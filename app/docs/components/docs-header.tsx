@@ -50,20 +50,20 @@ export function DocsHeader({
           </span>
         </div>
         <nav className="ml-auto flex items-center gap-[22px] text-[13.5px] text-[#4b5563]">
-          <a href="#" className="text-[#4b5563]">
+          <a href="#" className="text-[#4b5563] transition-colors hover:text-[#14171c]">
             Guides
           </a>
-          <a href="#" className="text-[#4b5563]">
+          <a href="#" className="text-[#4b5563] transition-colors hover:text-[#14171c]">
             API
           </a>
-          <a href="#" className="text-[#4b5563]">
+          <a href="#" className="text-[#4b5563] transition-colors hover:text-[#14171c]">
             Changelog
           </a>
           <a
             href="https://github.com/ECHO-Lit/ECHO-LIT"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#4b5563]"
+            className="text-[#4b5563] transition-colors hover:text-[#14171c]"
           >
             GitHub
           </a>

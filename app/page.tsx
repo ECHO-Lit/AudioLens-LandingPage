@@ -94,20 +94,20 @@ export default function Home() {
             </span>
           </div>
           <nav className="ml-auto flex gap-[26px] text-[13.5px] text-[#4b5563]">
-            <a href="#features" className="text-[#4b5563]">
+            <a href="#features" className="text-[#4b5563] transition-colors hover:text-[#14171c]">
               Features
             </a>
-            <Link href="/docs" className="text-[#4b5563]">
+            <Link href="/docs" className="text-[#4b5563] transition-colors hover:text-[#14171c]">
               Docs
             </Link>
-            <a href="#" className="text-[#4b5563]">
+            <a href="#" className="text-[#4b5563] transition-colors hover:text-[#14171c]">
               Research
             </a>
             <a
               href="https://github.com/ECHO-Lit/ECHO-LIT"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#4b5563]"
+              className="text-[#4b5563] transition-colors hover:text-[#14171c]"
             >
               GitHub
             </a>
@@ -271,7 +271,7 @@ export default function Home() {
                     href={l.href}
                     target={l.href.startsWith("http") ? "_blank" : undefined}
                     rel={l.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="text-[#4b5563]"
+                    className="text-[#4b5563] transition-colors hover:text-[#14171c]"
                   >
                     {l.text}
                   </a>
