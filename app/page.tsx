@@ -127,7 +127,7 @@ export default function Home() {
 
       <section
         id="features"
-        className="border-t border-[rgba(20,23,28,0.09)] bg-white"
+        className="scroll-mt-24 border-t border-[rgba(20,23,28,0.09)] bg-white"
       >
         <div className="mx-auto max-w-[1280px] px-10">
           <div className="pt-[70px] pb-[34px]">
