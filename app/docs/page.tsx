@@ -6,6 +6,7 @@ import { SECTIONS, TOC_BY_SECTION } from "./sections";
 import { DocsHeader } from "./components/docs-header";
 import { DocsSidebar } from "./components/docs-sidebar";
 import { DocsToc } from "./components/docs-toc";
+import { DocsPageFooter } from "./components/docs-page-footer";
 
 export default function DocsPage() {
   const [active, setActive] = useState("quickstart");
@@ -95,6 +96,8 @@ export default function DocsPage() {
           </h1>
 
           {ActiveSection && <ActiveSection />}
+
+          <DocsPageFooter key={active} active={active} onNavClick={goToNav} />
 
           <div className="mt-[26px] flex flex-wrap justify-between gap-5 border-t border-[rgba(20,23,28,0.1)] pt-[18px] font-mono text-[10.5px] text-[#9ca3af]">
             <span>AudioLens docs · MIT License</span>
