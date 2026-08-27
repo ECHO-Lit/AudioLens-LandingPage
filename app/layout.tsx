@@ -22,7 +22,7 @@ const plexSerif = IBM_Plex_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "AudioLens — Hear what your model actually heard",
+  title: "AudioLens — Learning Interpretability Tool for Voice Models",
   description:
     "An interpretability workbench for voice models. Trace a prediction from waveform to token with saliency, attention, embeddings and perturbation analysis.",
 };

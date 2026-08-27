@@ -53,10 +53,7 @@ export default function Home() {
 
       <section className="mx-auto max-w-[1280px] px-10">
         <div className="flex flex-col items-center pt-[88px] pb-[26px] text-center">
-          <div
-            className="mb-[22px] font-mono text-[11px] tracking-[0.14em] uppercase"
-            style={{ color: ACCENT }}
-          >
+          <div className="mb-[22px] font-mono text-[11px] tracking-[0.14em] text-[#14171c] uppercase">
             {EYEBROW}
           </div>
           <h1 className="m-0 text-[66px] leading-[1.02] font-medium tracking-[-0.035em] text-balance text-[#14171c]">
