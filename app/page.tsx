@@ -64,7 +64,7 @@ const FOOTER_COLUMNS = [
   {
     label: "Project",
     links: [
-      { text: "GitHub", href: "#" },
+      { text: "GitHub", href: "https://github.com/ECHO-Lit/ECHO-LIT" },
       { text: "Contributing", href: "#" },
       { text: "Security", href: "#" },
     ],
@@ -103,7 +103,12 @@ export default function Home() {
             <a href="#" className="text-[#4b5563]">
               Research
             </a>
-            <a href="#" className="text-[#4b5563]">
+            <a
+              href="https://github.com/ECHO-Lit/ECHO-LIT"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#4b5563]"
+            >
               GitHub
             </a>
           </nav>
@@ -261,7 +266,13 @@ export default function Home() {
               </div>
               <div className="flex flex-col gap-[9px] text-[13px]">
                 {col.links.map((l) => (
-                  <a key={l.text} href={l.href} className="text-[#4b5563]">
+                  <a
+                    key={l.text}
+                    href={l.href}
+                    target={l.href.startsWith("http") ? "_blank" : undefined}
+                    rel={l.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    className="text-[#4b5563]"
+                  >
                     {l.text}
                   </a>
                 ))}
