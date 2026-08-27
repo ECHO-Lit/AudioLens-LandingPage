@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
-import { Logomark } from "@/components/logomark";
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
 
 const ACCENT = "#1e4fd8";
 const EYEBROW = "Interpretability for voice models";
@@ -44,83 +44,12 @@ const FEATURES = [
   },
 ];
 
-const FOOTER_COLUMNS = [
-  {
-    label: "Product",
-    links: [
-      { text: "Features", href: "#features" },
-      { text: "Dashboard", href: "#" },
-      { text: "Changelog", href: "#" },
-    ],
-  },
-  {
-    label: "Resources",
-    links: [
-      { text: "Documentation", href: "/docs" },
-      { text: "Architecture", href: "#" },
-      { text: "Model support", href: "#" },
-    ],
-  },
-  {
-    label: "Project",
-    links: [
-      { text: "GitHub", href: "https://github.com/ECHO-Lit/ECHO-LIT" },
-      { text: "Contributing", href: "#" },
-      { text: "Security", href: "#" },
-    ],
-  },
-];
-
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#fbfbfa]">
       {/* max-w values are content-box widths from the design plus their own
           horizontal padding, since Tailwind's preflight forces border-box. */}
-      <header className="sticky top-0 z-30 px-10 pt-4">
-        <div
-          className="mx-auto flex h-[60px] max-w-[1154px] items-center gap-8 rounded-full border border-[rgba(255,255,255,0.7)] bg-[rgba(255,255,255,0.6)] pr-[10px] pl-[22px] backdrop-blur-[18px] backdrop-saturate-[1.7]"
-          style={{
-            boxShadow:
-              "0 0 0 1px rgba(20,23,28,0.05), 0 1px 2px rgba(20,23,28,0.04), 0 20px 44px -24px rgba(20,23,28,0.3)",
-          }}
-        >
-          <div className="flex items-center gap-[9px]">
-            <Logomark heights={[7, 15, 11, 4]} containerHeight={15} mutedLast />
-            <span className="text-[15px] font-semibold tracking-[-0.01em] text-[#14171c]">
-              AudioLens
-            </span>
-            <span className="rounded-[3px] border border-[rgba(20,23,28,0.14)] px-[5px] py-px font-mono text-[10px] text-[#6b7280]">
-              v1.0
-            </span>
-          </div>
-          <nav className="ml-auto flex gap-[26px] text-[13.5px] text-[#4b5563]">
-            <a href="#features" className="text-[#4b5563] transition-colors hover:text-[#14171c]">
-              Features
-            </a>
-            <Link href="/docs" className="text-[#4b5563] transition-colors hover:text-[#14171c]">
-              Docs
-            </Link>
-            <a href="#" className="text-[#4b5563] transition-colors hover:text-[#14171c]">
-              Research
-            </a>
-            <a
-              href="https://github.com/ECHO-Lit/ECHO-LIT"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#4b5563] transition-colors hover:text-[#14171c]"
-            >
-              GitHub
-            </a>
-          </nav>
-          <a
-            href="#"
-            className="rounded-full px-[17px] py-[9px] text-[13px] font-medium text-white transition-[filter] hover:text-white hover:brightness-[0.88]"
-            style={{ background: ACCENT }}
-          >
-            Open dashboard
-          </a>
-        </div>
-      </header>
+      <SiteHeader />
 
       <section className="mx-auto max-w-[1280px] px-10">
         <div className="flex flex-col items-center pt-[88px] pb-[26px] text-center">
@@ -245,46 +174,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="border-t border-[rgba(20,23,28,0.11)] bg-[#fbfbfa]">
-        <div className="mx-auto grid max-w-[1280px] grid-cols-[minmax(0,1.6fr)_repeat(3,minmax(0,1fr))] gap-10 px-10 pt-14 pb-[30px]">
-          <div>
-            <div className="flex items-center gap-[9px]">
-              <Logomark heights={[6, 13, 9]} containerHeight={13} />
-              <span className="text-[14px] font-semibold text-[#14171c]">
-                AudioLens
-              </span>
-            </div>
-            <p className="mt-3.5 max-w-[34ch] text-[13px] leading-[1.65] text-[#6b7280]">
-              Explainability tooling for speech and voice models. Self-hosted,
-              MIT licensed, built in the open.
-            </p>
-          </div>
-          {FOOTER_COLUMNS.map((col) => (
-            <div key={col.label}>
-              <div className="mb-3.5 font-mono text-[10px] tracking-[0.1em] text-[#9ca3af] uppercase">
-                {col.label}
-              </div>
-              <div className="flex flex-col gap-[9px] text-[13px]">
-                {col.links.map((l) => (
-                  <a
-                    key={l.text}
-                    href={l.href}
-                    target={l.href.startsWith("http") ? "_blank" : undefined}
-                    rel={l.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="text-[#4b5563] transition-colors hover:text-[#14171c]"
-                  >
-                    {l.text}
-                  </a>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="mx-auto flex max-w-[1280px] flex-wrap justify-between gap-5 border-t border-[rgba(20,23,28,0.09)] px-10 pt-[18px] pb-10 font-mono text-[10.5px] text-[#9ca3af]">
-          <span>MIT License · Built for audio model interpretability</span>
-          <span>Waveform to logits</span>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
