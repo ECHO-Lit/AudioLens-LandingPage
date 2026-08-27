@@ -6,7 +6,6 @@ import { SECTIONS, TOC_BY_SECTION } from "./sections";
 import { DocsHeader } from "./components/docs-header";
 import { DocsSidebar } from "./components/docs-sidebar";
 import { DocsToc } from "./components/docs-toc";
-import { DocsFooter } from "./components/docs-footer";
 
 export default function DocsPage() {
   const [active, setActive] = useState("quickstart");
@@ -96,6 +95,11 @@ export default function DocsPage() {
           </h1>
 
           {ActiveSection && <ActiveSection />}
+
+          <div className="mt-[26px] flex flex-wrap justify-between gap-5 border-t border-[rgba(20,23,28,0.1)] pt-[18px] font-mono text-[10.5px] text-[#9ca3af]">
+            <span>AudioLens docs · MIT License</span>
+            <span>Waveform to logits</span>
+          </div>
         </main>
 
         <DocsToc
@@ -104,8 +108,6 @@ export default function DocsPage() {
           onTocClick={goToToc}
         />
       </div>
-
-      <DocsFooter />
     </div>
   );
 }
