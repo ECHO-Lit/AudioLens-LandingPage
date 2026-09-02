@@ -7,6 +7,9 @@ import { DocsHeader } from "./components/docs-header";
 import { DocsSidebar } from "./components/docs-sidebar";
 import { DocsToc } from "./components/docs-toc";
 import { DocsPageFooter } from "./components/docs-page-footer";
+import { DocsPageActions } from "./components/docs-page-actions";
+import { ACCENT } from "./constants";
+import Grainient from "@/components/Grainient";
 
 export default function DocsPage() {
   const [active, setActive] = useState("quickstart");
@@ -85,15 +88,60 @@ export default function DocsPage() {
         <DocsSidebar nav={nav} active={active} onNavClick={goToNav} />
 
         <main className="min-w-0 py-[34px] pb-[88px]">
-          <div className="mb-4 flex items-center gap-2 text-[12px] text-[#9ca3af]">
-            <span>{selectedGroup?.label}</span>
-            <span className="text-[#d1d5db]">/</span>
-            <span className="text-[#4b5563]">{selectedItem?.title}</span>
+          <div className="mb-4 flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2 text-[12px] text-[#9ca3af]">
+              <span>{selectedGroup?.label}</span>
+              <span className="text-[#d1d5db]">/</span>
+              <span className="text-[#4b5563]">{selectedItem?.title}</span>
+            </div>
+            <DocsPageActions title={selectedItem?.title} desc={selectedItem?.desc} />
           </div>
 
-          <h1 className="m-0 text-[38px] leading-[1.08] font-medium tracking-[-0.03em]">
-            {selectedItem?.title}
-          </h1>
+          <div className="relative overflow-hidden rounded-2xl border border-[rgba(30,79,216,0.14)]">
+            <div className="absolute inset-0 z-0">
+              <Grainient
+                className="h-full w-full"
+                color1="#8ab4ff"
+                color2={ACCENT}
+                color3="#0b1e63"
+                timeSpeed={0}
+                colorBalance={-0.15}
+                warpStrength={1}
+                warpFrequency={5}
+                warpSpeed={2}
+                warpAmplitude={50}
+                blendAngle={180}
+                blendSoftness={0.05}
+                rotationAmount={180}
+                noiseScale={2}
+                grainAmount={0.1}
+                grainScale={2}
+                grainAnimated={false}
+                contrast={1.5}
+                gamma={1}
+                saturation={1}
+                centerX={0}
+                centerY={0}
+                zoom={1.05}
+              />
+            </div>
+            <div className="relative z-10 px-8 pt-11 pb-6">
+              <h1
+                className="m-0 text-[42px] leading-[1.08] font-medium tracking-[-0.03em] text-white"
+                style={{ textShadow: "0 1px 3px rgba(0,0,0,0.35), 0 1px 12px rgba(0,0,0,0.2)" }}
+              >
+                {selectedItem?.title}
+              </h1>
+              {selectedItem?.desc && (
+                <p
+                  className="mt-2.5 max-w-[58ch] text-[16.5px] leading-[1.6] text-white/85"
+                  style={{ textShadow: "0 1px 3px rgba(0,0,0,0.35)" }}
+                >
+                  {selectedItem.desc}
+                </p>
+              )}
+            </div>
+          </div>
 
           {ActiveSection && <ActiveSection />}
 
