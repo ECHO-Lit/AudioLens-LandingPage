@@ -80,9 +80,14 @@
   background: #cddcff;
 }
 
-* {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(20, 23, 28, 0.18) transparent;
+/* In @layer base so utilities such as `no-scrollbar` can still override it.
+   Unlayered, this outranked every layered rule and forced a scrollbar onto
+   containers that opt out of one. */
+@layer base {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(20, 23, 28, 0.18) transparent;
+  }
 }
 
 @media (max-width: 1180px) {

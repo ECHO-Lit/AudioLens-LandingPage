@@ -8,20 +8,42 @@ import { DocsSidebar } from "./components/docs-sidebar";
 import { DocsToc } from "./components/docs-toc";
 import { DocsPageFooter } from "./components/docs-page-footer";
 import { DocsPageActions } from "./components/docs-page-actions";
+import { DocsSearchDialog } from "./components/docs-search-dialog";
 import { ACCENT } from "./constants";
 import Grainient from "@/components/Grainient";
+
+// An empty id means "top of the page" rather than a specific heading.
+function scrollToAnchor(id: string) {
+  if (!id) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    return;
+  }
+  const el = document.getElementById(id);
+  if (!el) return;
+  const y = el.getBoundingClientRect().top + window.scrollY - 76;
+  window.scrollTo({ top: y, behavior: "smooth" });
+}
 
 export default function DocsPage() {
   const [active, setActive] = useState("quickstart");
   const [tocActive, setTocActive] = useState(TOC_BY_SECTION.quickstart[0].id);
-  const [query, setQuery] = useState("");
-  const searchRef = useRef<HTMLInputElement>(null);
+  const [searchOpen, setSearchOpen] = useState(false);
+  // Anchor to jump to once a newly selected section has mounted. A ref rather
+  // than state: clearing it must not trigger another render.
+  const pendingScroll = useRef<string | null>(null);
+
+  useEffect(() => {
+    const target = pendingScroll.current;
+    if (target === null) return;
+    pendingScroll.current = null;
+    scrollToAnchor(target);
+  }, [active]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
-        searchRef.current?.focus();
+        setSearchOpen((v) => !v);
       }
     };
     window.addEventListener("keydown", onKey);
@@ -50,12 +72,6 @@ export default function DocsPage() {
     return () => observer.disconnect();
   }, [active]);
 
-  const q = query.trim().toLowerCase();
-  const nav = NAV_GROUPS.map((g) => ({
-    label: g.label,
-    items: g.items.filter((it) => !q || it.title.toLowerCase().includes(q)),
-  })).filter((g) => g.items.length);
-
   const selectedGroup = NAV_GROUPS.find((g) =>
     g.items.some((it) => it.id === active),
   );
@@ -70,22 +86,37 @@ export default function DocsPage() {
 
   const goToToc = (id: string) => (e: MouseEvent) => {
     e.preventDefault();
-    const el = document.getElementById(id);
-    if (el) {
-      const y = el.getBoundingClientRect().top + window.scrollY - 76;
-      window.scrollTo({ top: y, behavior: "smooth" });
-    }
+    scrollToAnchor(id);
     setTocActive(id);
+  };
+
+  const handleSearchSelect = (id: string, headingId?: string) => {
+    setSearchOpen(false);
+    setTocActive(headingId ?? TOC_BY_SECTION[id]?.[0]?.id ?? "");
+
+    if (id === active) {
+      // Already mounted, so the anchor exists right now.
+      scrollToAnchor(headingId ?? "");
+      return;
+    }
+    // Otherwise wait for the new section to render before looking it up.
+    pendingScroll.current = headingId ?? "";
+    setActive(id);
   };
 
   const ActiveSection = SECTIONS[active];
 
   return (
     <div className="min-h-screen bg-[#fbfbfa]">
-      <DocsHeader query={query} setQuery={setQuery} searchRef={searchRef} />
+      <DocsHeader onOpenSearch={() => setSearchOpen(true)} />
+      <DocsSearchDialog
+        open={searchOpen}
+        onOpenChange={setSearchOpen}
+        onSelect={handleSearchSelect}
+      />
 
       <div className="docs-shell mx-auto grid max-w-[1504px] grid-cols-[236px_minmax(0,1fr)_208px] items-start gap-8 px-8">
-        <DocsSidebar nav={nav} active={active} onNavClick={goToNav} />
+        <DocsSidebar nav={NAV_GROUPS} active={active} onNavClick={goToNav} />
 
         <main className="min-w-0 py-[34px] pb-[88px]">
           <div className="mb-4 flex items-center justify-between gap-2">

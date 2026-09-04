@@ -23,10 +23,10 @@ export function DocsToc({
               key={t.id}
               href={`#${t.id}`}
               onClick={onTocClick(t.id)}
-              className="-ml-px py-[5px] pl-3 text-[12.5px] leading-[1.4]"
+              className="-ml-px py-[5px] pl-3 text-[12.5px] leading-[1.4] text-[#6b7280] hover:text-[#374151]"
               style={{
                 borderLeft: `2px solid ${t.id === tocActive ? ACCENT : "transparent"}`,
-                color: t.id === tocActive ? "#14171c" : "#6b7280",
+                ...(t.id === tocActive ? { color: "#14171c" } : {}),
                 fontWeight: t.id === tocActive ? 500 : 400,
               }}
             >
@@ -37,14 +37,6 @@ export function DocsToc({
       ) : (
         <div className="pl-2.5 text-[12.5px] text-[#9ca3af]">Nothing to show</div>
       )}
-      <div className="mt-[26px] flex flex-col gap-2 border-t border-[rgba(20,23,28,0.1)] pt-[18px] text-[12.5px]">
-        <a href="#" className="text-[#4b5563]">
-          Edit this page
-        </a>
-        <a href="#" className="text-[#4b5563]">
-          Report an issue
-        </a>
-      </div>
     </aside>
   );
 }

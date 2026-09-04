@@ -1,6 +1,8 @@
 import { ComponentType } from "react";
+import { SectionContent } from "./content-types";
 import { IntroductionSection } from "./intro";
-import { QuickstartSection, QUICKSTART_TOC } from "./quickstart";
+import { QuickstartSection } from "./quickstart";
+import { QUICKSTART_CONTENT } from "./quickstart.content";
 import { CoreConceptsSection } from "./concepts";
 import { LoadingDatasetsSection } from "./datasets";
 import { SaliencyMappingSection } from "./saliency";
@@ -39,7 +41,22 @@ export const SECTIONS: Record<string, ComponentType> = {
   cli: CliSection,
 };
 
-// Only sections with in-page subsections get a right-hand "On this page" TOC.
-export const TOC_BY_SECTION: Record<string, TocItem[]> = {
-  quickstart: QUICKSTART_TOC,
+// Sections that have authored content register it here. Both the right-hand
+// "On this page" TOC and the search index are derived from this, so a new
+// section only needs a content module -- no other wiring.
+export const SECTION_CONTENT: Record<string, SectionContent> = {
+  quickstart: QUICKSTART_CONTENT,
 };
+
+// Only sections with in-page subsections get a right-hand "On this page" TOC.
+export const TOC_BY_SECTION: Record<string, TocItem[]> = Object.fromEntries(
+  Object.entries(SECTION_CONTENT)
+    .map(([id, content]) => [
+      id,
+      content.headings.map(({ id: headingId, label }) => ({
+        id: headingId,
+        label,
+      })),
+    ])
+    .filter(([, items]) => items.length),
+);

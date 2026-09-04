@@ -24,24 +24,32 @@ export function DocsPageFooter({
         <div className="flex gap-2">
           <button
             onClick={() => setVote("yes")}
-            className="cursor-pointer rounded-[5px] px-3.5 py-1.5 text-[12.5px]"
+            className="cursor-pointer rounded-[5px] border border-[rgba(20,23,28,0.13)] bg-white px-3.5 py-1.5 text-[12.5px] text-[#4b5563] hover:border-[rgba(20,23,28,0.25)] hover:bg-[#f7f7f6]"
             style={{
               fontFamily: "revert",
-              border: `1px solid ${vote === "yes" ? "rgba(30,79,216,0.35)" : "rgba(20,23,28,0.13)"}`,
-              background: vote === "yes" ? "#eef3ff" : "#fff",
-              color: vote === "yes" ? "#1e4fd8" : "#4b5563",
+              ...(vote === "yes"
+                ? {
+                    border: "1px solid rgba(20,23,28,0.28)",
+                    background: "#f7f7f6",
+                    color: "#14171c",
+                  }
+                : {}),
             }}
           >
             Yes
           </button>
           <button
             onClick={() => setVote("no")}
-            className="cursor-pointer rounded-[5px] px-3.5 py-1.5 text-[12.5px]"
+            className="cursor-pointer rounded-[5px] border border-[rgba(20,23,28,0.13)] bg-white px-3.5 py-1.5 text-[12.5px] text-[#4b5563] hover:border-[rgba(20,23,28,0.25)] hover:bg-[#f7f7f6]"
             style={{
               fontFamily: "revert",
-              border: `1px solid ${vote === "no" ? "rgba(20,23,28,0.28)" : "rgba(20,23,28,0.13)"}`,
-              background: vote === "no" ? "#f7f7f6" : "#fff",
-              color: vote === "no" ? "#14171c" : "#4b5563",
+              ...(vote === "no"
+                ? {
+                    border: "1px solid rgba(20,23,28,0.28)",
+                    background: "#f7f7f6",
+                    color: "#14171c",
+                  }
+                : {}),
             }}
           >
             No

@@ -2,145 +2,18 @@
 
 import { useState } from "react";
 import { ACCENT } from "../constants";
+import {
+  CALLOUT_TITLE,
+  CODE_BLOCKS,
+  ENDPOINTS,
+  INSTALL_INTRO,
+  LEAD,
+  NEXT_LINKS,
+  PREREQS,
+  STEPS,
+} from "./quickstart.content";
 
-const CODE_BLOCKS = [
-  {
-    label: "docker",
-    code: `# 1. Clone
-git clone https://github.com/ECHO-Lit/ECHO-LIT.git
-cd ECHO-LIT
-
-# 2. Copy env files (defaults work out of the box)
-cp Backend/.env.example Backend/.env
-cp Frontend/.env.example Frontend/.env
-
-# 3. Boot the full stack
-docker compose up --build`,
-  },
-  {
-    label: "nvidia",
-    code: `# Linux or WSL 2 with the NVIDIA Container Toolkit.
-# Scale the all-queue local worker to 0 so only the GPU
-# worker consumes GPU queues.
-docker compose --profile gpu up --build \\
-  --scale worker-model-local=0 \\
-  redis api scheduler frontend worker-cpu worker-gpu`,
-  },
-  {
-    label: "amd rocm",
-    code: `# Linux with a supported ROCm host driver.
-docker compose --profile amd up --build \\
-  --scale worker-model-local=0 \\
-  redis api scheduler frontend worker-cpu worker-amd`,
-  },
-  {
-    label: "macos mps",
-    code: `# Docker Desktop cannot pass Metal into a Linux container.
-# Keep the API in Compose, run the worker natively.
-cd Backend
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-
-STORAGE_LOCAL_ROOT=shared-storage ML_DEVICE=mps \\
-  celery -A app.core.celery_app:celery_app worker \\
-  --queues=gpu-fast,gpu-large --concurrency=1`,
-  },
-];
-
-const PREREQS = [
-  {
-    kicker: "REQUIRED",
-    title: "Docker",
-    body: "Docker Desktop on Windows or Mac, Docker Engine plus the Compose plugin on Linux.",
-  },
-  {
-    kicker: "WINDOWS",
-    title: "WSL 2 backend",
-    body: "Enable it in Docker Desktop settings for faster bind-mount I/O and GPU passthrough.",
-  },
-  {
-    kicker: "NVIDIA",
-    title: "Driver 555+",
-    body: "Verify with a base CUDA 12.6 image running nvidia-smi before booting the GPU profile.",
-  },
-  {
-    kicker: "APPLE",
-    title: "Native worker",
-    body: "Docker Desktop does not expose MPS, so run the worker outside the container to use the GPU.",
-  },
-];
-
-const ENDPOINTS = [
-  { name: "Frontend", addr: "http://localhost:8080", state: "ready" },
-  { name: "API", addr: "http://localhost:8000/health", state: "ready" },
-  { name: "Redis broker", addr: "localhost:6379", state: "ready" },
-  { name: "Worker heartbeat", addr: "reported by /health", state: "polling" },
-];
-
-const STEPS = [
-  {
-    n: "1",
-    title: "Upload audio or pick a sample dataset",
-    body: "Drop your own files into the uploader, or start from the bundled Common Voice and RAVDESS subsets. Dataset paths inside the container are case-sensitive.",
-    cmd: "data/common_voice_valid_dev",
-  },
-  {
-    n: "2",
-    title: "Select a model",
-    body: "Choose a Whisper or Wav2Vec2 checkpoint. The first selection triggers a weight download into the worker cache; pre-warm it if you want an instant first run.",
-    cmd: null,
-  },
-  {
-    n: "3",
-    title: "Read the prediction",
-    body: "The transcript panel aligns prediction against ground truth word by word and reports WER, CER and Levenshtein distance per datapoint.",
-    cmd: null,
-  },
-  {
-    n: "4",
-    title: "Generate a saliency map",
-    body: "Run Grad-CAM or integrated gradients over the waveform. Segments are ranked by their contribution to each predicted token and highlighted on the shared timeline.",
-    cmd: null,
-  },
-  {
-    n: "5",
-    title: "Perturb and compare",
-    body: "Add noise, shift pitch, clip or mask a region, then watch the metrics move. Robustness measured, not assumed.",
-    cmd: null,
-  },
-];
-
-const NEXT_LINKS = [
-  {
-    title: "Core concepts",
-    body: "Datapoints, the shared timeline, and how panels stay in sync.",
-    meta: "5 min read",
-  },
-  {
-    title: "Custom checkpoints",
-    body: "Point the loader at a local or Hugging Face model of your own.",
-    meta: "Guide",
-  },
-  {
-    title: "Architecture",
-    body: "API control plane, Celery workers, Redis broker, shared storage.",
-    meta: "Reference",
-  },
-  {
-    title: "REST API",
-    body: "Every panel is backed by an endpoint you can call directly.",
-    meta: "Reference",
-  },
-];
-
-export const QUICKSTART_TOC = [
-  { id: "prereq", label: "Prerequisites" },
-  { id: "install", label: "Install and boot" },
-  { id: "endpoints", label: "Service endpoints" },
-  { id: "first", label: "First analysis" },
-  { id: "next", label: "Where to go next" },
-];
+export { QUICKSTART_TOC } from "./quickstart.content";
 
 export function QuickstartSection() {
   const [tab, setTab] = useState(0);
@@ -156,9 +29,7 @@ export function QuickstartSection() {
   return (
     <>
       <p className="mt-3.5 max-w-[64ch] text-[16px] leading-[1.62] text-[#4b5563] text-pretty">
-        Boot the full AudioLens stack locally with Docker, load a sample
-        dataset, and produce your first saliency map against a Whisper
-        checkpoint. About ten minutes, most of it model download.
+        {LEAD}
       </p>
 
       <div className="mt-5 flex flex-wrap gap-2 font-mono text-[10.5px] text-[#5b6472]">
@@ -177,7 +48,7 @@ export function QuickstartSection() {
         <div className="w-[3px] flex-none rounded-sm" style={{ background: ACCENT }} />
         <div>
           <div className="text-[13px] font-semibold text-[#12327f]">
-            Model weights download on first run
+            {CALLOUT_TITLE}
           </div>
           <p className="mt-[5px] text-[13px] leading-[1.6] text-[#3f4b63]">
             Only the worker container pulls weights, into{" "}
@@ -222,8 +93,7 @@ export function QuickstartSection() {
         Install and boot
       </h2>
       <p className="mt-4 max-w-[64ch] text-[14.5px] leading-[1.65] text-[#4b5563]">
-        Pick the target that matches your accelerator. Every path ends
-        with the same three services on the same ports.
+        {INSTALL_INTRO}
       </p>
 
       <div
@@ -238,11 +108,8 @@ export function QuickstartSection() {
                 setTab(i);
                 setCopied(false);
               }}
-              className="cursor-pointer rounded-[5px] px-[11px] py-1.5 font-mono text-[11px]"
-              style={{
-                color: tab === i ? "#14171c" : "#8b929c",
-                background: tab === i ? "#fff" : "transparent",
-              }}
+              className="cursor-pointer rounded-[5px] px-[11px] py-1.5 font-mono text-[11px] text-[#8b929c] hover:text-[#4b5563]"
+              style={tab === i ? { color: "#14171c", background: "#fff" } : undefined}
             >
               {t.label}
             </button>
