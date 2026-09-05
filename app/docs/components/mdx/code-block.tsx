@@ -59,11 +59,10 @@ export function CodeInline({ children, ...props }: ComponentProps<"code">) {
   const insidePre = useContext(InsidePreContext);
   if (insidePre) return <code {...props}>{children}</code>;
 
+  // No tint and no box: monospace at a muted grey is enough to mark a literal.
+  // A highlighted background here reads as a link and fights the real ones.
   return (
-    <code
-      {...props}
-      className="rounded-[3px] bg-[rgba(30,79,216,0.09)] px-1 py-px font-mono text-[0.9em] text-[#26303f]"
-    >
+    <code {...props} className="font-mono text-[12px] text-[#4b5563]">
       {children}
     </code>
   );

@@ -101,7 +101,7 @@ export default async function DocsSlugPage({ params }: Props) {
             {item.title}
           </h1>
           <p
-            className="mt-2.5 max-w-[58ch] text-[15px] leading-[1.6] text-white/85 sm:text-[16.5px]"
+            className="mt-2.5 text-[15px] leading-[1.6] text-white/85 sm:text-[16.5px]"
             style={{ textShadow: "0 1px 3px rgba(0,0,0,0.35)" }}
           >
             {item.desc}

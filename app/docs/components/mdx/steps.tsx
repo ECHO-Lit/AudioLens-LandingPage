@@ -39,7 +39,9 @@ export function Step({ title, children, n, last }: StepProps) {
       </div>
       <div className="min-w-0 pt-0.5">
         <div className="text-[14.5px] font-semibold">{title}</div>
-        <div className="max-w-[62ch] text-[13.5px] leading-[1.62] text-[#5b6472] text-pretty [&>*:first-child]:mt-1.5 [&>p]:mt-1.5">
+        {/* Sized on the paragraph: MDX wraps step copy in <p>, which carries
+            the global 14.5px mapping and would beat inheritance from here. */}
+        <div className="text-[#5b6472] text-pretty [&_p]:mt-1.5 [&_p]:text-[13.5px] [&_p]:leading-[1.62]">
           {children}
         </div>
       </div>

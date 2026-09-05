@@ -6,7 +6,7 @@ import { CodeTabs } from "@/app/docs/components/mdx/code-tabs";
 import { Callout } from "@/app/docs/components/mdx/callout";
 import { Card, CardGrid } from "@/app/docs/components/mdx/cards";
 import { Step, Steps } from "@/app/docs/components/mdx/steps";
-import { Badges, Pill } from "@/app/docs/components/mdx/misc";
+import { Badges, Lead, Status } from "@/app/docs/components/mdx/misc";
 
 // h1 is deliberately absent: the page hero in app/docs/[slug]/page.tsx renders
 // the only h1, from the nav entry. Content starts at h2.
@@ -39,19 +39,19 @@ const components: MDXComponents = {
   ),
   h3: (props) => <h3 {...props} className={`${headingBase} mt-8 text-[16.5px]`} />,
   h4: (props) => <h4 {...props} className={`${headingBase} mt-6 text-[14.5px]`} />,
-  p: (props) => (
-    <p {...props} className="mt-4 max-w-[64ch] text-[14.5px] leading-[1.65] text-[#4b5563]" />
-  ),
+  // No reading-measure cap: prose spans the full content column so it shares a
+  // right edge with tables, code blocks and card grids.
+  p: (props) => <p {...props} className="mt-4 text-[14.5px] leading-[1.65] text-[#4b5563]" />,
   ul: (props) => (
     <ul
       {...props}
-      className="mt-4 max-w-[64ch] list-disc space-y-1.5 pl-5 text-[14.5px] leading-[1.65] text-[#4b5563] marker:text-[#9ca3af]"
+      className="mt-4 list-disc space-y-1.5 pl-5 text-[14.5px] leading-[1.65] text-[#4b5563] marker:text-[#9ca3af]"
     />
   ),
   ol: (props) => (
     <ol
       {...props}
-      className="mt-4 max-w-[64ch] list-decimal space-y-1.5 pl-5 text-[14.5px] leading-[1.65] text-[#4b5563] marker:text-[#9ca3af]"
+      className="mt-4 list-decimal space-y-1.5 pl-5 text-[14.5px] leading-[1.65] text-[#4b5563] marker:text-[#9ca3af]"
     />
   ),
   blockquote: (props) => (
@@ -65,9 +65,14 @@ const components: MDXComponents = {
 
   // GFM tables. The wrapper scrolls on its own so a wide table never makes the
   // page scroll sideways.
+  // First column names the row (service, variable, flag), so it carries the
+  // same medium weight the hand-built endpoints table used.
   table: (props) => (
     <div className="mt-[18px] overflow-x-auto rounded-[9px] border border-[rgba(20,23,28,0.11)] bg-white">
-      <table {...props} className="w-full border-collapse text-left" />
+      <table
+        {...props}
+        className="w-full border-collapse text-left [&_td:first-child]:font-medium"
+      />
     </div>
   ),
   thead: (props) => <thead {...props} className="bg-[#f7f7f6]" />,
@@ -97,7 +102,8 @@ const components: MDXComponents = {
   Steps,
   Step,
   Badges,
-  Pill,
+  Lead,
+  Status,
 };
 
 export function useMDXComponents(): MDXComponents {

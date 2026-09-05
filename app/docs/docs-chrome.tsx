@@ -62,7 +62,7 @@ export function DocsChrome({ children }: { children: ReactNode }) {
           className="sticky top-[60px] hidden max-h-[calc(100vh-60px)] overflow-y-auto border-r border-[rgba(20,23,28,0.08)] py-[30px] pr-5 pb-[60px] lg:block"
         />
 
-        <main id="docs-content" className="min-w-0 py-[34px] pb-[88px]">
+        <main id="docs-content" className="min-w-0 px-1 py-[34px] pb-[88px]">
           {children}
         </main>
 

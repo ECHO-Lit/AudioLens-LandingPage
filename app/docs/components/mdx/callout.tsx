@@ -28,8 +28,9 @@ export function Callout({
             {title}
           </div>
         )}
-        {/* MDX wraps the body in <p>; the margin below targets that first child. */}
-        <div className="text-[13px] leading-[1.6] text-[#3f4b63] [&>*:first-child]:mt-[5px] [&>p]:mt-[5px]">
+        {/* MDX wraps the body in <p>, which would otherwise take the global
+            14.5px paragraph size -- set it on the paragraph, not the box. */}
+        <div className="text-[#3f4b63] [&_p]:mt-[5px] [&_p]:text-[13px] [&_p]:leading-[1.6]">
           {children}
         </div>
       </div>

@@ -39,7 +39,9 @@ export function Card({
         </div>
       )}
       <div className="text-[13.5px] font-semibold">{title}</div>
-      <div className="text-[12.5px] leading-[1.55] text-[#6b7280] text-pretty [&>*:first-child]:mt-[5px] [&>p]:mt-[5px]">
+      {/* Sized on the paragraph: MDX wraps card copy in <p>, which carries the
+          global 14.5px mapping and would beat a size inherited from here. */}
+      <div className="text-[#6b7280] text-pretty [&_p]:mt-[5px] [&_p]:text-[12.5px] [&_p]:leading-[1.55]">
         {children}
       </div>
       {meta && (

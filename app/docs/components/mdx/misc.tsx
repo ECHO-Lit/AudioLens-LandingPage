@@ -1,5 +1,20 @@
 import type { ReactNode } from "react";
 
+/**
+ * Opening paragraph of a page. Larger than body copy -- MDX cannot tell the
+ * first paragraph apart from the rest, so it is marked explicitly.
+ */
+export function Lead({ children }: { children: ReactNode }) {
+  // MDX wraps the body in <p>, which picks up the global 14.5px paragraph
+  // mapping. The descendant selector outranks that element's own class, so the
+  // size has to be set on the paragraph rather than inherited from here.
+  return (
+    <div className="text-[#4b5563] text-pretty [&_p]:mt-3.5 [&_p]:text-[16px] [&_p]:leading-[1.62]">
+      {children}
+    </div>
+  );
+}
+
 /** Small metadata chips under a page lead -- version, licence, stack. */
 export function Badges({ items }: { items: string[] }) {
   return (
@@ -13,27 +28,13 @@ export function Badges({ items }: { items: string[] }) {
   );
 }
 
-const PILL_TONES = {
-  ok: { border: "rgba(27,107,90,0.18)", bg: "#eef8f4", fg: "#1b6b5a" },
-  pending: { border: "rgba(180,83,9,0.2)", bg: "#fff8ee", fg: "#96560a" },
-  muted: { border: "rgba(20,23,28,0.14)", bg: "#f7f7f6", fg: "#6b7280" },
-} as const;
-
-/** Status pill, mostly for the status column of reference tables. */
-export function Pill({
-  tone = "muted",
-  children,
-}: {
-  tone?: keyof typeof PILL_TONES;
-  children: ReactNode;
-}) {
-  const t = PILL_TONES[tone];
+/**
+ * State marker for reference tables. Deliberately unboxed and uncoloured --
+ * plain muted mono, so a table of statuses reads as text rather than a row of
+ * competing badges.
+ */
+export function Status({ children }: { children: ReactNode }) {
   return (
-    <span
-      className="inline-block rounded-[3px] border px-[7px] py-0.5 font-mono text-[10.5px] whitespace-nowrap"
-      style={{ borderColor: t.border, background: t.bg, color: t.fg }}
-    >
-      {children}
-    </span>
+    <span className="font-mono text-[10.5px] whitespace-nowrap text-[#6b7280]">{children}</span>
   );
 }

@@ -1,5 +1,7 @@
+<Lead>
 Boot the full AudioLens stack locally with Docker, load a sample dataset, and produce your first
 saliency map against a Whisper checkpoint. About ten minutes, most of it model download.
+</Lead>
 
 <Badges items={["v1.0", "MIT", "FastAPI · React 18"]} />
 
@@ -80,10 +82,10 @@ STORAGE_LOCAL_ROOT=shared-storage ML_DEVICE=mps \
 
 | Service | Address | Status |
 | --- | --- | --- |
-| Frontend | `http://localhost:8080` | <Pill tone="ok">ready</Pill> |
-| API | `http://localhost:8000/health` | <Pill tone="ok">ready</Pill> |
-| Redis broker | `localhost:6379` | <Pill tone="ok">ready</Pill> |
-| Worker heartbeat | reported by `/health` | <Pill tone="pending">polling</Pill> |
+| Frontend | `http://localhost:8080` | <Status>ready</Status> |
+| API | `http://localhost:8000/health` | <Status>ready</Status> |
+| Redis broker | `localhost:6379` | <Status>ready</Status> |
+| Worker heartbeat | reported by `/health` | <Status>polling</Status> |
 
 ## First analysis
 

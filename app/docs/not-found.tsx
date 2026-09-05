@@ -10,7 +10,7 @@ export default function DocsNotFound() {
       <h1 className="mt-3 text-[32px] leading-[1.1] font-medium tracking-[-0.03em]">
         No such page
       </h1>
-      <p className="mt-3 max-w-[52ch] text-[14.5px] leading-[1.65] text-[#4b5563]">
+      <p className="mt-3 text-[14.5px] leading-[1.65] text-[#4b5563]">
         That documentation page does not exist. Use the sidebar, or press{" "}
         <kbd className="rounded-[3px] border border-[rgba(20,23,28,0.14)] bg-white px-1.5 py-px font-mono text-[11px]">
           ⌘K
