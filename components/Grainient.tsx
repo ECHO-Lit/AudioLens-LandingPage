@@ -1,3 +1,7 @@
+'use client';
+
+// WebGL canvas -- must run on the client. Previously implied by every importer
+// being a client component; the docs page is now a Server Component.
 import React, { useEffect, useRef } from 'react';
 import { Renderer, Program, Mesh, Triangle } from 'ogl';
 import './Grainient.css';

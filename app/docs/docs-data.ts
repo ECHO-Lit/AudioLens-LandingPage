@@ -1,6 +1,21 @@
 export type NavItem = { id: string; title: string; tag?: string; desc: string };
 export type NavGroup = { label: string; items: NavItem[] };
 
+/** Every page in sidebar order. Backs prev/next, routing and the sitemap. */
+export function flatNav(): NavItem[] {
+  return NAV_GROUPS.flatMap((g) => g.items);
+}
+
+export function findNavItem(id: string): NavItem | undefined {
+  return flatNav().find((it) => it.id === id);
+}
+
+export function findNavGroup(id: string): NavGroup | undefined {
+  return NAV_GROUPS.find((g) => g.items.some((it) => it.id === id));
+}
+
+export const docsHref = (id: string) => `/docs/${id}`;
+
 export const NAV_GROUPS: NavGroup[] = [
   {
     label: "Get started",

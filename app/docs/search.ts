@@ -1,83 +1,31 @@
 import { NAV_GROUPS } from "./docs-data";
-import { SECTION_CONTENT } from "./sections";
-import { ContentBlock } from "./sections/content-types";
+import { SECTION_RECORDS } from "./docs-index.generated";
+import type { SearchKind, SearchRecord } from "./search-types";
 
-export type SearchKind = "page" | "heading" | "content";
-
-export type SearchRecord = {
-  key: string;
-  sectionId: string;
-  headingId?: string;
-  kind: SearchKind;
-  title: string;
-  body: string;
-};
+export type { SearchKind, SearchRecord };
 
 export const MAX_RESULTS = 20;
 const MAX_PER_HEADING = 2;
 
-function blockText(block: ContentBlock): string {
-  if (block.kind === "item") {
-    return block.text ? `${block.title} ${block.text}` : block.title;
-  }
-  return block.text;
-}
-
 // Built once at module scope -- the corpus is static.
-const INDEX: SearchRecord[] = (() => {
-  const records: SearchRecord[] = [];
-
-  for (const group of NAV_GROUPS) {
-    for (const item of group.items) {
-      records.push({
-        key: `page:${item.id}`,
-        sectionId: item.id,
-        kind: "page",
-        title: item.title,
-        body: item.desc,
-      });
-
-      const content = SECTION_CONTENT[item.id];
-      if (!content) continue;
-
-      // Intro copy sits above the first heading, so it has no anchor and no
-      // heading label of its own -- it is shown as bare excerpt.
-      for (const block of content.lead ?? []) {
-        records.push({
-          key: `lead:${item.id}:${records.length}`,
-          sectionId: item.id,
-          kind: "content",
-          title: "",
-          body: blockText(block),
-        });
-      }
-
-      for (const heading of content.headings) {
-        records.push({
-          key: `heading:${item.id}:${heading.id}`,
-          sectionId: item.id,
-          headingId: heading.id,
-          kind: "heading",
-          title: heading.label,
-          body: "",
-        });
-
-        for (const block of heading.blocks) {
-          records.push({
-            key: `content:${item.id}:${heading.id}:${records.length}`,
-            sectionId: item.id,
-            headingId: heading.id,
-            kind: "content",
-            title: heading.label,
-            body: blockText(block),
-          });
-        }
-      }
-    }
-  }
-
-  return records;
-})();
+//
+// Page records come from NAV_GROUPS, which owns titles, descriptions and order.
+// Heading and body records come from docs-index.generated.ts, produced from
+// content/docs/*.mdx by scripts/build-docs-index.mjs. Walking NAV_GROUPS rather
+// than the generated object keeps results in sidebar order and means a page
+// with no .mdx file yet is still findable by title.
+const INDEX: SearchRecord[] = NAV_GROUPS.flatMap((group) =>
+  group.items.flatMap((item) => [
+    {
+      key: `page:${item.id}`,
+      sectionId: item.id,
+      kind: "page" as const,
+      title: item.title,
+      body: item.desc,
+    },
+    ...(SECTION_RECORDS[item.id] ?? []),
+  ]),
+);
 
 const SECTION_TITLES: Record<string, string> = Object.fromEntries(
   NAV_GROUPS.flatMap((g) => g.items.map((it) => [it.id, it.title])),

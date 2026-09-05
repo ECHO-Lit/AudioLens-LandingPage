@@ -30,9 +30,11 @@ function GeminiLogo({ size = 14 }: { size?: number }) {
 export function DocsPageActions({
   title,
   desc,
+  slug,
 }: {
-  title?: string;
-  desc?: string;
+  title: string;
+  desc: string;
+  slug: string;
 }) {
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -42,81 +44,105 @@ export function DocsPageActions({
     const onClick = (e: MouseEvent) => {
       if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
     };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
     document.addEventListener("mousedown", onClick);
-    return () => document.removeEventListener("mousedown", onClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onClick);
+      document.removeEventListener("keydown", onKey);
+    };
   }, []);
 
-  const pageUrl = typeof window !== "undefined" ? window.location.href : "";
-  const pageMarkdown = [`# ${title ?? ""}`, desc ?? "", pageUrl]
-    .filter(Boolean)
-    .join("\n\n");
+  // The page body is only available as rendered DOM -- the MDX source never
+  // reaches the client. Reading the prose wrapper gives the real content
+  // rather than just the title and description.
+  const pageText = () => {
+    const el = document.querySelector<HTMLElement>("[data-docs-prose]");
+    return (el?.innerText ?? "").replace(/\n{3,}/g, "\n\n").trim();
+  };
 
+  const buildMarkdown = () =>
+    [`# ${title}`, desc, window.location.href, pageText()].filter(Boolean).join("\n\n");
+
+  // Close before the async clipboard write so the menu never lingers if the
+  // permission prompt steals focus.
   const copyPage = async () => {
-    if (navigator.clipboard) {
-      try {
-        await navigator.clipboard.writeText(pageMarkdown);
-      } catch {
-        /* ignore */
-      }
+    setOpen(false);
+    try {
+      await navigator.clipboard.writeText(buildMarkdown());
+    } catch {
+      return;
     }
     setCopied(true);
-    setOpen(false);
     setTimeout(() => setCopied(false), 1600);
   };
 
-  const openWith = (base: string, prompt: string) => () => {
+  const openWith = (base: string) => () => {
+    const prompt = `I have questions about this page:\n\n${buildMarkdown()}`;
     window.open(`${base}${encodeURIComponent(prompt)}`, "_blank", "noopener,noreferrer");
     setOpen(false);
   };
-
-  const askPrompt = `I have questions about this page:\n\n${pageMarkdown}`;
 
   const MENU = [
     {
       label: "Open in ChatGPT",
       icon: OpenAILogo,
       iconSize: 14,
-      action: openWith("https://chatgpt.com/?q=", askPrompt),
+      action: openWith("https://chatgpt.com/?q="),
     },
     {
       label: "Open in Claude",
       icon: ClaudeLogo,
       iconSize: 14,
-      action: openWith("https://claude.ai/new?q=", askPrompt),
+      action: openWith("https://claude.ai/new?q="),
     },
     {
       label: "Open in Gemini",
       icon: GeminiLogo,
       iconSize: 18,
-      action: openWith("https://gemini.google.com/app?q=", askPrompt),
+      action: openWith("https://gemini.google.com/app?q="),
     },
   ];
 
+  const menuId = `page-actions-${slug}`;
+
   return (
-    <div ref={ref} className="relative flex">
+    <div ref={ref} className="relative flex flex-none">
       <button
         onClick={copyPage}
-        className="flex items-center gap-1.5 rounded-l-[6px] border border-[rgba(20,23,28,0.14)] bg-white px-2.5 py-[7px] text-[12px] text-[#4b5563] hover:border-[rgba(20,23,28,0.26)]"
+        className="flex items-center gap-1.5 rounded-l-[6px] border border-[rgba(20,23,28,0.14)] bg-white px-2.5 py-[7px] text-[12px] text-[#4b5563] hover:border-[rgba(20,23,28,0.26)] focus-visible:ring-2 focus-visible:ring-[#1e4fd8] focus-visible:outline-none"
       >
-        {copied ? <Check size={13} /> : <Copy size={13} />}
-        {copied ? "Copied" : "Copy page"}
+        {copied ? <Check size={13} aria-hidden="true" /> : <Copy size={13} aria-hidden="true" />}
+        <span className="hidden sm:inline">{copied ? "Copied" : "Copy page"}</span>
+        <span className="sr-only" role="status">
+          {copied ? "Page copied to clipboard" : ""}
+        </span>
       </button>
       <button
         onClick={() => setOpen((v) => !v)}
         aria-label="More export options"
         aria-expanded={open}
-        className="flex items-center rounded-r-[6px] border border-l-0 border-[rgba(20,23,28,0.14)] bg-white px-1.5 py-[7px] text-[#4b5563] hover:border-[rgba(20,23,28,0.26)]"
+        aria-haspopup="menu"
+        aria-controls={open ? menuId : undefined}
+        className="flex items-center rounded-r-[6px] border border-l-0 border-[rgba(20,23,28,0.14)] bg-white px-1.5 py-[7px] text-[#4b5563] hover:border-[rgba(20,23,28,0.26)] focus-visible:ring-2 focus-visible:ring-[#1e4fd8] focus-visible:outline-none"
       >
-        <ChevronDown size={13} />
+        <ChevronDown size={13} aria-hidden="true" />
       </button>
 
       {open && (
-        <div className="absolute top-[calc(100%+6px)] right-0 z-20 w-[248px] overflow-hidden rounded-[10px] border border-[rgba(20,23,28,0.12)] bg-white py-1.5 shadow-[0_8px_24px_rgba(20,23,28,0.12)]">
+        <div
+          id={menuId}
+          role="menu"
+          className="absolute top-[calc(100%+6px)] right-0 z-20 w-[248px] overflow-hidden rounded-[10px] border border-[rgba(20,23,28,0.12)] bg-white py-1.5 shadow-[0_8px_24px_rgba(20,23,28,0.12)]"
+        >
           {MENU.map((m) => (
             <button
               key={m.label}
+              role="menuitem"
               onClick={m.action}
-              className="flex w-full items-center gap-2.5 px-3 py-2 text-left hover:bg-[#f4f7ff]"
+              className="flex w-full items-center gap-2.5 px-3 py-2 text-left hover:bg-[#f4f7ff] focus-visible:bg-[#f4f7ff] focus-visible:outline-none"
             >
               <span className="flex h-7 w-7 flex-none items-center justify-center rounded-[8px] border border-[rgba(20,23,28,0.1)] bg-[#f7f7f6] text-[#14171c]">
                 <m.icon size={m.iconSize} />
@@ -124,7 +150,7 @@ export function DocsPageActions({
               <span className="flex flex-col gap-px">
                 <span className="flex items-center gap-1 text-[12.5px] font-medium text-[#14171c]">
                   {m.label}
-                  <ExternalLink size={11} className="text-[#9ca3af]" />
+                  <ExternalLink size={11} className="text-[#9ca3af]" aria-hidden="true" />
                 </span>
                 <span className="text-[11px] text-[#9ca3af]">
                   Ask questions about this page
