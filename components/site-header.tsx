@@ -6,7 +6,10 @@ import { Logomark } from "./logomark";
 import { HamburgerIcon } from "./hamburger-icon";
 
 const ACCENT = "#1e4fd8";
-const SHRINK_AT = 24;
+// Never hide the bar while still near the top of the page.
+const REVEAL_ABOVE = 96;
+// Ignore sub-pixel and rubber-band scroll noise, so the bar doesn't flicker.
+const DIRECTION_THRESHOLD = 6;
 
 const NAV_LINKS = [
   { key: "features", href: "/#features", label: "Features" },
@@ -15,16 +18,51 @@ const NAV_LINKS = [
 ] as const;
 
 export function SiteHeader({ active }: { active?: string }) {
-  const [scrolled, setScrolled] = useState(false);
-  const [hovered, setHovered] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const mobileRef = useRef<HTMLDivElement>(null);
-
+  const lastY = useRef(0);
+  // Read in the scroll handler without making it a dependency, so the
+  // listener is attached once instead of re-bound on every menu toggle.
+  const mobileOpenRef = useRef(false);
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > SHRINK_AT);
+    mobileOpenRef.current = mobileOpen;
+  }, [mobileOpen]);
+
+  // Hide on scroll down, reveal on scroll up.
+  useEffect(() => {
+    lastY.current = window.scrollY;
+    let frame = 0;
+
+    const evaluate = () => {
+      frame = 0;
+      const y = window.scrollY;
+      const delta = y - lastY.current;
+
+      if (y <= REVEAL_ABOVE || mobileOpenRef.current) {
+        setHidden(false);
+        lastY.current = y;
+        return;
+      }
+
+      // Only advance the reference point once a move was decisive enough to
+      // act on; otherwise slow drags never accumulate past the threshold.
+      if (Math.abs(delta) < DIRECTION_THRESHOLD) return;
+      setHidden(delta > 0);
+      lastY.current = y;
+    };
+
+    const onScroll = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(evaluate);
+    };
+
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   useEffect(() => {
@@ -37,8 +75,6 @@ export function SiteHeader({ active }: { active?: string }) {
     return () => document.removeEventListener("mousedown", onClick);
   }, []);
 
-  const expanded = !scrolled || hovered;
-
   // Next's <Link> bails on scrolling for a same-route hash change, so
   // #features needs a manual smooth scroll when already on "/".
   const handleFeaturesClick = (e: MouseEvent<HTMLAnchorElement>) => {
@@ -48,15 +84,19 @@ export function SiteHeader({ active }: { active?: string }) {
     window.history.replaceState(null, "", "/#features");
   };
 
+  // Layout and colours are the original header's; only the typeface
+  // (font-display) follows the v2 design.
   return (
-    <header className="sticky top-0 z-30 px-4 pt-4 sm:px-6 md:px-10">
+    <header
+      className="font-display sticky top-0 z-30 px-4 pt-4 transition-transform duration-300 ease-out will-change-transform motion-reduce:transition-none sm:px-6 md:px-10"
+      style={{
+        transform: hidden ? "translateY(calc(-100% - 12px))" : "translateY(0)",
+      }}
+    >
       <div ref={mobileRef} className="mx-auto max-w-[1154px]">
         <div
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
-          className="flex items-center gap-4 overflow-hidden rounded-full border border-[rgba(255,255,255,0.7)] bg-[rgba(255,255,255,0.6)] py-2 pr-[10px] pl-[22px] backdrop-blur-[18px] backdrop-saturate-[1.7] transition-[height] duration-300 ease-out md:gap-8"
+          className="flex h-[60px] items-center gap-4 overflow-hidden rounded-full border border-[rgba(255,255,255,0.7)] bg-[rgba(255,255,255,0.6)] py-2 pr-[10px] pl-[22px] backdrop-blur-[18px] backdrop-saturate-[1.7] md:gap-8"
           style={{
-            height: expanded ? 60 : 40,
             boxShadow:
               "0 0 0 1px rgba(20,23,28,0.05), 0 1px 2px rgba(20,23,28,0.04), 0 20px 44px -24px rgba(20,23,28,0.3)",
           }}
@@ -68,13 +108,7 @@ export function SiteHeader({ active }: { active?: string }) {
             </span>
           </Link>
 
-          <div
-            className="ml-auto hidden items-center gap-8 transition-opacity duration-300 ease-out md:flex"
-            style={{
-              opacity: expanded ? 1 : 0,
-              pointerEvents: expanded ? "auto" : "none",
-            }}
-          >
+          <div className="ml-auto hidden items-center gap-8 md:flex">
             <nav className="flex gap-[26px] text-[13.5px] whitespace-nowrap">
               {NAV_LINKS.map((l) => (
                 <Link

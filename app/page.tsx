@@ -1,172 +1,374 @@
 import Image from "next/image";
+import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 
-const ACCENT = "#1e4fd8";
-const EYEBROW = "Interpretability for voice models";
+const ACCENT = "#1b48e0";
+const EYEBROW = "Interpretability for speech models";
 
-const FEATURES = [
+const CHIPS = [
+  "Whisper",
+  "Wav2Vec2",
+  "Custom checkpoints",
+  "CUDA · ROCm · MPS",
+  "Self-hosted",
+];
+
+const PREMISE = [
   {
-    no: "01",
-    title: "Saliency mapping",
-    body: "Gradient-weighted attribution over the raw waveform. Segment or heatmap view, ranked by contribution to each predicted token.",
-    meta: "Grad-CAM · Integrated Gradients",
+    figure: "0.072",
+    tone: ACCENT,
+    bg: "#f6f8ff",
+    title: "A score hides the failure",
+    body: "Word error rate tells you that something broke. It never tells you which 300 milliseconds of audio broke it.",
   },
   {
-    no: "02",
-    title: "Attention",
-    body: "Per-head, per-layer attention across encoder frames, readable as a matrix or projected back onto the audio timeline.",
-    meta: "Encoder · cross-attention",
+    figure: "3000",
+    tone: "#0a0c11",
+    bg: "#f7f7f6",
+    title: "Embeddings hide the structure",
+    body: "Points in latent space only become useful once clusters, outliers and noise flags are attached to real datapoints.",
   },
   {
-    no: "03",
-    title: "Embedding projector",
-    body: "PCA and UMAP views of dataset-level embeddings with clustering, noise flags and a separation score you can trust cautiously.",
-    meta: "PCA 50d · HDBSCAN",
-  },
-  {
-    no: "04",
-    title: "Perturbation lab",
-    body: "Add noise, shift pitch, clip and mask regions, then watch WER move. Robustness measured, not assumed.",
-    meta: "12 transforms",
-  },
-  {
-    no: "05",
-    title: "Transcript diffing",
-    body: "Prediction against ground truth, aligned word by word, with WER, CER and Levenshtein surfaced per datapoint.",
-    meta: "WER · CER · Levenshtein",
-  },
-  {
-    no: "06",
-    title: "Fairness & diagnostics",
-    body: "Slice metrics by speaker, accent, language or any metadata column to find where the model quietly fails.",
-    meta: "Slice-based reporting",
+    figure: "56%",
+    tone: "#0a0c11",
+    bg: "#f7f7f6",
+    title: "Attribution needs context",
+    body: "A salient segment matters only when you can hear it, perturb it and watch the prediction change in the same view.",
   },
 ];
 
+const TIMELINE = [
+  { range: "6.7-6.9s", label: "Saliency peak", value: "68%" },
+  { range: "13.6-13.9s", label: "Attention head L6-H3", value: "0.41" },
+  { range: "18.4-18.6s", label: "Nearest neighbour drift", value: "2.1σ" },
+  { range: "19.3-19.7s", label: "Perturbation delta", value: "+0.09" },
+];
+
+const PANELS = [
+  {
+    no: "01",
+    meta: "Grad-CAM · IG",
+    title: "Saliency mapping",
+    body: "Gradient-weighted attribution over the raw waveform, ranked by contribution to each predicted token and drawn back onto the audio.",
+  },
+  {
+    no: "02",
+    meta: "Encoder · cross",
+    title: "Attention",
+    body: "Per-head, per-layer attention across encoder frames, readable as a matrix or projected onto the timeline you already selected.",
+  },
+  {
+    no: "03",
+    meta: "PCA · HDBSCAN",
+    title: "Embedding projector",
+    body: "Dataset-level embeddings in PCA and UMAP space, with clustering, noise flags and a separation score reported honestly.",
+  },
+  {
+    no: "04",
+    meta: "12 transforms",
+    title: "Perturbation lab",
+    body: "Add noise, shift pitch, clip and mask regions, then watch the metrics move. Robustness measured, not assumed.",
+  },
+  {
+    no: "05",
+    meta: "WER · CER",
+    title: "Transcript diffing",
+    body: "Prediction against ground truth aligned word by word, with WER, CER and Levenshtein distance surfaced per datapoint.",
+  },
+  {
+    no: "06",
+    meta: "Slice reporting",
+    title: "Fairness diagnostics",
+    body: "Slice metrics by speaker, accent, language or any metadata column to find where the model quietly fails.",
+  },
+];
+
+// The design draws every hairline as a 1px ring rather than a border, so the
+// rounded corners stay crisp underneath the layered shadows.
+const RING = "shadow-[0_0_0_1px_rgba(10,12,17,0.08)]";
+
 export default function Home() {
+  // overflow-x-clip, not -hidden: `hidden` on one axis forces the other to
+  // `auto`, which turns the wrapper into a scroll container and stops the
+  // sticky header from sticking.
   return (
-    <div className="min-h-screen bg-[#fbfbfa]">
-      {/* max-w values are content-box widths from the design plus their own
-          horizontal padding, since Tailwind's preflight forces border-box. */}
+    <div className="font-display min-h-screen overflow-x-clip bg-white text-[#0a0c11]">
       <SiteHeader />
 
-      <section className="mx-auto max-w-[1280px] px-10">
-        <div className="flex flex-col items-center pt-[88px] pb-[26px] text-center">
-          <div className="mb-[22px] font-mono text-[11px] tracking-[0.14em] text-[#14171c] uppercase">
-            {EYEBROW}
+      {/* Hero */}
+      <section className="relative px-6 pt-[72px] text-center sm:pt-[88px] lg:pt-[104px]">
+        {/* Geometry is the v2 artboard's verbatim: left:50% plus translateX(-50%),
+            with the drift animation's own transform taking over once it runs. */}
+        <div
+          aria-hidden
+          className="al-drift pointer-events-none absolute top-[-140px] left-1/2 z-0 h-[900px] w-[1500px] max-w-none opacity-90 blur-[30px]"
+          style={{
+            transform: "translateX(-50%)",
+            animation: "al-drift 26s ease-in-out infinite",
+            background:
+              "radial-gradient(38% 34% at 50% 34%, rgba(27,72,224,0.20) 0%, rgba(27,72,224,0) 72%), radial-gradient(30% 30% at 30% 44%, rgba(102,163,255,0.22) 0%, rgba(102,163,255,0) 70%), radial-gradient(28% 28% at 70% 40%, rgba(160,120,255,0.16) 0%, rgba(160,120,255,0) 72%)",
+          }}
+        />
+
+        <div className="relative z-[1] mx-auto max-w-[1120px]">
+          <div
+            className={`inline-flex items-center gap-2.5 rounded-full bg-white/75 py-[7px] pr-2 pl-3.5 text-[13px] text-[#535a67] ${RING}`}
+          >
+            <span
+              className="font-code text-[11px] tracking-[0.06em]"
+            >
+              v1.0
+            </span>
+            <span>{EYEBROW}</span>
+            <span className="inline-flex h-[22px] w-[22px] items-center justify-center text-[12px] text-[#535a67]">
+              →
+            </span>
           </div>
-          <h1 className="m-0 text-[66px] leading-[1.02] font-medium tracking-[-0.035em] text-balance text-[#14171c]">
-            Hear what your
+
+          <h1 className="mt-[26px] mb-0 text-[44px] leading-[0.94] font-semibold tracking-[-0.045em] text-balance sm:text-[64px] md:text-[80px] lg:text-[104px]">
+            Listen to the
             <br />
-            model <em className="font-serif font-normal italic">actually</em>{" "}
-            heard.
+            model thinking.
           </h1>
-          <p className="mx-auto mt-[26px] max-w-[56ch] text-[17px] leading-[1.6] text-[#4b5563] text-pretty">
-            An interpretability workbench for voice models. Trace a prediction
-            from waveform to token with saliency, attention, embeddings and
-            perturbation analysis, without leaving the timeline the audio lives
-            on.
+
+          <p className="mx-auto mt-[30px] max-w-[60ch] text-[17px] leading-[1.55] font-normal text-[#535a67] text-pretty sm:text-[20px]">
+            AudioLens is an interpretability workbench for speech models. Follow
+            a single prediction from raw waveform to emitted token, across
+            saliency, attention, embeddings and perturbation, on one shared
+            timeline.
           </p>
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+
+          <div className="mt-[38px] flex flex-wrap justify-center gap-3">
             <a
               href="#"
-              className="rounded-[6px] px-[22px] py-3 text-[14px] font-medium text-white transition-[filter] hover:text-white hover:brightness-[0.88]"
+              className="rounded-full px-7 py-[15px] text-[15px] font-medium text-white shadow-[0_14px_30px_-14px_rgba(27,72,224,0.7)] transition-[filter] hover:text-white hover:brightness-90"
               style={{ background: ACCENT }}
             >
               Open the dashboard
             </a>
-            <code className="box-content flex h-[18px] w-[219px] items-center rounded-[6px] border border-[rgba(20,23,28,0.12)] bg-white px-[15px] py-[11px] font-mono text-[13px] text-[#374151]">
-              $ docker compose up --build
-            </code>
+            <Link
+              href="/docs"
+              className={`rounded-full bg-white/80 px-[26px] py-[15px] text-[15px] font-medium text-[#0a0c11] transition-colors hover:bg-[#f4f5f7] hover:text-[#0a0c11] ${RING}`}
+            >
+              Read the docs
+            </Link>
           </div>
         </div>
 
-        <div className="relative pt-[34px] pb-24">
+        {/* Product shot */}
+        <div className="relative z-[1] mx-auto mt-[74px] max-w-[1240px]">
+          <div className="relative rounded-[26px] bg-linear-to-b from-white/90 to-white/50 p-2.5 shadow-[0_0_0_1px_rgba(10,12,17,0.07),0_70px_120px_-60px_rgba(10,32,90,0.55)]">
+            <div className={`overflow-hidden rounded-[18px] bg-white ${RING}`}>
+              <div className="flex h-[42px] items-center gap-3.5 bg-[#f7f8fa] px-4 shadow-[inset_0_-1px_0_rgba(10,12,17,0.07)]">
+                <div className="flex gap-[7px]">
+                  <div className="h-2.5 w-2.5 rounded-full bg-[#e3e5e9]" />
+                  <div className="h-2.5 w-2.5 rounded-full bg-[#e3e5e9]" />
+                  <div className="h-2.5 w-2.5 rounded-full bg-[#e3e5e9]" />
+                </div>
+                <div
+                  className={`font-code flex h-6 max-w-[400px] flex-1 items-center rounded-full bg-white px-3 text-[11px] text-[#8b929c] ${RING}`}
+                >
+                  audiolens.app/lab/whisper-base
+                </div>
+                <span className="font-code ml-auto hidden text-[10.5px] text-[#a8adb5] sm:inline">
+                  SAA dataset
+                </span>
+              </div>
+              <Image
+                src="/assets/dashboard.png"
+                alt="AudioLens dashboard showing audio embeddings, saliency overlay and datapoint editor"
+                width={1915}
+                height={980}
+                className="block h-auto w-full"
+                priority
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="font-code relative z-[1] mx-auto flex max-w-[1240px] flex-wrap justify-center gap-3.5 pt-[34px] text-[11.5px] text-[#6b7280]">
+          {CHIPS.map((c) => (
+            <span key={c} className={`rounded-full bg-white px-3.5 py-2 ${RING}`}>
+              {c}
+            </span>
+          ))}
+        </div>
+      </section>
+
+      {/* The premise */}
+      <section className="px-6 pt-[90px] sm:pt-[120px] lg:pt-[150px]">
+        <div className="mx-auto max-w-[1240px]">
+          <div className="max-w-[24ch]">
+            <h2 className="mt-5 mb-0 text-[34px] leading-none font-semibold tracking-[-0.04em] text-balance sm:text-[44px] lg:text-[64px]">
+              A transcript is not an explanation.
+            </h2>
+          </div>
+
+          <div className="mt-[70px] grid grid-cols-[repeat(auto-fit,minmax(min(280px,100%),1fr))] gap-[26px]">
+            {PREMISE.map((p) => (
+              <div
+                key={p.title}
+                className="rounded-[22px] px-[30px] pt-8 pb-[34px] shadow-[0_0_0_1px_rgba(10,12,17,0.06)]"
+                style={{ background: p.bg }}
+              >
+                <div
+                  className="font-code text-[44px] leading-none font-normal tracking-[-0.03em]"
+                  style={{ color: p.tone }}
+                >
+                  {p.figure}
+                </div>
+                <div className="mt-5 text-[19px] font-semibold tracking-[-0.015em]">
+                  {p.title}
+                </div>
+                <p className="mt-[9px] mb-0 text-[15px] leading-[1.6] text-[#535a67] text-pretty">
+                  {p.body}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* One timeline */}
+      <section className="px-6 pt-[90px] sm:pt-[120px] lg:pt-[150px]">
+        <div className="relative mx-auto max-w-[1240px] overflow-hidden rounded-[32px] bg-[#0a0c11] px-6 pt-[52px] text-white sm:px-10 sm:pt-[64px] lg:px-16 lg:pt-[78px]">
           <div
-            className="pointer-events-none absolute top-[-46px] left-1/2 h-[400px] w-[94%] -translate-x-1/2 blur-[52px]"
+            aria-hidden
+            className="pointer-events-none absolute top-[-160px] right-[-160px] h-[620px] w-[620px] blur-[20px]"
             style={{
               background:
-                "radial-gradient(60% 64% at 50% 32%, rgba(30,79,216,0.32) 0%, rgba(30,79,216,0.16) 44%, rgba(30,79,216,0) 80%)",
+                "radial-gradient(circle at 50% 50%, rgba(27,72,224,0.55) 0%, rgba(27,72,224,0) 68%)",
             }}
           />
-          <div
-            className="relative overflow-hidden rounded-[11px] border border-[rgba(20,23,28,0.13)] bg-white"
-            style={{
-              boxShadow:
-                "0 1px 2px rgba(20,23,28,0.05), 0 40px 80px -40px rgba(20,23,28,0.3)",
-            }}
-          >
-            <div className="flex h-[41px] items-center gap-3.5 border-b border-[rgba(20,23,28,0.1)] bg-[#f6f6f5] px-3.5">
-              <div className="flex gap-1.5">
-                <div className="h-2.5 w-2.5 rounded-full bg-[#e0e0de]" />
-                <div className="h-2.5 w-2.5 rounded-full bg-[#e0e0de]" />
-                <div className="h-2.5 w-2.5 rounded-full bg-[#e0e0de]" />
+          <div className="relative grid grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))] items-end gap-14">
+            <div>
+              <div className="font-code text-[11.5px] tracking-[0.14em] text-[#8fabff] uppercase">
+                One timeline
               </div>
-              <div className="flex h-[22px] max-w-[420px] flex-1 items-center rounded-[5px] border border-[rgba(20,23,28,0.1)] bg-white px-[9px] font-mono text-[10.5px] text-[#8b929c]">
-                audiolens.app/lab/whisper-base
-              </div>
-              <div className="ml-auto font-mono text-[10px] text-[#a8adb5]">
-                SAA dataset
-              </div>
+              <h2 className="mt-5 mb-0 text-[32px] leading-none font-semibold tracking-[-0.04em] text-balance sm:text-[42px] lg:text-[60px]">
+                Every panel points at the same frames.
+              </h2>
+              <p className="mt-6 mb-0 max-w-[46ch] text-[17px] leading-[1.6] text-white/65 text-pretty">
+                Select a span once. Saliency, attention heads, embedding
+                neighbours and perturbation deltas all recompute against it, so
+                evidence accumulates instead of scattering across tabs.
+              </p>
             </div>
+            <div className="flex flex-col gap-3.5 pb-1.5">
+              {TIMELINE.map((t) => (
+                <div
+                  key={t.range}
+                  className="grid grid-cols-[76px_1fr_52px] items-center gap-[18px] rounded-[14px] bg-white/5 px-[18px] py-[15px] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.09)] sm:grid-cols-[96px_1fr_52px]"
+                >
+                  <span className="font-code text-[11.5px] text-white/50">
+                    {t.range}
+                  </span>
+                  <span className="text-[15px] font-medium">{t.label}</span>
+                  <span className="font-code text-right text-[12.5px] text-[#8fabff]">
+                    {t.value}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="relative mt-16 max-h-[300px] overflow-hidden rounded-t-[20px] shadow-[0_-1px_0_rgba(255,255,255,0.12)]">
             <Image
               src="/assets/dashboard.png"
-              alt="AudioLens dashboard: audio embeddings, saliency overlay and datapoint editor"
+              alt="Saliency overlay and embedding view inside the AudioLens workbench"
               width={1915}
               height={980}
               className="block h-auto w-full"
-              priority
             />
           </div>
         </div>
       </section>
 
+      {/* Six panels. Keeps id="features" so the header's /#features link, which
+          predates this design, still resolves. */}
       <section
         id="features"
-        className="scroll-mt-24 border-t border-[rgba(20,23,28,0.09)] bg-white"
+        className="scroll-mt-24 px-6 pt-[90px] sm:pt-[120px] lg:pt-[150px]"
       >
-        <div className="mx-auto max-w-[1280px] px-10">
-          <div className="pt-[70px] pb-[34px]">
-            <h2 className="m-0 max-w-[22ch] text-[34px] leading-[1.1] font-medium tracking-[-0.03em] text-[#14171c]">
-              Six views on the same second of audio.
-            </h2>
+        <div className="mx-auto max-w-[1240px]">
+          <div className="flex flex-wrap items-end justify-between gap-10">
+            <div className="max-w-[22ch]">
+              <h2 className="mt-5 mb-0 text-[34px] leading-none font-semibold tracking-[-0.04em] text-balance sm:text-[44px] lg:text-[64px]">
+                Methods, not vibes.
+              </h2>
+            </div>
+            <Link
+              href="/docs"
+              className="rounded-full px-6 py-3.5 text-[15px] font-medium text-[#0a0c11] shadow-[0_0_0_1px_rgba(10,12,17,0.12)] transition-colors hover:bg-[#f4f5f7] hover:text-[#0a0c11]"
+            >
+              Method reference
+            </Link>
           </div>
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] border-t border-l border-[rgba(20,23,28,0.11)]">
-            {FEATURES.map((f) => (
+
+          <div className="mt-16 grid grid-cols-[repeat(auto-fit,minmax(min(340px,100%),1fr))] gap-[22px]">
+            {PANELS.map((p) => (
               <div
-                key={f.no}
-                className="border-r border-b border-[rgba(20,23,28,0.11)] px-[26px] pt-7 pb-8 transition-colors duration-150 hover:bg-[#fafbfe]"
+                key={p.no}
+                className={`rounded-[22px] bg-white px-8 pt-[34px] pb-9 transition-[box-shadow,transform] duration-200 hover:-translate-y-[3px] hover:shadow-[0_0_0_1px_rgba(27,72,224,0.3),0_30px_60px_-34px_rgba(10,32,90,0.4)] ${RING}`}
               >
-                <div
-                  className="mb-4 font-mono text-[10.5px]"
-                  style={{ color: ACCENT }}
-                >
-                  {f.no}
+                <div className="flex items-center justify-between">
+                  <span
+                    className="font-code text-[11.5px]"
+                    style={{ color: ACCENT }}
+                  >
+                    {p.no}
+                  </span>
+                  <span className="font-code text-[10.5px] text-[#9ca3af]">
+                    {p.meta}
+                  </span>
                 </div>
-                <h3 className="m-0 text-[16px] font-semibold tracking-[-0.01em] text-[#14171c]">
-                  {f.title}
+                <h3 className="mt-[26px] mb-0 text-[26px] leading-[1.1] font-semibold tracking-[-0.025em]">
+                  {p.title}
                 </h3>
-                <p className="mt-[9px] text-[13.5px] leading-[1.6] text-[#5b6472] text-pretty">
-                  {f.body}
+                <p className="mt-3 mb-0 text-[15px] leading-[1.62] text-[#535a67] text-pretty">
+                  {p.body}
                 </p>
-                <div className="mt-5 font-mono text-[10px] text-[#9ca3af]">
-                  {f.meta}
-                </div>
               </div>
             ))}
           </div>
-          <div className="flex flex-wrap items-center gap-3.5 pt-14 pb-[74px]">
-            <span className="text-[15px] text-[#374151]">
-              Point it at your own checkpoint.
-            </span>
-            <a
-              href="#"
-              className="border-b border-[rgba(30,79,216,0.35)] pb-px text-[14px] font-medium"
-              style={{ color: ACCENT }}
-            >
-              Read the model loader docs
-            </a>
+        </div>
+      </section>
+
+      {/* Closing CTA */}
+      <section className="px-6 pt-[90px] sm:pt-[120px] lg:pt-[150px]">
+        <div className="relative mx-auto max-w-[1240px] overflow-hidden rounded-[32px] bg-linear-to-b from-[#f6f8ff] to-white px-6 py-16 text-center shadow-[0_0_0_1px_rgba(10,12,17,0.07)] sm:px-12 sm:pt-24 sm:pb-[100px]">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute bottom-[-320px] left-1/2 h-[520px] w-[900px] max-w-none -translate-x-1/2 blur-[20px]"
+            style={{
+              background:
+                "radial-gradient(circle at 50% 50%, rgba(27,72,224,0.28) 0%, rgba(27,72,224,0) 68%)",
+            }}
+          />
+          <div className="relative">
+            <h2 className="m-0 text-[38px] leading-[0.98] font-semibold tracking-[-0.045em] text-balance sm:text-[52px] lg:text-[72px]">
+              Run it on your
+              <br />
+              own checkpoint.
+            </h2>
+            <p className="mx-auto mt-[26px] mb-0 max-w-[52ch] text-[16px] leading-[1.6] text-[#535a67] sm:text-[18px]">
+              Self-hosted, MIT licensed, no telemetry. One command brings up the
+              API, worker and workbench.
+            </p>
+            <div className="mt-9 flex flex-wrap justify-center gap-3">
+              <a
+                href="#"
+                className="rounded-full px-7 py-[15px] text-[15px] font-medium text-white shadow-[0_14px_30px_-14px_rgba(27,72,224,0.7)] transition-[filter] hover:text-white hover:brightness-90"
+                style={{ background: ACCENT }}
+              >
+                Get started
+              </a>
+              <code
+                className={`font-code rounded-full bg-white px-[22px] py-[15px] text-[13px] text-[#2b3342] sm:text-[14px] ${RING}`}
+              >
+                $ docker compose up --build
+              </code>
+            </div>
           </div>
         </div>
       </section>
