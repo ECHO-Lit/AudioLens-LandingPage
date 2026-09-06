@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import Grainient from "@/components/Grainient";
 
 const ACCENT = "#1b48e0";
 const EYEBROW = "Interpretability for speech models";
@@ -336,16 +337,41 @@ export default function Home() {
 
       {/* Closing CTA */}
       <section className="px-6 pt-[90px] sm:pt-[120px] lg:pt-[150px]">
-        <div className="relative mx-auto max-w-[1240px] overflow-hidden rounded-[32px] bg-linear-to-b from-[#f6f8ff] to-white px-6 py-16 text-center shadow-[0_0_0_1px_rgba(10,12,17,0.07)] sm:px-12 sm:pt-24 sm:pb-[100px]">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute bottom-[-320px] left-1/2 h-[520px] w-[900px] max-w-none -translate-x-1/2 blur-[20px]"
-            style={{
-              background:
-                "radial-gradient(circle at 50% 50%, rgba(27,72,224,0.28) 0%, rgba(27,72,224,0) 68%)",
-            }}
-          />
-          <div className="relative">
+        <div className="relative mx-auto max-w-[1240px] overflow-hidden rounded-[32px] px-6 py-16 text-center shadow-[0_0_0_1px_rgba(10,12,17,0.07)] sm:px-12 sm:pt-24 sm:pb-[100px]">
+          {/* Static (timeSpeed 0, grain not animated) grainient. lightMode is
+              off on purpose: it recolors by each stop's hue, and a hue read
+              off near-white pastels has almost no chroma to work with, so it
+              washes out to flat gray (as seen). Feeding the pastel colors
+              straight into the raw blend instead keeps them light enough for
+              the dark heading/body text while actually showing their tint. */}
+          <div className="absolute inset-0 z-0" aria-hidden="true">
+            <Grainient
+              className="h-full w-full"
+              color1="#c9dcff"
+              color2="#eef1ff"
+              color3="#ecdcff"
+              timeSpeed={0}
+              colorBalance={0}
+              warpStrength={1}
+              warpFrequency={5}
+              warpSpeed={2}
+              warpAmplitude={50}
+              blendAngle={180}
+              blendSoftness={0.05}
+              rotationAmount={180}
+              noiseScale={2}
+              grainAmount={0.06}
+              grainScale={2}
+              grainAnimated={false}
+              contrast={1}
+              gamma={1}
+              saturation={0.9}
+              centerX={0}
+              centerY={0}
+              zoom={1.05}
+            />
+          </div>
+          <div className="relative z-10">
             <h2 className="m-0 text-[38px] leading-[0.98] font-semibold tracking-[-0.045em] text-balance sm:text-[52px] lg:text-[72px]">
               Run it on your
               <br />
