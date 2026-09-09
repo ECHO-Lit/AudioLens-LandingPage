@@ -9,8 +9,8 @@ import {
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
-// IBM Plex stays the docs typeface -- app/globals.css maps it to
-// --font-sans/mono/serif, which every page under /docs inherits.
+// IBM Plex Sans no longer used for body text (--font-sans now maps to
+// Manrope, matching the landing page) but Plex Mono/Serif still load below.
 const plexSans = IBM_Plex_Sans({
   variable: "--font-plex-sans",
   subsets: ["latin"],

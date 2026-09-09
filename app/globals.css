@@ -5,14 +5,12 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: var(--font-plex-sans), system-ui, sans-serif;
+  --font-sans: var(--font-manrope), system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, monospace;
   --font-serif: var(--font-plex-serif), Georgia, serif;
   --font-heading: var(--font-sans);
 
-  /* Marketing typefaces for the landing/research pages and the site chrome.
-     Deliberately separate tokens from --font-sans/mono/serif above, which the
-     docs rely on -- repointing those would retypeset every page under /docs. */
+  /* Marketing typefaces for the landing/research pages and the site chrome. */
   --font-display: var(--font-manrope), system-ui, sans-serif;
   --font-code: var(--font-gs-code), ui-monospace, monospace;
   --color-sidebar-ring: var(--sidebar-ring);
