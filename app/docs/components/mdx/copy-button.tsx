@@ -44,7 +44,7 @@ export function CopyButton({
       type="button"
       onClick={copy}
       aria-label={label}
-      className="cursor-pointer rounded-[5px] border border-[rgba(20,23,28,0.12)] bg-white px-[9px] py-[5px] font-mono text-[10.5px] text-[#4b5563] hover:border-[rgba(20,23,28,0.24)] focus-visible:ring-2 focus-visible:ring-[#1e4fd8] focus-visible:ring-offset-1 focus-visible:outline-none"
+      className="cursor-pointer rounded-[5px] border border-al-hairline-strong bg-card px-[9px] py-[5px] font-mono text-[10.5px] text-muted-foreground hover:border-al-hairline-hover focus-visible:ring-2 focus-visible:ring-al-accent focus-visible:ring-offset-1 focus-visible:outline-none"
     >
       <span aria-hidden="true">{copied ? "copied" : "copy"}</span>
       {/* The visible label swaps silently; announce the result separately. */}

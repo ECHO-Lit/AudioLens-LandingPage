@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { Logomark } from "@/components/logomark";
-import { ACCENT } from "../constants";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { ACCENT } from "@/lib/theme";
 import { DASHBOARD_HREF, SITE_LINKS } from "../docs-links";
 import { DocsMobileNav } from "./docs-mobile-nav";
 
@@ -32,26 +33,26 @@ export function DocsHeader({
   onOpenSearch: () => void;
 }) {
   return (
-    <header className="sticky top-0 z-30 border-b border-[rgba(20,23,28,0.09)] bg-[rgba(251,251,250,0.86)] backdrop-blur-[14px] backdrop-saturate-150">
+    <header className="sticky top-0 z-30 border-b border-al-hairline-strong bg-[var(--al-header-bg)] backdrop-blur-[14px] backdrop-saturate-150 dark:backdrop-saturate-100">
       <div className="mx-auto flex h-[60px] max-w-[1504px] items-center gap-3 px-4 sm:gap-6 sm:px-8">
         <DocsMobileNav active={active} />
 
-        <div className="flex flex-none items-center gap-[9px] text-[#14171c]">
+        <div className="flex flex-none items-center gap-[9px] text-foreground">
           <Link
             href="/"
-            className="flex items-center gap-[9px] text-[#14171c] hover:text-[#14171c] focus-visible:ring-2 focus-visible:ring-[#1e4fd8] focus-visible:outline-none"
+            className="flex items-center gap-[9px] text-foreground hover:text-foreground focus-visible:ring-2 focus-visible:ring-al-accent focus-visible:outline-none"
           >
             <Logomark heights={[7, 15, 11, 4]} containerHeight={15} mutedLast />
             <span className="text-[15px] font-semibold tracking-[-0.01em] whitespace-nowrap">
               AudioLens
             </span>
           </Link>
-          <span className="text-[15px] font-normal text-[#c9ccd1]" aria-hidden="true">
+          <span className="text-[15px] font-normal text-al-fg-faint" aria-hidden="true">
             /
           </span>
           <Link
             href="/docs"
-            className="text-[15px] font-medium whitespace-nowrap text-[#4b5563] hover:text-[#14171c] focus-visible:ring-2 focus-visible:ring-[#1e4fd8] focus-visible:outline-none"
+            className="text-[15px] font-medium whitespace-nowrap text-muted-foreground hover:text-foreground focus-visible:ring-2 focus-visible:ring-al-accent focus-visible:outline-none"
           >
             Docs
           </Link>
@@ -63,27 +64,32 @@ export function DocsHeader({
           <button
             onClick={onOpenSearch}
             aria-label="Search documentation"
-            className="flex h-[34px] w-[34px] cursor-pointer items-center justify-center rounded-[6px] border border-[rgba(20,23,28,0.12)] bg-white text-[#9ca3af] hover:border-[rgba(20,23,28,0.22)] focus-visible:ring-2 focus-visible:ring-[#1e4fd8] focus-visible:outline-none sm:hidden"
+            className="flex h-[34px] w-[34px] cursor-pointer items-center justify-center rounded-[6px] border border-al-hairline-strong bg-card text-al-fg-quaternary hover:border-al-hairline-hover focus-visible:ring-2 focus-visible:ring-al-accent focus-visible:outline-none sm:hidden"
           >
             <SearchIcon size={15} />
           </button>
 
           <button
             onClick={onOpenSearch}
-            className="hidden h-[34px] w-[190px] cursor-text items-center gap-2 rounded-[6px] border border-[rgba(20,23,28,0.12)] bg-white px-2.5 text-left text-[#9ca3af] hover:border-[rgba(20,23,28,0.22)] focus-visible:ring-2 focus-visible:ring-[#1e4fd8] focus-visible:outline-none sm:flex lg:w-[220px]"
+            className="hidden h-[34px] w-[190px] cursor-text items-center gap-2 rounded-[6px] border border-al-hairline-strong bg-card px-2.5 text-left text-al-fg-quaternary hover:border-al-hairline-hover focus-visible:ring-2 focus-visible:ring-al-accent focus-visible:outline-none sm:flex lg:w-[220px]"
           >
             <SearchIcon />
             <span className="min-w-0 flex-1 truncate text-[12.5px]">Search documentation</span>
-            <span className="hidden rounded-[3px] border border-[rgba(20,23,28,0.12)] px-1 py-px font-mono text-[10px] lg:inline">
+            <span className="hidden rounded-[3px] border border-al-hairline-strong px-1 py-px font-mono text-[10px] lg:inline">
               ⌘K
             </span>
           </button>
+
+          {/* ThemeToggle sits outside the lg:flex nav below so it stays
+              reachable at every width, not just when the sidebar nav is
+              visible. */}
+          <ThemeToggle />
 
           {/* Promoted from md: to lg: so it flips at the same width the sidebar
               collapses -- the two used to disagree between 768 and 820px. */}
           <nav
             aria-label="Site"
-            className="hidden items-center gap-[22px] text-[13.5px] text-[#4b5563] lg:flex"
+            className="hidden items-center gap-[22px] text-[13.5px] text-muted-foreground lg:flex"
           >
             {SITE_LINKS.map((l) =>
               l.external ? (
@@ -92,7 +98,7 @@ export function DocsHeader({
                   href={l.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#4b5563] transition-colors hover:text-[#14171c] focus-visible:ring-2 focus-visible:ring-[#1e4fd8] focus-visible:outline-none"
+                  className="text-muted-foreground transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-al-accent focus-visible:outline-none"
                 >
                   {l.label}
                 </a>
@@ -100,7 +106,7 @@ export function DocsHeader({
                 <Link
                   key={l.label}
                   href={l.href}
-                  className="text-[#4b5563] transition-colors hover:text-[#14171c] focus-visible:ring-2 focus-visible:ring-[#1e4fd8] focus-visible:outline-none"
+                  className="text-muted-foreground transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-al-accent focus-visible:outline-none"
                 >
                   {l.label}
                 </Link>
@@ -108,7 +114,7 @@ export function DocsHeader({
             )}
             <a
               href={DASHBOARD_HREF}
-              className="rounded-[5px] px-3.5 py-2 text-[13px] font-medium text-white hover:brightness-[0.88] focus-visible:ring-2 focus-visible:ring-[#1e4fd8] focus-visible:outline-none"
+              className="rounded-[5px] px-3.5 py-2 text-[13px] font-medium text-white hover:brightness-[0.88] focus-visible:ring-2 focus-visible:ring-al-accent focus-visible:outline-none"
               style={{ background: ACCENT }}
             >
               Dashboard

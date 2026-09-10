@@ -112,7 +112,7 @@ export function DocsPageActions({
     <div ref={ref} className="relative flex flex-none">
       <button
         onClick={copyPage}
-        className="flex items-center gap-1.5 rounded-l-[6px] border border-[rgba(20,23,28,0.14)] bg-white px-2.5 py-[7px] text-[12px] text-[#4b5563] hover:border-[rgba(20,23,28,0.26)] focus-visible:ring-2 focus-visible:ring-[#1e4fd8] focus-visible:outline-none"
+        className="flex items-center gap-1.5 rounded-l-[6px] border border-al-hairline-strong bg-card px-2.5 py-[7px] text-[12px] text-muted-foreground hover:border-al-hairline-hover focus-visible:ring-2 focus-visible:ring-al-accent focus-visible:outline-none"
       >
         {copied ? <Check size={13} aria-hidden="true" /> : <Copy size={13} aria-hidden="true" />}
         <span className="hidden sm:inline">{copied ? "Copied" : "Copy page"}</span>
@@ -126,7 +126,7 @@ export function DocsPageActions({
         aria-expanded={open}
         aria-haspopup="menu"
         aria-controls={open ? menuId : undefined}
-        className="flex items-center rounded-r-[6px] border border-l-0 border-[rgba(20,23,28,0.14)] bg-white px-1.5 py-[7px] text-[#4b5563] hover:border-[rgba(20,23,28,0.26)] focus-visible:ring-2 focus-visible:ring-[#1e4fd8] focus-visible:outline-none"
+        className="flex items-center rounded-r-[6px] border border-l-0 border-al-hairline-strong bg-card px-1.5 py-[7px] text-muted-foreground hover:border-al-hairline-hover focus-visible:ring-2 focus-visible:ring-al-accent focus-visible:outline-none"
       >
         <ChevronDown size={13} aria-hidden="true" />
       </button>
@@ -135,24 +135,24 @@ export function DocsPageActions({
         <div
           id={menuId}
           role="menu"
-          className="absolute top-[calc(100%+6px)] right-0 z-20 w-[248px] overflow-hidden rounded-[10px] border border-[rgba(20,23,28,0.12)] bg-white py-1.5 shadow-[0_8px_24px_rgba(20,23,28,0.12)]"
+          className="absolute top-[calc(100%+6px)] right-0 z-20 w-[248px] overflow-hidden rounded-[10px] border border-al-hairline-strong bg-card py-1.5 shadow-[0_8px_24px_var(--al-shadow-sm)]"
         >
           {MENU.map((m) => (
             <button
               key={m.label}
               role="menuitem"
               onClick={m.action}
-              className="flex w-full items-center gap-2.5 px-3 py-2 text-left hover:bg-[#f4f7ff] focus-visible:bg-[#f4f7ff] focus-visible:outline-none"
+              className="flex w-full items-center gap-2.5 px-3 py-2 text-left hover:bg-al-accent-tint focus-visible:bg-al-accent-tint focus-visible:outline-none"
             >
-              <span className="flex h-7 w-7 flex-none items-center justify-center rounded-[8px] border border-[rgba(20,23,28,0.1)] bg-[#f7f7f6] text-[#14171c]">
+              <span className="flex h-7 w-7 flex-none items-center justify-center rounded-[8px] border border-al-hairline-strong bg-al-surface-2 text-foreground">
                 <m.icon size={m.iconSize} />
               </span>
               <span className="flex flex-col gap-px">
-                <span className="flex items-center gap-1 text-[12.5px] font-medium text-[#14171c]">
+                <span className="flex items-center gap-1 text-[12.5px] font-medium text-foreground">
                   {m.label}
-                  <ExternalLink size={11} className="text-[#9ca3af]" aria-hidden="true" />
+                  <ExternalLink size={11} className="text-al-fg-quaternary" aria-hidden="true" />
                 </span>
-                <span className="text-[11px] text-[#9ca3af]">
+                <span className="text-[11px] text-al-fg-quaternary">
                   Ask questions about this page
                 </span>
               </span>

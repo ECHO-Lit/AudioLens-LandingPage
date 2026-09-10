@@ -1,4 +1,4 @@
-const ACCENT = "#1e4fd8";
+import { ACCENT } from "@/lib/theme";
 
 export function Logomark({
   heights,
@@ -22,7 +22,7 @@ export function Logomark({
             height: h,
             background:
               mutedLast && i === heights.length - 1
-                ? "rgba(30,79,216,0.4)"
+                ? "var(--al-accent-line-strong)"
                 : ACCENT,
           }}
         />

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { TocItem } from "../search-types";
-import { ACCENT } from "../constants";
+import { ACCENT } from "@/lib/theme";
 
 export function DocsToc({
   sectionId,
@@ -46,12 +46,12 @@ export function DocsToc({
 
   return (
     <aside className="docs-toc sticky top-[60px] hidden max-h-[calc(100vh-60px)] overflow-y-auto py-[34px] pb-[60px] xl:block">
-      <div className="mb-3 font-mono text-[10px] tracking-[0.11em] text-[#9ca3af] uppercase">
+      <div className="mb-3 font-mono text-[10px] tracking-[0.11em] text-al-fg-quaternary uppercase">
         On this page
       </div>
       {items && items.length ? (
         <nav aria-label="On this page">
-          <ul className="flex list-none flex-col gap-0.5 border-l border-[rgba(20,23,28,0.1)] p-0">
+          <ul className="flex list-none flex-col gap-0.5 border-l border-al-hairline-strong p-0">
             {items.map((t) => {
               const on = t.id === active;
               return (
@@ -59,10 +59,10 @@ export function DocsToc({
                   <a
                     href={`#${t.id}`}
                     aria-current={on ? "location" : undefined}
-                    className="-ml-px block py-[5px] pl-3 text-[12.5px] leading-[1.4] text-[#6b7280] hover:text-[#374151] focus-visible:ring-2 focus-visible:ring-[#1e4fd8] focus-visible:outline-none"
+                    className="-ml-px block py-[5px] pl-3 text-[12.5px] leading-[1.4] text-al-fg-tertiary hover:text-foreground focus-visible:ring-2 focus-visible:ring-al-accent focus-visible:outline-none"
                     style={{
                       borderLeft: `2px solid ${on ? ACCENT : "transparent"}`,
-                      ...(on ? { color: "#14171c" } : {}),
+                      ...(on ? { color: "var(--foreground)" } : {}),
                       fontWeight: on ? 500 : 400,
                     }}
                   >
@@ -74,7 +74,7 @@ export function DocsToc({
           </ul>
         </nav>
       ) : (
-        <div className="pl-2.5 text-[12.5px] text-[#9ca3af]">Nothing to show</div>
+        <div className="pl-2.5 text-[12.5px] text-al-fg-quaternary">Nothing to show</div>
       )}
     </aside>
   );

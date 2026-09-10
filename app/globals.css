@@ -2,7 +2,9 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-@custom-variant dark (&:is(.dark *));
+/* :is(.dark, .dark *) -- not just .dark * -- so dark: utilities also fire on
+   an element that itself carries .dark (e.g. <html>), not only descendants. */
+@custom-variant dark (&:is(.dark, .dark *));
 
 @theme inline {
   --font-sans: var(--font-manrope), system-ui, sans-serif;
@@ -13,19 +15,6 @@
   /* Marketing typefaces for the landing/research pages and the site chrome. */
   --font-display: var(--font-manrope), system-ui, sans-serif;
   --font-code: var(--font-gs-code), ui-monospace, monospace;
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -51,6 +40,33 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* AudioLens design tokens -- concepts shadcn has no slot for (hairlines,
+     glass, gradient washes, callout tints, code colors). Values live in
+     :root/.dark below; `inline` here makes these utilities emit var(--al-x)
+     rather than a resolved literal, which is what lets .dark flip them. */
+  --color-al-canvas: var(--al-canvas);
+  --color-al-surface-2: var(--al-surface-2);
+  --color-al-surface-3: var(--al-surface-3);
+  --color-al-panel: var(--al-panel);
+  --color-al-fg-strong: var(--al-fg-strong);
+  --color-al-fg-body: var(--al-fg-body);
+  --color-al-fg-tertiary: var(--al-fg-tertiary);
+  --color-al-fg-quaternary: var(--al-fg-quaternary);
+  --color-al-fg-faint: var(--al-fg-faint);
+  --color-al-accent: var(--al-accent);
+  --color-al-accent-fg: var(--al-accent-fg);
+  --color-al-accent-text: var(--al-accent-text);
+  --color-al-accent-hover: var(--al-accent-hover);
+  --color-al-accent-tint: var(--al-accent-tint);
+  --color-al-accent-line: var(--al-accent-line);
+  --color-al-accent-line-strong: var(--al-accent-line-strong);
+  --color-al-hairline: var(--al-hairline);
+  --color-al-hairline-soft: var(--al-hairline-soft);
+  --color-al-hairline-strong: var(--al-hairline-strong);
+  --color-al-hairline-hover: var(--al-hairline-hover);
+  --color-al-code-fg: var(--al-code-fg);
+  --color-al-code-border: var(--al-code-border);
 }
 
 /* Base link styling from the design. Must live in @layer base so Tailwind
@@ -65,12 +81,12 @@
   }
 
   a {
-    color: #1e4fd8;
+    color: var(--al-accent-text);
     text-decoration: none;
   }
 
   a:hover {
-    color: #12327f;
+    color: var(--al-accent-hover);
   }
   * {
     @apply border-border outline-ring/50;
@@ -78,19 +94,16 @@
   body {
     @apply bg-background text-foreground;
   }
-}
 
-::selection {
-  background: #cddcff;
-}
+  ::selection {
+    background: var(--al-selection);
+  }
 
-/* In @layer base so utilities such as `no-scrollbar` can still override it.
-   Unlayered, this outranked every layered rule and forced a scrollbar onto
-   containers that opt out of one. */
-@layer base {
+  /* scrollbar-color needs `* { }`, not `:root`, to reach scroll containers
+     other than the document (sidebar nav, code blocks, etc). */
   * {
     scrollbar-width: thin;
-    scrollbar-color: rgba(20, 23, 28, 0.18) transparent;
+    scrollbar-color: var(--al-scrollbar) transparent;
   }
 }
 
@@ -106,73 +119,167 @@
   }
 }
 
+/* rehype-pretty-code's theme map (next.config.ts) emits --shiki-light /
+   --shiki-dark per span plus data-theme="light dark" on <pre>/<code>, instead
+   of a resolved `color:`. Switch on .dark like every other token. Must beat
+   CodePre's own text-al-code-fg, hence @layer components. */
+@layer components {
+  code[data-theme*=" "],
+  code[data-theme*=" "] span {
+    color: var(--shiki-light);
+  }
+  .dark code[data-theme*=" "],
+  .dark code[data-theme*=" "] span {
+    color: var(--shiki-dark);
+  }
+}
+
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  color-scheme: light;
+
+  /* shadcn core, realigned to the actual design colors instead of stock
+     grayscale -- the only consumers are components/ui/* (button, input,
+     textarea, input-group, command, dialog). */
+  --background: #fbfbfa;
+  --foreground: #14171c;
+  --card: #ffffff;
+  --card-foreground: #14171c;
+  --popover: #ffffff;
+  --popover-foreground: #14171c;
+  --primary: #1e4fd8;
+  --primary-foreground: #ffffff;
+  --secondary: #f7f7f6;
+  --secondary-foreground: #14171c;
+  --muted: #f7f7f6;
+  --muted-foreground: #4b5563;
+  --accent: #f0f0ef;
+  --accent-foreground: #14171c;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
+  --border: rgba(20, 23, 28, 0.1);
+  --input: rgba(20, 23, 28, 0.12);
+  --ring: #1e4fd8;
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+
+  /* AudioLens design tokens -- see the @theme inline block above for how
+     these become bg-al-, text-al-, and border-al- utilities. */
+  --al-canvas: #ffffff;
+  --al-surface-2: #f7f7f6;
+  --al-surface-3: #f0f0ef;
+  --al-panel: #0a0c11;
+  --al-fg-strong: #0a0c11;
+  --al-fg-body: #535a67;
+  --al-fg-tertiary: #6b7280;
+  --al-fg-quaternary: #9ca3af;
+  --al-fg-faint: #c9ccd1;
+  --al-accent: #1e4fd8;
+  --al-accent-fg: #ffffff;
+  --al-accent-text: #1e4fd8;
+  --al-accent-hover: #12327f;
+  --al-accent-tint: #f4f7ff;
+  --al-accent-line: rgba(30, 79, 216, 0.2);
+  --al-accent-line-strong: rgba(30, 79, 216, 0.35);
+  --al-hairline: rgba(10, 12, 17, 0.08);
+  --al-hairline-soft: rgba(10, 12, 17, 0.06);
+  --al-hairline-strong: rgba(20, 23, 28, 0.12);
+  --al-hairline-hover: rgba(20, 23, 28, 0.22);
+  --al-shadow-sm: rgba(20, 23, 28, 0.04);
+  --al-shadow-lift: rgba(10, 32, 90, 0.4);
+  --al-shadow-deep: rgba(10, 32, 90, 0.55);
+  --al-shadow-accent: rgba(27, 72, 224, 0.7);
+  --al-glass: rgba(255, 255, 255, 0.6);
+  --al-glass-solid: rgba(255, 255, 255, 0.92);
+  --al-glass-border: rgba(255, 255, 255, 0.7);
+  --al-header-bg: rgba(251, 251, 250, 0.86);
+  --al-wash-a: rgba(27, 72, 224, 0.2);
+  --al-wash-a-0: rgba(27, 72, 224, 0);
+  --al-wash-b: rgba(102, 163, 255, 0.22);
+  --al-wash-b-0: rgba(102, 163, 255, 0);
+  --al-wash-c: rgba(160, 120, 255, 0.16);
+  --al-wash-c-0: rgba(160, 120, 255, 0);
+  --al-note-bg: #f4f7ff;
+  --al-note-border: rgba(30, 79, 216, 0.2);
+  --al-note-bar: #1e4fd8;
+  --al-note-title: #12327f;
+  --al-warn-bg: #fffaf2;
+  --al-warn-border: rgba(180, 83, 9, 0.22);
+  --al-warn-bar: #b45309;
+  --al-warn-title: #7c3d05;
+  --al-code-fg: #26303f;
+  --al-code-border: rgba(20, 23, 28, 0.13);
+  --al-selection: #cddcff;
+  --al-scrollbar: rgba(20, 23, 28, 0.18);
+  --al-skeleton: rgba(20, 23, 28, 0.07);
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  color-scheme: dark;
+
+  --background: #0a0c11;
+  --foreground: #f2f3f5;
+  --card: #14171c;
+  --card-foreground: #f2f3f5;
+  --popover: #14171c;
+  --popover-foreground: #f2f3f5;
+  --primary: #1e4fd8;
+  --primary-foreground: #ffffff;
+  --secondary: #1b1f27;
+  --secondary-foreground: #f2f3f5;
+  --muted: #1b1f27;
+  --muted-foreground: #9ca3af;
+  --accent: #1b1f27;
+  --accent-foreground: #f2f3f5;
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.14);
+  --ring: #8fabff;
+
+  --al-canvas: #0a0c11;
+  --al-surface-2: #1b1f27;
+  --al-surface-3: #232833;
+  --al-panel: #14171c;
+  --al-fg-strong: #f7f8fa;
+  --al-fg-body: #a3abb8;
+  --al-fg-tertiary: #8b929c;
+  --al-fg-quaternary: #6f7885;
+  --al-fg-faint: #4a515c;
+  --al-accent: #1e4fd8;
+  --al-accent-fg: #ffffff;
+  --al-accent-text: #8fabff;
+  --al-accent-hover: #b9cbff;
+  --al-accent-tint: rgba(30, 79, 216, 0.14);
+  --al-accent-line: rgba(143, 171, 255, 0.22);
+  --al-accent-line-strong: rgba(143, 171, 255, 0.42);
+  --al-hairline: rgba(255, 255, 255, 0.09);
+  --al-hairline-soft: rgba(255, 255, 255, 0.06);
+  --al-hairline-strong: rgba(255, 255, 255, 0.14);
+  --al-hairline-hover: rgba(255, 255, 255, 0.28);
+  --al-shadow-sm: rgba(0, 0, 0, 0.5);
+  --al-shadow-lift: rgba(0, 0, 0, 0.6);
+  --al-shadow-deep: rgba(0, 0, 0, 0.72);
+  --al-shadow-accent: rgba(27, 72, 224, 0.5);
+  --al-glass: rgba(20, 23, 28, 0.62);
+  --al-glass-solid: rgba(20, 23, 28, 0.94);
+  --al-glass-border: rgba(255, 255, 255, 0.1);
+  --al-header-bg: rgba(10, 12, 17, 0.86);
+  --al-wash-a: rgba(27, 72, 224, 0.34);
+  --al-wash-a-0: rgba(27, 72, 224, 0);
+  --al-wash-b: rgba(102, 163, 255, 0.14);
+  --al-wash-b-0: rgba(102, 163, 255, 0);
+  --al-wash-c: rgba(160, 120, 255, 0.13);
+  --al-wash-c-0: rgba(160, 120, 255, 0);
+  --al-note-bg: rgba(30, 79, 216, 0.14);
+  --al-note-border: rgba(143, 171, 255, 0.24);
+  --al-note-bar: #8fabff;
+  --al-note-title: #b9cbff;
+  --al-warn-bg: rgba(180, 83, 9, 0.16);
+  --al-warn-border: rgba(245, 158, 11, 0.28);
+  --al-warn-bar: #f59e0b;
+  --al-warn-title: #fcd34d;
+  --al-code-fg: #c9d1d9;
+  --al-code-border: rgba(255, 255, 255, 0.12);
+  --al-selection: rgba(30, 79, 216, 0.45);
+  --al-scrollbar: rgba(255, 255, 255, 0.22);
+  --al-skeleton: rgba(255, 255, 255, 0.08);
 }
 
 /* Ambient gradient wash behind the landing hero. Landing-page only. */

@@ -12,7 +12,7 @@ export function Skeleton({
   return (
     <div
       aria-hidden="true"
-      className={`animate-pulse rounded-[5px] bg-[rgba(20,23,28,0.07)] ${className}`}
+      className={`animate-pulse rounded-[5px] bg-al-skeleton ${className}`}
       style={style}
     />
   );

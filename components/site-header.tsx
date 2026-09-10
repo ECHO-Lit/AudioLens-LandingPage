@@ -4,8 +4,9 @@ import { useEffect, useRef, useState, MouseEvent } from "react";
 import Link from "next/link";
 import { Logomark } from "./logomark";
 import { HamburgerIcon } from "./hamburger-icon";
+import { ThemeToggle } from "./theme-toggle";
+import { ACCENT } from "@/lib/theme";
 
-const ACCENT = "#1e4fd8";
 // Never hide the bar while still near the top of the page.
 const REVEAL_ABOVE = 96;
 // Ignore sub-pixel and rubber-band scroll noise, so the bar doesn't flicker.
@@ -95,15 +96,15 @@ export function SiteHeader({ active }: { active?: string }) {
     >
       <div ref={mobileRef} className="mx-auto max-w-[1154px]">
         <div
-          className="flex h-[60px] items-center gap-4 overflow-hidden rounded-full border border-[rgba(255,255,255,0.7)] bg-[rgba(255,255,255,0.6)] py-2 pr-[10px] pl-[22px] backdrop-blur-[18px] backdrop-saturate-[1.7] md:gap-8"
+          className="flex h-[60px] items-center gap-4 overflow-hidden rounded-full border border-al-glass-border bg-al-glass py-2 pr-[10px] pl-[22px] backdrop-blur-[18px] backdrop-saturate-[1.7] dark:backdrop-saturate-100 md:gap-8"
           style={{
             boxShadow:
-              "0 0 0 1px rgba(20,23,28,0.05), 0 1px 2px rgba(20,23,28,0.04), 0 20px 44px -24px rgba(20,23,28,0.3)",
+              "0 0 0 1px var(--al-hairline-strong), 0 1px 2px var(--al-shadow-sm), 0 20px 44px -24px var(--al-shadow-sm)",
           }}
         >
           <Link href="/" className="flex flex-none items-center gap-[9px]">
             <Logomark heights={[7, 15, 11, 4]} containerHeight={15} mutedLast />
-            <span className="text-[15px] font-semibold tracking-[-0.01em] whitespace-nowrap text-[#14171c]">
+            <span className="text-[15px] font-semibold tracking-[-0.01em] whitespace-nowrap text-foreground">
               AudioLens
             </span>
           </Link>
@@ -115,10 +116,10 @@ export function SiteHeader({ active }: { active?: string }) {
                   key={l.key}
                   href={l.href}
                   onClick={l.key === "features" ? handleFeaturesClick : undefined}
-                  className="text-[#4b5563] transition-colors hover:text-[#14171c]"
+                  className="text-muted-foreground transition-colors hover:text-foreground"
                   style={{
                     fontWeight: active === l.key ? 500 : 400,
-                    ...(active === l.key ? { color: "#14171c" } : {}),
+                    ...(active === l.key ? { color: "var(--foreground)" } : {}),
                   }}
                 >
                   {l.label}
@@ -128,11 +129,12 @@ export function SiteHeader({ active }: { active?: string }) {
                 href="https://github.com/ECHO-Lit/ECHO-LIT"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#4b5563] transition-colors hover:text-[#14171c]"
+                className="text-muted-foreground transition-colors hover:text-foreground"
               >
                 GitHub
               </a>
             </nav>
+            <ThemeToggle />
             <a
               href="#"
               className="rounded-full px-[17px] py-[9px] text-[13px] font-medium whitespace-nowrap text-white transition-[filter] hover:text-white hover:brightness-[0.88]"
@@ -146,7 +148,7 @@ export function SiteHeader({ active }: { active?: string }) {
             onClick={() => setMobileOpen((v) => !v)}
             aria-label="Toggle menu"
             aria-expanded={mobileOpen}
-            className="ml-auto flex h-8 w-8 flex-none items-center justify-center rounded-full text-[#14171c] md:hidden"
+            className="ml-auto flex h-8 w-8 flex-none items-center justify-center rounded-full text-foreground md:hidden"
           >
             <HamburgerIcon open={mobileOpen} />
           </button>
@@ -154,10 +156,10 @@ export function SiteHeader({ active }: { active?: string }) {
 
         {mobileOpen && (
           <div
-            className="mt-2 flex flex-col gap-1 rounded-2xl border border-[rgba(255,255,255,0.7)] bg-[rgba(255,255,255,0.92)] p-3 backdrop-blur-[18px] backdrop-saturate-[1.7] md:hidden"
+            className="mt-2 flex flex-col gap-1 rounded-2xl border border-al-glass-border bg-al-glass-solid p-3 backdrop-blur-[18px] backdrop-saturate-[1.7] dark:backdrop-saturate-100 md:hidden"
             style={{
               boxShadow:
-                "0 0 0 1px rgba(20,23,28,0.05), 0 1px 2px rgba(20,23,28,0.04), 0 20px 44px -24px rgba(20,23,28,0.3)",
+                "0 0 0 1px var(--al-hairline-strong), 0 1px 2px var(--al-shadow-sm), 0 20px 44px -24px var(--al-shadow-sm)",
             }}
           >
             {NAV_LINKS.map((l) => (
@@ -168,10 +170,10 @@ export function SiteHeader({ active }: { active?: string }) {
                   if (l.key === "features") handleFeaturesClick(e);
                   setMobileOpen(false);
                 }}
-                className="rounded-lg px-3 py-2.5 text-[14px] text-[#4b5563] hover:bg-[#f7f7f6] hover:text-[#14171c]"
+                className="rounded-lg px-3 py-2.5 text-[14px] text-muted-foreground hover:bg-al-surface-2 hover:text-foreground"
                 style={{
                   fontWeight: active === l.key ? 500 : 400,
-                  ...(active === l.key ? { color: "#14171c" } : {}),
+                  ...(active === l.key ? { color: "var(--foreground)" } : {}),
                 }}
               >
                 {l.label}
@@ -181,10 +183,14 @@ export function SiteHeader({ active }: { active?: string }) {
               href="https://github.com/ECHO-Lit/ECHO-LIT"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-lg px-3 py-2.5 text-[14px] text-[#4b5563] hover:bg-[#f7f7f6] hover:text-[#14171c]"
+              className="rounded-lg px-3 py-2.5 text-[14px] text-muted-foreground hover:bg-al-surface-2 hover:text-foreground"
             >
               GitHub
             </a>
+            <div className="mt-1 flex items-center justify-between rounded-lg px-3 py-2.5">
+              <span className="text-[14px] text-muted-foreground">Theme</span>
+              <ThemeToggle />
+            </div>
             <a
               href="#"
               onClick={() => setMobileOpen(false)}

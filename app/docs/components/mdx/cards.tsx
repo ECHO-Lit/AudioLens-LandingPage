@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { ACCENT } from "../../constants";
+import { ACCENT } from "@/lib/theme";
 
 /** Auto-fitting card grid. Used for prerequisites and "where to go next". */
 export function CardGrid({ min = 232, children }: { min?: number; children: ReactNode }) {
@@ -41,7 +41,7 @@ export function Card({
       <div className="text-[13.5px] font-semibold">{title}</div>
       {/* Sized on the paragraph: MDX wraps card copy in <p>, which carries the
           global 14.5px mapping and would beat a size inherited from here. */}
-      <div className="text-[#6b7280] text-pretty [&_p]:mt-[5px] [&_p]:text-[12.5px] [&_p]:leading-[1.55]">
+      <div className="text-al-fg-tertiary text-pretty [&_p]:mt-[5px] [&_p]:text-[12.5px] [&_p]:leading-[1.55]">
         {children}
       </div>
       {meta && (
@@ -53,16 +53,16 @@ export function Card({
   );
 
   const shared =
-    "block rounded-lg border border-[rgba(20,23,28,0.11)] bg-white px-4 pt-[15px] pb-4 text-[#14171c] focus-visible:ring-2 focus-visible:ring-[#1e4fd8] focus-visible:outline-none";
+    "block rounded-lg border border-al-hairline-strong bg-card px-4 pt-[15px] pb-4 text-foreground focus-visible:ring-2 focus-visible:ring-al-accent focus-visible:outline-none";
 
   if (!href) {
-    return <div className={`${shared} hover:border-[rgba(30,79,216,0.3)]`}>{body}</div>;
+    return <div className={`${shared} hover:border-al-accent-line-strong`}>{body}</div>;
   }
 
   return (
     <Link
       href={href}
-      className={`${shared} transition-transform hover:-translate-y-px hover:border-[rgba(30,79,216,0.35)]`}
+      className={`${shared} transition-transform hover:-translate-y-px hover:border-al-accent-line-strong`}
     >
       {body}
     </Link>

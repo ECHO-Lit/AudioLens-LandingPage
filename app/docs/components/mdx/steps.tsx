@@ -1,5 +1,5 @@
 import { Children, cloneElement, isValidElement, type ReactElement, type ReactNode } from "react";
-import { ACCENT } from "../../constants";
+import { ACCENT } from "@/lib/theme";
 
 type StepProps = { title: string; children?: ReactNode; n?: number; last?: boolean };
 
@@ -29,19 +29,19 @@ export function Step({ title, children, n, last }: StepProps) {
     <li className="grid grid-cols-[26px_1fr] gap-4 pb-[22px]">
       <div className="flex flex-col items-center gap-1.5">
         <div
-          className="flex h-6 w-6 flex-none items-center justify-center rounded-full border border-[rgba(30,79,216,0.28)] bg-[#f4f7ff] font-mono text-[11px]"
-          style={{ color: ACCENT }}
+          className="flex h-6 w-6 flex-none items-center justify-center rounded-full border border-al-accent-line font-mono text-[11px]"
+          style={{ color: ACCENT, background: "var(--al-accent-tint)" }}
           aria-hidden="true"
         >
           {n}
         </div>
-        {!last && <div className="w-px flex-1 bg-[rgba(20,23,28,0.1)]" aria-hidden="true" />}
+        {!last && <div className="w-px flex-1 bg-al-hairline-strong" aria-hidden="true" />}
       </div>
       <div className="min-w-0 pt-0.5">
         <div className="text-[14.5px] font-semibold">{title}</div>
         {/* Sized on the paragraph: MDX wraps step copy in <p>, which carries
             the global 14.5px mapping and would beat inheritance from here. */}
-        <div className="text-[#5b6472] text-pretty [&_p]:mt-1.5 [&_p]:text-[13.5px] [&_p]:leading-[1.62]">
+        <div className="text-al-fg-body text-pretty [&_p]:mt-1.5 [&_p]:text-[13.5px] [&_p]:leading-[1.62]">
           {children}
         </div>
       </div>

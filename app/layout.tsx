@@ -8,6 +8,7 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/components/theme-provider";
 
 // IBM Plex Sans no longer used for body text (--font-sans now maps to
 // Manrope, matching the landing page) but Plex Mono/Serif still load below.
@@ -69,6 +70,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={cn(
         "h-full",
         plexSans.variable,
@@ -78,8 +80,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         googleSansCode.variable,
       )}
     >
-      <body className="min-h-full bg-[#fbfbfa] text-[#14171c] font-sans antialiased">
-        {children}
+      <body className="min-h-full font-sans antialiased">
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

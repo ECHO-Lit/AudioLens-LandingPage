@@ -39,10 +39,10 @@ export function DocsChrome({ children }: { children: ReactNode }) {
   };
 
   return (
-    <div className="min-h-screen bg-[#fbfbfa]">
+    <div className="min-h-screen bg-background">
       <a
         href="#docs-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-[6px] focus:bg-white focus:px-4 focus:py-2 focus:text-[13px] focus:font-medium focus:text-[#14171c] focus:ring-2 focus:ring-[#1e4fd8] focus:outline-none"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-[6px] focus:bg-card focus:px-4 focus:py-2 focus:text-[13px] focus:font-medium focus:text-foreground focus:ring-2 focus:ring-al-accent focus:outline-none"
       >
         Skip to content
       </a>
@@ -59,7 +59,7 @@ export function DocsChrome({ children }: { children: ReactNode }) {
       <div className="mx-auto grid max-w-[1504px] grid-cols-[minmax(0,1fr)] items-start gap-8 px-4 sm:px-8 lg:grid-cols-[236px_minmax(0,1fr)] xl:grid-cols-[236px_minmax(0,1fr)_208px]">
         <DocsSidebar
           active={active}
-          className="sticky top-[60px] hidden max-h-[calc(100vh-60px)] overflow-y-auto border-r border-[rgba(20,23,28,0.08)] py-[30px] pr-5 pb-[60px] lg:block"
+          className="sticky top-[60px] hidden max-h-[calc(100vh-60px)] overflow-y-auto border-r border-al-hairline-soft py-[30px] pr-5 pb-[60px] lg:block"
         />
 
         <main id="docs-content" className="min-w-0 px-1 py-[34px] pb-[88px]">

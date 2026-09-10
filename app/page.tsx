@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import Grainient from "@/components/Grainient";
+import { ThemedGrainient } from "@/components/grainient-theme";
+import { ACCENT } from "@/lib/theme";
 
-const ACCENT = "#1b48e0";
 const EYEBROW = "Interpretability for speech models";
 
 const CHIPS = [
@@ -18,22 +18,22 @@ const CHIPS = [
 const PREMISE = [
   {
     figure: "0.072",
-    tone: ACCENT,
-    bg: "#f6f8ff",
+    tone: "var(--al-accent-text)",
+    bg: "var(--al-accent-tint)",
     title: "A score hides the failure",
     body: "Word error rate tells you that something broke. It never tells you which 300 milliseconds of audio broke it.",
   },
   {
     figure: "3000",
-    tone: "#0a0c11",
-    bg: "#f7f7f6",
+    tone: "var(--al-fg-strong)",
+    bg: "var(--al-surface-2)",
     title: "Embeddings hide the structure",
     body: "Points in latent space only become useful once clusters, outliers and noise flags are attached to real datapoints.",
   },
   {
     figure: "56%",
-    tone: "#0a0c11",
-    bg: "#f7f7f6",
+    tone: "var(--al-fg-strong)",
+    bg: "var(--al-surface-2)",
     title: "Attribution needs context",
     body: "A salient segment matters only when you can hear it, perturb it and watch the prediction change in the same view.",
   },
@@ -87,14 +87,14 @@ const PANELS = [
 
 // The design draws every hairline as a 1px ring rather than a border, so the
 // rounded corners stay crisp underneath the layered shadows.
-const RING = "shadow-[0_0_0_1px_rgba(10,12,17,0.08)]";
+const RING = "shadow-[0_0_0_1px_var(--al-hairline)]";
 
 export default function Home() {
   // overflow-x-clip, not -hidden: `hidden` on one axis forces the other to
   // `auto`, which turns the wrapper into a scroll container and stops the
   // sticky header from sticking.
   return (
-    <div className="font-display min-h-screen overflow-x-clip bg-white text-[#0a0c11]">
+    <div className="font-display min-h-screen overflow-x-clip bg-al-canvas text-al-fg-strong">
       <SiteHeader />
 
       {/* Hero */}
@@ -108,13 +108,13 @@ export default function Home() {
             transform: "translateX(-50%)",
             animation: "al-drift 26s ease-in-out infinite",
             background:
-              "radial-gradient(38% 34% at 50% 34%, rgba(27,72,224,0.20) 0%, rgba(27,72,224,0) 72%), radial-gradient(30% 30% at 30% 44%, rgba(102,163,255,0.22) 0%, rgba(102,163,255,0) 70%), radial-gradient(28% 28% at 70% 40%, rgba(160,120,255,0.16) 0%, rgba(160,120,255,0) 72%)",
+              "radial-gradient(38% 34% at 50% 34%, var(--al-wash-a) 0%, var(--al-wash-a-0) 72%), radial-gradient(30% 30% at 30% 44%, var(--al-wash-b) 0%, var(--al-wash-b-0) 70%), radial-gradient(28% 28% at 70% 40%, var(--al-wash-c) 0%, var(--al-wash-c-0) 72%)",
           }}
         />
 
         <div className="relative z-[1] mx-auto max-w-[1120px]">
           <div
-            className={`inline-flex items-center gap-2.5 rounded-full bg-white/75 py-[7px] pr-2 pl-3.5 text-[13px] text-[#535a67] ${RING}`}
+            className={`inline-flex items-center gap-2.5 rounded-full bg-card/75 py-[7px] pr-2 pl-3.5 text-[13px] text-al-fg-body ${RING}`}
           >
             <span
               className="font-code text-[11px] tracking-[0.06em]"
@@ -122,7 +122,7 @@ export default function Home() {
               v1.0
             </span>
             <span>{EYEBROW}</span>
-            <span className="inline-flex h-[22px] w-[22px] items-center justify-center text-[12px] text-[#535a67]">
+            <span className="inline-flex h-[22px] w-[22px] items-center justify-center text-[12px] text-al-fg-body">
               →
             </span>
           </div>
@@ -133,7 +133,7 @@ export default function Home() {
             model thinking.
           </h1>
 
-          <p className="mx-auto mt-[30px] max-w-[60ch] text-[17px] leading-[1.55] font-normal text-[#535a67] text-pretty sm:text-[20px]">
+          <p className="mx-auto mt-[30px] max-w-[60ch] text-[17px] leading-[1.55] font-normal text-al-fg-body text-pretty sm:text-[20px]">
             AudioLens is an interpretability workbench for speech models. Follow
             a single prediction from raw waveform to emitted token, across
             saliency, attention, embeddings and perturbation, on one shared
@@ -143,14 +143,14 @@ export default function Home() {
           <div className="mt-[38px] flex flex-wrap justify-center gap-3">
             <a
               href="#"
-              className="rounded-full px-7 py-[15px] text-[15px] font-medium text-white shadow-[0_14px_30px_-14px_rgba(27,72,224,0.7)] transition-[filter] hover:text-white hover:brightness-90"
+              className="rounded-full px-7 py-[15px] text-[15px] font-medium text-white shadow-[0_14px_30px_-14px_var(--al-shadow-accent)] transition-[filter] hover:text-white hover:brightness-90"
               style={{ background: ACCENT }}
             >
               Open the dashboard
             </a>
             <Link
               href="/docs"
-              className={`rounded-full bg-white/80 px-[26px] py-[15px] text-[15px] font-medium text-[#0a0c11] transition-colors hover:bg-[#f4f5f7] hover:text-[#0a0c11] ${RING}`}
+              className={`rounded-full bg-card/80 px-[26px] py-[15px] text-[15px] font-medium text-al-fg-strong transition-colors hover:bg-al-surface-3 hover:text-al-fg-strong ${RING}`}
             >
               Read the docs
             </Link>
@@ -159,20 +159,20 @@ export default function Home() {
 
         {/* Product shot */}
         <div className="relative z-[1] mx-auto mt-[74px] max-w-[1240px]">
-          <div className="relative rounded-[26px] bg-linear-to-b from-white/90 to-white/50 p-2.5 shadow-[0_0_0_1px_rgba(10,12,17,0.07),0_70px_120px_-60px_rgba(10,32,90,0.55)]">
-            <div className={`overflow-hidden rounded-[18px] bg-white ${RING}`}>
-              <div className="flex h-[42px] items-center gap-3.5 bg-[#f7f8fa] px-4 shadow-[inset_0_-1px_0_rgba(10,12,17,0.07)]">
+          <div className="relative rounded-[26px] bg-linear-to-b from-card/90 to-card/50 p-2.5 shadow-[0_0_0_1px_var(--al-hairline-soft),0_70px_120px_-60px_var(--al-shadow-deep)]">
+            <div className={`overflow-hidden rounded-[18px] bg-card ${RING}`}>
+              <div className="flex h-[42px] items-center gap-3.5 bg-al-surface-2 px-4 shadow-[inset_0_-1px_0_var(--al-hairline-soft)]">
                 <div className="flex gap-[7px]">
-                  <div className="h-2.5 w-2.5 rounded-full bg-[#e3e5e9]" />
-                  <div className="h-2.5 w-2.5 rounded-full bg-[#e3e5e9]" />
-                  <div className="h-2.5 w-2.5 rounded-full bg-[#e3e5e9]" />
+                  <div className="h-2.5 w-2.5 rounded-full bg-al-fg-faint" />
+                  <div className="h-2.5 w-2.5 rounded-full bg-al-fg-faint" />
+                  <div className="h-2.5 w-2.5 rounded-full bg-al-fg-faint" />
                 </div>
                 <div
-                  className={`font-code flex h-6 max-w-[400px] flex-1 items-center rounded-full bg-white px-3 text-[11px] text-[#8b929c] ${RING}`}
+                  className={`font-code flex h-6 max-w-[400px] flex-1 items-center rounded-full bg-card px-3 text-[11px] text-al-fg-tertiary ${RING}`}
                 >
                   audiolens.app/lab/whisper-base
                 </div>
-                <span className="font-code ml-auto hidden text-[10.5px] text-[#a8adb5] sm:inline">
+                <span className="font-code ml-auto hidden text-[10.5px] text-al-fg-quaternary sm:inline">
                   SAA dataset
                 </span>
               </div>
@@ -181,16 +181,16 @@ export default function Home() {
                 alt="AudioLens dashboard showing audio embeddings, saliency overlay and datapoint editor"
                 width={1915}
                 height={980}
-                className="block h-auto w-full"
+                className="block h-auto w-full dark:opacity-[0.88] dark:contrast-[1.05]"
                 priority
               />
             </div>
           </div>
         </div>
 
-        <div className="font-code relative z-[1] mx-auto flex max-w-[1240px] flex-wrap justify-center gap-3.5 pt-[34px] text-[11.5px] text-[#6b7280]">
+        <div className="font-code relative z-[1] mx-auto flex max-w-[1240px] flex-wrap justify-center gap-3.5 pt-[34px] text-[11.5px] text-al-fg-tertiary">
           {CHIPS.map((c) => (
-            <span key={c} className={`rounded-full bg-white px-3.5 py-2 ${RING}`}>
+            <span key={c} className={`rounded-full bg-card px-3.5 py-2 ${RING}`}>
               {c}
             </span>
           ))}
@@ -210,7 +210,7 @@ export default function Home() {
             {PREMISE.map((p) => (
               <div
                 key={p.title}
-                className="rounded-[22px] px-[30px] pt-8 pb-[34px] shadow-[0_0_0_1px_rgba(10,12,17,0.06)]"
+                className="rounded-[22px] px-[30px] pt-8 pb-[34px] shadow-[0_0_0_1px_var(--al-hairline-soft)]"
                 style={{ background: p.bg }}
               >
                 <div
@@ -222,7 +222,7 @@ export default function Home() {
                 <div className="mt-5 text-[19px] font-semibold tracking-[-0.015em]">
                   {p.title}
                 </div>
-                <p className="mt-[9px] mb-0 text-[15px] leading-[1.6] text-[#535a67] text-pretty">
+                <p className="mt-[9px] mb-0 text-[15px] leading-[1.6] text-al-fg-body text-pretty">
                   {p.body}
                 </p>
               </div>
@@ -233,7 +233,7 @@ export default function Home() {
 
       {/* One timeline */}
       <section className="px-6 pt-[90px] sm:pt-[120px] lg:pt-[150px]">
-        <div className="relative mx-auto max-w-[1240px] overflow-hidden rounded-[32px] bg-[#0a0c11] px-6 pt-[52px] text-white sm:px-10 sm:pt-[64px] lg:px-16 lg:pt-[78px]">
+        <div className="relative mx-auto max-w-[1240px] overflow-hidden rounded-[32px] bg-al-panel px-6 pt-[52px] text-white sm:px-10 sm:pt-[64px] lg:px-16 lg:pt-[78px]">
           <div
             aria-hidden
             className="pointer-events-none absolute top-[-160px] right-[-160px] h-[620px] w-[620px] blur-[20px]"
@@ -279,7 +279,7 @@ export default function Home() {
               alt="Saliency overlay and embedding view inside the AudioLens workbench"
               width={1915}
               height={980}
-              className="block h-auto w-full"
+              className="block h-auto w-full dark:opacity-[0.88] dark:contrast-[1.05]"
             />
           </div>
         </div>
@@ -300,7 +300,7 @@ export default function Home() {
             </div>
             <Link
               href="/docs"
-              className="rounded-full px-6 py-3.5 text-[15px] font-medium text-[#0a0c11] shadow-[0_0_0_1px_rgba(10,12,17,0.12)] transition-colors hover:bg-[#f4f5f7] hover:text-[#0a0c11]"
+              className="rounded-full px-6 py-3.5 text-[15px] font-medium text-al-fg-strong shadow-[0_0_0_1px_var(--al-hairline-strong)] transition-colors hover:bg-al-surface-3 hover:text-al-fg-strong"
             >
               Method reference
             </Link>
@@ -310,7 +310,7 @@ export default function Home() {
             {PANELS.map((p) => (
               <div
                 key={p.no}
-                className={`rounded-[22px] bg-white px-8 pt-[34px] pb-9 transition-[box-shadow,transform] duration-200 hover:-translate-y-[3px] hover:shadow-[0_0_0_1px_rgba(27,72,224,0.3),0_30px_60px_-34px_rgba(10,32,90,0.4)] ${RING}`}
+                className={`rounded-[22px] bg-card px-8 pt-[34px] pb-9 transition-[box-shadow,transform] duration-200 hover:-translate-y-[3px] hover:shadow-[0_0_0_1px_rgba(27,72,224,0.3),0_30px_60px_-34px_var(--al-shadow-lift)] ${RING}`}
               >
                 <div className="flex items-center justify-between">
                   <span
@@ -319,14 +319,14 @@ export default function Home() {
                   >
                     {p.no}
                   </span>
-                  <span className="font-code text-[10.5px] text-[#9ca3af]">
+                  <span className="font-code text-[10.5px] text-al-fg-quaternary">
                     {p.meta}
                   </span>
                 </div>
                 <h3 className="mt-[26px] mb-0 text-[26px] leading-[1.1] font-semibold tracking-[-0.025em]">
                   {p.title}
                 </h3>
-                <p className="mt-3 mb-0 text-[15px] leading-[1.62] text-[#535a67] text-pretty">
+                <p className="mt-3 mb-0 text-[15px] leading-[1.62] text-al-fg-body text-pretty">
                   {p.body}
                 </p>
               </div>
@@ -337,19 +337,22 @@ export default function Home() {
 
       {/* Closing CTA */}
       <section className="px-6 pt-[90px] sm:pt-[120px] lg:pt-[150px]">
-        <div className="relative mx-auto max-w-[1240px] overflow-hidden rounded-[32px] px-6 py-16 text-center shadow-[0_0_0_1px_rgba(10,12,17,0.07)] sm:px-12 sm:pt-24 sm:pb-[100px]">
+        <div className="relative mx-auto max-w-[1240px] overflow-hidden rounded-[32px] px-6 py-16 text-center shadow-[0_0_0_1px_var(--al-hairline-soft)] sm:px-12 sm:pt-24 sm:pb-[100px]">
           {/* Static (timeSpeed 0, grain not animated) grainient. lightMode is
               off on purpose: it recolors by each stop's hue, and a hue read
               off near-white pastels has almost no chroma to work with, so it
               washes out to flat gray (as seen). Feeding the pastel colors
               straight into the raw blend instead keeps them light enough for
-              the dark heading/body text while actually showing their tint. */}
+              the dark heading/body text while actually showing their tint.
+              Dark triple is deeper/lower-chroma so the blend stays a subtle
+              backdrop instead of glowing on the near-black page. */}
           <div className="absolute inset-0 z-0" aria-hidden="true">
-            <Grainient
+            <ThemedGrainient
               className="h-full w-full"
               color1="#c9dcff"
               color2="#eef1ff"
               color3="#ecdcff"
+              dark={{ color1: "#101a3a", color2: "#0b1020", color3: "#1a1233" }}
               timeSpeed={0}
               colorBalance={0}
               warpStrength={1}
@@ -377,20 +380,20 @@ export default function Home() {
               <br />
               own checkpoint.
             </h2>
-            <p className="mx-auto mt-[26px] mb-0 max-w-[52ch] text-[16px] leading-[1.6] text-[#535a67] sm:text-[18px]">
+            <p className="mx-auto mt-[26px] mb-0 max-w-[52ch] text-[16px] leading-[1.6] text-al-fg-body sm:text-[18px]">
               Self-hosted, MIT licensed, no telemetry. One command brings up the
               API, worker and workbench.
             </p>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
               <a
                 href="#"
-                className="rounded-full px-7 py-[15px] text-[15px] font-medium text-white shadow-[0_14px_30px_-14px_rgba(27,72,224,0.7)] transition-[filter] hover:text-white hover:brightness-90"
+                className="rounded-full px-7 py-[15px] text-[15px] font-medium text-white shadow-[0_14px_30px_-14px_var(--al-shadow-accent)] transition-[filter] hover:text-white hover:brightness-90"
                 style={{ background: ACCENT }}
               >
                 Get started
               </a>
               <code
-                className={`font-code rounded-full bg-white px-[22px] py-[15px] text-[13px] text-[#2b3342] sm:text-[14px] ${RING}`}
+                className={`font-code rounded-full bg-card px-[22px] py-[15px] text-[13px] text-al-fg-strong sm:text-[14px] ${RING}`}
               >
                 $ docker compose up --build
               </code>

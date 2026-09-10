@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ACCENT } from "../constants";
+import { ACCENT } from "@/lib/theme";
 import {
   SearchRecord,
   groupResults,
@@ -101,7 +101,7 @@ function ResultGroup({
       {buckets.map((bucket) => (
         <div
           key={bucket.headingId ?? "lead"}
-          className="ml-3 border-l border-[rgba(20,23,28,0.16)]"
+          className="ml-3 border-l border-al-hairline-hover"
         >
           {bucket.label && (
             <CommandItem

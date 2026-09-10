@@ -31,8 +31,8 @@ const FOOTER_COLUMNS = [
 
 export function SiteFooter() {
   return (
-    <footer className="font-display bg-white px-6 pt-[90px] text-[#0a0c11] sm:pt-[110px] lg:pt-[130px]">
-      <div className="mx-auto grid max-w-[1240px] grid-cols-1 gap-11 pt-[52px] shadow-[inset_0_1px_0_rgba(10,12,17,0.09)] sm:grid-cols-2 lg:grid-cols-[minmax(0,1.7fr)_repeat(3,minmax(0,1fr))]">
+    <footer className="font-display bg-al-canvas px-6 pt-[90px] text-al-fg-strong sm:pt-[110px] lg:pt-[130px]">
+      <div className="mx-auto grid max-w-[1240px] grid-cols-1 gap-11 pt-[52px] shadow-[inset_0_1px_0_var(--al-hairline-strong)] sm:grid-cols-2 lg:grid-cols-[minmax(0,1.7fr)_repeat(3,minmax(0,1fr))]">
         <div>
           <div className="flex items-center gap-2.5">
             <Logomark heights={[7, 16, 11]} containerHeight={16} />
@@ -40,14 +40,14 @@ export function SiteFooter() {
               AudioLens
             </span>
           </div>
-          <p className="mt-4 max-w-[34ch] text-[14.5px] leading-[1.65] text-[#6b7280]">
+          <p className="mt-4 max-w-[34ch] text-[14.5px] leading-[1.65] text-al-fg-tertiary">
             Explainability tooling for speech and voice models. Self-hosted, MIT
             licensed, built in the open.
           </p>
         </div>
         {FOOTER_COLUMNS.map((col) => (
           <div key={col.label}>
-            <div className="font-code mb-4 text-[10.5px] tracking-[0.12em] text-[#9ca3af] uppercase">
+            <div className="font-code mb-4 text-[10.5px] tracking-[0.12em] text-al-fg-quaternary uppercase">
               {col.label}
             </div>
             <div className="flex flex-col gap-[11px] text-[14.5px]">
@@ -59,7 +59,7 @@ export function SiteFooter() {
                   rel={
                     l.href.startsWith("http") ? "noopener noreferrer" : undefined
                   }
-                  className="text-[#535a67] transition-colors hover:text-[#0a0c11]"
+                  className="text-al-fg-body transition-colors hover:text-al-fg-strong"
                 >
                   {l.text}
                 </a>
@@ -68,7 +68,7 @@ export function SiteFooter() {
           </div>
         ))}
       </div>
-      <div className="font-code mx-auto flex max-w-[1240px] flex-wrap justify-between gap-5 pt-[30px] pb-11 text-[11px] text-[#9ca3af]">
+      <div className="font-code mx-auto flex max-w-[1240px] flex-wrap justify-between gap-5 pt-[30px] pb-11 text-[11px] text-al-fg-quaternary">
         <span>AudioLens · Built for audio model interpretability</span>
         <span>Waveform to logits</span>
       </div>

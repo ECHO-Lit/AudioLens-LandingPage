@@ -9,7 +9,7 @@ export function Lead({ children }: { children: ReactNode }) {
   // mapping. The descendant selector outranks that element's own class, so the
   // size has to be set on the paragraph rather than inherited from here.
   return (
-    <div className="text-[#4b5563] text-pretty [&_p]:mt-3.5 [&_p]:text-[16px] [&_p]:leading-[1.62]">
+    <div className="text-muted-foreground text-pretty [&_p]:mt-3.5 [&_p]:text-[16px] [&_p]:leading-[1.62]">
       {children}
     </div>
   );
@@ -18,9 +18,9 @@ export function Lead({ children }: { children: ReactNode }) {
 /** Small metadata chips under a page lead -- version, licence, stack. */
 export function Badges({ items }: { items: string[] }) {
   return (
-    <ul className="mt-5 flex list-none flex-wrap gap-2 p-0 font-mono text-[10.5px] text-[#5b6472]">
+    <ul className="mt-5 flex list-none flex-wrap gap-2 p-0 font-mono text-[10.5px] text-al-fg-body">
       {items.map((b) => (
-        <li key={b} className="rounded border border-[rgba(20,23,28,0.11)] bg-white px-2 py-[3px]">
+        <li key={b} className="rounded border border-al-hairline-strong bg-card px-2 py-[3px]">
           {b}
         </li>
       ))}
@@ -35,6 +35,6 @@ export function Badges({ items }: { items: string[] }) {
  */
 export function Status({ children }: { children: ReactNode }) {
   return (
-    <span className="font-mono text-[10.5px] whitespace-nowrap text-[#6b7280]">{children}</span>
+    <span className="font-mono text-[10.5px] whitespace-nowrap text-al-fg-tertiary">{children}</span>
   );
 }

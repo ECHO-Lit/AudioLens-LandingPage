@@ -1,9 +1,18 @@
 import type { ReactNode } from "react";
-import { ACCENT } from "../../constants";
 
 const TONES = {
-  note: { border: "rgba(30,79,216,0.2)", bg: "#f4f7ff", bar: ACCENT, title: "#12327f" },
-  warn: { border: "rgba(180,83,9,0.22)", bg: "#fffaf2", bar: "#b45309", title: "#7c3d05" },
+  note: {
+    border: "var(--al-note-border)",
+    bg: "var(--al-note-bg)",
+    bar: "var(--al-note-bar)",
+    title: "var(--al-note-title)",
+  },
+  warn: {
+    border: "var(--al-warn-border)",
+    bg: "var(--al-warn-bg)",
+    bar: "var(--al-warn-bar)",
+    title: "var(--al-warn-title)",
+  },
 } as const;
 
 export function Callout({
@@ -30,7 +39,7 @@ export function Callout({
         )}
         {/* MDX wraps the body in <p>, which would otherwise take the global
             14.5px paragraph size -- set it on the paragraph, not the box. */}
-        <div className="text-[#3f4b63] [&_p]:mt-[5px] [&_p]:text-[13px] [&_p]:leading-[1.6]">
+        <div className="text-al-fg-body [&_p]:mt-[5px] [&_p]:text-[13px] [&_p]:leading-[1.6]">
           {children}
         </div>
       </div>

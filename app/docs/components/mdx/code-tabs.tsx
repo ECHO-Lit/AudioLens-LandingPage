@@ -55,10 +55,10 @@ export function CodeTabs({
 
   return (
     <div
-      className="mt-[18px] overflow-hidden rounded-[9px] border border-[rgba(20,23,28,0.13)] bg-white"
-      style={{ boxShadow: "0 1px 2px rgba(20,23,28,0.04)" }}
+      className="mt-[18px] overflow-hidden rounded-[9px] border border-al-code-border bg-card"
+      style={{ boxShadow: "0 1px 2px var(--al-shadow-sm)" }}
     >
-      <div className="flex items-center gap-0.5 border-b border-[rgba(20,23,28,0.1)] bg-[#f7f7f6] px-2 py-1.5">
+      <div className="flex items-center gap-0.5 border-b border-al-hairline-strong bg-al-surface-2 px-2 py-1.5">
         <div role="tablist" aria-label={label} onKeyDown={onKeyDown} className="flex gap-0.5">
           {labels.slice(0, count).map((l, i) => (
             <button
@@ -73,8 +73,12 @@ export function CodeTabs({
               aria-controls={`${baseId}-panel-${i}`}
               tabIndex={i === active ? 0 : -1}
               onClick={() => setTab(i)}
-              className="cursor-pointer rounded-[5px] px-[11px] py-1.5 font-mono text-[11px] text-[#8b929c] hover:text-[#4b5563] focus-visible:ring-2 focus-visible:ring-[#1e4fd8] focus-visible:outline-none"
-              style={i === active ? { color: "#14171c", background: "#fff" } : undefined}
+              className="cursor-pointer rounded-[5px] px-[11px] py-1.5 font-mono text-[11px] text-al-fg-tertiary hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-al-accent focus-visible:outline-none"
+              style={
+                i === active
+                  ? { color: "var(--foreground)", background: "var(--card)" }
+                  : undefined
+              }
             >
               {l}
             </button>

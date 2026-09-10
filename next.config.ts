@@ -20,7 +20,11 @@ const withMDX = createMDX({
       [
         "rehype-pretty-code",
         {
-          theme: "github-light",
+          // A theme map (vs. a single string) makes rehype-pretty-code emit
+          // --shiki-light/--shiki-dark per span instead of resolved `color:`,
+          // which app/globals.css then switches on .dark -- see the
+          // `code[data-theme]` rules there.
+          theme: { light: "github-light", dark: "github-dark-dimmed" },
           // Let our own CSS own the block background; the theme only colors tokens.
           keepBackground: false,
         },
