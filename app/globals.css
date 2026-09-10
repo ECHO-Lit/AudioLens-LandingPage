@@ -303,3 +303,64 @@
     transform: translate3d(-2%, 0, 0) scale(1);
   }
 }
+
+/* Character-by-character reveal on scroll -- components/text-reveal.tsx.
+   The component only writes --al-reveal-p (0..1 scroll progress) once per
+   frame; the per-character ramp below is pure CSS, so a 40-character heading
+   costs the same one style write as a 4-character one.
+
+   Registered with @property so the values are typed numbers: calc() can then
+   divide by them, and the initial-value of 1 for progress means the text
+   server-renders fully opaque and stays that way without JS. */
+@property --al-reveal-p {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
+@property --al-reveal-n {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
+@property --al-reveal-s {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 9;
+}
+@property --al-reveal-d {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0.14;
+}
+@property --al-reveal-i {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+/* Left as ordinary inline boxes on purpose. An inline-block per character
+   makes every character an atomic inline box, and the line breaker is allowed
+   to break between any two of those -- which splits words mid-word on narrow
+   viewports. Inline spans keep the normal text flow, so the only break
+   opportunities are the real spaces the component emits between words. */
+.al-reveal-char {
+  /* Progress is scaled past the character count by the spread so the last
+     character still finishes at p = 1, then each character reads its own slice
+     of that ramp: dim until the wave arrives, opaque once it passes. */
+  opacity: clamp(
+    var(--al-reveal-d),
+    calc(
+      (
+          var(--al-reveal-p) * (var(--al-reveal-n) + var(--al-reveal-s)) -
+            var(--al-reveal-i)
+        ) / var(--al-reveal-s)
+    ),
+    1
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .al-reveal-char {
+    opacity: 1;
+  }
+}

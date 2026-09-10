@@ -3,6 +3,8 @@ import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ThemedGrainient } from "@/components/grainient-theme";
+import { Parallax } from "@/components/parallax";
+import { TextReveal } from "@/components/text-reveal";
 import { ACCENT } from "@/lib/theme";
 
 const EYEBROW = "Interpretability for speech models";
@@ -101,16 +103,25 @@ export default function Home() {
       <section className="relative px-6 pt-[72px] text-center sm:pt-[88px] lg:pt-[104px]">
         {/* Geometry is the v2 artboard's verbatim: left:50% plus translateX(-50%),
             with the drift animation's own transform taking over once it runs. */}
-        <div
+        <Parallax
           aria-hidden
-          className="al-drift pointer-events-none absolute top-[-140px] left-1/2 z-0 h-[900px] w-[1500px] max-w-none opacity-90 blur-[30px]"
-          style={{
-            transform: "translateX(-50%)",
-            animation: "al-drift 26s ease-in-out infinite",
-            background:
-              "radial-gradient(38% 34% at 50% 34%, var(--al-wash-a) 0%, var(--al-wash-a-0) 72%), radial-gradient(30% 30% at 30% 44%, var(--al-wash-b) 0%, var(--al-wash-b-0) 70%), radial-gradient(28% 28% at 70% 40%, var(--al-wash-c) 0%, var(--al-wash-c-0) 72%)",
-          }}
-        />
+          speed={0.18}
+          max={140}
+          className="pointer-events-none absolute top-[-140px] left-1/2 z-0 h-[900px] w-[1500px] max-w-none"
+        >
+          {/* left-1/2 lives on the parallax wrapper now, so the -50% pull and
+              the drift animation that overrides it both stay on this inner
+              layer, exactly as the artboard had them. */}
+          <div
+            className="al-drift h-full w-full opacity-90 blur-[30px]"
+            style={{
+              transform: "translateX(-50%)",
+              animation: "al-drift 26s ease-in-out infinite",
+              background:
+                "radial-gradient(38% 34% at 50% 34%, var(--al-wash-a) 0%, var(--al-wash-a-0) 72%), radial-gradient(30% 30% at 30% 44%, var(--al-wash-b) 0%, var(--al-wash-b-0) 70%), radial-gradient(28% 28% at 70% 40%, var(--al-wash-c) 0%, var(--al-wash-c-0) 72%)",
+            }}
+          />
+        </Parallax>
 
         <div className="relative z-[1] mx-auto max-w-[1120px]">
           <div
@@ -158,7 +169,11 @@ export default function Home() {
         </div>
 
         {/* Product shot */}
-        <div className="relative z-[1] mx-auto mt-[74px] max-w-[1240px]">
+        <Parallax
+          speed={0.06}
+          max={44}
+          className="relative z-[1] mx-auto mt-[74px] max-w-[1240px]"
+        >
           <div className="relative rounded-[26px] bg-linear-to-b from-card/90 to-card/50 p-2.5 shadow-[0_0_0_1px_var(--al-hairline-soft),0_70px_120px_-60px_var(--al-shadow-deep)]">
             <div className={`overflow-hidden rounded-[18px] bg-card ${RING}`}>
               <div className="flex h-[42px] items-center gap-3.5 bg-al-surface-2 px-4 shadow-[inset_0_-1px_0_var(--al-hairline-soft)]">
@@ -186,7 +201,7 @@ export default function Home() {
               />
             </div>
           </div>
-        </div>
+        </Parallax>
 
         <div className="font-code relative z-[1] mx-auto flex max-w-[1240px] flex-wrap justify-center gap-3.5 pt-[34px] text-[11.5px] text-al-fg-tertiary">
           {CHIPS.map((c) => (
@@ -201,9 +216,11 @@ export default function Home() {
       <section className="px-6 pt-[90px] sm:pt-[120px] lg:pt-[150px]">
         <div className="mx-auto max-w-[1240px]">
           <div className="max-w-[24ch]">
-            <h2 className="mt-5 mb-0 text-[34px] leading-none font-semibold tracking-[-0.04em] text-balance sm:text-[44px] lg:text-[64px]">
-              A transcript is not an explanation.
-            </h2>
+            <TextReveal
+              as="h2"
+              text="A transcript is not an explanation."
+              className="mt-5 mb-0 text-[34px] leading-none font-semibold tracking-[-0.04em] text-balance sm:text-[44px] lg:text-[64px]"
+            />
           </div>
 
           <div className="mt-[70px] grid grid-cols-[repeat(auto-fit,minmax(min(280px,100%),1fr))] gap-[26px]">
@@ -233,9 +250,11 @@ export default function Home() {
 
       {/* One timeline */}
       <section className="px-6 pt-[90px] sm:pt-[120px] lg:pt-[150px]">
-        <div className="relative mx-auto max-w-[1240px] overflow-hidden rounded-[32px] bg-al-panel px-6 pt-[52px] text-white sm:px-10 sm:pt-[64px] lg:px-16 lg:pt-[78px]">
-          <div
+        <div className="relative mx-auto max-w-[1240px] overflow-hidden rounded-[32px] bg-al-panel px-6 pt-[52px] pb-9 text-white sm:px-10 sm:pt-[64px] sm:pb-11 lg:px-16 lg:pt-[78px] lg:pb-14">
+          <Parallax
             aria-hidden
+            speed={0.2}
+            max={120}
             className="pointer-events-none absolute top-[-160px] right-[-160px] h-[620px] w-[620px] blur-[20px]"
             style={{
               background:
@@ -247,9 +266,11 @@ export default function Home() {
               <div className="font-code text-[11.5px] tracking-[0.14em] text-[#8fabff] uppercase">
                 One timeline
               </div>
-              <h2 className="mt-5 mb-0 text-[32px] leading-none font-semibold tracking-[-0.04em] text-balance sm:text-[42px] lg:text-[60px]">
-                Every panel points at the same frames.
-              </h2>
+              <TextReveal
+                as="h2"
+                text="Every panel points at the same frames."
+                className="mt-5 mb-0 text-[32px] leading-none font-semibold tracking-[-0.04em] text-balance sm:text-[42px] lg:text-[60px]"
+              />
               <p className="mt-6 mb-0 max-w-[46ch] text-[17px] leading-[1.6] text-white/65 text-pretty">
                 Select a span once. Saliency, attention heads, embedding
                 neighbours and perturbation deltas all recompute against it, so
@@ -273,14 +294,22 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="relative mt-16 max-h-[300px] overflow-hidden rounded-t-[20px] shadow-[0_-1px_0_rgba(255,255,255,0.12)]">
-            <Image
-              src="/assets/dashboard.png"
-              alt="Saliency overlay and embedding view inside the AudioLens workbench"
-              width={1915}
-              height={980}
-              className="block h-auto w-full dark:opacity-[0.88] dark:contrast-[1.05]"
-            />
+          {/* Rounded and hairlined on all four sides: the shot used to bleed
+              into the panel's bottom edge, so it read as part of the card
+              rather than as something sitting inside it. */}
+          <div className="relative mt-16 max-h-[300px] overflow-hidden rounded-[20px] shadow-[0_0_0_1px_rgba(255,255,255,0.12)]">
+            {/* The negative margin keeps the parallax range entirely above the
+                crop's top edge, so the shot can never slide down far enough to
+                open a gap inside the window. */}
+            <Parallax speed={0.12} max={70} className="-mt-[70px]">
+              <Image
+                src="/assets/embedding-landscape.png"
+                alt="Speech embeddings rendered as a voxel landscape, peaks marking the frames the model weighted most heavily"
+                width={1836}
+                height={1033}
+                className="block h-auto w-full"
+              />
+            </Parallax>
           </div>
         </div>
       </section>
@@ -294,9 +323,11 @@ export default function Home() {
         <div className="mx-auto max-w-[1240px]">
           <div className="flex flex-wrap items-end justify-between gap-10">
             <div className="max-w-[22ch]">
-              <h2 className="mt-5 mb-0 text-[34px] leading-none font-semibold tracking-[-0.04em] text-balance sm:text-[44px] lg:text-[64px]">
-                Methods, not vibes.
-              </h2>
+              <TextReveal
+                as="h2"
+                text="Methods, not vibes."
+                className="mt-5 mb-0 text-[34px] leading-none font-semibold tracking-[-0.04em] text-balance sm:text-[44px] lg:text-[64px]"
+              />
             </div>
             <Link
               href="/docs"
@@ -346,7 +377,12 @@ export default function Home() {
               the dark heading/body text while actually showing their tint.
               Dark triple is deeper/lower-chroma so the blend stays a subtle
               backdrop instead of glowing on the near-black page. */}
-          <div className="absolute inset-0 z-0" aria-hidden="true">
+          <Parallax
+            speed={0.08}
+            max={56}
+            className="absolute inset-x-0 -inset-y-16 z-0"
+            aria-hidden="true"
+          >
             <ThemedGrainient
               className="h-full w-full"
               color1="#c9dcff"
@@ -373,13 +409,13 @@ export default function Home() {
               centerY={0}
               zoom={1.05}
             />
-          </div>
+          </Parallax>
           <div className="relative z-10">
-            <h2 className="m-0 text-[38px] leading-[0.98] font-semibold tracking-[-0.045em] text-balance sm:text-[52px] lg:text-[72px]">
-              Run it on your
-              <br />
-              own checkpoint.
-            </h2>
+            <TextReveal
+              as="h2"
+              text={"Run it on your\nown checkpoint."}
+              className="m-0 text-[38px] leading-[0.98] font-semibold tracking-[-0.045em] text-balance sm:text-[52px] lg:text-[72px]"
+            />
             <p className="mx-auto mt-[26px] mb-0 max-w-[52ch] text-[16px] leading-[1.6] text-al-fg-body sm:text-[18px]">
               Self-hosted, MIT licensed, no telemetry. One command brings up the
               API, worker and workbench.
