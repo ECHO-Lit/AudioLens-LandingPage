@@ -298,18 +298,14 @@ export default function Home() {
               into the panel's bottom edge, so it read as part of the card
               rather than as something sitting inside it. */}
           <div className="relative mt-16 max-h-[300px] overflow-hidden rounded-[20px] shadow-[0_0_0_1px_rgba(255,255,255,0.12)]">
-            {/* The negative margin keeps the parallax range entirely above the
-                crop's top edge, so the shot can never slide down far enough to
-                open a gap inside the window. */}
-            <Parallax speed={0.12} max={70} className="-mt-[70px]">
-              <Image
-                src="/assets/embedding-landscape.png"
-                alt="Speech embeddings rendered as a voxel landscape, peaks marking the frames the model weighted most heavily"
-                width={1836}
-                height={1033}
-                className="block h-auto w-full"
-              />
-            </Parallax>
+            <Image
+              src="/assets/embedded-image.jpg"
+              alt="Speech embeddings rendered as a voxel landscape, peaks marking the frames the model weighted most heavily"
+              width={1836}
+              height={1033}
+              priority
+              className="block h-[300px] w-full scale-[1.176] object-cover object-center"
+            />
           </div>
         </div>
       </section>
