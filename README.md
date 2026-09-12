@@ -1,43 +1,20 @@
 # AudioLens Landing Page
 
+<img src="public/assets/AudioLens.png" alt="AudioLens" style="border-radius: 16px;" />
+
 **Purpose:** the purpose of this site is to give users an understanding of what AudioLens is and a guide for using it. It is not a product surface — no app functionality lives here, only explanation and documentation.
 
-> **Status: UI mockup only.**
-> This repo is a UI mockup of the AudioLens landing page and docs page. Copy, screenshots, feature lists, and doc content are placeholders and not final. Everything here has to be finalized after AudioLens itself is implemented — the real product behavior will drive the final content.
+> **Status: work in progress.**
+> This repo is a UI mockup of the AudioLens landing page and docs page. Copy, screenshots, feature lists, and doc content are placeholders and not final — still configuring, still writing docs. Everything here has to be finalized after AudioLens itself is implemented — the real product behavior will drive the final content.
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Main AudioLens repo: [ECHO-Lit/ECHO-LIT](https://github.com/ECHO-Lit/ECHO-LIT)
 
-## Getting Started
+## Pages
 
-First, run the development server:
+- **Landing** (`/`) — main marketing page, still being iterated on.
+- **Docs** (`/docs`) — documentation pages, content still being written and structured.
+- **Research** (`/research`) — research/background page, still a placeholder pending final content.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+None of these are final — copy, structure, and content across all pages will change as AudioLens itself takes shape.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<img src="public/assets/logo.jpeg" alt="Logo" style="border-radius: 16px;" />
