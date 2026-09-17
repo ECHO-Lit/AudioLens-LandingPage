@@ -10,11 +10,7 @@ import { ACCENT } from "@/lib/theme";
 const EYEBROW = "Interpretability for speech models";
 
 const CHIPS = [
-  "Whisper",
-  "Wav2Vec2",
-  "Custom checkpoints",
-  "CUDA · ROCm · MPS",
-  "Self-hosted",
+  "Visual Interpretability and Diagnostic Tool for Speech Recognition",
 ];
 
 const PREMISE = [
@@ -218,12 +214,30 @@ export default function Home() {
           <div className="max-w-[24ch]">
             <TextReveal
               as="h2"
-              text="A transcript is not an explanation."
+              text="Beyond the transcript."
               className="mt-5 mb-0 text-[34px] leading-none font-semibold tracking-[-0.04em] text-balance sm:text-[44px] lg:text-[64px]"
             />
           </div>
 
-          <div className="mt-[70px] grid grid-cols-[repeat(auto-fit,minmax(min(280px,100%),1fr))] gap-[26px]">
+          {/* Media card leads the row, three premise cards follow it: four
+              across on desktop, two by two on tablet, stacked on mobile. */}
+          <div className="mt-[70px] grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="relative min-h-[360px] overflow-hidden rounded-[22px] bg-al-panel shadow-[0_0_0_1px_var(--al-hairline-soft)]">
+              <video
+                src="/assets/loop-card.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-hidden
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-black/70 to-transparent" />
+              <div className="absolute bottom-6 left-[30px] text-[17px] font-medium tracking-[-0.015em] text-white">
+                Hear what it heard.
+              </div>
+            </div>
             {PREMISE.map((p) => (
               <div
                 key={p.title}
