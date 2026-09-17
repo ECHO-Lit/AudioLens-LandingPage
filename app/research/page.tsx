@@ -1,6 +1,17 @@
+import type { Metadata } from "next";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ACCENT } from "@/lib/theme";
+import { ResearchCard } from "./research-card";
+import { RESEARCH } from "./research-data";
+
+export const metadata: Metadata = {
+  title: "Research — AudioLens",
+  description:
+    "Papers, benchmarks and write-ups behind AudioLens, published as they land.",
+};
+
+const RING = "shadow-[0_0_0_1px_var(--al-hairline)]";
 
 export default function ResearchPage() {
   return (
@@ -39,18 +50,30 @@ export default function ResearchPage() {
             land.
           </p>
 
-          <div className="mx-auto mt-16 flex w-full max-w-[720px] flex-col items-center gap-2.5 rounded-[22px] bg-al-surface-2 px-6 py-24 shadow-[0_0_0_1px_var(--al-hairline-soft)]">
-            <span className="font-code text-[11.5px] tracking-[0.14em] text-al-fg-quaternary uppercase">
-              Nothing to show
+          {/* Keeps the page honest while the boxes below are empty. */}
+          <div
+            className={`mt-8 inline-flex items-center gap-2.5 rounded-full bg-card/75 py-[7px] pr-3.5 pl-3 text-[13px] text-al-fg-tertiary ${RING}`}
+          >
+            <span className="font-code text-[11px] tracking-[0.06em]">
+              PREVIEW
             </span>
-            <span className="max-w-[40ch] text-[15px] leading-[1.6] text-al-fg-tertiary text-pretty">
-              Work in progress. The first write-ups will appear here as they are
-              published.
-            </span>
+            <span>Placeholders — the first write-ups are still in review</span>
           </div>
         </div>
       </section>
 
+      <section
+        id="papers"
+        className="scroll-mt-24 px-6 pt-[70px] sm:pt-[90px] lg:pt-[110px]"
+      >
+        <div className="mx-auto grid max-w-[1240px] grid-cols-[repeat(auto-fit,minmax(min(320px,100%),1fr))] gap-[22px]">
+          {RESEARCH.map((entry, i) => (
+            <ResearchCard key={entry.slug} entry={entry} priority={i === 0} />
+          ))}
+        </div>
+      </section>
+
+      <div className="pt-[90px] sm:pt-[120px]" />
       <SiteFooter />
     </div>
   );

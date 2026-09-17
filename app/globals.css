@@ -364,3 +364,72 @@
     opacity: 1;
   }
 }
+
+/* Research articles share the docs MDX element map (mdx-components.tsx), which
+   is typeset for a documentation column: 14.5px muted paragraphs, bordered h2.
+   An article wants a reading measure and reading size instead. These rules sit
+   outside every @layer on purpose -- unlayered declarations beat layered ones
+   in the cascade, so they override the utility classes the map sets inline
+   without touching the docs. Scoped to .research-prose, so only
+   app/research/[slug] is affected. */
+.research-prose p,
+.research-prose li {
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--al-fg-body);
+}
+
+.research-prose p {
+  margin-top: 1.25rem;
+}
+
+.research-prose ul,
+.research-prose ol {
+  margin-top: 1.25rem;
+}
+
+/* The lead paragraph sets its own size through a descendant selector of equal
+   specificity, so it has to be restated here to stay ahead of the rule above. */
+.research-prose > div:first-child p {
+  font-size: 20px;
+  line-height: 1.55;
+  color: var(--al-fg-strong);
+}
+
+.research-prose h2 {
+  margin-top: 3.25rem;
+  border-bottom: 0;
+  padding-bottom: 0;
+  font-size: 28px;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--al-fg-strong);
+}
+
+.research-prose h3 {
+  margin-top: 2.25rem;
+  font-size: 20px;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--al-fg-strong);
+}
+
+.research-prose blockquote {
+  margin-top: 2rem;
+  font-size: 19px;
+  line-height: 1.6;
+}
+
+.research-prose img {
+  width: 100%;
+  border-radius: 18px;
+}
+
+/* Figure captions under an inline image -- the code-fence <figure> is handled
+   by CodeFigure and never carries a <figcaption>. */
+.research-prose figcaption {
+  margin-top: 0.75rem;
+  font-family: var(--font-code), ui-monospace, monospace;
+  font-size: 11.5px;
+  color: var(--al-fg-quaternary);
+}
