@@ -7,24 +7,25 @@ const FOOTER_COLUMNS = [
     label: "Product",
     links: [
       { text: "Features", href: "/#features" },
+      { text: "Quickstart", href: "/docs/quickstart" },
+      // TODO: set real demo URL, see {{DEMO_URL}}
       { text: "Dashboard", href: "#" },
-      { text: "Changelog", href: "#" },
     ],
   },
   {
-    label: "Resources",
+    label: "Docs",
     links: [
-      { text: "Documentation", href: "/docs" },
-      { text: "Architecture", href: "#" },
-      { text: "Model support", href: "#" },
+      { text: "Architecture", href: "/docs/arch" },
+      { text: "Model support", href: "/docs/custom" },
+      { text: "Licenses", href: "/docs/licenses" },
     ],
   },
   {
     label: "Project",
     links: [
-      { text: "GitHub", href: "https://github.com/ECHO-Lit/ECHO-LIT" },
-      { text: "Contributing", href: "#" },
-      { text: "Security", href: "#" },
+      { text: "Contributing", href: "/docs/contributing" },
+      { text: "Security", href: "/docs/security" },
+      { text: "Changelog", href: "/docs/changelog" },
     ],
   },
 ];
@@ -69,7 +70,10 @@ export function SiteFooter() {
         ))}
       </div>
       <div className="font-code mx-auto flex max-w-[1240px] flex-wrap justify-between gap-5 pt-[30px] pb-11 text-[11px] text-al-fg-quaternary">
-        <span>AudioLens · Built for audio model interpretability</span>
+        <span>
+          AudioLens is open source, MIT licensed, self-hosted by default, and
+          built with no telemetry.
+        </span>
         <span>Waveform to logits</span>
       </div>
     </footer>

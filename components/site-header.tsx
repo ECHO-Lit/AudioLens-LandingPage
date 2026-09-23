@@ -135,6 +135,7 @@ export function SiteHeader({ active }: { active?: string }) {
               </a>
             </nav>
             <ThemeToggle />
+            {/* TODO: set real demo URL, see {{DEMO_URL}} */}
             <a
               href="#"
               className="rounded-full px-[17px] py-[9px] text-[13px] font-medium whitespace-nowrap text-white transition-[filter] hover:text-white hover:brightness-[0.88]"
@@ -191,6 +192,7 @@ export function SiteHeader({ active }: { active?: string }) {
               <span className="text-[14px] text-muted-foreground">Theme</span>
               <ThemeToggle />
             </div>
+            {/* TODO: set real demo URL, see {{DEMO_URL}} */}
             <a
               href="#"
               onClick={() => setMobileOpen(false)}
