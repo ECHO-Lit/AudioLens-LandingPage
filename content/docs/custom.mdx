@@ -1,3 +1,63 @@
-<Callout title="Being written">
-  This page has no content yet.
+## Bring your own model
+
+<Lead>
+  Beyond the bundled Whisper and Wav2Vec2 checkpoints, AudioLens can register
+  any Hugging Face repo that fits one of the architectures it knows how to
+  run.
+</Lead>
+
+## Architecture constraints
+
+A custom model must be one of:
+
+- a speech **Seq2Seq** architecture (like Whisper),
+- a **CTC** architecture, or
+- an **audio-classification** architecture (like Wav2Vec2 for emotion).
+
+Two rules apply to every custom model, no exceptions:
+
+- `trust_remote_code=False` **always** — a repo that requires remote code
+  execution to load cannot be registered.
+- Classification models **must** define `id2label` in their config, so
+  AudioLens knows what the output classes mean. A classification checkpoint
+  without `id2label` will fail validation.
+
+<Callout title="Not every Hugging Face model will work" tone="warn">
+  Registering a repo doesn't guarantee it loads. If its architecture, task,
+  or config doesn't match what AudioLens expects, registration fails at the
+  validation step below rather than silently running with wrong assumptions.
 </Callout>
+
+## Registering a model
+
+Registering a custom model follows the same asynchronous pattern as running
+an analysis job:
+
+<Steps>
+  <Step title="Submit the model">
+    `POST /models` with the Hugging Face repo id. This returns immediately
+    with a `202` while the model is validated in the background.
+  </Step>
+  <Step title="Validation runs">
+    AudioLens checks the model's architecture and config against the
+    constraints above — Seq2Seq, CTC, or audio-classification;
+    `trust_remote_code=False`; `id2label` present for classification models.
+  </Step>
+  <Step title="Poll for the result">
+    `GET /models/{id}` to check status. Once validation succeeds, the model
+    is available to use in jobs like any built-in model.
+  </Step>
+</Steps>
+
+Once registered, list, inspect, or remove custom models with `GET /models`,
+`GET /models/{id}`, and `DELETE /models/{id}`. If the model supports it,
+`GET /models/jacobian-lenses/{model_id}` lists any Jacobian Lenses fitted for
+it.
+
+## Where to go next
+
+<CardGrid min={232}>
+  <Card title="REST API" kicker="Reference" meta="Full model registration and job endpoints" href="/docs/rest" />
+  <Card title="Whisper" kicker="Models" meta="The bundled Seq2Seq checkpoints" href="/docs/whisper" />
+  <Card title="Wav2Vec2" kicker="Models" meta="The bundled classification checkpoint" href="/docs/wav2vec" />
+</CardGrid>

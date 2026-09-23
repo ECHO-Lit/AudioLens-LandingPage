@@ -1,3 +1,67 @@
-<Callout title="Being written">
-  This page has no content yet.
+## Automatic device selection
+
+<Lead>
+  Workers pick an inference device with the `ML_DEVICE` environment
+  variable. The default, `ML_DEVICE=auto`, tries devices in this order:
+  **CUDA → ROCm → MPS → CPU**, falling back to the next option if a device
+  isn't available.
+</Lead>
+
+You can also pin a worker to a specific device explicitly:
+`ML_DEVICE=cpu`, `mps`, `cuda`, `cuda:N` (a specific GPU index), or `rocm`.
+
+<Callout title="Apple Silicon (MPS) needs a native worker" tone="warn">
+  Docker Desktop cannot expose MPS to a container. To use an Apple Silicon
+  GPU, run the model-serving worker natively, outside Docker — see the
+  `macos mps` tab below.
 </Callout>
+
+## Compose profiles per device
+
+<CodeTabs labels={["nvidia", "amd rocm", "macos mps"]}>
+
+```bash
+# NVIDIA
+docker compose --profile gpu up --build \
+  --scale worker-model-local=0 \
+  redis api scheduler frontend worker-cpu worker-gpu
+```
+
+```bash
+# AMD ROCm
+docker compose --profile amd up --build \
+  --scale worker-model-local=0 \
+  redis api scheduler frontend worker-cpu worker-amd
+```
+
+```bash
+# Apple Silicon (MPS) — run the worker natively
+cd Backend
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+STORAGE_LOCAL_ROOT=shared-storage ML_DEVICE=mps \
+  celery -A app.core.celery_app:celery_app worker --queues=gpu-fast,gpu-large --concurrency=1
+```
+
+</CodeTabs>
+
+The NVIDIA variant (`worker-gpu`) requests an NVIDIA GPU reservation and
+needs driver 555+. The AMD variant (`worker-amd`) needs `/dev/kfd` and
+`/dev/dri` exposed and a ROCm-supported GPU on Linux. Both profiles scale
+`worker-model-local` to 0 so the GPU-capable worker takes over the
+`gpu-fast`/`gpu-large` queues instead.
+
+## ATTENTION_FORCE_CPU
+
+`ATTENTION_FORCE_CPU` defaults to `true`. It forces the attention operation
+onto CPU regardless of `ML_DEVICE`, working around a GPU Triton segfault.
+Leave it at its default unless you've specifically confirmed attention is
+stable on GPU in your environment.
+
+## Where to go next
+
+<CardGrid min={232}>
+  <Card title="Quickstart" kicker="Get started" meta="Boot the stack for the first time" href="/docs/quickstart" />
+  <Card title="Environment variables" kicker="Reference" meta="Every configuration flag, including ML_DEVICE" href="/docs/env" />
+  <Card title="Architecture" kicker="Reference" meta="Control plane, workers, Redis, and storage" href="/docs/arch" />
+</CardGrid>

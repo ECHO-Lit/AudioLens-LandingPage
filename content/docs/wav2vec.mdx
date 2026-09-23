@@ -1,3 +1,38 @@
-<Callout title="Being written">
-  This page has no content yet.
+## Available checkpoint
+
+<Lead>
+  AudioLens's Wav2Vec2 model is used for emotion classification, not
+  transcription.
+</Lead>
+
+| Catalog key | Model ID | Task | Notes |
+|---|---|---|---|
+| `wav2vec2` | `r-f/wav2vec-english-speech-emotion-recognition` | emotion classification | shown in the UI dropdown; labels are read from the model's config at runtime |
+
+<Callout title="Apache 2.0 license" tone="note">
+  `r-f/wav2vec-english-speech-emotion-recognition` is Apache 2.0 licensed. It
+  is fine-tuned from `jonatasgrosman/wav2vec2-large-xlsr-53-english`. See
+  [/docs/licenses](/docs/licenses) for the full terms and source links.
 </Callout>
+
+Like Whisper, this model is English-only — there is no multi-language
+support for emotion classification.
+
+## Legacy fallback models
+
+Two older Wav2Vec2 checkpoints remain in the codebase as a legacy fallback
+path, used only for attention visualization on an older code path:
+
+- `jonatasgrosman/wav2vec2-large-xlsr-53-english`
+- `facebook/wav2vec2-base-960h`
+
+Both are Apache 2.0 licensed. They aren't part of the main model catalog and
+aren't offered in the UI dropdown.
+
+## Where to go next
+
+<CardGrid min={232}>
+  <Card title="Attention" kicker="Analysis panel" meta="Per-layer, per-head attention weights" href="/docs/attention" />
+  <Card title="Fairness slices" kicker="Analysis panel" meta="Compare emotion-classification performance across groups" href="/docs/fairness" />
+  <Card title="Licenses" kicker="Reference" meta="Full license terms for AudioLens's models" href="/docs/licenses" />
+</CardGrid>

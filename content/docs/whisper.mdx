@@ -1,3 +1,44 @@
-<Callout title="Being written">
-  This page has no content yet.
+## Available checkpoints
+
+<Lead>
+  AudioLens ships two Whisper checkpoints for speech-to-text, both under the
+  Apache 2.0 license.
+</Lead>
+
+| Catalog key | Model ID | Notes |
+|---|---|---|
+| `whisper-base` | `openai/whisper-base` | shown in the UI model dropdown |
+| `whisper-large` | `openai/whisper-large-v3` | API-only — intentionally hidden from the UI dropdown |
+
+`whisper-large` is fully usable through the REST API (`POST /jobs`, `POST
+/models`, etc.) — it's just not offered as a choice in the frontend's model
+picker.
+
+<Callout title="Apache 2.0 license" tone="note">
+  Both Whisper checkpoints are permissively licensed and commercial use is
+  allowed. See [/docs/licenses](/docs/licenses) for the full terms and
+  source links.
 </Callout>
+
+## English-only
+
+Whisper decoding in AudioLens is pinned to `language="en"` and
+`task="transcribe"`. AudioLens does not support multi-language transcription
+or translation tasks — every Whisper job runs in English-transcribe mode
+regardless of the input clip's actual language.
+
+## Saliency on Whisper
+
+Whisper models can be analyzed with the Saliency panel. One thing worth
+knowing before you rely on the result: the method labeled `gradcam` in the
+API and UI does not actually run Grad-CAM — it runs **Integrated Gradients**
+under the hood. See [/docs/saliency](/docs/saliency) for the full detail on
+saliency methods and how to check whether a given map is trustworthy.
+
+## Where to go next
+
+<CardGrid min={232}>
+  <Card title="Saliency mapping" kicker="Analysis panel" meta="Attribution maps, including the gradcam naming caveat" href="/docs/saliency" />
+  <Card title="Device selection" kicker="Models" meta="Run Whisper on CPU, CUDA, ROCm, or Apple MPS" href="/docs/devices" />
+  <Card title="Licenses" kicker="Reference" meta="Full license terms for AudioLens's models" href="/docs/licenses" />
+</CardGrid>
