@@ -1,0 +1,48 @@
+<Lead>
+  A limited public hosted demo of AudioLens is planned. It is **not live
+  yet** — there is no URL to link to, and nothing below should be read as a
+  description of a running service.
+</Lead>
+
+<Badges items={["Planned", "Not live"]} />
+
+## Status
+
+{/* TODO: set real demo URL, see {{DEMO_URL}} */}
+<CardGrid min={232}>
+  <Card title="Hosted demo" kicker="Planned" meta="No URL yet — check this page again once it ships" href="#" />
+</CardGrid>
+
+<Callout title="This demo isn't live" tone="note">
+  Until a real deployment exists, the fastest way to use AudioLens today is
+  to run it yourself — see [Self-hosting](/docs/selfhost). This page will be
+  updated with a real link the moment the hosted demo ships.
+</Callout>
+
+## Dataset licensing and the demo
+
+AudioLens ships with several bundled sample datasets, and three of them —
+**RAVDESS**, **L2-ARCTIC**, and the **Speech Accent Archive (SAA)** — are
+licensed **non-commercial only** (see [Licenses](/docs/licenses) for the
+exact terms). AudioLens is a non-commercial, open-source project, and the
+hosted demo will be a non-commercial public demo with no paid tier — so
+using these datasets there is compatible with their license terms.
+Attribution/citation requirements still apply and are listed on the
+[Licenses](/docs/licenses) page. This only becomes a real question for
+someone who forks AudioLens into a **commercial** product; that fork would
+need to drop these three datasets or obtain a separate license for them.
+
+## Usage limits — not decided yet
+
+**No rate limiting exists in AudioLens's code today.** If and when the
+hosted demo launches, any usage caps (requests per session, clip length,
+concurrent jobs, etc.) will be a **policy decision made at launch time**, not
+a feature that's already built. Don't rely on this page — or any other page
+in these docs — as evidence that quotas exist; as of this writing, they
+don't.
+
+## In the meantime
+
+If you want to try AudioLens now, [Self-hosting](/docs/selfhost) gets the
+full stack running locally with Docker Compose in about ten minutes — see
+also the [Quickstart](/docs/quickstart).

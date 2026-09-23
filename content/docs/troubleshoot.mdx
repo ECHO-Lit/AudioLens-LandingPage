@@ -1,0 +1,115 @@
+<Lead>
+  Most self-hosting problems fall into a handful of buckets: slow first-run
+  downloads, Windows path quirks, GPU passthrough, or a queue that's stuck.
+  Start here before opening an issue.
+</Lead>
+
+<CardGrid min={232}>
+  <Card title="First run is slow" kicker="10–30+ min" meta="Model weights download lazily on first use" href="#first-run-model-downloads" />
+  <Card title="Windows path errors" kicker="Short path tip" meta="Long paths + case-sensitive dataset files" href="#windows-path-and-case-sensitivity" />
+  <Card title="No GPU on macOS" kicker="Docker Desktop limitation" meta="MPS needs a native worker" href="#apple-silicon-mps-under-docker-desktop" />
+  <Card title="GPU profile ignored" kicker="check nvidia-smi" meta="Driver not visible inside the container" href="#nvidia-gpu-not-detected" />
+  <Card title="503 / Redis full" meta="Broker or cache at capacity" href="#redis-full-or-503-responses" />
+  <Card title="Jobs stuck" kicker="queue-status.sh -w" meta="Find and clear stalled jobs" href="#finding-stuck-jobs" />
+</CardGrid>
+
+## First-run model downloads
+
+Whisper Large and fairness jobs in particular can take **10–30+ minutes** to
+become ready the first time they run, because the underlying model weights
+are pulled lazily on first use rather than baked into the image. This is
+expected, not a hang.
+
+Avoid the wait during a demo or first analysis by pre-warming weights ahead
+of time — see [Self-hosting → Pre-warm model weights](/docs/selfhost).
+
+## Windows path and case-sensitivity
+
+Dataset file paths are **case-sensitive**, even on Windows. Combined with
+Windows' path-length limits, a deep checkout path can produce confusing
+"file not found" errors that have nothing to do with the dataset itself.
+
+<Callout title="Fix: use a short checkout path" tone="note">
+  Clone the repo somewhere short, e.g. `C:\dev\AudioLens`, instead of nested
+  deep inside a long user-profile directory.
+</Callout>
+
+## Apple Silicon (MPS) under Docker Desktop
+
+Docker Desktop cannot expose Apple's Metal (MPS) backend to a container —
+this is a Docker Desktop limitation, not an AudioLens bug. If you're on a
+Mac and want GPU acceleration, run the worker natively outside Docker
+instead:
+
+```bash
+cd Backend
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+STORAGE_LOCAL_ROOT=shared-storage ML_DEVICE=mps \
+  celery -A app.core.celery_app:celery_app worker --queues=gpu-fast,gpu-large --concurrency=1
+```
+
+See [Device selection](/docs/devices) for how `ML_DEVICE=auto` picks a
+backend.
+
+## NVIDIA GPU not detected
+
+If the `gpu` compose profile comes up but jobs still run on CPU, confirm the
+driver is actually visible **inside a container** before suspecting compose
+or AudioLens itself:
+
+<Steps>
+  <Step title="Check the host driver version">
+    NVIDIA needs driver **555+**. Anything older won't work with the CUDA
+    base image AudioLens ships.
+  </Step>
+  <Step title="Confirm GPU passthrough with a throwaway container">
+
+```bash
+docker run --rm --gpus all nvidia/cuda:12.6.0-base-ubuntu22.04 nvidia-smi
+```
+
+If this doesn't show your GPU, the problem is in your Docker/NVIDIA Container
+Toolkit setup, not in the AudioLens compose file.
+  </Step>
+  <Step title="Re-check the profile flags">
+    Make sure you booted with `--profile gpu` and scaled
+    `worker-model-local` to `0`, per [Self-hosting](/docs/selfhost) — a
+    leftover CPU-profile worker will happily pick up jobs and mask the GPU
+    issue.
+  </Step>
+</Steps>
+
+## Redis full or 503 responses
+
+Redis is configured with `noeviction` and a memory cap
+(`REDIS_MAXMEMORY`, default 1gb). Once it's full, writes start failing and
+the API can return 503s. Check `/health` (below) first — it reports Redis
+status directly. If Redis is the culprit, either raise `REDIS_MAXMEMORY` or
+clear stale data with `docker compose down -v` and a fresh start (this wipes
+job history and uploaded audio, not your source checkout).
+
+## Checking system health
+
+```
+GET /health
+```
+
+reports Redis (all three logical DBs used by the API — sessions/cache, job
+metadata, Celery), storage backend reachability, worker count, and queue
+depth in one response. This is the first thing to check when something
+feels wrong — before digging into container logs.
+
+## Finding stuck jobs
+
+```bash
+scripts/queue-status.sh -w
+```
+
+watches queue depth and per-job status continuously, so you can see whether
+a job is actually progressing or just sitting in a queue with no worker
+consuming it. If a queue is backed up with no matching worker running,
+re-check which containers you started against the [queue routing
+table](/docs/arch#queues) — `gpu-fast`/`gpu-large` jobs need
+`worker-model-local` or `worker-gpu`/`worker-amd`, and `cpu` jobs need
+`worker-cpu`.

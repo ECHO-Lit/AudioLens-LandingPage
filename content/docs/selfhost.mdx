@@ -1,0 +1,144 @@
+<Lead>
+  AudioLens is distributed as open source and is meant to be self-hosted with
+  Docker Compose. There's no hosted control plane to sign up for — you run
+  the API, the workers, Redis, and the frontend yourself, on your own
+  hardware.
+</Lead>
+
+<Badges items={["Docker Compose", "Open source", "MIT"]} />
+
+## Prerequisites
+
+- **Docker Desktop** (Windows/Mac) or **Docker Engine + Compose plugin 2.24+**
+  (Linux).
+- **Windows:** the WSL 2 backend, enabled in Docker Desktop.
+- **NVIDIA GPU:** driver **555+** on the host.
+- **AMD GPU:** a ROCm-supported GPU, Linux only.
+- **Apple Silicon (MPS):** Docker Desktop cannot expose Metal to a container.
+  You'll run the worker natively outside Docker for GPU acceleration on Mac —
+  see the macOS tab below and [Device selection](/docs/devices).
+
+## Clone and boot
+
+```bash
+git clone https://github.com/ECHO-Lit/ECHO-LIT.git AudioLens
+cd AudioLens
+cp Backend/.env.example Backend/.env
+cp Frontend/.env.example Frontend/.env
+docker compose up --build
+```
+
+Env files are optional — both services run with sane defaults if you skip
+the `cp` steps. See [Environment variables](/docs/env) for everything you
+can override.
+
+## Boot variants
+
+<CodeTabs labels={["docker", "nvidia", "amd rocm", "macos mps"]}>
+
+```bash
+git clone https://github.com/ECHO-Lit/ECHO-LIT.git AudioLens
+cd AudioLens
+cp Backend/.env.example Backend/.env
+cp Frontend/.env.example Frontend/.env
+docker compose up --build
+```
+
+```bash
+# NVIDIA — adds a GPU worker, drops the CPU-only model worker
+docker compose --profile gpu up --build \
+  --scale worker-model-local=0 \
+  redis api scheduler frontend worker-cpu worker-gpu
+```
+
+```bash
+# AMD ROCm — Linux only
+docker compose --profile amd up --build \
+  --scale worker-model-local=0 \
+  redis api scheduler frontend worker-cpu worker-amd
+```
+
+```bash
+# Apple Silicon (MPS) — run the worker natively, outside Docker
+cd Backend
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+STORAGE_LOCAL_ROOT=shared-storage ML_DEVICE=mps \
+  celery -A app.core.celery_app:celery_app worker --queues=gpu-fast,gpu-large --concurrency=1
+```
+
+</CodeTabs>
+
+See [Architecture](/docs/arch) for what each compose service (`worker-cpu`,
+`worker-model-local`, `worker-gpu`, `worker-amd`, `scheduler`) actually does.
+
+## Service endpoints after boot
+
+| Service | Address | Notes |
+|---|---|---|
+| Frontend | `http://localhost:8080` | React app, served by the dev/nginx target |
+| API health | `http://localhost:8000/health` | FastAPI control plane |
+| Redis | `localhost:6379` | 4 logical DBs — sessions, jobs, Celery broker, Celery results |
+
+## Pre-warm model weights
+
+By default, model weights download lazily on the first job that needs them
+— which can take a while for larger checkpoints. Pre-warm the Whisper Base
+weights before your first real analysis:
+
+```bash
+docker compose run --rm worker-model-local python3 -c \
+  "from transformers import pipeline; pipeline('automatic-speech-recognition', model='openai/whisper-base')"
+```
+
+## Scale workers
+
+```bash
+docker compose up -d --scale worker-cpu=2 --scale worker-model-local=2
+```
+
+## Helper scripts
+
+The repo ships a few scripts under `scripts/` to save you the raw compose
+invocations:
+
+- **`start.sh`** — `docker compose up -d --build`, then waits for the API and
+  frontend to become healthy.
+- **`stop.sh`** — stops the stack.
+- **`queue-status.sh [-w]`** — prints queue depth and job status; `-w`
+  watches continuously.
+
+Full reference, plus the dataset-import scripts, is on the
+[CLI & scripts](/docs/cli) page.
+
+## Production notes
+
+<Callout title="Defaults are for local development" tone="warn">
+  The defaults you get out of the box (`ENVIRONMENT=development`,
+  `COOKIE_SECURE=false`, HTTP-only `ALLOWED_ORIGINS`) are not safe to expose
+  on the public internet as-is.
+</Callout>
+
+- Set **`ENVIRONMENT=production`** — this enforces secure cookies and HTTPS
+  origins.
+- Set **`COOKIE_SECURE=true`** once you're behind HTTPS, and set
+  **`ALLOWED_ORIGINS`** to your real origin(s) — `*` is rejected.
+- For a durable, horizontally-scalable storage backend instead of the local
+  filesystem, set **`STORAGE_BACKEND=s3`** plus `S3_BUCKET`,
+  `S3_ENDPOINT_URL`, `S3_REGION`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`.
+
+Full variable-by-variable reference: [Environment variables](/docs/env).
+
+## Windows tip
+
+Keep the repo checkout at a **short path** (e.g. `C:\dev\AudioLens`) rather
+than deep inside a long user-profile path. Dataset file paths are
+case-sensitive, and long Windows paths combined with case mismatches are a
+common source of "file not found" errors on first boot.
+
+## Teardown
+
+```bash
+docker compose down       # stop and remove containers
+docker compose down -v    # also wipe named volumes (Redis data, local storage)
+```
