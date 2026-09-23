@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ACCENT } from "@/lib/theme";
 import {
   SearchRecord,
   groupResults,
@@ -34,7 +33,7 @@ function Highlight({ text, tokens }: { text: string; tokens: string[] }) {
     <>
       {parts.map((part, i) =>
         lookup.has(part.toLowerCase()) ? (
-          <span key={i} style={{ color: ACCENT }}>
+          <span key={i} style={{ color: "var(--al-accent-text)" }}>
             {part}
           </span>
         ) : (

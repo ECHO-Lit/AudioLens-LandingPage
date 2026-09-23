@@ -1,5 +1,4 @@
 import { Children, cloneElement, isValidElement, type ReactElement, type ReactNode } from "react";
-import { ACCENT } from "@/lib/theme";
 
 type StepProps = { title: string; children?: ReactNode; n?: number; last?: boolean };
 
@@ -30,7 +29,7 @@ export function Step({ title, children, n, last }: StepProps) {
       <div className="flex flex-col items-center gap-1.5">
         <div
           className="flex h-6 w-6 flex-none items-center justify-center rounded-full border border-al-accent-line font-mono text-[11px]"
-          style={{ color: ACCENT, background: "var(--al-accent-tint)" }}
+          style={{ color: "var(--al-accent-text)", background: "var(--al-accent-tint)" }}
           aria-hidden="true"
         >
           {n}

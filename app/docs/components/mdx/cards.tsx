@@ -1,6 +1,5 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { ACCENT } from "@/lib/theme";
 
 /** Auto-fitting card grid. Used for prerequisites and "where to go next". */
 export function CardGrid({ min = 232, children }: { min?: number; children: ReactNode }) {
@@ -34,7 +33,7 @@ export function Card({
   const body = (
     <>
       {kicker && (
-        <div className="mb-[9px] font-mono text-[10px]" style={{ color: ACCENT }}>
+        <div className="mb-[9px] font-mono text-[10px]" style={{ color: "var(--al-accent-text)" }}>
           {kicker}
         </div>
       )}
@@ -45,7 +44,7 @@ export function Card({
         {children}
       </div>
       {meta && (
-        <div className="mt-3 font-mono text-[10.5px]" style={{ color: ACCENT }}>
+        <div className="mt-3 font-mono text-[10.5px]" style={{ color: "var(--al-accent-text)" }}>
           {meta} <span aria-hidden="true">→</span>
         </div>
       )}
