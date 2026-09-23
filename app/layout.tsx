@@ -65,9 +65,9 @@ export const metadata: Metadata = {
   // Research articles reference their cover image by site-relative path; without
   // a base, Next cannot resolve those into absolute og:image URLs.
   metadataBase: new URL(SITE_URL),
-  title: "AudioLens — Learning Interpretability Tool for Voice Models",
+  title: "AudioLens — Interpretability workbench for speech models",
   description:
-    "An interpretability workbench for speech models. Follow a single prediction from raw waveform to emitted token, across saliency, attention, embeddings and perturbation, on one shared timeline.",
+    "AudioLens is an open-source interpretability and debugging workbench for speech models. Follow one prediction from raw waveform to emitted token with saliency, attention, embeddings, perturbation testing, layer probing, and fairness slicing — self-hosted, MIT licensed, no telemetry.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

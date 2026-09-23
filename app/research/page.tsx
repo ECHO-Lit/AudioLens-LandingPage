@@ -8,7 +8,7 @@ import { RESEARCH } from "./research-data";
 export const metadata: Metadata = {
   title: "Research — AudioLens",
   description:
-    "Papers, benchmarks and write-ups behind AudioLens, published as they land.",
+    "Nothing published yet. Writeups and findings behind AudioLens will land here as they're ready.",
 };
 
 const RING = "shadow-[0_0_0_1px_var(--al-hairline)]";
@@ -46,8 +46,9 @@ export default function ResearchPage() {
           </h1>
 
           <p className="mx-auto mt-[26px] max-w-[56ch] text-[17px] leading-[1.6] text-al-fg-body text-pretty sm:text-[18px]">
-            Papers, benchmarks and write-ups behind AudioLens, published as they
-            land.
+            Nothing published yet. AudioLens is built in the open as an extension of ECHO —
+            inspired by Google PAIR&apos;s LIT. Writeups and findings will land here as they&apos;re
+            ready.
           </p>
 
           {/* Keeps the page honest while the boxes below are empty. */}
