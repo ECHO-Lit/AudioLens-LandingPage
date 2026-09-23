@@ -1,0 +1,62 @@
+## What the EDA panel shows
+
+<Lead>
+  Before you run any model on a dataset, the Dataset EDA panel lets you look
+  at the dataset itself: how balanced its classes are, how its acoustic
+  features are distributed, and where its outliers sit.
+</Lead>
+
+The panel covers, for a loaded dataset:
+
+- **Class balance** — counts per label, so you can spot skew before it
+  shows up as a fairness problem later.
+- **Histograms** of acoustic feature distributions.
+- **Box plots** to compare feature spread across classes.
+- **Correlation heatmap** across acoustic features.
+- **Outlier detection**, flagging clips that sit far outside the rest of the
+  distribution.
+
+<Callout title="Image placeholder: EDA panel overview">
+  Add `/assets/docs/eda-panel-overview.png` — a screenshot of the Dataset EDA
+  panel showing the class balance chart, a feature histogram, and the
+  correlation heatmap side by side. Replace this callout with
+  `![Dataset EDA panel overview](/assets/docs/eda-panel-overview.png)` once
+  the real image is uploaded.
+</Callout>
+
+## Clustering and nearest neighbours
+
+The EDA panel also runs **HDBSCAN** clustering over the dataset's embedding
+space and reports a **silhouette score** for the resulting clusters, so you
+can judge how well-separated the clusters actually are rather than taking
+cluster assignments at face value. From any point, you can pull up its
+**nearest neighbours** in that same embedding space — useful for spotting
+near-duplicates or checking whether a mislabeled clip has neighbours that
+suggest what its label should have been.
+
+This reuses the same embedding space as the [Embedding
+projector](/docs/embeddings) panel — the two are looking at the same
+underlying representation from different angles.
+
+## Exporting results
+
+| Export | Format |
+|---|---|
+| Acoustic features | CSV |
+| Full EDA report | JSON |
+| Clusters | CSV |
+| Most Plotly charts | PNG download |
+
+There is no SRT, PDF, or transcript export anywhere in AudioLens — the
+exports above are the complete list.
+
+Dataset-level EDA data is served by `GET /{dataset}/eda` for built-in
+datasets; see [/docs/rest](/docs/rest) for the full endpoint reference.
+
+## Where to go next
+
+<CardGrid min={232}>
+  <Card title="Loading datasets" kicker="Get started" meta="Bundled datasets and custom uploads" href="/docs/datasets" />
+  <Card title="Embedding projector" kicker="Analysis panel" meta="Projections, clustering, and nearest neighbours" href="/docs/embeddings" />
+  <Card title="Fairness slices" kicker="Analysis panel" meta="Compare performance across metadata slices" href="/docs/fairness" />
+</CardGrid>

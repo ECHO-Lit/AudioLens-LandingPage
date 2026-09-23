@@ -1,3 +1,65 @@
-<Callout title="Being written">
-  This page has no content yet.
+## Bundled datasets
+
+<Lead>
+  AudioLens ships with a handful of small, bundled sample datasets so you can
+  start exploring without uploading anything. Audio files themselves are
+  never committed to the repository — bundled datasets are packaged
+  separately, and a couple of the larger ones are fetched by a script you
+  run yourself.
+</Lead>
+
+| Dataset | Rows | How it's added |
+|---|---|---|
+| Common Voice (cv-valid-dev subset) | 100 | bundled |
+| RAVDESS | 144 | bundled |
+| L2-ARCTIC | 150 | bundled, includes phone-error annotations |
+| Speech Accent Archive (SAA) | 150 | bundled |
+| LibriSpeech-1000 | ~1000 | fetched via `scripts/download_librispeech_1000.py` |
+| SAVEE | up to 100 | prepared via `scripts/prepare_savee_subset.py` — requires you to already own a copy |
+
+<Callout title="Non-commercial licenses in this list" tone="warn">
+  RAVDESS, L2-ARCTIC, and the Speech Accent Archive (SAA) are all licensed
+  for non-commercial use only. Common Voice and SAVEE's current terms are
+  flagged as unverified. See [/docs/licenses](/docs/licenses) for the full
+  breakdown per dataset before using any of these outside research or
+  personal use.
 </Callout>
+
+## Custom datasets
+
+Any user can upload their own dataset — there's no gatekeeping beyond the
+same file limits that apply to a single upload. A custom dataset needs
+labels from one of two sources:
+
+- an **uploaded label CSV** mapping filenames to labels, or
+- **filename-pattern-derived labels**, where labels are inferred from a
+  naming convention (for example, the pattern used for SAVEE-style
+  filenames).
+
+Custom dataset management goes through its own set of endpoints — creating
+the dataset, uploading files, submitting or deriving a manifest and labels,
+and listing or deleting the dataset later. See [/docs/rest](/docs/rest) for
+the full list.
+
+## Formats, size, and duration limits
+
+These limits apply to any audio you upload, whether it's a one-off clip or
+part of a custom dataset:
+
+| Setting | Default |
+|---|---|
+| Accepted formats | `.wav` `.mp3` `.m4a` `.flac` |
+| Max upload size | 100 MB (`MAX_UPLOAD_BYTES` = 104857600) |
+| Max clip duration | 10 minutes (`MAX_AUDIO_DURATION_SECONDS` = 600) |
+
+Some analyses apply tighter limits on top of these — saliency, for example,
+caps the analysis window well below 10 minutes. See each panel's own page
+for its specific limits.
+
+## Where to go next
+
+<CardGrid min={232}>
+  <Card title="Dataset EDA" kicker="Analysis panel" meta="Explore class balance and distributions before you analyze" href="/docs/eda" />
+  <Card title="Licenses" kicker="Reference" meta="Full license terms for AudioLens's models and datasets" href="/docs/licenses" />
+  <Card title="REST API" kicker="Reference" meta="Every dataset and upload endpoint" href="/docs/rest" />
+</CardGrid>
