@@ -1,3 +1,63 @@
-<Callout title="Being written">
-  This page has no content yet.
-</Callout>
+## The shared timeline
+
+<Lead>
+  Every panel in AudioLens — Saliency, Attention, Embeddings, Perturbation,
+  Diagnostics, Fairness, Layer Probes, J-Lens, Dataset EDA — reads from and
+  writes to the same underlying job data. Instead of separate tools that each
+  need their own upload and their own model run, AudioLens keeps one
+  timeline per audio clip and model, and every analysis you launch attaches
+  its result to that timeline.
+</Lead>
+
+## What a datapoint is
+
+A **datapoint** is one audio clip paired with one model. Everything you do —
+run a prediction, compute saliency, probe a layer, slice by fairness group —
+is an operation on that datapoint. A job (`POST /jobs`) runs one operation
+against one datapoint and returns a `job_id`; the UI polls `GET /jobs/{id}`
+until it's done, then reads `GET /jobs/{id}/result`.
+
+## How panels stay in sync
+
+Because every panel is reading results scoped to the same datapoint, switching
+from the Saliency tab to the Attention tab or the Embeddings tab doesn't
+require re-uploading audio or re-selecting a model — the frontend already
+knows which clip and which model you're looking at. Panels that depend on
+each other's output build on this directly: for example, the Embeddings tab's
+clustering (HDBSCAN) and nearest-neighbour retrieval reuse the same
+embedding space that the Dataset EDA tab visualizes, and J-Lens Lab
+(`/j-lens`) fits a lens over the decoder layers that the J-Lens panel then
+applies to a specific datapoint.
+
+The operations underneath the panels are dispatched to three Celery queues
+so that fast, cheap work doesn't wait behind slow, heavy work:
+
+| Queue | Operations |
+|---|---|
+| `gpu-fast` | prediction, embedding, hidden states, layer probing |
+| `gpu-large` | attention, saliency, faithfulness, Jacobian Lens |
+| `cpu` | perturbation, audio features, linguistic-vs-acoustic sweep, fairness, cleanup |
+
+## Sessions, not accounts
+
+AudioLens has no user accounts. The first time you visit, the API sets an
+anonymous, HttpOnly `sid` cookie with a 24-hour TTL. Every resource you
+create — uploaded audio, jobs, custom models, custom datasets — is scoped to
+that session cookie, not to an identity. There are no roles and no
+multi-tenancy: a session either has access to what it created, or it
+doesn't. When a session's data expires after 24 hours, it's simply gone —
+there's nothing to migrate or reclaim.
+
+## Where to go next
+
+<CardGrid min={232}>
+  <Card title="Saliency mapping" kicker="Analysis panel" meta="Attribution maps over the waveform" href="/docs/saliency" />
+  <Card title="Attention" kicker="Analysis panel" meta="Per-layer, per-head attention weights" href="/docs/attention" />
+  <Card title="Embedding projector" kicker="Analysis panel" meta="Projections with clustering and nearest neighbours" href="/docs/embeddings" />
+  <Card title="Dataset EDA" kicker="Analysis panel" meta="Class balance, distributions, and outliers" href="/docs/eda" />
+  <Card title="Fairness slices" kicker="Analysis panel" meta="Performance across accent, speaker, or metadata" href="/docs/fairness" />
+  <Card title="Layer probes" kicker="Analysis panel" meta="Where a property is represented, layer by layer" href="/docs/probes" />
+  <Card title="Jacobian Lens" kicker="Analysis panel" meta="A position-resolved lens over decoder layers" href="/docs/jlens" />
+  <Card title="Diagnostics" kicker="Analysis panel" meta="Linguistic vs. acoustic influence" href="/docs/diagnostics" />
+  <Card title="Perturbation lab" kicker="Analysis panel" meta="Noise, pitch, time-stretch, and masking" href="/docs/perturb" />
+</CardGrid>

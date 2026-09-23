@@ -1,3 +1,67 @@
-<Callout title="Being written">
-  This page has no content yet.
+## What AudioLens is
+
+<Lead>
+  AudioLens is an interpretability and debugging workbench for speech
+  models — the audio-domain counterpart to Google PAIR's LIT (Learning
+  Interpretability Tool), which targets text and tabular models. It lets a
+  researcher or developer follow a single prediction from raw waveform to
+  emitted token, using saliency maps, attention visualization, embedding
+  projections, perturbation testing, layer probing, and fairness slicing —
+  all on one shared timeline.
+</Lead>
+
+<img
+  src="/assets/AudioLens.png"
+  alt="AudioLens"
+  className="my-6 w-full rounded-2xl"
+/>
+
+<Callout title="What AudioLens is not" tone="note">
+  AudioLens is not a transcription, meeting-notes, or call-analytics
+  product. It doesn't run in real time (no microphone recording, no
+  WebSockets), it doesn't support multiple languages (Whisper decoding is
+  pinned to English, and the Wav2Vec2 emotion model is English-only), it has
+  no user accounts, and there's no speaker diarization, summarization,
+  sentiment analysis, or SRT/PDF transcript export.
 </Callout>
+
+## Why it exists
+
+Speech models are hard to debug from the outside. A transcript or a
+confidence score tells you *what* a model predicted, not *why* — which parts
+of the waveform it attended to, whether a saliency map can be trusted,
+whether performance holds up across accents or speakers, or where in the
+network a property like pitch or phoneme identity is actually represented.
+AudioLens exists to make those questions answerable interactively, on real
+audio, without writing one-off analysis scripts for every question.
+
+## Who it's for
+
+Researchers and engineers working on speech recognition or speech emotion
+models who need to inspect a specific prediction, compare checkpoints,
+stress-test robustness with perturbations, or check whether a model's
+errors are concentrated in particular speaker groups.
+
+## Lineage: ECHO → AudioLens
+
+AudioLens is built on and extends **ECHO**, an MIT-licensed audio
+interpretability tool originally released as *LIT for Voice* (v1.0.0,
+2024-10-13) and created by Anas Hussaindeen, Chandupa Ambepitiya, and
+Dewmike Amarasinghe. AudioLens is inspired throughout by Google PAIR's LIT. See
+[/docs/licenses](/docs/licenses) for the full license and attribution.
+
+## What you can do
+
+<CardGrid min={232}>
+  <Card title="Saliency mapping" kicker="Analysis panel" meta="Attribution maps over the waveform" href="/docs/saliency" />
+  <Card title="Attention" kicker="Analysis panel" meta="Per-layer, per-head attention weights" href="/docs/attention" />
+  <Card title="Embedding projector" kicker="Analysis panel" meta="2D/3D projections with clustering and nearest neighbours" href="/docs/embeddings" />
+  <Card title="Fairness slices" kicker="Analysis panel" meta="Compare performance across accent, speaker, or metadata" href="/docs/fairness" />
+</CardGrid>
+
+## Where to go next
+
+<CardGrid min={232}>
+  <Card title="Quickstart" kicker="Get started" meta="Boot the stack and run your first analysis" href="/docs/quickstart" />
+  <Card title="Core concepts" kicker="Get started" meta="Datapoints, the shared timeline, and panel sync" href="/docs/concepts" />
+</CardGrid>

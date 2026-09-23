@@ -1,131 +1,131 @@
+## Get AudioLens running
+
 <Lead>
-Boot the full AudioLens stack locally with Docker, load a sample dataset, and produce your first
-saliency map against a Whisper checkpoint. About ten minutes, most of it model download.
+  AudioLens runs as a set of Docker Compose services: a CPU-only FastAPI
+  control plane, one or more Celery workers that actually load models, Redis
+  for sessions and job metadata, and a React frontend. This page gets the
+  full stack running locally and walks through one analysis job.
 </Lead>
 
-<Badges items={["v1.0", "MIT", "FastAPI · React 18"]} />
+<Badges items={["Open source", "MIT", "FastAPI · React 18"]} />
 
-<Callout title="Model weights download on first run">
-  Only the worker container pulls weights, into `hf-cache`. The API image never imports the ML
-  runtime.
+<Callout title="Model weights download on first use" tone="note">
+  Env files are optional — sane defaults work without them. Model weights
+  are not bundled; they download lazily the first time a job needs them. If
+  you'd rather not wait mid-analysis, pre-warm them ahead of time (see
+  below).
 </Callout>
 
 ## Prerequisites
 
-<CardGrid>
-  <Card kicker="REQUIRED" title="Docker">
-    Docker Desktop on Windows or Mac, Docker Engine plus the Compose plugin on Linux.
-  </Card>
-  <Card kicker="WINDOWS" title="WSL 2 backend">
-    Enable it in Docker Desktop settings for faster bind-mount I/O and GPU passthrough.
-  </Card>
-  <Card kicker="NVIDIA" title="Driver 555+">
-    Verify with a base CUDA 12.6 image running `nvidia-smi` before booting the GPU profile.
-  </Card>
-  <Card kicker="APPLE" title="Native worker">
-    Docker Desktop does not expose MPS, so run the worker outside the container to use the GPU.
-  </Card>
+<CardGrid min={232}>
+  <Card title="Docker" kicker="Required" meta="Docker Desktop (Windows/Mac) or Docker Engine + Compose plugin 2.24+ (Linux)" />
+  <Card title="WSL 2" kicker="Windows only" meta="Docker Desktop needs the WSL 2 backend" />
+  <Card title="NVIDIA driver 555+" kicker="Optional, for CUDA" meta="Only needed for the NVIDIA GPU variant" />
+  <Card title="ROCm-supported GPU" kicker="Optional, for AMD" meta="Linux only, for the AMD GPU variant" />
 </CardGrid>
 
 ## Install and boot
 
-Pick the target that matches your accelerator. Every path ends with the same three services on the
-same ports.
-
-<CodeTabs labels={["docker", "nvidia", "amd rocm", "macos mps"]} label="Install target">
+<CodeTabs labels={["docker", "nvidia", "amd rocm", "macos mps"]}>
 
 ```bash
-# 1. Clone
-git clone https://github.com/ECHO-Lit/ECHO-LIT.git
-cd ECHO-LIT
-
-# 2. Copy env files (defaults work out of the box)
+git clone https://github.com/ECHO-Lit/ECHO-LIT.git AudioLens
+cd AudioLens
 cp Backend/.env.example Backend/.env
 cp Frontend/.env.example Frontend/.env
-
-# 3. Boot the full stack
 docker compose up --build
 ```
 
 ```bash
-# Linux or WSL 2 with the NVIDIA Container Toolkit.
-# Scale the all-queue local worker to 0 so only the GPU
-# worker consumes GPU queues.
+# NVIDIA
 docker compose --profile gpu up --build \
   --scale worker-model-local=0 \
   redis api scheduler frontend worker-cpu worker-gpu
 ```
 
 ```bash
-# Linux with a supported ROCm host driver.
+# AMD ROCm
 docker compose --profile amd up --build \
   --scale worker-model-local=0 \
   redis api scheduler frontend worker-cpu worker-amd
 ```
 
 ```bash
-# Docker Desktop cannot pass Metal into a Linux container.
-# Keep the API in Compose, run the worker natively.
+# Apple Silicon (MPS) — Docker Desktop can't expose MPS, so the worker
+# runs natively, outside Docker
 cd Backend
-python3 -m venv .venv
-source .venv/bin/activate
+python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-
 STORAGE_LOCAL_ROOT=shared-storage ML_DEVICE=mps \
-  celery -A app.core.celery_app:celery_app worker \
-  --queues=gpu-fast,gpu-large --concurrency=1
+  celery -A app.core.celery_app:celery_app worker --queues=gpu-fast,gpu-large --concurrency=1
 ```
 
 </CodeTabs>
 
+<Callout title="Windows tip" tone="note">
+  Keep the repo at a short path (e.g. `C:\dev\AudioLens`) — dataset paths are
+  case-sensitive.
+</Callout>
+
+To pre-warm model weights instead of downloading them lazily on first job:
+
+```bash
+docker compose run --rm worker-model-local python3 -c \
+  "from transformers import pipeline; pipeline('automatic-speech-recognition', model='openai/whisper-base')"
+```
+
+To tear the stack down: `docker compose down` (add `-v` to also wipe volumes).
+
 ## Service endpoints
 
-| Service | Address | Status |
-| --- | --- | --- |
-| Frontend | `http://localhost:8080` | <Status>ready</Status> |
-| API | `http://localhost:8000/health` | <Status>ready</Status> |
-| Redis broker | `localhost:6379` | <Status>ready</Status> |
-| Worker heartbeat | reported by `/health` | <Status>polling</Status> |
+| Service | URL |
+|---|---|
+| Frontend | `http://localhost:8080` |
+| API health check | `http://localhost:8000/health` |
+| Redis | `localhost:6379` |
 
-## First analysis
+## Run your first analysis
 
 <Steps>
-  <Step title="Upload audio or pick a sample dataset">
-    Drop your own files into the uploader, or start from the bundled Common Voice and RAVDESS
-    subsets. Dataset paths inside the container are case-sensitive, for example
-    `data/common_voice_valid_dev`.
+  <Step title="Open the frontend">
+    Visit `http://localhost:8080`. A new anonymous session cookie is set
+    automatically — there's no sign-up or login.
   </Step>
-  <Step title="Select a model">
-    Choose a Whisper or Wav2Vec2 checkpoint. The first selection triggers a weight download into the
-    worker cache; pre-warm it if you want an instant first run.
+  <Step title="Pick a dataset or upload a clip">
+    Start from a bundled dataset (see [/docs/datasets](/docs/datasets)) or
+    upload your own `.wav`, `.mp3`, `.m4a`, or `.flac` file, up to 100 MB and
+    10 minutes long.
   </Step>
-  <Step title="Read the prediction">
-    The transcript panel aligns prediction against ground truth word by word and reports WER, CER
-    and Levenshtein distance per datapoint.
+  <Step title="Choose a model">
+    Pick `whisper-base` (speech-to-text) or `wav2vec2` (emotion
+    classification) from the model dropdown.
   </Step>
-  <Step title="Generate a saliency map">
-    Run Grad-CAM or integrated gradients over the waveform. Segments are ranked by their
-    contribution to each predicted token and highlighted on the shared timeline.
+  <Step title="Launch an analysis">
+    Start with a `prediction` job to see the model's raw output, then try
+    `saliency` to see which parts of the waveform drove it. The UI polls the
+    job until it completes.
   </Step>
-  <Step title="Perturb and compare">
-    Add noise, shift pitch, clip or mask a region, then watch the metrics move. Robustness measured,
-    not assumed.
+  <Step title="Read the result">
+    The result appears on the shared timeline. Open another panel — Attention
+    or Embeddings, for example — and it stays in sync with the same
+    datapoint.
   </Step>
 </Steps>
 
+<Callout title="Image placeholder: first analysis result">
+  Add `/assets/docs/quickstart-first-result.png` — a screenshot of the
+  frontend showing a completed prediction job with the saliency panel open on
+  the shared timeline. Replace this callout with
+  `![First analysis result in AudioLens](/assets/docs/quickstart-first-result.png)`
+  once the real image is uploaded.
+</Callout>
+
 ## Where to go next
 
-<CardGrid min={240}>
-  <Card title="Core concepts" meta="5 min read" href="/docs/concepts">
-    Datapoints, the shared timeline, and how panels stay in sync.
-  </Card>
-  <Card title="Custom checkpoints" meta="Guide" href="/docs/custom">
-    Point the loader at a local or Hugging Face model of your own.
-  </Card>
-  <Card title="Architecture" meta="Reference" href="/docs/arch">
-    API control plane, Celery workers, Redis broker, shared storage.
-  </Card>
-  <Card title="REST API" meta="Reference" href="/docs/rest">
-    Every panel is backed by an endpoint you can call directly.
-  </Card>
+<CardGrid min={232}>
+  <Card title="Core concepts" kicker="Get started" meta="Datapoints, the shared timeline, and panel sync" href="/docs/concepts" />
+  <Card title="Loading datasets" kicker="Get started" meta="Bundled datasets, licenses, and custom uploads" href="/docs/datasets" />
+  <Card title="Saliency mapping" kicker="Analysis panel" meta="Attribution maps over the waveform" href="/docs/saliency" />
+  <Card title="Device selection" kicker="Models" meta="Run on CPU, CUDA, ROCm, or Apple MPS" href="/docs/devices" />
 </CardGrid>
