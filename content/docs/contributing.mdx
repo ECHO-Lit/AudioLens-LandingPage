@@ -1,0 +1,61 @@
+<Lead>
+  AudioLens is open source and welcomes contributions. The workflow is
+  intentionally ordinary: fork, branch, test, open a PR.
+</Lead>
+
+## Workflow
+
+<Steps>
+  <Step title="Fork the repo">
+    Fork `https://github.com/ECHO-Lit/ECHO-LIT`.
+  </Step>
+  <Step title="Branch from main">
+    Use a prefix that describes the change: `feature/`, `bugfix/`, `docs/`,
+    or `refactor/`.
+  </Step>
+  <Step title="Make your change and test it">
+    Frontend tests run on **Vitest**, backend tests run on **pytest**.
+  </Step>
+  <Step title="Open a PR against main">
+    Reference the issue you're closing with `Fixes #n` in the description.
+  </Step>
+</Steps>
+
+## Style
+
+- **Frontend:** ESLint.
+- **Backend:** PEP 8, checked with `flake8` and formatted with `black`.
+
+## Code of Conduct
+
+Contributions are governed by a **Contributor Covenant 2.0** Code of
+Conduct, with a four-step enforcement ladder (correction, warning,
+temporary ban, permanent ban).
+
+<Callout title="The Code of Conduct's contact method is still a placeholder" tone="warn">
+  As of this writing, the enforcement contact line in the repo's Code of
+  Conduct still reads `[INSERT CONTACT METHOD]` rather than a real address.
+  This is a known gap, not an oversight to paper over here — a maintainer
+  needs to fill in a real reporting contact before the enforcement process
+  described above is actually actionable. If you need to report a conduct
+  issue in the meantime, use the security contact on the
+  [Security](/docs/security) page as a fallback.
+</Callout>
+
+## Credits
+
+AudioLens is built by:
+
+- Januda Lelwala
+- Janith Mahanama
+- Hesandi Mallawarachchi
+
+AudioLens is built on and extends **ECHO**, an MIT-licensed audio
+interpretability tool created by:
+
+- Anas Hussaindeen
+- Chandupa Ambepitiya
+- Dewmike Amarasinghe
+
+Both ECHO and AudioLens are inspired by Google PAIR's **LIT** (Learning
+Interpretability Tool).

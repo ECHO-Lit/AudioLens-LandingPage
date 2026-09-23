@@ -1,0 +1,80 @@
+<Lead>
+  AudioLens itself is MIT licensed. The models and datasets it works with
+  are a mix of permissive and non-commercial licenses — read this page
+  before you deploy AudioLens anywhere other than your own machine, and
+  especially before deciding what a public instance can show.
+</Lead>
+
+<Badges items={["MIT", "Open source"]} />
+
+## AudioLens's own license
+
+AudioLens's code is **MIT licensed**.
+
+- Copyright (c) 2025 Anas Hussaindeen, Chandupa Ambepitiya, Dewmike
+  Amarasinghe (original ECHO)
+- Copyright (c) 2026 Januda Lelwala, Janith Mahanama, Hesandi Mallawarachchi
+  (AudioLens, an extension of ECHO)
+
+**AudioLens does not redistribute any dataset audio.** Datasets are fetched
+or imported by scripts you run yourself — see [Loading
+datasets](/docs/datasets) and [CLI & scripts](/docs/cli). The MIT license on
+AudioLens's code says nothing about the license terms of the audio,
+transcripts, or model weights it helps you work with — those are listed
+below.
+
+## Third-party model and dataset licenses
+
+| Asset | License | Key terms | Source |
+|---|---|---|---|
+| `openai/whisper-base` | Apache 2.0 | Permissive, commercial use OK | huggingface.co/openai/whisper-base |
+| `openai/whisper-large-v3` | Apache 2.0 (same Whisper license family) | Permissive, commercial use OK | huggingface.co/openai/whisper-large-v3 |
+| `r-f/wav2vec-english-speech-emotion-recognition` | Apache 2.0 | Permissive; fine-tuned from `jonatasgrosman/wav2vec2-large-xlsr-53-english` | huggingface.co/r-f/wav2vec-english-speech-emotion-recognition |
+| `facebook/wav2vec2-base-960h` (legacy fallback) | Apache 2.0 | Permissive | huggingface.co/facebook/wav2vec2-base-960h |
+| `jonatasgrosman/wav2vec2-large-xlsr-53-english` (legacy fallback) | Apache 2.0 | Permissive | huggingface.co/jonatasgrosman/wav2vec2-large-xlsr-53-english |
+| Common Voice (cv-valid-dev subset) | **Unverified — check source** | Mozilla's own historical policy is CC0 (public domain) for audio + transcripts, but as of Oct 2025 Mozilla moved distribution behind "Mozilla Data Collective" and current live terms could not be confirmed by automated fetch | commonvoice.mozilla.org (fetch attempts blocked by JS-rendered page) |
+| RAVDESS | **CC BY-NC-SA 4.0** — non-commercial only | Commercial license must be purchased separately (contact ravdess@gmail.com); attribution + share-alike required; cite the PLoS ONE paper | zenodo.org/records/1188976 |
+| L2-ARCTIC | **CC BY-NC 4.0** — non-commercial only | Attribution required; must cite Zhao et al. (2018) Interspeech; registration (name/email/affiliation) required before download; commercial use needs approval from Dr. Ricardo Gutierrez-Osuna | psi.engr.tamu.edu/l2-arctic-corpus |
+| Speech Accent Archive (SAA) | **CC BY-NC-SA 4.0** | Non-commercial, attribution, share-alike | accent.gmu.edu |
+| LibriSpeech / LibriSpeech-1000 | **CC BY 4.0** | Attribution required, commercial use allowed | openslr.org/12, huggingface.co/datasets/openslr/librispeech_asr |
+| SAVEE | **Unverified — check source** | The project's own import script states plainly that "SAVEE is licensed and cannot be redistributed" — not freely licensed; requires obtaining a copy directly from the University of Surrey. Automated fetch of the official SAVEE site failed (TLS certificate mismatch) | kahlan.eps.surrey.ac.uk/savee (fetch blocked) |
+
+<Callout title="RAVDESS, L2-ARCTIC, and SAA are non-commercial licenses" tone="note">
+  These three bundled datasets are licensed for **non-commercial use only**.
+  AudioLens is itself a non-commercial, open-source project — self-hosted for
+  free, and its planned [hosted demo](/docs/demo) is a non-commercial public
+  demo with no paid tier — so this is compatible with how AudioLens uses
+  them. Attribution and citation requirements still apply regardless. If you
+  fork AudioLens for a **commercial** deployment, you'd need to either drop
+  these three datasets or get a separate license: RAVDESS's commercial terms
+  require a purchased license (ravdess@gmail.com), and L2-ARCTIC's require
+  approval from its maintainer (Dr. Ricardo Gutierrez-Osuna).
+</Callout>
+
+<Callout title="Common Voice and SAVEE license terms are unverified" tone="note">
+  Both are marked **"unverified — check source"** in the table above rather
+  than given a guessed license, because automated attempts to fetch their
+  current official terms failed. Follow the source links and confirm the
+  terms yourself before relying on either dataset for anything beyond local
+  experimentation — don't take this page's absence of a confirmed license
+  as evidence that one doesn't apply.
+</Callout>
+
+## What this means in practice
+
+- **Whisper and Wav2Vec2 model weights are unambiguously permissive**
+  (Apache 2.0) — nothing about running inference with them restricts
+  commercial use.
+- **AudioLens's own code (MIT) does not redistribute any dataset audio** —
+  the license terms above attach to the datasets themselves, fetched or
+  imported by scripts you run, not to anything AudioLens ships in its repo.
+- **Non-commercial datasets are opt-in, not required** — you can run
+  AudioLens entirely against LibriSpeech, your own uploaded audio, or a
+  custom dataset and never touch RAVDESS, L2-ARCTIC, or SAA.
+- **Confirm current terms yourself** for Common Voice and SAVEE before
+  quoting a license anywhere official — this table reflects what could be
+  verified as of the date at the top of this content pack, not a live feed.
+
+See [Loading datasets](/docs/datasets) for how each dataset gets into
+AudioLens, and [Hosted demo](/docs/demo) for how the demo uses these
+datasets as a non-commercial deployment.

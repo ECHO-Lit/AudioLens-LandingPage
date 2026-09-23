@@ -1,0 +1,54 @@
+<Lead>
+  AudioLens is self-hosted software with no accounts and no telemetry.
+  Here's how to report a vulnerability, and what's a deployer's own
+  responsibility versus what AudioLens does for you out of the box.
+</Lead>
+
+## Supported versions
+
+| Version | Supported |
+|---|---|
+| 1.0.x | <Status>yes</Status> |
+
+## Reporting a vulnerability
+
+Report security issues to **janithmahanama47@gmail.com**.
+
+- You should get a response within **48 hours**.
+- The target for a patch, once a report is confirmed, is **14 days**.
+
+## What AudioLens gives you by default
+
+The session model is **anonymous** — a single HttpOnly `sid` cookie per
+session, no user accounts, no passwords, no stored credentials to
+compromise. There's nothing resembling an account database to breach.
+
+## Best practices for deployers
+
+<Callout title="These are recommendations, not shipped features" tone="warn">
+  The items below are things **you** should configure when you self-host
+  AudioLens for anyone other than yourself on localhost — they are not
+  built into AudioLens automatically. In particular: **no rate limiting
+  exists in AudioLens's code today.** If you expose an instance publicly,
+  putting a reverse proxy or gateway with rate limiting in front of it is
+  your responsibility, not something the API does for you.
+</Callout>
+
+- **Serve over HTTPS** in any deployment reachable outside your own machine.
+- **Put API auth or network-level access control in front of it** if the
+  instance shouldn't be open to anyone who can reach the URL — AudioLens's
+  own session model has no login step.
+- **Add rate limiting at the proxy/gateway layer** — again, not present in
+  AudioLens itself.
+- **Get informed consent before processing anyone else's audio** through an
+  instance you run — treat uploaded audio as data you're responsible for
+  under whatever privacy obligations apply to you.
+
+## Production configuration
+
+Two environment flags matter most for a production posture:
+
+- **`COOKIE_SECURE=true`** once you're behind HTTPS
+- **`ALLOWED_ORIGINS`** set to your real origin(s) — `*` is rejected
+
+Full reference: [Environment variables](/docs/env).
