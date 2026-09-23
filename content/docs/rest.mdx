@@ -1,3 +1,117 @@
-<Callout title="Being written">
-  This page has no content yet.
+<Lead>
+  Every panel in the UI is a thin client over this API — there's no
+  functionality in AudioLens that isn't reachable by calling these endpoints
+  directly.
+</Lead>
+
+<Badges items={["Anonymous session", "24h TTL", "No accounts"]} />
+
+## Session model
+
+Auth is a single anonymous, HttpOnly **`sid`** cookie, issued on first
+contact and valid for **24 hours**. Every resource you create — uploaded
+audio, jobs, custom models, custom datasets — is scoped to the session that
+created it. There are no accounts, no roles, and no multi-tenancy: ownership
+is just "which session created this."
+
+| Method | Path | Purpose |
+|---|---|---|
+| `GET` | `/session` | Get (or implicitly create) the current session |
+
+## Audio
+
+| Method | Path | Purpose |
+|---|---|---|
+| `POST` | `/upload` | Upload an audio file, returns an opaque `audio_id` — no inference runs yet |
+| `GET` | `/upload/list` | List audio uploaded in this session |
+| `GET` | `/upload/metadata/{id}` | Get metadata for one upload |
+| `DELETE` | `/upload/{id}` | Delete an upload |
+| `POST` | `/audio/materialize` | Materialize an audio reference (e.g. from a bundled dataset) into a usable audio resource |
+| `GET` | `/audio/{id}` | Fetch audio bytes by id |
+| `POST` | `/audio/{id}/variant` | Create a derived variant of an audio file |
+
+## Jobs
+
+Jobs are how every analysis operation actually runs — `POST /jobs` hands
+back a `job_id` immediately (202), and a worker picks it up asynchronously.
+
+| Method | Path | Purpose |
+|---|---|---|
+| `POST` | `/jobs` | Submit a job — returns `202` with a `job_id` |
+| `GET` | `/jobs/{id}` | Poll job status |
+| `GET` | `/jobs/{id}/result` | Fetch the job's result once complete |
+| `DELETE` | `/jobs/{id}` | Cancel or remove a job |
+| `DELETE` | `/jobs/jacobian-lenses/{lens_id}` | Delete a fitted Jacobian Lens |
+
+The specific `type` you submit to `POST /jobs` determines which analysis
+runs. See each panel's own page for parameters: [Saliency](/docs/saliency),
+[Attention](/docs/attention), [Embeddings](/docs/embeddings),
+[Perturbation](/docs/perturb), [Diagnostics](/docs/diagnostics),
+[Fairness](/docs/fairness), [Layer probes](/docs/probes), [Jacobian
+Lens](/docs/jlens), and [Dataset EDA](/docs/eda).
+
+## Custom models
+
+| Method | Path | Purpose |
+|---|---|---|
+| `POST` | `/models` | Register a custom Hugging Face model — see [Custom checkpoints](/docs/custom) |
+| `GET` | `/models` | List registered custom models |
+| `GET` | `/models/{id}` | Get one custom model's details |
+| `DELETE` | `/models/{id}` | Remove a custom model |
+| `GET` | `/models/jacobian-lenses/{model_id}` | List Jacobian Lenses fitted for a model |
+
+## Analyses
+
+Two operations — fairness and linguistic-vs-acoustic — live under a
+versioned prefix rather than `/jobs` directly:
+
+| Method | Path | Purpose |
+|---|---|---|
+| `POST` | `/api/v1/analyses/linguistic-vs-acoustic` | Run the linguistic-vs-acoustic sweep — see [Diagnostics](/docs/diagnostics) |
+| `GET` | `/api/v1/analyses/fairness/groupable` | List metadata columns you can group by |
+| `POST` | `/api/v1/analyses/fairness` | Run a fairness slice — see [Fairness slices](/docs/fairness) |
+| `POST` | `/api/v1/analyses/fairness/cancel-all` | Cancel all running fairness jobs |
+
+## Dataset management (custom datasets)
+
+| Method | Path | Purpose |
+|---|---|---|
+| `POST` | `/upload/dataset/create` | Create a new custom dataset |
+| `POST` | `/upload/dataset/{name}/files` | Add files to a custom dataset |
+| `POST` | `/upload/dataset/{name}/manifest` | Upload or replace a dataset manifest |
+| `GET` | `/upload/dataset/label-patterns` | List built-in filename label patterns (e.g. the `savee` pattern) |
+| `GET` | `/upload/dataset/{name}/labels` | Get labels for a dataset |
+| `POST` | `/upload/dataset/{name}/labels` | Set labels for a dataset |
+| `DELETE` | `/upload/dataset/{name}/labels` | Clear labels for a dataset |
+| `POST` | `/upload/dataset/{name}/labels/derive` | Derive labels from a filename pattern |
+| `GET` | `/upload/dataset/list` | List custom datasets in this session |
+| `GET` | `/upload/dataset/{name}/metadata` | Get dataset metadata |
+| `GET` | `/upload/dataset/{name}/files[/…]` | Browse or download files in a dataset |
+| `DELETE` | `/upload/dataset/{name}` | Delete a custom dataset |
+| `POST` | `/upload/dataset/cleanup` | Clean up orphaned dataset artifacts |
+
+See [Loading datasets](/docs/datasets) for the higher-level workflow.
+
+## Built-in datasets
+
+| Method | Path | Purpose |
+|---|---|---|
+| `GET` | `/{dataset}/metadata` | Metadata for a bundled dataset |
+| `GET` | `/{dataset}/eda` | Bundled dataset's EDA report — see [Dataset EDA](/docs/eda) |
+| `GET`, `HEAD`, `OPTIONS` | `/{dataset}/file/{path}` | Fetch a file from a bundled dataset (supports HTTP `Range`) |
+
+## Ops
+
+| Method | Path | Purpose |
+|---|---|---|
+| `GET` | `/health` | Checks Redis (all logical DBs), storage backend, worker count, queue depth |
+| `GET` | `/metrics` | Metrics endpoint |
+
+<Callout title="Legacy synchronous routes are not current API" tone="warn">
+  Older synchronous inference routes still exist in the codebase for
+  backward compatibility, but they answer `410 Gone` unless
+  `ENABLE_LEGACY_SYNC_INFERENCE=true` is set — and that flag is refused
+  outside `production`. They are not part of the current API surface and
+  are intentionally left out of this reference. Use `POST /jobs` for
+  everything.
 </Callout>

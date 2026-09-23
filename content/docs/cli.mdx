@@ -1,3 +1,58 @@
-<Callout title="Being written">
-  This page has no content yet.
+<Lead>
+  AudioLens doesn't ship a dedicated CLI binary — instead, a handful of
+  shell and Python scripts under `scripts/` cover the operations you'd
+  otherwise script by hand: starting/stopping the stack, checking queue
+  health, and importing datasets.
+</Lead>
+
+## Stack management scripts
+
+<CardGrid min={232}>
+  <Card title="start.sh" kicker="scripts/start.sh" meta="docker compose up -d --build, then waits for API + frontend to be healthy" />
+  <Card title="stop.sh" kicker="scripts/stop.sh" meta="Stops the stack" />
+  <Card title="queue-status.sh" kicker="scripts/queue-status.sh [-w]" meta="Prints queue depth and job status; -w watches continuously" />
+</CardGrid>
+
+## Dataset scripts
+
+| Script | Purpose |
+|---|---|
+| `download_librispeech_1000.py` | Downloads the ~1000-row LibriSpeech-1000 sample from the HF datasets-server |
+| `import_librispeech_custom.py` | Imports a LibriSpeech-style dataset you already have on disk |
+| `prepare_savee_subset.py` | Prepares a SAVEE subset (up to 100 clips) — see the callout below |
+| `run_layer_probe_analysis.py` | Runs layer-probe analysis from the command line, outside the UI |
+
+<Callout title="SAVEE is not redistributable" tone="warn">
+  `prepare_savee_subset.py` requires that you **already own a copy** of the
+  SAVEE dataset — the script's own comments state plainly that "SAVEE is
+  licensed and cannot be redistributed." AudioLens does not bundle or fetch
+  SAVEE audio for you. See [Licenses](/docs/licenses) for what's currently
+  confirmed about SAVEE's terms, and [Loading datasets](/docs/datasets) for
+  the general import workflow.
 </Callout>
+
+## Useful `docker compose` commands
+
+Scale worker replicas:
+
+```bash
+docker compose up -d --scale worker-cpu=2 --scale worker-model-local=2
+```
+
+Tear the stack down, optionally wiping volumes (Redis data, local storage):
+
+```bash
+docker compose down
+docker compose down -v
+```
+
+Pre-warm model weights in a one-off container instead of waiting for the
+first real job to trigger the download:
+
+```bash
+docker compose run --rm worker-model-local python3 -c \
+  "from transformers import pipeline; pipeline('automatic-speech-recognition', model='openai/whisper-base')"
+```
+
+See [Self-hosting](/docs/selfhost) for the full boot sequence these commands
+fit into.

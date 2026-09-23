@@ -1,3 +1,103 @@
-<Callout title="Being written">
-  This page has no content yet.
+<Lead>
+  AudioLens splits into a CPU-only control plane and a model-execution
+  plane. The frontend only ever talks to the control plane — it never
+  reaches a worker directly.
+</Lead>
+
+<Badges items={["FastAPI", "Celery", "Redis", "No SQL database"]} />
+
+## Control plane vs. execution plane
+
+**FastAPI** is a CPU-only control plane: it accepts uploads, enqueues jobs,
+and serves results, but never runs a model itself. **Celery workers** are
+the model execution plane — they're the only processes that ever load a
+checkpoint or touch a GPU.
+
+## Request flow
+
+<Steps>
+  <Step title="Upload audio">
+    `POST /upload` stores the audio and returns an opaque `audio_id`. No
+    inference runs yet.
+  </Step>
+  <Step title="Submit a job">
+    `POST /jobs` returns `202` immediately with a `job_id`, and publishes a
+    task envelope onto the appropriate queue.
+  </Step>
+  <Step title="A worker picks it up">
+    A Celery worker downloads the audio to a temp dir, lazily loads the
+    model if it isn't already resident, runs the operation, and stores the
+    result.
+  </Step>
+  <Step title="The UI polls">
+    The frontend polls `GET /jobs/{id}` for status, then reads
+    `GET /jobs/{id}/result` once it's done.
+  </Step>
+  <Step title="Everything expires">
+    Job, upload, and result metadata expires after 24 hours.
+  </Step>
+</Steps>
+
+## Queues
+
+Jobs are routed to one of three queues depending on which operation they
+run:
+
+| Queue | Operations |
+|---|---|
+| `gpu-fast` | prediction, embedding, hidden states, layer probing (Whisper Base, Wav2Vec2) |
+| `gpu-large` | attention, saliency, faithfulness, Jacobian Lens, anything on Whisper Large |
+| `cpu` | perturbation, audio features, linguistic-vs-acoustic sweep, fairness, cleanup |
+
+## Storage
+
+**No SQL database.** Redis holds four logical DBs:
+
+| DB | Holds |
+|---|---|
+| DB0 | Sessions / cache |
+| DB1 | Job metadata |
+| DB2 | Celery broker |
+| DB3 | Celery results |
+
+Uploaded audio and job results live in object storage — the local
+filesystem by default, or an S3-compatible bucket in production — under a
+24-hour lifecycle policy (`echo-transient-artifacts-24h`). Celery Beat runs
+an hourly cleanup pass plus a stale-job reaper every 300 seconds.
+
+## Compose services
+
+Compose project name: `echo`.
+
+| Service | Image / role | Ports | Notes |
+|---|---|---|---|
+| `redis` | `redis:7-alpine` | 6379 | AOF persistence, `noeviction`, healthcheck |
+| `api` | Backend Dockerfile, CPU-only | 8000 | FastAPI, `uvicorn --reload`, healthcheck on `/health` |
+| `worker-cpu` | Backend Dockerfile, cpu variant | – | `--queues=cpu --concurrency=2` |
+| `worker-model-local` | Backend Dockerfile, cpu variant | – | `--queues=gpu-fast,gpu-large --concurrency=1` |
+| `scheduler` | api image | – | `celery beat` — must run exactly once |
+| `worker-gpu` | Backend Dockerfile, gpu variant, profile `gpu` | – | NVIDIA GPU reservation |
+| `worker-amd` | Backend Dockerfile, rocm variant, profile `amd` | – | `/dev/kfd`, `/dev/dri`, ROCm |
+| `frontend` | Frontend Dockerfile, dev target | 8080 | depends on healthy `api` |
+
+**Base images:** `python:3.11-slim` (CPU/ROCm),
+`nvidia/cuda:12.6.0-runtime-ubuntu22.04` (GPU). Frontend: `node:20-alpine`
+for development; the production target is `nginx:alpine` on port 80 with
+SPA fallback. Containers run as non-root user `appuser` (uid 1000).
+
+<Callout title="Image placeholder: architecture diagram">
+  Add `/assets/docs/architecture-diagram.png` — a diagram (not a screenshot)
+  showing the frontend talking only to the FastAPI control plane, the
+  control plane publishing job envelopes to the three queues, Celery
+  workers consuming those queues, and the shared Redis/object-storage layer
+  underneath. Replace this callout with
+  `![Architecture diagram](/assets/docs/architecture-diagram.png)` once the
+  real image is uploaded.
 </Callout>
+
+## Related pages
+
+[Self-hosting](/docs/selfhost) for booting this stack,
+[Environment variables](/docs/env) for every tunable above, and
+[Device selection](/docs/devices) for how `ML_DEVICE` picks CUDA, ROCm, MPS,
+or CPU.
