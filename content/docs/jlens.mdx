@@ -1,0 +1,58 @@
+<Lead>
+  Jacobian Lens is a decoder-only, position-resolved lens over Whisper's
+  decoder layers — it learns a mapping you can then apply to new clips to
+  see how a decoder layer's representation relates to the tokens it
+  eventually produces, position by position.
+</Lead>
+
+<Badges items={["decoder-only", "position-resolved", "Whisper", "/j-lens Lab"]} />
+
+## Two operations
+
+- **`jacobian_lens_fit`** — fits a new lens from a dataset of samples.
+  Requires **2 to 1000 samples**, each clip **≤ 60 seconds**, and a dataset
+  or manifest that includes a **transcript** (the lens is fit against
+  known text, not raw audio alone).
+- **`jacobian_lens_apply`** — applies an already-fitted lens to a clip.
+  Takes `top_k` (how many top results to return) and an optional
+  `transcript`.
+
+## The J-Lens Lab
+
+Fitting a lens has its own dedicated page in the app: **`/j-lens`**, called
+the **J-Lens Lab**. It's a 3-step flow:
+
+<Steps>
+  <Step title="Pick model and dataset">
+    Choose the Whisper checkpoint and the dataset (with transcripts) you'll
+    fit against.
+  </Step>
+  <Step title="Select samples">
+    Choose which samples from that dataset — within the 2–1000 range — go
+    into the fit.
+  </Step>
+  <Step title="Fit">
+    Submit the fit job and wait for it to complete; the result is a saved
+    lens you can apply to new clips afterward.
+  </Step>
+</Steps>
+
+<Callout title="Image placeholder: J-Lens Lab flow">
+  Add `/assets/docs/jlens-lab.png` — the /j-lens page showing the 3-step
+  fit flow (model+dataset, sample selection, fit) and the saved lenses
+  list. Replace this callout with
+  `![J-Lens Lab flow](/assets/docs/jlens-lab.png)` once the real image is
+  uploaded.
+</Callout>
+
+## Saved lenses
+
+Once fit, a lens is saved and shows up in a **saved lenses list**, ready to
+apply to new clips via `jacobian_lens_apply` without re-fitting.
+
+To remove one:
+
+```bash
+curl -X DELETE http://localhost:8000/jobs/jacobian-lenses/{lens_id} \
+  --cookie "sid=<your session cookie>"
+```

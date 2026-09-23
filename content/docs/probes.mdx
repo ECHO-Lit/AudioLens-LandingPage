@@ -1,0 +1,50 @@
+<Lead>
+  Layer probing answers a specific question: for some property you care
+  about — speaker gender, accent, emotion, anything you can label — which
+  layer of the model actually represents it best?
+</Lead>
+
+<Badges items={["layer_probe", "logreg", "linear_svm", "cross-validation"]} />
+
+## How it works
+
+The `layer_probe` operation trains a small linear classifier — a
+**probe** — on the hidden states from each layer independently, then
+scores how well each layer's probe predicts the property. The result is a
+per-layer view of where in the model that property becomes linearly
+separable.
+
+## Probe types
+
+- **`logreg`** — logistic regression.
+- **`linear_svm`** — linear support vector machine.
+
+## Limits
+
+<CardGrid min={200}>
+  <Card title="Properties" kicker="up to 8" meta="Per probing run" />
+  <Card title="CV folds" kicker="2–10" meta="Cross-validation folds per probe" />
+</CardGrid>
+
+Each property is probed independently across all layers, using
+cross-validation so the reported score isn't just an artifact of the
+particular train/test split.
+
+## Reading the results
+
+- **Layer profile chart** — probe accuracy (or the relevant score) plotted
+  against layer index, for each property. The layer where the curve peaks
+  is where that property is most linearly represented.
+- **Selectivity heatmap** — properties against layers, so you can compare
+  multiple properties' profiles at once and see whether they peak at the
+  same layer or different ones.
+- **Confusion matrix** — per-property, per-layer, showing which classes
+  the probe actually confuses at that layer.
+
+<Callout title="Image placeholder: layer probe profile">
+  Add `/assets/docs/probes-profile.png` — the layer probe panel showing the
+  layer profile chart and selectivity heatmap for a multi-property run.
+  Replace this callout with
+  `![Layer probe profile](/assets/docs/probes-profile.png)` once the real
+  image is uploaded.
+</Callout>

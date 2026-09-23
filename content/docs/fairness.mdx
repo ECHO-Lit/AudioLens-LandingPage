@@ -1,3 +1,77 @@
-<Callout title="Being written">
-  This page has no content yet.
+<Lead>
+  Fairness slicing groups a dataset by a metadata column — speaker, accent,
+  language, or anything else you've attached — and compares model
+  performance across those groups, with bootstrap statistics behind every
+  number.
+</Lead>
+
+<Badges items={["slice metrics", "bootstrap", "shipped feature"]} />
+
+<Callout title="Shipped, not beta">
+  Fairness slicing is a complete, shipped feature — it is not labeled
+  "beta" anywhere in the product, and this page shouldn't imply otherwise.
+</Callout>
+
+## Grouping
+
+You can slice by up to **2 grouping keys** at once (e.g. accent and
+speaker together, not just one at a time).
+
+## Metrics
+
+<CardGrid min={160}>
+  <Card title="wer" />
+  <Card title="cer" />
+  <Card title="accuracy" />
+  <Card title="macro_f1" />
+  <Card title="ece" />
+  <Card title="silhouette" />
+  <Card title="leakage" />
+  <Card title="grounding_lift" />
+  <Card title="attribution_entropy" />
+</CardGrid>
+
+## Minimums
+
+A slice needs enough data before its statistics mean anything, so two
+minimums are enforced:
+
+| Setting | Default | Meaning |
+|---|---|---|
+| `FR10_MIN_GROUP_SIZE` | 8 | minimum items in a group before it's included |
+| `FR10_MIN_SPEAKERS_PER_GROUP` | 2 | minimum distinct speakers per group |
+
+Groups below either minimum are excluded from the results rather than
+reported with unreliable statistics.
+
+## Dataset size
+
+Fairness analysis is capped at **≤ 20,000 items total** per run.
+
+## How long it takes
+
+<Callout title="This is not a quick job" tone="warn">
+  A full fairness run — many groups, several metrics, bootstrap resampling
+  across all of them — can take **10 to 30+ minutes**. It runs on the `cpu`
+  queue as a background job; submit it and come back rather than waiting
+  on the request.
+</Callout>
+
+## Reading the results
+
+- **Disparity radar** — one axis per metric, one line per group, so you can
+  see at a glance which groups the model treats differently and on which
+  metric.
+- **Group error bars** — per-group metric values with bootstrap confidence
+  intervals, so you can tell a real gap from noise.
+- **Phone confusion matrix** — where phone-level annotations exist (for
+  example, L2-ARCTIC), a confusion matrix of which phones get mistaken for
+  which, broken out by group.
+
+<Callout title="Image placeholder: fairness disparity radar">
+  Add `/assets/docs/fairness-radar.png` — the fairness panel's disparity
+  radar chart with several groups plotted across the metric axes. Replace
+  this callout with
+  `![Fairness disparity radar](/assets/docs/fairness-radar.png)` once the
+  real image is uploaded.
 </Callout>

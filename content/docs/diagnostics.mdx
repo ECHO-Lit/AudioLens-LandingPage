@@ -1,0 +1,57 @@
+<Lead>
+  Diagnostics runs a linguistic-vs-acoustic sweep: a batch of controlled
+  variants across several files, designed to separate how much of a
+  prediction comes from what was said versus how it sounded.
+</Lead>
+
+<Badges items={["linguistic-vs-acoustic", "sweep", "batch analysis"]} />
+
+## What the sweep does
+
+Instead of perturbing one clip at a time, diagnostics sweeps a whole batch
+of files across one or more acoustic dimensions and looks at how
+predictions shift as a group — separating variation that tracks the
+*content* of the speech from variation that tracks its *acoustics*.
+
+## Limits
+
+<CardGrid min={200}>
+  <Card title="Files" kicker="up to 25" meta="Per sweep request" />
+  <Card title="Sweep dimensions" kicker="1–5" meta="pitch, speed, noise, time_mask, freq_mask" />
+  <Card title="Total variants" kicker="≤ 60" meta="Across the whole sweep" />
+  <Card title="Minimum clip length" kicker="≥ 0.5s" meta="Shorter clips are rejected" />
+</CardGrid>
+
+The five available sweep dimensions are **pitch, speed, noise, time_mask,
+and freq_mask** — you choose between 1 and 5 of them per sweep, and the
+combination of files × dimensions is capped so a single request can't
+generate an unbounded number of variants.
+
+## Running it
+
+Diagnostics is submitted as a job like any other analysis:
+
+```bash
+curl -X POST http://localhost:8000/api/v1/analyses/linguistic-vs-acoustic \
+  -H "Content-Type: application/json" \
+  --cookie "sid=<your session cookie>" \
+  -d '{
+    "audio_ids": ["<id-1>", "<id-2>"],
+    "sweeps": ["pitch", "noise"]
+  }'
+```
+
+The endpoint responds **`202 Accepted`** immediately, before any variant
+has actually been generated, with an estimate of the work ahead:
+
+```json
+{
+  "job_id": "…",
+  "estimated_variants": 24,
+  "estimated_seconds": 40
+}
+```
+
+Poll the job the same way as any other analysis — see
+[REST API](/docs/rest) for the shared `GET /jobs/{id}` / `GET
+/jobs/{id}/result` pattern every panel in AudioLens uses.
