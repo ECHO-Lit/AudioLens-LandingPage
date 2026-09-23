@@ -1,3 +1,46 @@
-<Callout title="Being written">
-  This page has no content yet.
+<Lead>
+  The perturbation lab applies a controlled transform to a clip, re-runs the
+  model on the result, and lets you compare the prediction before and after
+  — a direct robustness check rather than an inferred one.
+</Lead>
+
+<Badges items={["noise", "time_masking", "pitch_shift", "time_stretch"]} />
+
+## Four perturbation types
+
+There are **four** perturbation types available today — noted explicitly
+here because marketing copy elsewhere may round this up; this page is the
+accurate count:
+
+- **`noise`**
+- **`time_masking`**
+- **`pitch_shift`**
+- **`time_stretch`**
+
+## Request limits
+
+Up to **10 perturbations per request**. Each generates a new audio variant,
+which is then run back through the model so you can compare its prediction
+against the original.
+
+## Comparing results
+
+For each perturbation, the panel shows:
+
+- **Original vs. generated waveform**, side by side, so you can see exactly
+  what the transform did to the signal.
+- **Re-run prediction** for the perturbed clip, next to the original
+  prediction, so you can see whether — and how much — the transform moved
+  the model's output.
+
+This is the most direct robustness signal in AudioLens: instead of asking
+"what does the model attend to," perturbation asks "does the model's answer
+survive a small, controlled change to the input."
+
+<Callout title="Image placeholder: perturbation before/after">
+  Add `/assets/docs/perturb-compare.png` — the perturbation panel showing
+  the original and perturbed waveforms stacked, with both predictions
+  displayed for comparison. Replace this callout with
+  `![Perturbation before and after](/assets/docs/perturb-compare.png)` once
+  the real image is uploaded.
 </Callout>

@@ -1,3 +1,46 @@
-<Callout title="Being written">
-  This page has no content yet.
+<Lead>
+  The embedding projector reduces a model's learned representations down to
+  a space you can actually look at — two or three dimensions you can rotate,
+  zoom, and select points in.
+</Lead>
+
+<Badges items={["PCA", "t-SNE", "UMAP", "HDBSCAN", "nearest neighbour"]} />
+
+## Projection methods
+
+The `embedding` operation supports three reduction methods:
+
+- **PCA** — linear, fast, preserves global variance structure.
+- **t-SNE** — nonlinear, tends to separate local clusters well.
+- **UMAP** — nonlinear, generally faster than t-SNE at similar cluster
+  quality.
+
+Each can be projected into **2D or 3D**, your choice.
+
+## Clustering
+
+Clustering is optional and off by default. When enabled, it runs
+**HDBSCAN** over the projected points, with `min_cluster_size` tunable from
+**2 to 50**. Smaller values surface more, smaller clusters; larger values
+collapse the projection into a handful of broad groups.
+
+## Nearest-neighbour retrieval
+
+Click a point and the panel can retrieve its nearest neighbours in embedding
+space — useful for answering "what else does the model think is similar to
+this clip?" without leaving the projector.
+
+## Selection and export
+
+- **Box or lasso select** a region of points to inspect them together, or
+  to hand a subset off to another panel.
+- **PNG export** is available on the projection via Plotly's built-in
+  export, like the other Plotly-backed charts in the app.
+
+<Callout title="Image placeholder: 3D embedding scatter">
+  Add `/assets/docs/embeddings-3d.png` — the projector in 3D mode with a
+  handful of HDBSCAN clusters colored distinctly and a lasso selection in
+  progress. Replace this callout with
+  `![3D embedding scatter](/assets/docs/embeddings-3d.png)` once the real
+  image is uploaded.
 </Callout>

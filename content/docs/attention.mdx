@@ -1,3 +1,49 @@
-<Callout title="Being written">
-  This page has no content yet.
+<Lead>
+  The attention panel shows exactly what a chosen attention head looked at
+  while producing its output — one layer, one head, at a time.
+</Lead>
+
+<Badges items={["Whisper", "custom models", "per-layer", "per-head"]} />
+
+## Which models this works on
+
+Attention extraction is available for **Whisper** and **custom** models
+only. It is **not available for wav2vec2** — wav2vec2 is a CTC classifier
+without the encoder-decoder attention structure this panel visualizes.
+
+## Selecting a layer and head
+
+<CardGrid min={220}>
+  <Card title="layer_idx" kicker="0–31, default 6" meta="Which transformer layer to inspect" />
+  <Card title="head_idx" kicker="0–31, default 0" meta="Which attention head within that layer" />
+</CardGrid>
+
+Different heads specialize differently — some track local acoustic
+continuity, others track longer-range structure. There's no single "right"
+head to look at; the point of exposing both indices is to let you sweep
+across layers and heads and compare.
+
+## Two views
+
+- **Matrix view** — the raw attention weight matrix for the selected
+  layer/head, source positions against target positions.
+- **Timeline view** — attention weight plotted against the shared audio
+  timeline, so you can line it up against the waveform, the saliency map, or
+  the transcript for the same clip.
+
+<Callout title="Image placeholder: attention matrix view">
+  Add `/assets/docs/attention-matrix.png` — the attention panel with the
+  layer/head selectors and the matrix view rendered for a sample clip.
+  Replace this callout with
+  `![Attention matrix view](/assets/docs/attention-matrix.png)` once the
+  real image is uploaded.
 </Callout>
+
+## GPU note: `ATTENTION_FORCE_CPU`
+
+Attention extraction on GPU can trigger a Triton segfault in the underlying
+kernel. `ATTENTION_FORCE_CPU` (default `true`) works around this by forcing
+attention computation onto CPU regardless of the worker's normal device
+selection. Leave it on unless you've specifically verified GPU attention
+extraction is stable on your hardware — turning it off trades a rare crash
+for slightly faster runs.
