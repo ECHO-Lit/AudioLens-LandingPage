@@ -34,6 +34,10 @@ export const TOC_BY_SECTION: Record<string, TocItem[]> = {
   ],
   "attention": [
     {
+      "id": "what-is-attention",
+      "label": "What is attention?"
+    },
+    {
       "id": "which-models-this-works-on",
       "label": "Which models this works on"
     },
@@ -42,8 +46,12 @@ export const TOC_BY_SECTION: Record<string, TocItem[]> = {
       "label": "Selecting a layer and head"
     },
     {
-      "id": "two-views",
-      "label": "Two views"
+      "id": "what-the-weights-are",
+      "label": "What the weights are"
+    },
+    {
+      "id": "views",
+      "label": "Views"
     },
     {
       "id": "gpu-note-attention_force_cpu",
@@ -188,12 +196,24 @@ export const TOC_BY_SECTION: Record<string, TocItem[]> = {
   ],
   "diagnostics": [
     {
+      "id": "what-is-linguistic-vs-acoustic-diagnostics",
+      "label": "What is linguistic-vs-acoustic diagnostics?"
+    },
+    {
       "id": "what-the-sweep-does",
       "label": "What the sweep does"
     },
     {
       "id": "limits",
       "label": "Limits"
+    },
+    {
+      "id": "what-each-dimension-varies",
+      "label": "What each dimension varies"
+    },
+    {
+      "id": "reading-the-profile",
+      "label": "Reading the profile"
     },
     {
       "id": "running-it",
@@ -204,6 +224,14 @@ export const TOC_BY_SECTION: Record<string, TocItem[]> = {
     {
       "id": "what-the-eda-panel-shows",
       "label": "What the EDA panel shows"
+    },
+    {
+      "id": "what-is-exploratory-data-analysis-eda",
+      "label": "What is exploratory data analysis (EDA)?"
+    },
+    {
+      "id": "acoustic-features",
+      "label": "Acoustic features"
     },
     {
       "id": "clustering-and-nearest-neighbours",
@@ -219,6 +247,14 @@ export const TOC_BY_SECTION: Record<string, TocItem[]> = {
     }
   ],
   "embeddings": [
+    {
+      "id": "what-is-an-embedding",
+      "label": "What is an embedding?"
+    },
+    {
+      "id": "what-gets-projected",
+      "label": "What gets projected"
+    },
     {
       "id": "projection-methods",
       "label": "Projection methods"
@@ -276,12 +312,20 @@ export const TOC_BY_SECTION: Record<string, TocItem[]> = {
   ],
   "fairness": [
     {
+      "id": "what-is-fairness-slicing",
+      "label": "What is fairness slicing?"
+    },
+    {
       "id": "grouping",
       "label": "Grouping"
     },
     {
       "id": "metrics",
       "label": "Metrics"
+    },
+    {
+      "id": "is-a-gap-real-the-statistics",
+      "label": "Is a gap real? The statistics"
     },
     {
       "id": "minimums",
@@ -298,6 +342,18 @@ export const TOC_BY_SECTION: Record<string, TocItem[]> = {
     {
       "id": "reading-the-results",
       "label": "Reading the results"
+    },
+    {
+      "id": "dataset-specific-analyses",
+      "label": "Dataset-specific analyses"
+    },
+    {
+      "id": "common-misreadings",
+      "label": "Common misreadings"
+    },
+    {
+      "id": "glossary",
+      "label": "Glossary"
     }
   ],
   "intro": [
@@ -328,6 +384,10 @@ export const TOC_BY_SECTION: Record<string, TocItem[]> = {
   ],
   "jlens": [
     {
+      "id": "what-is-jacobian-lens",
+      "label": "What is Jacobian Lens?"
+    },
+    {
       "id": "two-operations",
       "label": "Two operations"
     },
@@ -356,6 +416,10 @@ export const TOC_BY_SECTION: Record<string, TocItem[]> = {
   ],
   "perturb": [
     {
+      "id": "what-is-perturbation",
+      "label": "What is perturbation?"
+    },
+    {
       "id": "four-perturbation-types",
       "label": "Four perturbation types"
     },
@@ -370,6 +434,10 @@ export const TOC_BY_SECTION: Record<string, TocItem[]> = {
   ],
   "probes": [
     {
+      "id": "what-is-layer-probing",
+      "label": "What is layer probing?"
+    },
+    {
       "id": "how-it-works",
       "label": "How it works"
     },
@@ -380,6 +448,10 @@ export const TOC_BY_SECTION: Record<string, TocItem[]> = {
     {
       "id": "limits",
       "label": "Limits"
+    },
+    {
+      "id": "the-three-numbers-per-layer",
+      "label": "The three numbers per layer"
     },
     {
       "id": "reading-the-results",
@@ -447,6 +519,10 @@ export const TOC_BY_SECTION: Record<string, TocItem[]> = {
     }
   ],
   "saliency": [
+    {
+      "id": "what-is-saliency",
+      "label": "What is saliency?"
+    },
     {
       "id": "methods",
       "label": "Methods"
@@ -566,6 +642,10 @@ export const TOC_BY_SECTION: Record<string, TocItem[]> = {
     {
       "id": "available-checkpoint",
       "label": "Available checkpoint"
+    },
+    {
+      "id": "output",
+      "label": "Output"
     },
     {
       "id": "legacy-fallback-models",
@@ -902,7 +982,23 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Whisper custom models per-layer per-head"
     },
     {
-      "key": "heading:attention:which-models-this-works-on:2",
+      "key": "heading:attention:what-is-attention:2",
+      "sectionId": "attention",
+      "headingId": "what-is-attention",
+      "kind": "heading",
+      "title": "What is attention?",
+      "body": ""
+    },
+    {
+      "key": "content:attention:what-is-attention:3",
+      "sectionId": "attention",
+      "headingId": "what-is-attention",
+      "kind": "content",
+      "title": "What is attention?",
+      "body": "Attention is the mechanism transformer models use to decide which parts of their input matter when producing each output. Every layer has several heads, and each head assigns a weight between every pair of positions. Plotting those weights for one layer and one head shows which words the model tied to which stretch of audio."
+    },
+    {
+      "key": "heading:attention:which-models-this-works-on:4",
       "sectionId": "attention",
       "headingId": "which-models-this-works-on",
       "kind": "heading",
@@ -910,7 +1006,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:attention:which-models-this-works-on:3",
+      "key": "content:attention:which-models-this-works-on:5",
       "sectionId": "attention",
       "headingId": "which-models-this-works-on",
       "kind": "content",
@@ -918,28 +1014,12 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Attention extraction is available for Whisper and custom models only. It is not available for wav2vec2 — wav2vec2 is a CTC classifier without the encoder-decoder attention structure this panel visualizes."
     },
     {
-      "key": "heading:attention:selecting-a-layer-and-head:4",
+      "key": "heading:attention:selecting-a-layer-and-head:6",
       "sectionId": "attention",
       "headingId": "selecting-a-layer-and-head",
       "kind": "heading",
       "title": "Selecting a layer and head",
       "body": ""
-    },
-    {
-      "key": "content:attention:selecting-a-layer-and-head:5",
-      "sectionId": "attention",
-      "headingId": "selecting-a-layer-and-head",
-      "kind": "content",
-      "title": "Selecting a layer and head",
-      "body": "layer_idx 0–31, default 6 Which transformer layer to inspect"
-    },
-    {
-      "key": "content:attention:selecting-a-layer-and-head:6",
-      "sectionId": "attention",
-      "headingId": "selecting-a-layer-and-head",
-      "kind": "content",
-      "title": "Selecting a layer and head",
-      "body": "head_idx 0–31, default 0 Which attention head within that layer"
     },
     {
       "key": "content:attention:selecting-a-layer-and-head:7",
@@ -947,42 +1027,82 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "selecting-a-layer-and-head",
       "kind": "content",
       "title": "Selecting a layer and head",
+      "body": "layer_idx 0–31, default 6 Which transformer layer to inspect"
+    },
+    {
+      "key": "content:attention:selecting-a-layer-and-head:8",
+      "sectionId": "attention",
+      "headingId": "selecting-a-layer-and-head",
+      "kind": "content",
+      "title": "Selecting a layer and head",
+      "body": "head_idx 0–31, default 0 Which attention head within that layer"
+    },
+    {
+      "key": "content:attention:selecting-a-layer-and-head:9",
+      "sectionId": "attention",
+      "headingId": "selecting-a-layer-and-head",
+      "kind": "content",
+      "title": "Selecting a layer and head",
       "body": "Different heads specialize differently — some track local acoustic continuity, others track longer-range structure. There's no single \"right\" head to look at; the point of exposing both indices is to let you sweep across layers and heads and compare."
     },
     {
-      "key": "heading:attention:two-views:8",
+      "key": "heading:attention:what-the-weights-are:10",
       "sectionId": "attention",
-      "headingId": "two-views",
+      "headingId": "what-the-weights-are",
       "kind": "heading",
-      "title": "Two views",
+      "title": "What the weights are",
       "body": ""
     },
     {
-      "key": "content:attention:two-views:9",
+      "key": "content:attention:what-the-weights-are:11",
       "sectionId": "attention",
-      "headingId": "two-views",
+      "headingId": "what-the-weights-are",
       "kind": "content",
-      "title": "Two views",
+      "title": "What the weights are",
+      "body": "For the chosen layer and head, the panel transcribes the clip, gets word-level start and end times, and pairs each transcript word with the words it attends to. Each pair carries its attention weight plus the time interval of both words, which is how weights get placed on the audio timeline."
+    },
+    {
+      "key": "heading:attention:views:12",
+      "sectionId": "attention",
+      "headingId": "views",
+      "kind": "heading",
+      "title": "Views",
+      "body": ""
+    },
+    {
+      "key": "content:attention:views:13",
+      "sectionId": "attention",
+      "headingId": "views",
+      "kind": "content",
+      "title": "Views",
       "body": "Matrix view — the raw attention weight matrix for the selected layer/head, source positions against target positions."
     },
     {
-      "key": "content:attention:two-views:10",
+      "key": "content:attention:views:14",
       "sectionId": "attention",
-      "headingId": "two-views",
+      "headingId": "views",
       "kind": "content",
-      "title": "Two views",
+      "title": "Views",
+      "body": "Word-time pairs — the list of word pairs with their weights and time intervals."
+    },
+    {
+      "key": "content:attention:views:15",
+      "sectionId": "attention",
+      "headingId": "views",
+      "kind": "content",
+      "title": "Views",
       "body": "Timeline view — attention weight plotted against the shared audio timeline, so you can line it up against the waveform, the saliency map, or the transcript for the same clip."
     },
     {
-      "key": "content:attention:two-views:11",
+      "key": "content:attention:views:16",
       "sectionId": "attention",
-      "headingId": "two-views",
+      "headingId": "views",
       "kind": "content",
-      "title": "Two views",
+      "title": "Views",
       "body": "Image placeholder: attention matrix view Add /assets/docs/attention-matrix.png — the attention panel with the layer/head selectors and the matrix view rendered for a sample clip. Replace this callout with ![Attention matrix view](/assets/docs/attention-matrix.png) once the real image is uploaded."
     },
     {
-      "key": "heading:attention:gpu-note-attention_force_cpu:12",
+      "key": "heading:attention:gpu-note-attention_force_cpu:17",
       "sectionId": "attention",
       "headingId": "gpu-note-attention_force_cpu",
       "kind": "heading",
@@ -990,7 +1110,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:attention:gpu-note-attention_force_cpu:13",
+      "key": "content:attention:gpu-note-attention_force_cpu:18",
       "sectionId": "attention",
       "headingId": "gpu-note-attention_force_cpu",
       "kind": "content",
@@ -1935,7 +2055,63 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Non-commercial licenses in this list RAVDESS, L2-ARCTIC, and the Speech Accent Archive (SAA) are all licensed for non-commercial use only. Common Voice and SAVEE's current terms are flagged as unverified. See /docs/licenses for the full breakdown per dataset before using any of these outside research or personal use."
     },
     {
-      "key": "heading:datasets:custom-datasets:9",
+      "key": "content:datasets:bundled-datasets:9",
+      "sectionId": "datasets",
+      "headingId": "bundled-datasets",
+      "kind": "content",
+      "title": "Bundled datasets",
+      "body": "Metadata columns"
+    },
+    {
+      "key": "content:datasets:bundled-datasets:10",
+      "sectionId": "datasets",
+      "headingId": "bundled-datasets",
+      "kind": "content",
+      "title": "Bundled datasets",
+      "body": "Bundled datasets ship a metadata CSV. Its columns are what the Fairness grouping and the Layer probes properties draw on:"
+    },
+    {
+      "key": "content:datasets:bundled-datasets:11",
+      "sectionId": "datasets",
+      "headingId": "bundled-datasets",
+      "kind": "content",
+      "title": "Bundled datasets",
+      "body": "Common Voice text, age, gender, accent, duration, up_votes, down_votes, client_id, locale"
+    },
+    {
+      "key": "content:datasets:bundled-datasets:12",
+      "sectionId": "datasets",
+      "headingId": "bundled-datasets",
+      "kind": "content",
+      "title": "Bundled datasets",
+      "body": "RAVDESS emotion, intensity, statement, repetition, actor, gender, modality, vocal_channel"
+    },
+    {
+      "key": "content:datasets:bundled-datasets:13",
+      "sectionId": "datasets",
+      "headingId": "bundled-datasets",
+      "kind": "content",
+      "title": "Bundled datasets",
+      "body": "L2-ARCTIC speaker_code, native_language, gender, text, utt_id, error_type, canonical and perceived IPA, and human-verified error counts. Phone-level errors (time window, expected and produced phone) are in a separate annotations file."
+    },
+    {
+      "key": "content:datasets:bundled-datasets:14",
+      "sectionId": "datasets",
+      "headingId": "bundled-datasets",
+      "kind": "content",
+      "title": "Bundled datasets",
+      "body": "SAA native_language, age, age_english_onset, sex, birthplace, country, speakerid, reading_passage"
+    },
+    {
+      "key": "content:datasets:bundled-datasets:15",
+      "sectionId": "datasets",
+      "headingId": "bundled-datasets",
+      "kind": "content",
+      "title": "Bundled datasets",
+      "body": "Values of unknown (common in Common Voice age, gender, and accent) are treated as missing by layer probes, not as a category."
+    },
+    {
+      "key": "heading:datasets:custom-datasets:16",
       "sectionId": "datasets",
       "headingId": "custom-datasets",
       "kind": "heading",
@@ -1943,7 +2119,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:datasets:custom-datasets:10",
+      "key": "content:datasets:custom-datasets:17",
       "sectionId": "datasets",
       "headingId": "custom-datasets",
       "kind": "content",
@@ -1951,7 +2127,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Any user can upload their own dataset — there's no gatekeeping beyond the same file limits that apply to a single upload. A custom dataset needs labels from one of two sources:"
     },
     {
-      "key": "content:datasets:custom-datasets:11",
+      "key": "content:datasets:custom-datasets:18",
       "sectionId": "datasets",
       "headingId": "custom-datasets",
       "kind": "content",
@@ -1959,7 +2135,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "an uploaded label CSV mapping filenames to labels, or"
     },
     {
-      "key": "content:datasets:custom-datasets:12",
+      "key": "content:datasets:custom-datasets:19",
       "sectionId": "datasets",
       "headingId": "custom-datasets",
       "kind": "content",
@@ -1967,7 +2143,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "filename-pattern-derived labels, where labels are inferred from a naming convention (for example, the pattern used for SAVEE-style filenames)."
     },
     {
-      "key": "content:datasets:custom-datasets:13",
+      "key": "content:datasets:custom-datasets:20",
       "sectionId": "datasets",
       "headingId": "custom-datasets",
       "kind": "content",
@@ -1975,7 +2151,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Custom dataset management goes through its own set of endpoints — creating the dataset, uploading files, submitting or deriving a manifest and labels, and listing or deleting the dataset later. See /docs/rest for the full list."
     },
     {
-      "key": "heading:datasets:formats-size-and-duration-limits:14",
+      "key": "heading:datasets:formats-size-and-duration-limits:21",
       "sectionId": "datasets",
       "headingId": "formats-size-and-duration-limits",
       "kind": "heading",
@@ -1983,7 +2159,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:datasets:formats-size-and-duration-limits:15",
+      "key": "content:datasets:formats-size-and-duration-limits:22",
       "sectionId": "datasets",
       "headingId": "formats-size-and-duration-limits",
       "kind": "content",
@@ -1991,7 +2167,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "These limits apply to any audio you upload, whether it's a one-off clip or part of a custom dataset:"
     },
     {
-      "key": "content:datasets:formats-size-and-duration-limits:16",
+      "key": "content:datasets:formats-size-and-duration-limits:23",
       "sectionId": "datasets",
       "headingId": "formats-size-and-duration-limits",
       "kind": "content",
@@ -1999,7 +2175,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Accepted formats .wav .mp3 .m4a .flac"
     },
     {
-      "key": "content:datasets:formats-size-and-duration-limits:17",
+      "key": "content:datasets:formats-size-and-duration-limits:24",
       "sectionId": "datasets",
       "headingId": "formats-size-and-duration-limits",
       "kind": "content",
@@ -2007,7 +2183,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Max upload size 100 MB (MAX_UPLOAD_BYTES = 104857600)"
     },
     {
-      "key": "content:datasets:formats-size-and-duration-limits:18",
+      "key": "content:datasets:formats-size-and-duration-limits:25",
       "sectionId": "datasets",
       "headingId": "formats-size-and-duration-limits",
       "kind": "content",
@@ -2015,7 +2191,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Max clip duration 10 minutes (MAX_AUDIO_DURATION_SECONDS = 600)"
     },
     {
-      "key": "content:datasets:formats-size-and-duration-limits:19",
+      "key": "content:datasets:formats-size-and-duration-limits:26",
       "sectionId": "datasets",
       "headingId": "formats-size-and-duration-limits",
       "kind": "content",
@@ -2023,7 +2199,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Some analyses apply tighter limits on top of these — saliency, for example, caps the analysis window well below 10 minutes. See each panel's own page for its specific limits."
     },
     {
-      "key": "heading:datasets:where-to-go-next:20",
+      "key": "heading:datasets:where-to-go-next:27",
       "sectionId": "datasets",
       "headingId": "where-to-go-next",
       "kind": "heading",
@@ -2031,7 +2207,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:datasets:where-to-go-next:21",
+      "key": "content:datasets:where-to-go-next:28",
       "sectionId": "datasets",
       "headingId": "where-to-go-next",
       "kind": "content",
@@ -2039,7 +2215,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Dataset EDA Analysis panel Explore class balance and distributions before you analyze"
     },
     {
-      "key": "content:datasets:where-to-go-next:22",
+      "key": "content:datasets:where-to-go-next:29",
       "sectionId": "datasets",
       "headingId": "where-to-go-next",
       "kind": "content",
@@ -2047,7 +2223,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Licenses Reference Full license terms for AudioLens's models and datasets"
     },
     {
-      "key": "content:datasets:where-to-go-next:23",
+      "key": "content:datasets:where-to-go-next:30",
       "sectionId": "datasets",
       "headingId": "where-to-go-next",
       "kind": "content",
@@ -2289,7 +2465,23 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "linguistic-vs-acoustic sweep batch analysis"
     },
     {
-      "key": "heading:diagnostics:what-the-sweep-does:2",
+      "key": "heading:diagnostics:what-is-linguistic-vs-acoustic-diagnostics:2",
+      "sectionId": "diagnostics",
+      "headingId": "what-is-linguistic-vs-acoustic-diagnostics",
+      "kind": "heading",
+      "title": "What is linguistic-vs-acoustic diagnostics?",
+      "body": ""
+    },
+    {
+      "key": "content:diagnostics:what-is-linguistic-vs-acoustic-diagnostics:3",
+      "sectionId": "diagnostics",
+      "headingId": "what-is-linguistic-vs-acoustic-diagnostics",
+      "kind": "content",
+      "title": "What is linguistic-vs-acoustic diagnostics?",
+      "body": "A model's output can change because of what was said (linguistic content) or how it sounded (acoustics such as pitch, speed, or noise). Diagnostics sweeps controlled acoustic changes across a batch of files and compares the resulting damage against a control that removes words. That shows which of the two the model depends on."
+    },
+    {
+      "key": "heading:diagnostics:what-the-sweep-does:4",
       "sectionId": "diagnostics",
       "headingId": "what-the-sweep-does",
       "kind": "heading",
@@ -2297,7 +2489,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:diagnostics:what-the-sweep-does:3",
+      "key": "content:diagnostics:what-the-sweep-does:5",
       "sectionId": "diagnostics",
       "headingId": "what-the-sweep-does",
       "kind": "content",
@@ -2305,36 +2497,20 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Instead of perturbing one clip at a time, diagnostics sweeps a whole batch of files across one or more acoustic dimensions and looks at how predictions shift as a group — separating variation that tracks the content of the speech from variation that tracks its acoustics."
     },
     {
-      "key": "heading:diagnostics:limits:4",
+      "key": "content:diagnostics:what-the-sweep-does:6",
+      "sectionId": "diagnostics",
+      "headingId": "what-the-sweep-does",
+      "kind": "content",
+      "title": "What the sweep does",
+      "body": "Read the diagram left to right: variants are rendered from one waveform (the reference transcript and loudness stay fixed), workers render and score them in the background, and the result lands as a verdict plus a degradation curve and sensitivity index per dimension."
+    },
+    {
+      "key": "heading:diagnostics:limits:7",
       "sectionId": "diagnostics",
       "headingId": "limits",
       "kind": "heading",
       "title": "Limits",
       "body": ""
-    },
-    {
-      "key": "content:diagnostics:limits:5",
-      "sectionId": "diagnostics",
-      "headingId": "limits",
-      "kind": "content",
-      "title": "Limits",
-      "body": "Files up to 25 Per sweep request"
-    },
-    {
-      "key": "content:diagnostics:limits:6",
-      "sectionId": "diagnostics",
-      "headingId": "limits",
-      "kind": "content",
-      "title": "Limits",
-      "body": "Sweep dimensions 1–5 pitch, speed, noise, time_mask, freq_mask"
-    },
-    {
-      "key": "content:diagnostics:limits:7",
-      "sectionId": "diagnostics",
-      "headingId": "limits",
-      "kind": "content",
-      "title": "Limits",
-      "body": "Total variants ≤ 60 Across the whole sweep"
     },
     {
       "key": "content:diagnostics:limits:8",
@@ -2342,7 +2518,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "limits",
       "kind": "content",
       "title": "Limits",
-      "body": "Minimum clip length ≥ 0.5s Shorter clips are rejected"
+      "body": "Files up to 25 Per sweep request"
     },
     {
       "key": "content:diagnostics:limits:9",
@@ -2350,10 +2526,194 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "limits",
       "kind": "content",
       "title": "Limits",
+      "body": "Sweep dimensions 1–5 pitch, speed, noise, time_mask, freq_mask"
+    },
+    {
+      "key": "content:diagnostics:limits:10",
+      "sectionId": "diagnostics",
+      "headingId": "limits",
+      "kind": "content",
+      "title": "Limits",
+      "body": "Total variants ≤ 60 Across the whole sweep"
+    },
+    {
+      "key": "content:diagnostics:limits:11",
+      "sectionId": "diagnostics",
+      "headingId": "limits",
+      "kind": "content",
+      "title": "Limits",
+      "body": "Minimum clip length ≥ 0.5s Shorter clips are rejected"
+    },
+    {
+      "key": "content:diagnostics:limits:12",
+      "sectionId": "diagnostics",
+      "headingId": "limits",
+      "kind": "content",
+      "title": "Limits",
       "body": "The five available sweep dimensions are pitch, speed, noise, time_mask, and freq_mask — you choose between 1 and 5 of them per sweep, and the combination of files × dimensions is capped so a single request can't generate an unbounded number of variants."
     },
     {
-      "key": "heading:diagnostics:running-it:10",
+      "key": "heading:diagnostics:what-each-dimension-varies:13",
+      "sectionId": "diagnostics",
+      "headingId": "what-each-dimension-varies",
+      "kind": "heading",
+      "title": "What each dimension varies",
+      "body": ""
+    },
+    {
+      "key": "content:diagnostics:what-each-dimension-varies:14",
+      "sectionId": "diagnostics",
+      "headingId": "what-each-dimension-varies",
+      "kind": "content",
+      "title": "What each dimension varies",
+      "body": "Every variant is rendered at 16 kHz mono and loudness-normalised to −23 LUFS, so gain never confounds the result."
+    },
+    {
+      "key": "content:diagnostics:what-each-dimension-varies:15",
+      "sectionId": "diagnostics",
+      "headingId": "what-each-dimension-varies",
+      "kind": "content",
+      "title": "What each dimension varies",
+      "body": "pitch semitones"
+    },
+    {
+      "key": "content:diagnostics:what-each-dimension-varies:16",
+      "sectionId": "diagnostics",
+      "headingId": "what-each-dimension-varies",
+      "kind": "content",
+      "title": "What each dimension varies",
+      "body": "speed rate (1.0 = unchanged)"
+    },
+    {
+      "key": "content:diagnostics:what-each-dimension-varies:17",
+      "sectionId": "diagnostics",
+      "headingId": "what-each-dimension-varies",
+      "kind": "content",
+      "title": "What each dimension varies",
+      "body": "noise dB SNR (repeated per step to average out randomness)"
+    },
+    {
+      "key": "content:diagnostics:what-each-dimension-varies:18",
+      "sectionId": "diagnostics",
+      "headingId": "what-each-dimension-varies",
+      "kind": "content",
+      "title": "What each dimension varies",
+      "body": "time_mask % of the clip masked"
+    },
+    {
+      "key": "content:diagnostics:what-each-dimension-varies:19",
+      "sectionId": "diagnostics",
+      "headingId": "what-each-dimension-varies",
+      "kind": "content",
+      "title": "What each dimension varies",
+      "body": "freq_mask Hz"
+    },
+    {
+      "key": "content:diagnostics:what-each-dimension-varies:20",
+      "sectionId": "diagnostics",
+      "headingId": "what-each-dimension-varies",
+      "kind": "content",
+      "title": "What each dimension varies",
+      "body": "Each file also gets an identity control (unchanged audio) and, by default, a lexical control that removes about 30% of the words, which gives a reference ceiling for how much damage changing the content does."
+    },
+    {
+      "key": "heading:diagnostics:reading-the-profile:21",
+      "sectionId": "diagnostics",
+      "headingId": "reading-the-profile",
+      "kind": "heading",
+      "title": "Reading the profile",
+      "body": ""
+    },
+    {
+      "key": "content:diagnostics:reading-the-profile:22",
+      "sectionId": "diagnostics",
+      "headingId": "reading-the-profile",
+      "kind": "content",
+      "title": "Reading the profile",
+      "body": "For each dimension, the sweep produces a degradation curve: how far the output moves from the unperturbed baseline at each setting. That's self-WER for transcription models and output divergence for classification models, clipped to 0–1, with a bootstrap 95% interval per point."
+    },
+    {
+      "key": "content:diagnostics:reading-the-profile:23",
+      "sectionId": "diagnostics",
+      "headingId": "reading-the-profile",
+      "kind": "content",
+      "title": "Reading the profile",
+      "body": "sensitivity_index — the area under that curve, on a 0–1 scale. This is what dimensions are ranked by."
+    },
+    {
+      "key": "content:diagnostics:reading-the-profile:24",
+      "sectionId": "diagnostics",
+      "headingId": "reading-the-profile",
+      "kind": "content",
+      "title": "Reading the profile",
+      "body": "breakdown_theta — the setting at which degradation first crosses 50%, or none if it never does within the swept range."
+    },
+    {
+      "key": "content:diagnostics:reading-the-profile:25",
+      "sectionId": "diagnostics",
+      "headingId": "reading-the-profile",
+      "kind": "content",
+      "title": "Reading the profile",
+      "body": "local_slope_at_identity — how fast the output starts to move near the unchanged setting (local fragility)."
+    },
+    {
+      "key": "content:diagnostics:reading-the-profile:26",
+      "sectionId": "diagnostics",
+      "headingId": "reading-the-profile",
+      "kind": "content",
+      "title": "Reading the profile",
+      "body": "asymmetry and monotonic — whether degradation differs by direction and whether it grows steadily."
+    },
+    {
+      "key": "content:diagnostics:reading-the-profile:27",
+      "sectionId": "diagnostics",
+      "headingId": "reading-the-profile",
+      "kind": "content",
+      "title": "Reading the profile",
+      "body": "The overall verdict is based on the top dimension's sensitivity_index (acoustic_influence) and its size relative to the lexical control:"
+    },
+    {
+      "key": "content:diagnostics:reading-the-profile:28",
+      "sectionId": "diagnostics",
+      "headingId": "reading-the-profile",
+      "kind": "content",
+      "title": "Reading the profile",
+      "body": "linguistically_driven acoustic influence below 0.10 — acoustics barely move the output"
+    },
+    {
+      "key": "content:diagnostics:reading-the-profile:29",
+      "sectionId": "diagnostics",
+      "headingId": "reading-the-profile",
+      "kind": "content",
+      "title": "Reading the profile",
+      "body": "acoustically_dominated the top dimension reaches ≥ 60% of the lexical-control damage"
+    },
+    {
+      "key": "content:diagnostics:reading-the-profile:30",
+      "sectionId": "diagnostics",
+      "headingId": "reading-the-profile",
+      "kind": "content",
+      "title": "Reading the profile",
+      "body": "mixed anything in between"
+    },
+    {
+      "key": "content:diagnostics:reading-the-profile:31",
+      "sectionId": "diagnostics",
+      "headingId": "reading-the-profile",
+      "kind": "content",
+      "title": "Reading the profile",
+      "body": "inconclusive no dimension could be isolated for the input"
+    },
+    {
+      "key": "content:diagnostics:reading-the-profile:32",
+      "sectionId": "diagnostics",
+      "headingId": "reading-the-profile",
+      "kind": "content",
+      "title": "Reading the profile",
+      "body": "linguistic_robustness is 1 − acoustic_influence."
+    },
+    {
+      "key": "heading:diagnostics:running-it:33",
       "sectionId": "diagnostics",
       "headingId": "running-it",
       "kind": "heading",
@@ -2361,7 +2721,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:diagnostics:running-it:11",
+      "key": "content:diagnostics:running-it:34",
       "sectionId": "diagnostics",
       "headingId": "running-it",
       "kind": "content",
@@ -2369,7 +2729,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Diagnostics is submitted as a job like any other analysis:"
     },
     {
-      "key": "content:diagnostics:running-it:12",
+      "key": "content:diagnostics:running-it:35",
       "sectionId": "diagnostics",
       "headingId": "running-it",
       "kind": "content",
@@ -2377,7 +2737,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "curl -X POST http://localhost:8000/api/v1/analyses/linguistic-vs-acoustic \\ -H \"Content-Type: application/json\" \\ --cookie \"sid=<your session cookie>\" \\ -d '{ \"audio_ids\": [\"<id-1>\", \"<id-2>\"], \"sweeps\": [\"pitch\", \"noise\"] }'"
     },
     {
-      "key": "content:diagnostics:running-it:13",
+      "key": "content:diagnostics:running-it:36",
       "sectionId": "diagnostics",
       "headingId": "running-it",
       "kind": "content",
@@ -2385,7 +2745,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "The endpoint responds 202 Accepted immediately, before any variant has actually been generated, with an estimate of the work ahead:"
     },
     {
-      "key": "content:diagnostics:running-it:14",
+      "key": "content:diagnostics:running-it:37",
       "sectionId": "diagnostics",
       "headingId": "running-it",
       "kind": "content",
@@ -2393,7 +2753,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "{ \"job_id\": \"…\", \"estimated_variants\": 24, \"estimated_seconds\": 40 }"
     },
     {
-      "key": "content:diagnostics:running-it:15",
+      "key": "content:diagnostics:running-it:38",
       "sectionId": "diagnostics",
       "headingId": "running-it",
       "kind": "content",
@@ -2419,63 +2779,79 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Before you run any model on a dataset, the Dataset EDA panel lets you look at the dataset itself: how balanced its classes are, how its acoustic features are distributed, and where its outliers sit."
     },
     {
-      "key": "content:eda:what-the-eda-panel-shows:2",
+      "key": "heading:eda:what-is-exploratory-data-analysis-eda:2",
       "sectionId": "eda",
-      "headingId": "what-the-eda-panel-shows",
-      "kind": "content",
-      "title": "What the EDA panel shows",
-      "body": "The panel covers, for a loaded dataset:"
+      "headingId": "what-is-exploratory-data-analysis-eda",
+      "kind": "heading",
+      "title": "What is exploratory data analysis (EDA)?",
+      "body": ""
     },
     {
-      "key": "content:eda:what-the-eda-panel-shows:3",
+      "key": "content:eda:what-is-exploratory-data-analysis-eda:3",
       "sectionId": "eda",
-      "headingId": "what-the-eda-panel-shows",
+      "headingId": "what-is-exploratory-data-analysis-eda",
       "kind": "content",
-      "title": "What the EDA panel shows",
-      "body": "Class balance — counts per label, so you can spot skew before it shows up as a fairness problem later."
+      "title": "What is exploratory data analysis (EDA)?",
+      "body": "EDA is looking at a dataset before modelling it: how balanced its labels are, how its acoustic features are distributed, and which clips are outliers. Skew or oddities in the data are easy to mistake for model bugs later, so this panel shows them first."
     },
     {
-      "key": "content:eda:what-the-eda-panel-shows:4",
+      "key": "heading:eda:acoustic-features:4",
       "sectionId": "eda",
-      "headingId": "what-the-eda-panel-shows",
-      "kind": "content",
-      "title": "What the EDA panel shows",
-      "body": "Histograms of acoustic feature distributions."
+      "headingId": "acoustic-features",
+      "kind": "heading",
+      "title": "Acoustic features",
+      "body": ""
     },
     {
-      "key": "content:eda:what-the-eda-panel-shows:5",
+      "key": "content:eda:acoustic-features:5",
       "sectionId": "eda",
-      "headingId": "what-the-eda-panel-shows",
+      "headingId": "acoustic-features",
       "kind": "content",
-      "title": "What the EDA panel shows",
-      "body": "Box plots to compare feature spread across classes."
+      "title": "Acoustic features",
+      "body": "Features are extracted per clip with librosa, and each is summarised as mean, standard deviation, min, and max:"
     },
     {
-      "key": "content:eda:what-the-eda-panel-shows:6",
+      "key": "content:eda:acoustic-features:6",
       "sectionId": "eda",
-      "headingId": "what-the-eda-panel-shows",
+      "headingId": "acoustic-features",
       "kind": "content",
-      "title": "What the EDA panel shows",
-      "body": "Correlation heatmap across acoustic features."
+      "title": "Acoustic features",
+      "body": "Spectral centroid, rolloff (85%), and bandwidth — where the energy sits in frequency and how wide it spreads."
     },
     {
-      "key": "content:eda:what-the-eda-panel-shows:7",
+      "key": "content:eda:acoustic-features:7",
       "sectionId": "eda",
-      "headingId": "what-the-eda-panel-shows",
+      "headingId": "acoustic-features",
       "kind": "content",
-      "title": "What the EDA panel shows",
-      "body": "Outlier detection, flagging clips that sit far outside the rest of the distribution."
+      "title": "Acoustic features",
+      "body": "MFCCs — the first 13 coefficients."
     },
     {
-      "key": "content:eda:what-the-eda-panel-shows:8",
+      "key": "content:eda:acoustic-features:8",
       "sectionId": "eda",
-      "headingId": "what-the-eda-panel-shows",
+      "headingId": "acoustic-features",
       "kind": "content",
-      "title": "What the EDA panel shows",
-      "body": "Image placeholder: EDA panel overview Add /assets/docs/eda-panel-overview.png — a screenshot of the Dataset EDA panel showing the class balance chart, a feature histogram, and the correlation heatmap side by side. Replace this callout with ![Dataset EDA panel overview](/assets/docs/eda-panel-overview.png) once the real image is uploaded."
+      "title": "Acoustic features",
+      "body": "Chroma and tonnetz — pitch-class and tonal content."
     },
     {
-      "key": "heading:eda:clustering-and-nearest-neighbours:9",
+      "key": "content:eda:acoustic-features:9",
+      "sectionId": "eda",
+      "headingId": "acoustic-features",
+      "kind": "content",
+      "title": "Acoustic features",
+      "body": "RMS energy and zero-crossing rate — loudness and noisiness."
+    },
+    {
+      "key": "content:eda:acoustic-features:10",
+      "sectionId": "eda",
+      "headingId": "acoustic-features",
+      "kind": "content",
+      "title": "Acoustic features",
+      "body": "Tempo."
+    },
+    {
+      "key": "heading:eda:clustering-and-nearest-neighbours:11",
       "sectionId": "eda",
       "headingId": "clustering-and-nearest-neighbours",
       "kind": "heading",
@@ -2483,15 +2859,15 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:eda:clustering-and-nearest-neighbours:10",
+      "key": "content:eda:clustering-and-nearest-neighbours:12",
       "sectionId": "eda",
       "headingId": "clustering-and-nearest-neighbours",
       "kind": "content",
       "title": "Clustering and nearest neighbours",
-      "body": "The EDA panel also runs HDBSCAN clustering over the dataset's embedding space and reports a silhouette score for the resulting clusters, so you can judge how well-separated the clusters actually are rather than taking cluster assignments at face value. From any point, you can pull up its nearest neighbours in that same embedding space — useful for spotting near-duplicates or checking whether a mislabeled clip has neighbours that suggest what its label should have been."
+      "body": "The EDA panel also runs HDBSCAN clustering over the dataset's embedding space (default min_cluster_size 5, adjustable 2–50; at least 3 clips are needed) and reports a silhouette score for the resulting clusters (−1 to 1, higher is better separated), so you can judge how well-separated the clusters actually are rather than taking cluster assignments at face value. Clips HDBSCAN can't place in any cluster are labelled noise (-1) and are left out of the silhouette calculation. From any point, you can pull up its nearest neighbours in that same embedding space — useful for spotting near-duplicates or checking whether a mislabeled clip has neighbours that suggest what its label should have been."
     },
     {
-      "key": "content:eda:clustering-and-nearest-neighbours:11",
+      "key": "content:eda:clustering-and-nearest-neighbours:13",
       "sectionId": "eda",
       "headingId": "clustering-and-nearest-neighbours",
       "kind": "content",
@@ -2499,28 +2875,12 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "This reuses the same embedding space as the Embedding projector panel — the two are looking at the same underlying representation from different angles."
     },
     {
-      "key": "heading:eda:exporting-results:12",
+      "key": "heading:eda:exporting-results:14",
       "sectionId": "eda",
       "headingId": "exporting-results",
       "kind": "heading",
       "title": "Exporting results",
       "body": ""
-    },
-    {
-      "key": "content:eda:exporting-results:13",
-      "sectionId": "eda",
-      "headingId": "exporting-results",
-      "kind": "content",
-      "title": "Exporting results",
-      "body": "Acoustic features CSV"
-    },
-    {
-      "key": "content:eda:exporting-results:14",
-      "sectionId": "eda",
-      "headingId": "exporting-results",
-      "kind": "content",
-      "title": "Exporting results",
-      "body": "Full EDA report JSON"
     },
     {
       "key": "content:eda:exporting-results:15",
@@ -2528,7 +2888,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "exporting-results",
       "kind": "content",
       "title": "Exporting results",
-      "body": "Clusters CSV"
+      "body": "Acoustic features CSV"
     },
     {
       "key": "content:eda:exporting-results:16",
@@ -2536,7 +2896,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "exporting-results",
       "kind": "content",
       "title": "Exporting results",
-      "body": "Most Plotly charts PNG download"
+      "body": "Full EDA report JSON"
     },
     {
       "key": "content:eda:exporting-results:17",
@@ -2544,7 +2904,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "exporting-results",
       "kind": "content",
       "title": "Exporting results",
-      "body": "There is no SRT, PDF, or transcript export anywhere in AudioLens — the exports above are the complete list."
+      "body": "Clusters CSV"
     },
     {
       "key": "content:eda:exporting-results:18",
@@ -2552,10 +2912,26 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "exporting-results",
       "kind": "content",
       "title": "Exporting results",
+      "body": "Most Plotly charts PNG download"
+    },
+    {
+      "key": "content:eda:exporting-results:19",
+      "sectionId": "eda",
+      "headingId": "exporting-results",
+      "kind": "content",
+      "title": "Exporting results",
+      "body": "There is no SRT, PDF, or transcript export anywhere in AudioLens — the exports above are the complete list."
+    },
+    {
+      "key": "content:eda:exporting-results:20",
+      "sectionId": "eda",
+      "headingId": "exporting-results",
+      "kind": "content",
+      "title": "Exporting results",
       "body": "Dataset-level EDA data is served by GET /{dataset}/eda for built-in datasets; see /docs/rest for the full endpoint reference."
     },
     {
-      "key": "heading:eda:where-to-go-next:19",
+      "key": "heading:eda:where-to-go-next:21",
       "sectionId": "eda",
       "headingId": "where-to-go-next",
       "kind": "heading",
@@ -2563,7 +2939,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:eda:where-to-go-next:20",
+      "key": "content:eda:where-to-go-next:22",
       "sectionId": "eda",
       "headingId": "where-to-go-next",
       "kind": "content",
@@ -2571,7 +2947,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Loading datasets Get started Bundled datasets and custom uploads"
     },
     {
-      "key": "content:eda:where-to-go-next:21",
+      "key": "content:eda:where-to-go-next:23",
       "sectionId": "eda",
       "headingId": "where-to-go-next",
       "kind": "content",
@@ -2579,7 +2955,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Embedding projector Analysis panel Projections, clustering, and nearest neighbours"
     },
     {
-      "key": "content:eda:where-to-go-next:22",
+      "key": "content:eda:where-to-go-next:24",
       "sectionId": "eda",
       "headingId": "where-to-go-next",
       "kind": "content",
@@ -2603,44 +2979,44 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "PCA t-SNE UMAP HDBSCAN nearest neighbour"
     },
     {
-      "key": "heading:embeddings:projection-methods:2",
+      "key": "heading:embeddings:what-is-an-embedding:2",
+      "sectionId": "embeddings",
+      "headingId": "what-is-an-embedding",
+      "kind": "heading",
+      "title": "What is an embedding?",
+      "body": ""
+    },
+    {
+      "key": "content:embeddings:what-is-an-embedding:3",
+      "sectionId": "embeddings",
+      "headingId": "what-is-an-embedding",
+      "kind": "content",
+      "title": "What is an embedding?",
+      "body": "An embedding is the vector of numbers a model uses internally to represent a clip. Clips the model treats as similar end up with similar vectors. Because these vectors are far too long to read, the projector squeezes them into 2D or 3D so you can see clusters, outliers, and clips that look mislabeled."
+    },
+    {
+      "key": "heading:embeddings:what-gets-projected:4",
+      "sectionId": "embeddings",
+      "headingId": "what-gets-projected",
+      "kind": "heading",
+      "title": "What gets projected",
+      "body": ""
+    },
+    {
+      "key": "content:embeddings:what-gets-projected:5",
+      "sectionId": "embeddings",
+      "headingId": "what-gets-projected",
+      "kind": "content",
+      "title": "What gets projected",
+      "body": "Each clip becomes one point. Its vector is the model's mean-pooled encoder output — Whisper's last encoder hidden state, or Wav2Vec2's 768-dimensional representation. The projection only reduces those vectors for display, so switching method re-runs the reduction without re-extracting embeddings."
+    },
+    {
+      "key": "heading:embeddings:projection-methods:6",
       "sectionId": "embeddings",
       "headingId": "projection-methods",
       "kind": "heading",
       "title": "Projection methods",
       "body": ""
-    },
-    {
-      "key": "content:embeddings:projection-methods:3",
-      "sectionId": "embeddings",
-      "headingId": "projection-methods",
-      "kind": "content",
-      "title": "Projection methods",
-      "body": "The embedding operation supports three reduction methods:"
-    },
-    {
-      "key": "content:embeddings:projection-methods:4",
-      "sectionId": "embeddings",
-      "headingId": "projection-methods",
-      "kind": "content",
-      "title": "Projection methods",
-      "body": "PCA — linear, fast, preserves global variance structure."
-    },
-    {
-      "key": "content:embeddings:projection-methods:5",
-      "sectionId": "embeddings",
-      "headingId": "projection-methods",
-      "kind": "content",
-      "title": "Projection methods",
-      "body": "t-SNE — nonlinear, tends to separate local clusters well."
-    },
-    {
-      "key": "content:embeddings:projection-methods:6",
-      "sectionId": "embeddings",
-      "headingId": "projection-methods",
-      "kind": "content",
-      "title": "Projection methods",
-      "body": "UMAP — nonlinear, generally faster than t-SNE at similar cluster quality."
     },
     {
       "key": "content:embeddings:projection-methods:7",
@@ -2648,10 +3024,42 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "projection-methods",
       "kind": "content",
       "title": "Projection methods",
+      "body": "The embedding operation supports three reduction methods:"
+    },
+    {
+      "key": "content:embeddings:projection-methods:8",
+      "sectionId": "embeddings",
+      "headingId": "projection-methods",
+      "kind": "content",
+      "title": "Projection methods",
+      "body": "PCA — linear, fast, preserves global variance structure."
+    },
+    {
+      "key": "content:embeddings:projection-methods:9",
+      "sectionId": "embeddings",
+      "headingId": "projection-methods",
+      "kind": "content",
+      "title": "Projection methods",
+      "body": "t-SNE — nonlinear, tends to separate local clusters well."
+    },
+    {
+      "key": "content:embeddings:projection-methods:10",
+      "sectionId": "embeddings",
+      "headingId": "projection-methods",
+      "kind": "content",
+      "title": "Projection methods",
+      "body": "UMAP — nonlinear, generally faster than t-SNE at similar cluster quality."
+    },
+    {
+      "key": "content:embeddings:projection-methods:11",
+      "sectionId": "embeddings",
+      "headingId": "projection-methods",
+      "kind": "content",
+      "title": "Projection methods",
       "body": "Each can be projected into 2D or 3D, your choice."
     },
     {
-      "key": "heading:embeddings:clustering:8",
+      "key": "heading:embeddings:clustering:12",
       "sectionId": "embeddings",
       "headingId": "clustering",
       "kind": "heading",
@@ -2659,15 +3067,15 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:embeddings:clustering:9",
+      "key": "content:embeddings:clustering:13",
       "sectionId": "embeddings",
       "headingId": "clustering",
       "kind": "content",
       "title": "Clustering",
-      "body": "Clustering is optional and off by default. When enabled, it runs HDBSCAN over the projected points, with min_cluster_size tunable from 2 to 50. Smaller values surface more, smaller clusters; larger values collapse the projection into a handful of broad groups."
+      "body": "Clustering is optional and off by default. When enabled, it runs HDBSCAN over the projected points, with min_cluster_size tunable from 2 to 50. Smaller values surface more, smaller clusters; larger values collapse the projection into a handful of broad groups (default 5). Points HDBSCAN can't assign to any cluster are marked as noise, and the result includes a silhouette score (−1 to 1) for cluster quality. At least 3 clips are required."
     },
     {
-      "key": "heading:embeddings:nearest-neighbour-retrieval:10",
+      "key": "heading:embeddings:nearest-neighbour-retrieval:14",
       "sectionId": "embeddings",
       "headingId": "nearest-neighbour-retrieval",
       "kind": "heading",
@@ -2675,7 +3083,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:embeddings:nearest-neighbour-retrieval:11",
+      "key": "content:embeddings:nearest-neighbour-retrieval:15",
       "sectionId": "embeddings",
       "headingId": "nearest-neighbour-retrieval",
       "kind": "content",
@@ -2683,7 +3091,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Click a point and the panel can retrieve its nearest neighbours in embedding space — useful for answering \"what else does the model think is similar to this clip?\" without leaving the projector."
     },
     {
-      "key": "heading:embeddings:selection-and-export:12",
+      "key": "heading:embeddings:selection-and-export:16",
       "sectionId": "embeddings",
       "headingId": "selection-and-export",
       "kind": "heading",
@@ -2691,7 +3099,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:embeddings:selection-and-export:13",
+      "key": "content:embeddings:selection-and-export:17",
       "sectionId": "embeddings",
       "headingId": "selection-and-export",
       "kind": "content",
@@ -2699,7 +3107,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Box or lasso select a region of points to inspect them together, or to hand a subset off to another panel."
     },
     {
-      "key": "content:embeddings:selection-and-export:14",
+      "key": "content:embeddings:selection-and-export:18",
       "sectionId": "embeddings",
       "headingId": "selection-and-export",
       "kind": "content",
@@ -2707,7 +3115,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "PNG export is available on the projection via Plotly's built-in export, like the other Plotly-backed charts in the app."
     },
     {
-      "key": "content:embeddings:selection-and-export:15",
+      "key": "content:embeddings:selection-and-export:19",
       "sectionId": "embeddings",
       "headingId": "selection-and-export",
       "kind": "content",
@@ -3124,14 +3532,23 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "slice metrics bootstrap shipped feature"
     },
     {
-      "key": "content:fairness:lead:2",
+      "key": "heading:fairness:what-is-fairness-slicing:2",
       "sectionId": "fairness",
-      "kind": "content",
-      "title": "",
-      "body": "Shipped, not beta Fairness slicing is a complete, shipped feature — it is not labeled \"beta\" anywhere in the product, and this page shouldn't imply otherwise."
+      "headingId": "what-is-fairness-slicing",
+      "kind": "heading",
+      "title": "What is fairness slicing?",
+      "body": ""
     },
     {
-      "key": "heading:fairness:grouping:3",
+      "key": "content:fairness:what-is-fairness-slicing:3",
+      "sectionId": "fairness",
+      "headingId": "what-is-fairness-slicing",
+      "kind": "content",
+      "title": "What is fairness slicing?",
+      "body": "Fairness slicing splits a dataset into groups by a metadata column, such as accent or gender, and compares model performance across those groups. Speech models often do worse for non-native speakers or under-represented groups, and that only shows up when results are measured per group. A raw gap is not proof of bias on its own, so this panel adds statistics to tell a real gap from noise."
+    },
+    {
+      "key": "heading:fairness:grouping:4",
       "sectionId": "fairness",
       "headingId": "grouping",
       "kind": "heading",
@@ -3139,36 +3556,28 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:fairness:grouping:4",
+      "key": "content:fairness:grouping:5",
       "sectionId": "fairness",
       "headingId": "grouping",
       "kind": "content",
       "title": "Grouping",
-      "body": "You can slice by up to 2 grouping keys at once (e.g. accent and speaker together, not just one at a time)."
+      "body": "You pick a dataset, a grouping column from its metadata, and a model. You can slice by up to 2 grouping keys at once (e.g. accent and gender together, not just one at a time). You can also filter rows by other columns, but a column can't be both a filter and a grouping key."
     },
     {
-      "key": "heading:fairness:metrics:5",
+      "key": "content:fairness:grouping:6",
+      "sectionId": "fairness",
+      "headingId": "grouping",
+      "kind": "content",
+      "title": "Grouping",
+      "body": "Every group is compared against a reference group — by default the largest one — not against every other group. Set reference_group to pick a different baseline."
+    },
+    {
+      "key": "heading:fairness:metrics:7",
       "sectionId": "fairness",
       "headingId": "metrics",
       "kind": "heading",
       "title": "Metrics",
       "body": ""
-    },
-    {
-      "key": "content:fairness:metrics:6",
-      "sectionId": "fairness",
-      "headingId": "metrics",
-      "kind": "content",
-      "title": "Metrics",
-      "body": "wer"
-    },
-    {
-      "key": "content:fairness:metrics:7",
-      "sectionId": "fairness",
-      "headingId": "metrics",
-      "kind": "content",
-      "title": "Metrics",
-      "body": "cer"
     },
     {
       "key": "content:fairness:metrics:8",
@@ -3176,7 +3585,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "metrics",
       "kind": "content",
       "title": "Metrics",
-      "body": "accuracy"
+      "body": "Nine metrics are available. Transcription models (Whisper) use the error-rate family; classification models (Wav2Vec2 emotion) use the classification family; representation and grounding metrics come from the model's embeddings and saliency maps."
     },
     {
       "key": "content:fairness:metrics:9",
@@ -3184,7 +3593,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "metrics",
       "kind": "content",
       "title": "Metrics",
-      "body": "macro_f1"
+      "body": "Transcription"
     },
     {
       "key": "content:fairness:metrics:10",
@@ -3192,7 +3601,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "metrics",
       "kind": "content",
       "title": "Metrics",
-      "body": "ece"
+      "body": "wer Word Error Rate: (substitutions + deletions + insertions) / reference words. Lower is better. Reported both as micro WER (all edits summed first, so long utterances dominate) and macro WER (per-utterance WER averaged, so every utterance counts equally)."
     },
     {
       "key": "content:fairness:metrics:11",
@@ -3200,7 +3609,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "metrics",
       "kind": "content",
       "title": "Metrics",
-      "body": "silhouette"
+      "body": "cer Character Error Rate: the same calculation at the character level. More forgiving of spelling and word-boundary differences, and better suited to languages without clear word spacing."
     },
     {
       "key": "content:fairness:metrics:12",
@@ -3208,7 +3617,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "metrics",
       "kind": "content",
       "title": "Metrics",
-      "body": "leakage"
+      "body": "Text is normalised with Whisper's own normaliser before scoring, so punctuation and casing don't count as errors and numbers stay comparable with published Whisper results. Each group also reports its substitution, deletion, and insertion rates separately. A high insertion ratio with few deletions is the usual signature of hallucination."
     },
     {
       "key": "content:fairness:metrics:13",
@@ -3216,7 +3625,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "metrics",
       "kind": "content",
       "title": "Metrics",
-      "body": "grounding_lift"
+      "body": "Classification"
     },
     {
       "key": "content:fairness:metrics:14",
@@ -3224,10 +3633,306 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "metrics",
       "kind": "content",
       "title": "Metrics",
-      "body": "attribution_entropy"
+      "body": "accuracy Fraction of items whose predicted label matches the reference label."
     },
     {
-      "key": "heading:fairness:minimums:15",
+      "key": "content:fairness:metrics:15",
+      "sectionId": "fairness",
+      "headingId": "metrics",
+      "kind": "content",
+      "title": "Metrics",
+      "body": "macro_f1 F1 score computed per class and averaged with equal weight, so rare classes count as much as common ones. Better than accuracy when classes are imbalanced."
+    },
+    {
+      "key": "content:fairness:metrics:16",
+      "sectionId": "fairness",
+      "headingId": "metrics",
+      "kind": "content",
+      "title": "Metrics",
+      "body": "ece Expected Calibration Error: whether the model's confidence can be trusted. Predictions are binned by confidence (0–10%, 10–20%, … 90–100%); in each bin, \"how confident the model claimed to be\" is compared with \"how often it was actually right\", weighted by bin size. 0 is perfectly calibrated. A group with higher ECE is getting more over- or under-confident predictions — a subtler unfairness than raw accuracy."
+    },
+    {
+      "key": "content:fairness:metrics:17",
+      "sectionId": "fairness",
+      "headingId": "metrics",
+      "kind": "content",
+      "title": "Metrics",
+      "body": "Classification groups also report macro-recall, balanced accuracy, mean confidence, and a per-group confusion matrix."
+    },
+    {
+      "key": "content:fairness:metrics:18",
+      "sectionId": "fairness",
+      "headingId": "metrics",
+      "kind": "content",
+      "title": "Metrics",
+      "body": "Representation"
+    },
+    {
+      "key": "content:fairness:metrics:19",
+      "sectionId": "fairness",
+      "headingId": "metrics",
+      "kind": "content",
+      "title": "Metrics",
+      "body": "These use the model's embedding vectors and are computed when include_representation is on."
+    },
+    {
+      "key": "content:fairness:metrics:20",
+      "sectionId": "fairness",
+      "headingId": "metrics",
+      "kind": "content",
+      "title": "Metrics",
+      "body": "silhouette Whether embeddings naturally cluster by group label, using cosine distance. Ranges from −1 to 1; higher means groups sit in visibly separate regions of the embedding space. The real score is compared against 200 label-shuffled runs and reported as a z-score, so you can tell real structure from chance."
+    },
+    {
+      "key": "content:fairness:metrics:21",
+      "sectionId": "fairness",
+      "headingId": "metrics",
+      "kind": "content",
+      "title": "Metrics",
+      "body": "leakage Whether a speaker's group can be predicted from the embedding alone, using a k-NN classifier. Evaluation is speaker-disjoint (StratifiedGroupKFold by speaker), so the same person never appears in both train and test — otherwise you'd be measuring speaker identification, not accent. Reported as balanced accuracy, the chance level (1 / number of groups), and a leakage lift (score ÷ chance). Skipped when any group has fewer than 2 speakers."
+    },
+    {
+      "key": "content:fairness:metrics:22",
+      "sectionId": "fairness",
+      "headingId": "metrics",
+      "kind": "content",
+      "title": "Metrics",
+      "body": "High silhouette or leakage means the model's internal representation has learned to tell groups apart as a side effect — a warning sign for downstream disparate treatment, even before you look at output accuracy. Combined with the disparity result, the panel labels each case as representation-linked disparity, representation only, disparity not representation-linked, or no structure, no disparity."
+    },
+    {
+      "key": "content:fairness:metrics:23",
+      "sectionId": "fairness",
+      "headingId": "metrics",
+      "kind": "content",
+      "title": "Metrics",
+      "body": "Grounding"
+    },
+    {
+      "key": "content:fairness:metrics:24",
+      "sectionId": "fairness",
+      "headingId": "metrics",
+      "kind": "content",
+      "title": "Metrics",
+      "body": "These use saliency maps on a speaker-balanced sample of items (12 per group by default) and are computed when include_explanations is on."
+    },
+    {
+      "key": "content:fairness:metrics:25",
+      "sectionId": "fairness",
+      "headingId": "metrics",
+      "kind": "content",
+      "title": "Metrics",
+      "body": "grounding_lift How much more of the saliency mass lands on speech frames than you'd expect by chance, given how much of the clip is speech. 1.0 means no better than random; higher means the model genuinely attends to speech rather than silence or noise. Speech vs. silence comes from a simple energy-based voice-activity split."
+    },
+    {
+      "key": "content:fairness:metrics:26",
+      "sectionId": "fairness",
+      "headingId": "metrics",
+      "kind": "content",
+      "title": "Metrics",
+      "body": "attribution_entropy How spread out the saliency map is, normalised to 0–1. Near 0 means attention is concentrated on a few frames; near 1 means it is smeared evenly across the clip. Reported alongside a Gini coefficient and the top-10% mass (how much attribution sits in the most-attended 10% of the clip)."
+    },
+    {
+      "key": "content:fairness:metrics:27",
+      "sectionId": "fairness",
+      "headingId": "metrics",
+      "kind": "content",
+      "title": "Metrics",
+      "body": "If one group consistently gets lower grounding lift, the model is \"listening to the wrong part\" of the audio more often for that group — a different kind of unfairness than raw error rate."
+    },
+    {
+      "key": "heading:fairness:is-a-gap-real-the-statistics:28",
+      "sectionId": "fairness",
+      "headingId": "is-a-gap-real-the-statistics",
+      "kind": "heading",
+      "title": "Is a gap real? The statistics",
+      "body": ""
+    },
+    {
+      "key": "content:fairness:is-a-gap-real-the-statistics:29",
+      "sectionId": "fairness",
+      "headingId": "is-a-gap-real-the-statistics",
+      "kind": "content",
+      "title": "Is a gap real? The statistics",
+      "body": "For every group × metric, the panel compares the group against the reference and reports:"
+    },
+    {
+      "key": "content:fairness:is-a-gap-real-the-statistics:30",
+      "sectionId": "fairness",
+      "headingId": "is-a-gap-real-the-statistics",
+      "kind": "content",
+      "title": "Is a gap real? The statistics",
+      "body": "Gap — mean(group) − mean(reference), plus the ratio (e.g. 1.4× the reference WER) and an effect size (the gap in units of natural variation)."
+    },
+    {
+      "key": "content:fairness:is-a-gap-real-the-statistics:31",
+      "sectionId": "fairness",
+      "headingId": "is-a-gap-real-the-statistics",
+      "kind": "content",
+      "title": "Is a gap real? The statistics",
+      "body": "95% confidence interval — from a bootstrap: the data is resampled 2,000 times (n_bootstrap, 200–20,000) and the gap recomputed each time. The interval is the 2.5th–97.5th percentile of those gaps. If it doesn't cross zero, the gap is unlikely to be pure chance. This is the percentile bootstrap, not BCa."
+    },
+    {
+      "key": "content:fairness:is-a-gap-real-the-statistics:32",
+      "sectionId": "fairness",
+      "headingId": "is-a-gap-real-the-statistics",
+      "kind": "content",
+      "title": "Is a gap real? The statistics",
+      "body": "p-value and p_adjusted — the raw p-value is corrected with Holm-Bonferroni so that running many groups × metrics at once doesn't produce spurious \"significant\" results. Always read p_adjusted, not the raw value."
+    },
+    {
+      "key": "content:fairness:is-a-gap-real-the-statistics:33",
+      "sectionId": "fairness",
+      "headingId": "is-a-gap-real-the-statistics",
+      "kind": "content",
+      "title": "Is a gap real? The statistics",
+      "body": "How the resampling is done depends on the data:"
+    },
+    {
+      "key": "content:fairness:is-a-gap-real-the-statistics:34",
+      "sectionId": "fairness",
+      "headingId": "is-a-gap-real-the-statistics",
+      "kind": "content",
+      "title": "Is a gap real? The statistics",
+      "body": "Paired by content — if groups read the same sentences and at least 5 are shared, the same sentence is compared across groups and those pairs are resampled. Most powerful and most trustworthy."
+    },
+    {
+      "key": "content:fairness:is-a-gap-real-the-statistics:35",
+      "sectionId": "fairness",
+      "headingId": "is-a-gap-real-the-statistics",
+      "kind": "content",
+      "title": "Is a gap real? The statistics",
+      "body": "By speaker — otherwise whole speakers are resampled, so one voice can't dominate the result."
+    },
+    {
+      "key": "content:fairness:is-a-gap-real-the-statistics:36",
+      "sectionId": "fairness",
+      "headingId": "is-a-gap-real-the-statistics",
+      "kind": "content",
+      "title": "Is a gap real? The statistics",
+      "body": "By utterance — used only when no speaker IDs exist."
+    },
+    {
+      "key": "content:fairness:is-a-gap-real-the-statistics:37",
+      "sectionId": "fairness",
+      "headingId": "is-a-gap-real-the-statistics",
+      "kind": "content",
+      "title": "Is a gap real? The statistics",
+      "body": "Design: matched, partially matched, unmatched"
+    },
+    {
+      "key": "content:fairness:is-a-gap-real-the-statistics:38",
+      "sectionId": "fairness",
+      "headingId": "is-a-gap-real-the-statistics",
+      "kind": "content",
+      "title": "Is a gap real? The statistics",
+      "body": "Before trusting any comparison, the panel checks whether the groups spoke the same content:"
+    },
+    {
+      "key": "content:fairness:is-a-gap-real-the-statistics:39",
+      "sectionId": "fairness",
+      "headingId": "is-a-gap-real-the-statistics",
+      "kind": "content",
+      "title": "Is a gap real? The statistics",
+      "body": "matched — every group covers ≥ 95% of the same content. Any gap is down to how it was said, not what."
+    },
+    {
+      "key": "content:fairness:is-a-gap-real-the-statistics:40",
+      "sectionId": "fairness",
+      "headingId": "is-a-gap-real-the-statistics",
+      "kind": "content",
+      "title": "Is a gap real? The statistics",
+      "body": "partially_matched — some overlap; pairing is done on the shared subset only."
+    },
+    {
+      "key": "content:fairness:is-a-gap-real-the-statistics:41",
+      "sectionId": "fairness",
+      "headingId": "is-a-gap-real-the-statistics",
+      "kind": "content",
+      "title": "Is a gap real? The statistics",
+      "body": "unmatched — different groups said different things. A gap may reflect accent or may just reflect harder sentences, so every verdict carries a content-confounded caveat and is never called causal."
+    },
+    {
+      "key": "content:fairness:is-a-gap-real-the-statistics:42",
+      "sectionId": "fairness",
+      "headingId": "is-a-gap-real-the-statistics",
+      "kind": "content",
+      "title": "Is a gap real? The statistics",
+      "body": "Minimum detectable effect"
+    },
+    {
+      "key": "content:fairness:is-a-gap-real-the-statistics:43",
+      "sectionId": "fairness",
+      "headingId": "is-a-gap-real-the-statistics",
+      "kind": "content",
+      "title": "Is a gap real? The statistics",
+      "body": "The MDE is the smallest true gap this specific sample could have detected at 95% confidence and 80% power. It stops \"no significant difference\" from being misread as \"we checked and it's fine\" when the data was simply too small to see anything."
+    },
+    {
+      "key": "content:fairness:is-a-gap-real-the-statistics:44",
+      "sectionId": "fairness",
+      "headingId": "is-a-gap-real-the-statistics",
+      "kind": "content",
+      "title": "Is a gap real? The statistics",
+      "body": "Verdicts"
+    },
+    {
+      "key": "content:fairness:is-a-gap-real-the-statistics:45",
+      "sectionId": "fairness",
+      "headingId": "is-a-gap-real-the-statistics",
+      "kind": "content",
+      "title": "Is a gap real? The statistics",
+      "body": "Each comparison gets one verdict, checked in this order:"
+    },
+    {
+      "key": "content:fairness:is-a-gap-real-the-statistics:46",
+      "sectionId": "fairness",
+      "headingId": "is-a-gap-real-the-statistics",
+      "kind": "content",
+      "title": "Is a gap real? The statistics",
+      "body": "speaker_confounded The group has fewer speakers than the minimum, so an effect can't be separated from one individual's voice. Come back with more speakers."
+    },
+    {
+      "key": "content:fairness:is-a-gap-real-the-statistics:47",
+      "sectionId": "fairness",
+      "headingId": "is-a-gap-real-the-statistics",
+      "kind": "content",
+      "title": "Is a gap real? The statistics",
+      "body": "disparity_detected p_adjusted < 0.05 and the gap is practically meaningful (≥ 0.05 absolute, or ≥ 1.25× the reference). A real, statistically supported gap."
+    },
+    {
+      "key": "content:fairness:is-a-gap-real-the-statistics:48",
+      "sectionId": "fairness",
+      "headingId": "is-a-gap-real-the-statistics",
+      "kind": "content",
+      "title": "Is a gap real? The statistics",
+      "body": "inconclusive — underpowered The observed gap is smaller than the MDE. We can't rule out a real gap; there isn't enough data to see one this small."
+    },
+    {
+      "key": "content:fairness:is-a-gap-real-the-statistics:49",
+      "sectionId": "fairness",
+      "headingId": "is-a-gap-real-the-statistics",
+      "kind": "content",
+      "title": "Is a gap real? The statistics",
+      "body": "no_evidence_of_disparity Not significant, and the sample had power to detect a meaningful gap. The only verdict that is an actual \"looks fine\"."
+    },
+    {
+      "key": "content:fairness:is-a-gap-real-the-statistics:50",
+      "sectionId": "fairness",
+      "headingId": "is-a-gap-real-the-statistics",
+      "kind": "content",
+      "title": "Is a gap real? The statistics",
+      "body": "Thresholds are configurable per run: absolute_error_gap (0.05), disparity_ratio (1.25), grounding_gap (0.15), and alpha (0.05)."
+    },
+    {
+      "key": "content:fairness:is-a-gap-real-the-statistics:51",
+      "sectionId": "fairness",
+      "headingId": "is-a-gap-real-the-statistics",
+      "kind": "content",
+      "title": "Is a gap real? The statistics",
+      "body": "Alongside per-group verdicts, each metric gets corpus-level summary stats: max gap, disparity ratio (worst ÷ best group), Gini, and weighted standard deviation, with the best and worst group named."
+    },
+    {
+      "key": "heading:fairness:minimums:52",
       "sectionId": "fairness",
       "headingId": "minimums",
       "kind": "heading",
@@ -3235,7 +3940,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:fairness:minimums:16",
+      "key": "content:fairness:minimums:53",
       "sectionId": "fairness",
       "headingId": "minimums",
       "kind": "content",
@@ -3243,7 +3948,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "A slice needs enough data before its statistics mean anything, so two minimums are enforced:"
     },
     {
-      "key": "content:fairness:minimums:17",
+      "key": "content:fairness:minimums:54",
       "sectionId": "fairness",
       "headingId": "minimums",
       "kind": "content",
@@ -3251,7 +3956,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "FR10_MIN_GROUP_SIZE 8 minimum items in a group before it's included"
     },
     {
-      "key": "content:fairness:minimums:18",
+      "key": "content:fairness:minimums:55",
       "sectionId": "fairness",
       "headingId": "minimums",
       "kind": "content",
@@ -3259,7 +3964,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "FR10_MIN_SPEAKERS_PER_GROUP 2 minimum distinct speakers per group"
     },
     {
-      "key": "content:fairness:minimums:19",
+      "key": "content:fairness:minimums:56",
       "sectionId": "fairness",
       "headingId": "minimums",
       "kind": "content",
@@ -3267,7 +3972,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Groups below either minimum are excluded from the results rather than reported with unreliable statistics."
     },
     {
-      "key": "heading:fairness:dataset-size:20",
+      "key": "heading:fairness:dataset-size:57",
       "sectionId": "fairness",
       "headingId": "dataset-size",
       "kind": "heading",
@@ -3275,7 +3980,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:fairness:dataset-size:21",
+      "key": "content:fairness:dataset-size:58",
       "sectionId": "fairness",
       "headingId": "dataset-size",
       "kind": "content",
@@ -3283,7 +3988,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Fairness analysis is capped at ≤ 20,000 items total per run."
     },
     {
-      "key": "heading:fairness:how-long-it-takes:22",
+      "key": "heading:fairness:how-long-it-takes:59",
       "sectionId": "fairness",
       "headingId": "how-long-it-takes",
       "kind": "heading",
@@ -3291,7 +3996,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:fairness:how-long-it-takes:23",
+      "key": "content:fairness:how-long-it-takes:60",
       "sectionId": "fairness",
       "headingId": "how-long-it-takes",
       "kind": "content",
@@ -3299,7 +4004,15 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "This is not a quick job A full fairness run — many groups, several metrics, bootstrap resampling across all of them — can take 10 to 30+ minutes. It runs on the cpu queue as a background job; submit it and come back rather than waiting on the request."
     },
     {
-      "key": "heading:fairness:reading-the-results:24",
+      "key": "content:fairness:how-long-it-takes:61",
+      "sectionId": "fairness",
+      "headingId": "how-long-it-takes",
+      "kind": "content",
+      "title": "How long it takes",
+      "body": "Behind the scenes the job runs in four stages: it prepares (cache check, grouping, dropping small groups, picking the reference, classifying the design), infers in parallel shards of about 8 items, optionally explains a sampled subset with saliency on the GPU, then aggregates all statistics. Identical requests are cached and return instantly. A corrupt file is recorded as a per-item failure without sinking the whole job, and you can cancel a running job at any stage."
+    },
+    {
+      "key": "heading:fairness:reading-the-results:62",
       "sectionId": "fairness",
       "headingId": "reading-the-results",
       "kind": "heading",
@@ -3307,7 +4020,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:fairness:reading-the-results:25",
+      "key": "content:fairness:reading-the-results:63",
       "sectionId": "fairness",
       "headingId": "reading-the-results",
       "kind": "content",
@@ -3315,7 +4028,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Disparity radar — one axis per metric, one line per group, so you can see at a glance which groups the model treats differently and on which metric."
     },
     {
-      "key": "content:fairness:reading-the-results:26",
+      "key": "content:fairness:reading-the-results:64",
       "sectionId": "fairness",
       "headingId": "reading-the-results",
       "kind": "content",
@@ -3323,7 +4036,15 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Group error bars — per-group metric values with bootstrap confidence intervals, so you can tell a real gap from noise."
     },
     {
-      "key": "content:fairness:reading-the-results:27",
+      "key": "content:fairness:reading-the-results:65",
+      "sectionId": "fairness",
+      "headingId": "reading-the-results",
+      "kind": "content",
+      "title": "Reading the results",
+      "body": "Verdict cards — the plain-English verdict for each group and metric, with the CI, p_adjusted, estimator, and block count spelled out."
+    },
+    {
+      "key": "content:fairness:reading-the-results:66",
       "sectionId": "fairness",
       "headingId": "reading-the-results",
       "kind": "content",
@@ -3331,12 +4052,196 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Phone confusion matrix — where phone-level annotations exist (for example, L2-ARCTIC), a confusion matrix of which phones get mistaken for which, broken out by group."
     },
     {
-      "key": "content:fairness:reading-the-results:28",
+      "key": "content:fairness:reading-the-results:67",
       "sectionId": "fairness",
       "headingId": "reading-the-results",
       "kind": "content",
       "title": "Reading the results",
       "body": "Image placeholder: fairness disparity radar Add /assets/docs/fairness-radar.png — the fairness panel's disparity radar chart with several groups plotted across the metric axes. Replace this callout with ![Fairness disparity radar](/assets/docs/fairness-radar.png) once the real image is uploaded."
+    },
+    {
+      "key": "heading:fairness:dataset-specific-analyses:68",
+      "sectionId": "fairness",
+      "headingId": "dataset-specific-analyses",
+      "kind": "heading",
+      "title": "Dataset-specific analyses",
+      "body": ""
+    },
+    {
+      "key": "content:fairness:dataset-specific-analyses:69",
+      "sectionId": "fairness",
+      "headingId": "dataset-specific-analyses",
+      "kind": "content",
+      "title": "Dataset-specific analyses",
+      "body": "Speech Accent Archive (SAA)"
+    },
+    {
+      "key": "content:fairness:dataset-specific-analyses:70",
+      "sectionId": "fairness",
+      "headingId": "dataset-specific-analyses",
+      "kind": "content",
+      "title": "Dataset-specific analyses",
+      "body": "150 speakers all read the same paragraph, so the design is naturally matched and content can't be a confound. That unlocks two extra analyses:"
+    },
+    {
+      "key": "content:fairness:dataset-specific-analyses:71",
+      "sectionId": "fairness",
+      "headingId": "dataset-specific-analyses",
+      "kind": "content",
+      "title": "Dataset-specific analyses",
+      "body": "Word-position error heatmap — because every transcript aligns to the same reference, you get an error rate per word position, turning \"WER is higher\" into \"this group mishandles these specific words\"."
+    },
+    {
+      "key": "content:fairness:dataset-specific-analyses:72",
+      "sectionId": "fairness",
+      "headingId": "dataset-specific-analyses",
+      "kind": "content",
+      "title": "Dataset-specific analyses",
+      "body": "Age-of-English-onset regression — WER ≈ β0 + β1·age_english_onset + β2·age, plus a Spearman correlation, testing whether learning English later predicts worse transcription independent of current age."
+    },
+    {
+      "key": "content:fairness:dataset-specific-analyses:73",
+      "sectionId": "fairness",
+      "headingId": "dataset-specific-analyses",
+      "kind": "content",
+      "title": "Dataset-specific analyses",
+      "body": "Both are descriptive, not significance-tested; read them alongside the reported n."
+    },
+    {
+      "key": "content:fairness:dataset-specific-analyses:74",
+      "sectionId": "fairness",
+      "headingId": "dataset-specific-analyses",
+      "kind": "content",
+      "title": "Dataset-specific analyses",
+      "body": "L2-ARCTIC"
+    },
+    {
+      "key": "content:fairness:dataset-specific-analyses:75",
+      "sectionId": "fairness",
+      "headingId": "dataset-specific-analyses",
+      "kind": "content",
+      "title": "Dataset-specific analyses",
+      "body": "Non-native English speech where a trained linguist marked the exact time window, expected phoneme, and produced phoneme of every pronunciation error (891 annotated errors in the bundled subset). It adds:"
+    },
+    {
+      "key": "content:fairness:dataset-specific-analyses:76",
+      "sectionId": "fairness",
+      "headingId": "dataset-specific-analyses",
+      "kind": "content",
+      "title": "Dataset-specific analyses",
+      "body": "Phone-error grounding — does saliency land on the moments a linguist flagged? Scored with AUROC (0.5 = random, 1.0 = perfect), average precision, and AUROC within speech, which only counts speech frames and so proves the model is honing in on the error rather than just preferring speech over silence."
+    },
+    {
+      "key": "content:fairness:dataset-specific-analyses:77",
+      "sectionId": "fairness",
+      "headingId": "dataset-specific-analyses",
+      "kind": "content",
+      "title": "Dataset-specific analyses",
+      "body": "Accentedness regression — WER ≈ intercept + β·accentedness + group terms, where accentedness is human-verified error count per phone. If WER is already explained by how mispronounced an utterance was, a group's extra term shows whether the model penalises that accent beyond what the pronunciation itself predicts."
+    },
+    {
+      "key": "content:fairness:dataset-specific-analyses:78",
+      "sectionId": "fairness",
+      "headingId": "dataset-specific-analyses",
+      "kind": "content",
+      "title": "Dataset-specific analyses",
+      "body": "L2-ARCTIC will report speaker_confounded The bundled subset has exactly one speaker per native language (ABA Arabic, LXC Chinese, EBVS Spanish). With the default minimum of 2 speakers per group, every language-based comparison correctly reports speaker_confounded. That's intentional, not a bug: with one speaker you can't tell language from that person's voice."
+    },
+    {
+      "key": "heading:fairness:common-misreadings:79",
+      "sectionId": "fairness",
+      "headingId": "common-misreadings",
+      "kind": "heading",
+      "title": "Common misreadings",
+      "body": ""
+    },
+    {
+      "key": "content:fairness:common-misreadings:80",
+      "sectionId": "fairness",
+      "headingId": "common-misreadings",
+      "kind": "content",
+      "title": "Common misreadings",
+      "body": "disparity_detected on an unmatched design is real but not proof of accent-specific bias — hence the content-confounded flag."
+    },
+    {
+      "key": "content:fairness:common-misreadings:81",
+      "sectionId": "fairness",
+      "headingId": "common-misreadings",
+      "kind": "content",
+      "title": "Common misreadings",
+      "body": "speaker_confounded means \"get more speakers\", not \"no bias\"."
+    },
+    {
+      "key": "content:fairness:common-misreadings:82",
+      "sectionId": "fairness",
+      "headingId": "common-misreadings",
+      "kind": "content",
+      "title": "Common misreadings",
+      "body": "inconclusive — underpowered is not \"fine\". It means the sample was too small to detect a gap of practical size."
+    },
+    {
+      "key": "content:fairness:common-misreadings:83",
+      "sectionId": "fairness",
+      "headingId": "common-misreadings",
+      "kind": "content",
+      "title": "Common misreadings",
+      "body": "Custom single-file uploads aren't eligible: fairness needs a dataset with a grouping column and enough items per group."
+    },
+    {
+      "key": "heading:fairness:glossary:84",
+      "sectionId": "fairness",
+      "headingId": "glossary",
+      "kind": "heading",
+      "title": "Glossary",
+      "body": ""
+    },
+    {
+      "key": "content:fairness:glossary:85",
+      "sectionId": "fairness",
+      "headingId": "glossary",
+      "kind": "content",
+      "title": "Glossary",
+      "body": "Reference group The baseline group (usually the largest) everyone else is compared against"
+    },
+    {
+      "key": "content:fairness:glossary:86",
+      "sectionId": "fairness",
+      "headingId": "glossary",
+      "kind": "content",
+      "title": "Glossary",
+      "body": "Bootstrap CI A confidence interval built by resampling the data thousands of times to see how much a statistic naturally wobbles"
+    },
+    {
+      "key": "content:fairness:glossary:87",
+      "sectionId": "fairness",
+      "headingId": "glossary",
+      "kind": "content",
+      "title": "Glossary",
+      "body": "p_adjusted The p-value after Holm-Bonferroni correction for running many comparisons"
+    },
+    {
+      "key": "content:fairness:glossary:88",
+      "sectionId": "fairness",
+      "headingId": "glossary",
+      "kind": "content",
+      "title": "Glossary",
+      "body": "MDE Smallest true gap this sample could reliably detect"
+    },
+    {
+      "key": "content:fairness:glossary:89",
+      "sectionId": "fairness",
+      "headingId": "glossary",
+      "kind": "content",
+      "title": "Glossary",
+      "body": "Macro vs micro WER Macro averages each utterance's error rate; micro is total errors ÷ total words"
+    },
+    {
+      "key": "content:fairness:glossary:90",
+      "sectionId": "fairness",
+      "headingId": "glossary",
+      "kind": "content",
+      "title": "Glossary",
+      "body": "Leakage lift Leakage accuracy divided by chance level; above 1 means groups are recoverable from embeddings"
     }
   ],
   "intro": [
@@ -3493,7 +4398,23 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "decoder-only position-resolved Whisper /j-lens Lab"
     },
     {
-      "key": "heading:jlens:two-operations:2",
+      "key": "heading:jlens:what-is-jacobian-lens:2",
+      "sectionId": "jlens",
+      "headingId": "what-is-jacobian-lens",
+      "kind": "heading",
+      "title": "What is Jacobian Lens?",
+      "body": ""
+    },
+    {
+      "key": "content:jlens:what-is-jacobian-lens:3",
+      "sectionId": "jlens",
+      "headingId": "what-is-jacobian-lens",
+      "kind": "content",
+      "title": "What is Jacobian Lens?",
+      "body": "Jacobian Lens reads Whisper's decoder layers as if they were making predictions themselves. At each token position, it maps a layer's intermediate representation onto the vocabulary, so you can see how the model's guess develops layer by layer before it settles on the final token."
+    },
+    {
+      "key": "heading:jlens:two-operations:4",
       "sectionId": "jlens",
       "headingId": "two-operations",
       "kind": "heading",
@@ -3501,44 +4422,28 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:jlens:two-operations:3",
+      "key": "content:jlens:two-operations:5",
       "sectionId": "jlens",
       "headingId": "two-operations",
       "kind": "content",
       "title": "Two operations",
-      "body": "jacobian_lens_fit — fits a new lens from a dataset of samples. Requires 2 to 1000 samples, each clip ≤ 60 seconds, and a dataset or manifest that includes a transcript (the lens is fit against known text, not raw audio alone)."
+      "body": "jacobian_lens_fit — fits a new lens from a dataset of samples. Requires 2 to 1000 samples, each clip ≤ 60 seconds (max_audio_seconds defaults to 30), and a dataset or manifest that includes a transcript (the lens is fit against known text, not raw audio alone)."
     },
     {
-      "key": "content:jlens:two-operations:4",
+      "key": "content:jlens:two-operations:6",
       "sectionId": "jlens",
       "headingId": "two-operations",
       "kind": "content",
       "title": "Two operations",
-      "body": "jacobian_lens_apply — applies an already-fitted lens to a clip. Takes top_k (how many top results to return) and an optional transcript."
+      "body": "jacobian_lens_apply — applies an already-fitted lens to a clip. Takes top_k (how many top results to return), an optional transcript, and max_new_tokens (8–256, default 64)."
     },
     {
-      "key": "heading:jlens:the-j-lens-lab:5",
+      "key": "heading:jlens:the-j-lens-lab:7",
       "sectionId": "jlens",
       "headingId": "the-j-lens-lab",
       "kind": "heading",
       "title": "The J-Lens Lab",
       "body": ""
-    },
-    {
-      "key": "content:jlens:the-j-lens-lab:6",
-      "sectionId": "jlens",
-      "headingId": "the-j-lens-lab",
-      "kind": "content",
-      "title": "The J-Lens Lab",
-      "body": "Fitting a lens has its own dedicated page in the app: /j-lens, called the J-Lens Lab. It's a 3-step flow:"
-    },
-    {
-      "key": "content:jlens:the-j-lens-lab:7",
-      "sectionId": "jlens",
-      "headingId": "the-j-lens-lab",
-      "kind": "content",
-      "title": "The J-Lens Lab",
-      "body": "Pick model and dataset Choose the Whisper checkpoint and the dataset (with transcripts) you'll fit against."
     },
     {
       "key": "content:jlens:the-j-lens-lab:8",
@@ -3546,7 +4451,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "the-j-lens-lab",
       "kind": "content",
       "title": "The J-Lens Lab",
-      "body": "Select samples Choose which samples from that dataset — within the 2–1000 range — go into the fit."
+      "body": "Fitting a lens has its own dedicated page in the app: /j-lens, called the J-Lens Lab. It's a 3-step flow:"
     },
     {
       "key": "content:jlens:the-j-lens-lab:9",
@@ -3554,7 +4459,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "the-j-lens-lab",
       "kind": "content",
       "title": "The J-Lens Lab",
-      "body": "Fit Submit the fit job and wait for it to complete; the result is a saved lens you can apply to new clips afterward."
+      "body": "Pick model and dataset Choose the Whisper checkpoint and the dataset (with transcripts) you'll fit against."
     },
     {
       "key": "content:jlens:the-j-lens-lab:10",
@@ -3562,10 +4467,26 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "the-j-lens-lab",
       "kind": "content",
       "title": "The J-Lens Lab",
+      "body": "Select samples Choose which samples from that dataset — within the 2–1000 range — go into the fit."
+    },
+    {
+      "key": "content:jlens:the-j-lens-lab:11",
+      "sectionId": "jlens",
+      "headingId": "the-j-lens-lab",
+      "kind": "content",
+      "title": "The J-Lens Lab",
+      "body": "Fit Submit the fit job and wait for it to complete; the result is a saved lens you can apply to new clips afterward."
+    },
+    {
+      "key": "content:jlens:the-j-lens-lab:12",
+      "sectionId": "jlens",
+      "headingId": "the-j-lens-lab",
+      "kind": "content",
+      "title": "The J-Lens Lab",
       "body": "Image placeholder: J-Lens Lab flow Add /assets/docs/jlens-lab.png — the /j-lens page showing the 3-step fit flow (model+dataset, sample selection, fit) and the saved lenses list. Replace this callout with ![J-Lens Lab flow](/assets/docs/jlens-lab.png) once the real image is uploaded."
     },
     {
-      "key": "heading:jlens:saved-lenses:11",
+      "key": "heading:jlens:saved-lenses:13",
       "sectionId": "jlens",
       "headingId": "saved-lenses",
       "kind": "heading",
@@ -3573,7 +4494,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:jlens:saved-lenses:12",
+      "key": "content:jlens:saved-lenses:14",
       "sectionId": "jlens",
       "headingId": "saved-lenses",
       "kind": "content",
@@ -3581,7 +4502,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Once fit, a lens is saved and shows up in a saved lenses list, ready to apply to new clips via jacobian_lens_apply without re-fitting."
     },
     {
-      "key": "content:jlens:saved-lenses:13",
+      "key": "content:jlens:saved-lenses:15",
       "sectionId": "jlens",
       "headingId": "saved-lenses",
       "kind": "content",
@@ -3589,7 +4510,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "To remove one:"
     },
     {
-      "key": "content:jlens:saved-lenses:14",
+      "key": "content:jlens:saved-lenses:16",
       "sectionId": "jlens",
       "headingId": "saved-lenses",
       "kind": "content",
@@ -3829,28 +4750,28 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "noise time_masking pitch_shift time_stretch"
     },
     {
-      "key": "heading:perturb:four-perturbation-types:2",
+      "key": "heading:perturb:what-is-perturbation:2",
+      "sectionId": "perturb",
+      "headingId": "what-is-perturbation",
+      "kind": "heading",
+      "title": "What is perturbation?",
+      "body": ""
+    },
+    {
+      "key": "content:perturb:what-is-perturbation:3",
+      "sectionId": "perturb",
+      "headingId": "what-is-perturbation",
+      "kind": "content",
+      "title": "What is perturbation?",
+      "body": "Perturbation means changing a clip in a controlled way, such as adding noise or shifting pitch, and re-running the model on the result. Comparing the prediction before and after tells you directly whether the model's answer is robust to that change."
+    },
+    {
+      "key": "heading:perturb:four-perturbation-types:4",
       "sectionId": "perturb",
       "headingId": "four-perturbation-types",
       "kind": "heading",
       "title": "Four perturbation types",
       "body": ""
-    },
-    {
-      "key": "content:perturb:four-perturbation-types:3",
-      "sectionId": "perturb",
-      "headingId": "four-perturbation-types",
-      "kind": "content",
-      "title": "Four perturbation types",
-      "body": "There are four perturbation types available today — noted explicitly here because marketing copy elsewhere may round this up; this page is the accurate count:"
-    },
-    {
-      "key": "content:perturb:four-perturbation-types:4",
-      "sectionId": "perturb",
-      "headingId": "four-perturbation-types",
-      "kind": "content",
-      "title": "Four perturbation types",
-      "body": "noise"
     },
     {
       "key": "content:perturb:four-perturbation-types:5",
@@ -3858,7 +4779,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "four-perturbation-types",
       "kind": "content",
       "title": "Four perturbation types",
-      "body": "time_masking"
+      "body": "There are four perturbation types available today — noted explicitly here because marketing copy elsewhere may round this up; this page is the accurate count:"
     },
     {
       "key": "content:perturb:four-perturbation-types:6",
@@ -3866,7 +4787,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "four-perturbation-types",
       "kind": "content",
       "title": "Four perturbation types",
-      "body": "pitch_shift"
+      "body": "noise"
     },
     {
       "key": "content:perturb:four-perturbation-types:7",
@@ -3874,10 +4795,26 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "four-perturbation-types",
       "kind": "content",
       "title": "Four perturbation types",
+      "body": "time_masking"
+    },
+    {
+      "key": "content:perturb:four-perturbation-types:8",
+      "sectionId": "perturb",
+      "headingId": "four-perturbation-types",
+      "kind": "content",
+      "title": "Four perturbation types",
+      "body": "pitch_shift"
+    },
+    {
+      "key": "content:perturb:four-perturbation-types:9",
+      "sectionId": "perturb",
+      "headingId": "four-perturbation-types",
+      "kind": "content",
+      "title": "Four perturbation types",
       "body": "time_stretch"
     },
     {
-      "key": "heading:perturb:request-limits:8",
+      "key": "heading:perturb:request-limits:10",
       "sectionId": "perturb",
       "headingId": "request-limits",
       "kind": "heading",
@@ -3885,7 +4822,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:perturb:request-limits:9",
+      "key": "content:perturb:request-limits:11",
       "sectionId": "perturb",
       "headingId": "request-limits",
       "kind": "content",
@@ -3893,7 +4830,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Up to 10 perturbations per request. Each generates a new audio variant, which is then run back through the model so you can compare its prediction against the original."
     },
     {
-      "key": "heading:perturb:comparing-results:10",
+      "key": "heading:perturb:comparing-results:12",
       "sectionId": "perturb",
       "headingId": "comparing-results",
       "kind": "heading",
@@ -3901,7 +4838,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:perturb:comparing-results:11",
+      "key": "content:perturb:comparing-results:13",
       "sectionId": "perturb",
       "headingId": "comparing-results",
       "kind": "content",
@@ -3909,7 +4846,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "For each perturbation, the panel shows:"
     },
     {
-      "key": "content:perturb:comparing-results:12",
+      "key": "content:perturb:comparing-results:14",
       "sectionId": "perturb",
       "headingId": "comparing-results",
       "kind": "content",
@@ -3917,7 +4854,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Original vs. generated waveform, side by side, so you can see exactly what the transform did to the signal."
     },
     {
-      "key": "content:perturb:comparing-results:13",
+      "key": "content:perturb:comparing-results:15",
       "sectionId": "perturb",
       "headingId": "comparing-results",
       "kind": "content",
@@ -3925,7 +4862,95 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Re-run prediction for the perturbed clip, next to the original prediction, so you can see whether — and how much — the transform moved the model's output."
     },
     {
-      "key": "content:perturb:comparing-results:14",
+      "key": "content:perturb:comparing-results:16",
+      "sectionId": "perturb",
+      "headingId": "comparing-results",
+      "kind": "content",
+      "title": "Comparing results",
+      "body": "Metrics reported"
+    },
+    {
+      "key": "content:perturb:comparing-results:17",
+      "sectionId": "perturb",
+      "headingId": "comparing-results",
+      "kind": "content",
+      "title": "Comparing results",
+      "body": "For transcription models the perturbed transcript is scored against a reference after Whisper's own text normalisation, so punctuation and casing don't count as errors:"
+    },
+    {
+      "key": "content:perturb:comparing-results:18",
+      "sectionId": "perturb",
+      "headingId": "comparing-results",
+      "kind": "content",
+      "title": "Comparing results",
+      "body": "wer / cer Word and character error rate (capped at 1.0). Scored against the dataset ground truth, or against the unperturbed transcript to measure self-consistency."
+    },
+    {
+      "key": "content:perturb:comparing-results:19",
+      "sectionId": "perturb",
+      "headingId": "comparing-results",
+      "kind": "content",
+      "title": "Comparing results",
+      "body": "substitutions, deletions, insertions Edit counts behind WER, so you can see how the transcript degraded."
+    },
+    {
+      "key": "content:perturb:comparing-results:20",
+      "sectionId": "perturb",
+      "headingId": "comparing-results",
+      "kind": "content",
+      "title": "Comparing results",
+      "body": "insertion_ratio Insertions ÷ reference words. High insertions with few deletions is the hallucination signature."
+    },
+    {
+      "key": "content:perturb:comparing-results:21",
+      "sectionId": "perturb",
+      "headingId": "comparing-results",
+      "kind": "content",
+      "title": "Comparing results",
+      "body": "For classification models the perturbed prediction is compared with the baseline prediction:"
+    },
+    {
+      "key": "content:perturb:comparing-results:22",
+      "sectionId": "perturb",
+      "headingId": "comparing-results",
+      "kind": "content",
+      "title": "Comparing results",
+      "body": "confidence_delta Change in top-class confidence versus baseline."
+    },
+    {
+      "key": "content:perturb:comparing-results:23",
+      "sectionId": "perturb",
+      "headingId": "comparing-results",
+      "kind": "content",
+      "title": "Comparing results",
+      "body": "label_flipped 1 if the predicted label changed."
+    },
+    {
+      "key": "content:perturb:comparing-results:24",
+      "sectionId": "perturb",
+      "headingId": "comparing-results",
+      "kind": "content",
+      "title": "Comparing results",
+      "body": "js_divergence Jensen-Shannon divergence between the perturbed and baseline probability distributions, in nats, bounded 0 to ln 2 (≈ 0.69). Symmetric and always finite."
+    },
+    {
+      "key": "content:perturb:comparing-results:25",
+      "sectionId": "perturb",
+      "headingId": "comparing-results",
+      "kind": "content",
+      "title": "Comparing results",
+      "body": "true_class_confidence_delta Change in confidence on the baseline class."
+    },
+    {
+      "key": "content:perturb:comparing-results:26",
+      "sectionId": "perturb",
+      "headingId": "comparing-results",
+      "kind": "content",
+      "title": "Comparing results",
+      "body": "When several files are perturbed together, set-level accuracy, macro-F1, and macro-recall are also reported (they need at least 2 files)."
+    },
+    {
+      "key": "content:perturb:comparing-results:27",
       "sectionId": "perturb",
       "headingId": "comparing-results",
       "kind": "content",
@@ -3933,7 +4958,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "This is the most direct robustness signal in AudioLens: instead of asking \"what does the model attend to,\" perturbation asks \"does the model's answer survive a small, controlled change to the input.\""
     },
     {
-      "key": "content:perturb:comparing-results:15",
+      "key": "content:perturb:comparing-results:28",
       "sectionId": "perturb",
       "headingId": "comparing-results",
       "kind": "content",
@@ -3957,7 +4982,23 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "layer_probe logreg linear_svm cross-validation"
     },
     {
-      "key": "heading:probes:how-it-works:2",
+      "key": "heading:probes:what-is-layer-probing:2",
+      "sectionId": "probes",
+      "headingId": "what-is-layer-probing",
+      "kind": "heading",
+      "title": "What is layer probing?",
+      "body": ""
+    },
+    {
+      "key": "content:probes:what-is-layer-probing:3",
+      "sectionId": "probes",
+      "headingId": "what-is-layer-probing",
+      "kind": "content",
+      "title": "What is layer probing?",
+      "body": "A probe is a small, simple classifier trained on a model's hidden activations to predict a property, such as speaker gender or emotion. If a linear probe can predict the property from a layer, that layer represents it. Repeating this at every layer shows where in the network the property emerges."
+    },
+    {
+      "key": "heading:probes:how-it-works:4",
       "sectionId": "probes",
       "headingId": "how-it-works",
       "kind": "heading",
@@ -3965,7 +5006,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:probes:how-it-works:3",
+      "key": "content:probes:how-it-works:5",
       "sectionId": "probes",
       "headingId": "how-it-works",
       "kind": "content",
@@ -3973,7 +5014,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "The layer_probe operation trains a small linear classifier — a probe — on the hidden states from each layer independently, then scores how well each layer's probe predicts the property. The result is a per-layer view of where in the model that property becomes linearly separable."
     },
     {
-      "key": "heading:probes:probe-types:4",
+      "key": "heading:probes:probe-types:6",
       "sectionId": "probes",
       "headingId": "probe-types",
       "kind": "heading",
@@ -3981,7 +5022,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:probes:probe-types:5",
+      "key": "content:probes:probe-types:7",
       "sectionId": "probes",
       "headingId": "probe-types",
       "kind": "content",
@@ -3989,7 +5030,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "logreg — logistic regression."
     },
     {
-      "key": "content:probes:probe-types:6",
+      "key": "content:probes:probe-types:8",
       "sectionId": "probes",
       "headingId": "probe-types",
       "kind": "content",
@@ -3997,28 +5038,12 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "linear_svm — linear support vector machine."
     },
     {
-      "key": "heading:probes:limits:7",
+      "key": "heading:probes:limits:9",
       "sectionId": "probes",
       "headingId": "limits",
       "kind": "heading",
       "title": "Limits",
       "body": ""
-    },
-    {
-      "key": "content:probes:limits:8",
-      "sectionId": "probes",
-      "headingId": "limits",
-      "kind": "content",
-      "title": "Limits",
-      "body": "Properties up to 8 Per probing run"
-    },
-    {
-      "key": "content:probes:limits:9",
-      "sectionId": "probes",
-      "headingId": "limits",
-      "kind": "content",
-      "title": "Limits",
-      "body": "CV folds 2–10 Cross-validation folds per probe"
     },
     {
       "key": "content:probes:limits:10",
@@ -4026,10 +5051,122 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "limits",
       "kind": "content",
       "title": "Limits",
+      "body": "Properties up to 8 Per probing run"
+    },
+    {
+      "key": "content:probes:limits:11",
+      "sectionId": "probes",
+      "headingId": "limits",
+      "kind": "content",
+      "title": "Limits",
+      "body": "CV folds 2–10 Cross-validation folds per probe"
+    },
+    {
+      "key": "content:probes:limits:12",
+      "sectionId": "probes",
+      "headingId": "limits",
+      "kind": "content",
+      "title": "Limits",
       "body": "Each property is probed independently across all layers, using cross-validation so the reported score isn't just an artifact of the particular train/test split."
     },
     {
-      "key": "heading:probes:reading-the-results:11",
+      "key": "content:probes:limits:13",
+      "sectionId": "probes",
+      "headingId": "limits",
+      "kind": "content",
+      "title": "Limits",
+      "body": "probe logreg logreg or linear_svm"
+    },
+    {
+      "key": "content:probes:limits:14",
+      "sectionId": "probes",
+      "headingId": "limits",
+      "kind": "content",
+      "title": "Limits",
+      "body": "cv_folds 5 Cross-validation folds (2–10)"
+    },
+    {
+      "key": "content:probes:limits:15",
+      "sectionId": "probes",
+      "headingId": "limits",
+      "kind": "content",
+      "title": "Limits",
+      "body": "project_dims 256 Random projection applied to each layer's vector before probing (0–1024; 0 disables)"
+    },
+    {
+      "key": "content:probes:limits:16",
+      "sectionId": "probes",
+      "headingId": "limits",
+      "kind": "content",
+      "title": "Limits",
+      "body": "min_class_count 5 Minimum files a class needs to be included (2–50)"
+    },
+    {
+      "key": "content:probes:limits:17",
+      "sectionId": "probes",
+      "headingId": "limits",
+      "kind": "content",
+      "title": "Limits",
+      "body": "include_control on Also train a control probe on shuffled labels"
+    },
+    {
+      "key": "content:probes:limits:18",
+      "sectionId": "probes",
+      "headingId": "limits",
+      "kind": "content",
+      "title": "Limits",
+      "body": "Activations are mean-pooled per layer and standardised before fitting. Files labelled empty, unknown, none, or n/a are dropped as unannotated, and a property needs at least 8 usable files to be probed at all."
+    },
+    {
+      "key": "heading:probes:the-three-numbers-per-layer:19",
+      "sectionId": "probes",
+      "headingId": "the-three-numbers-per-layer",
+      "kind": "heading",
+      "title": "The three numbers per layer",
+      "body": ""
+    },
+    {
+      "key": "content:probes:the-three-numbers-per-layer:20",
+      "sectionId": "probes",
+      "headingId": "the-three-numbers-per-layer",
+      "kind": "content",
+      "title": "The three numbers per layer",
+      "body": "Read all three together — accuracy on its own can mislead:"
+    },
+    {
+      "key": "content:probes:the-three-numbers-per-layer:21",
+      "sectionId": "probes",
+      "headingId": "the-three-numbers-per-layer",
+      "kind": "content",
+      "title": "The three numbers per layer",
+      "body": "accuracy — mean cross-validated accuracy of the probe."
+    },
+    {
+      "key": "content:probes:the-three-numbers-per-layer:22",
+      "sectionId": "probes",
+      "headingId": "the-three-numbers-per-layer",
+      "kind": "content",
+      "title": "The three numbers per layer",
+      "body": "majority_baseline — the share of the largest class. Accuracy at or below this means the layer carries no usable information about the property, however high the number looks."
+    },
+    {
+      "key": "content:probes:the-three-numbers-per-layer:23",
+      "sectionId": "probes",
+      "headingId": "the-three-numbers-per-layer",
+      "kind": "content",
+      "title": "The three numbers per layer",
+      "body": "selectivity — accuracy − control_accuracy, where the control is the identical probe trained on shuffled labels. A probe that beats the baseline but not its control is memorising training rows rather than reading the representation."
+    },
+    {
+      "key": "content:probes:the-three-numbers-per-layer:24",
+      "sectionId": "probes",
+      "headingId": "the-three-numbers-per-layer",
+      "kind": "content",
+      "title": "The three numbers per layer",
+      "body": "Each layer also reports macro-F1 and the accuracy's standard deviation across folds, and each property reports its best layer by accuracy and by selectivity."
+    },
+    {
+      "key": "heading:probes:reading-the-results:25",
       "sectionId": "probes",
       "headingId": "reading-the-results",
       "kind": "heading",
@@ -4037,7 +5174,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:probes:reading-the-results:12",
+      "key": "content:probes:reading-the-results:26",
       "sectionId": "probes",
       "headingId": "reading-the-results",
       "kind": "content",
@@ -4045,7 +5182,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Layer profile chart — probe accuracy (or the relevant score) plotted against layer index, for each property. The layer where the curve peaks is where that property is most linearly represented."
     },
     {
-      "key": "content:probes:reading-the-results:13",
+      "key": "content:probes:reading-the-results:27",
       "sectionId": "probes",
       "headingId": "reading-the-results",
       "kind": "content",
@@ -4053,7 +5190,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Selectivity heatmap — properties against layers, so you can compare multiple properties' profiles at once and see whether they peak at the same layer or different ones."
     },
     {
-      "key": "content:probes:reading-the-results:14",
+      "key": "content:probes:reading-the-results:28",
       "sectionId": "probes",
       "headingId": "reading-the-results",
       "kind": "content",
@@ -4061,7 +5198,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Confusion matrix — per-property, per-layer, showing which classes the probe actually confuses at that layer."
     },
     {
-      "key": "content:probes:reading-the-results:15",
+      "key": "content:probes:reading-the-results:29",
       "sectionId": "probes",
       "headingId": "reading-the-results",
       "kind": "content",
@@ -4807,28 +5944,28 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "gradcam lime shap full_audio flag"
     },
     {
-      "key": "heading:saliency:methods:2",
+      "key": "heading:saliency:what-is-saliency:2",
+      "sectionId": "saliency",
+      "headingId": "what-is-saliency",
+      "kind": "heading",
+      "title": "What is saliency?",
+      "body": ""
+    },
+    {
+      "key": "content:saliency:what-is-saliency:3",
+      "sectionId": "saliency",
+      "headingId": "what-is-saliency",
+      "kind": "content",
+      "title": "What is saliency?",
+      "body": "Saliency is an attribution method: it scores every moment of the input audio by how much it influenced the model's prediction. The result is a heatmap drawn over the waveform. High-scoring stretches are the parts the model leaned on most for a given token or label, so you can check that it is listening to speech rather than noise or silence."
+    },
+    {
+      "key": "heading:saliency:methods:4",
       "sectionId": "saliency",
       "headingId": "methods",
       "kind": "heading",
       "title": "Methods",
       "body": ""
-    },
-    {
-      "key": "content:saliency:methods:3",
-      "sectionId": "saliency",
-      "headingId": "methods",
-      "kind": "content",
-      "title": "Methods",
-      "body": "The saliency operation supports three methods:"
-    },
-    {
-      "key": "content:saliency:methods:4",
-      "sectionId": "saliency",
-      "headingId": "methods",
-      "kind": "content",
-      "title": "Methods",
-      "body": "gradcam"
     },
     {
       "key": "content:saliency:methods:5",
@@ -4836,7 +5973,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "methods",
       "kind": "content",
       "title": "Methods",
-      "body": "lime"
+      "body": "The saliency operation supports three methods:"
     },
     {
       "key": "content:saliency:methods:6",
@@ -4844,7 +5981,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "methods",
       "kind": "content",
       "title": "Methods",
-      "body": "shap"
+      "body": "gradcam"
     },
     {
       "key": "content:saliency:methods:7",
@@ -4852,10 +5989,26 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "methods",
       "kind": "content",
       "title": "Methods",
+      "body": "lime"
+    },
+    {
+      "key": "content:saliency:methods:8",
+      "sectionId": "saliency",
+      "headingId": "methods",
+      "kind": "content",
+      "title": "Methods",
+      "body": "shap"
+    },
+    {
+      "key": "content:saliency:methods:9",
+      "sectionId": "saliency",
+      "headingId": "methods",
+      "kind": "content",
+      "title": "Methods",
       "body": "“gradcam” is not Grad-CAM The method labeled gradcam in the API and UI does not run Grad-CAM. It runs Integrated Gradients under the hood. The name is kept for historical reasons in the API surface, but if you're comparing this against literature on Grad-CAM for audio models, you're actually looking at an Integrated Gradients attribution. Attribute results accordingly when you write them up."
     },
     {
-      "key": "heading:saliency:the-full_audio-flag:8",
+      "key": "heading:saliency:the-full_audio-flag:10",
       "sectionId": "saliency",
       "headingId": "the-full_audio-flag",
       "kind": "heading",
@@ -4863,7 +6016,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:saliency:the-full_audio-flag:9",
+      "key": "content:saliency:the-full_audio-flag:11",
       "sectionId": "saliency",
       "headingId": "the-full_audio-flag",
       "kind": "content",
@@ -4871,28 +6024,12 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "By default, saliency runs on a bounded window of the clip rather than the full file. Set full_audio to run the attribution over the entire clip instead of just the windowed portion — subject to the window limits below."
     },
     {
-      "key": "heading:saliency:window-limits:10",
+      "key": "heading:saliency:window-limits:12",
       "sectionId": "saliency",
       "headingId": "window-limits",
       "kind": "heading",
       "title": "Window limits",
       "body": ""
-    },
-    {
-      "key": "content:saliency:window-limits:11",
-      "sectionId": "saliency",
-      "headingId": "window-limits",
-      "kind": "content",
-      "title": "Window limits",
-      "body": "Saliency computation is memory- and compute-bound, so it's capped:"
-    },
-    {
-      "key": "content:saliency:window-limits:12",
-      "sectionId": "saliency",
-      "headingId": "window-limits",
-      "kind": "content",
-      "title": "Window limits",
-      "body": "gradcam and lime: up to 12 seconds (MAX_SALIENCY_SECONDS)."
     },
     {
       "key": "content:saliency:window-limits:13",
@@ -4900,7 +6037,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "window-limits",
       "kind": "content",
       "title": "Window limits",
-      "body": "shap: up to 6 seconds (MAX_SALIENCY_SECONDS_SHAP) — SHAP is run with a fixed number of samples per call (SALIENCY_SHAP_SAMPLES), which makes it the most memory-sensitive of the three, hence the stricter window."
+      "body": "Saliency computation is memory- and compute-bound, so it's capped:"
     },
     {
       "key": "content:saliency:window-limits:14",
@@ -4908,31 +6045,31 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "window-limits",
       "kind": "content",
       "title": "Window limits",
+      "body": "gradcam and lime: up to 12 seconds (MAX_SALIENCY_SECONDS)."
+    },
+    {
+      "key": "content:saliency:window-limits:15",
+      "sectionId": "saliency",
+      "headingId": "window-limits",
+      "kind": "content",
+      "title": "Window limits",
+      "body": "shap: up to 6 seconds (MAX_SALIENCY_SECONDS_SHAP) — SHAP is run with a fixed number of samples per call (SALIENCY_SHAP_SAMPLES), which makes it the most memory-sensitive of the three, hence the stricter window."
+    },
+    {
+      "key": "content:saliency:window-limits:16",
+      "sectionId": "saliency",
+      "headingId": "window-limits",
+      "kind": "content",
+      "title": "Window limits",
       "body": "If your clip is longer than the relevant limit, trim it or pick a shorter segment before requesting saliency."
     },
     {
-      "key": "heading:saliency:is-this-map-telling-the-truth--saliency-faithfulness:15",
+      "key": "heading:saliency:is-this-map-telling-the-truth--saliency-faithfulness:17",
       "sectionId": "saliency",
       "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
       "kind": "heading",
       "title": "Is this map telling the truth? — saliency faithfulness",
       "body": ""
-    },
-    {
-      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:16",
-      "sectionId": "saliency",
-      "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
-      "kind": "content",
-      "title": "Is this map telling the truth? — saliency faithfulness",
-      "body": "A saliency map can look convincing and still be wrong. The companion check, saliency_faithfulness, asks the honest question directly: if you delete the parts of the waveform the map says matter most, does the prediction actually change?"
-    },
-    {
-      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:17",
-      "sectionId": "saliency",
-      "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
-      "kind": "content",
-      "title": "Is this map telling the truth? — saliency faithfulness",
-      "body": "It does this with a deletion curve: progressively occlude the highest-attributed regions and re-run prediction, comparing the before/after result at each step."
     },
     {
       "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:18",
@@ -4940,7 +6077,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
       "kind": "content",
       "title": "Is this map telling the truth? — saliency faithfulness",
-      "body": "n_steps 3–20, default 9 Deletion curve resolution"
+      "body": "A saliency map can look convincing and still be wrong. The companion check, saliency_faithfulness, asks the honest question directly: if you delete the parts of the waveform the map says matter most, does the prediction actually change?"
     },
     {
       "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:19",
@@ -4948,7 +6085,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
       "kind": "content",
       "title": "Is this map telling the truth? — saliency faithfulness",
-      "body": "top_fraction 0.2 Fraction of the map treated as most-salient"
+      "body": "It does this with a deletion curve: progressively occlude the highest-attributed regions and re-run prediction, comparing the before/after result at each step."
     },
     {
       "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:20",
@@ -4956,7 +6093,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
       "kind": "content",
       "title": "Is this map telling the truth? — saliency faithfulness",
-      "body": "random_repeats 2–10, default 3 Random-deletion baselines for comparison"
+      "body": "n_steps 3–20, default 9 Deletion curve resolution"
     },
     {
       "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:21",
@@ -4964,7 +6101,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
       "kind": "content",
       "title": "Is this map telling the truth? — saliency faithfulness",
-      "body": "occlusion optional Alternative to deletion for masking regions"
+      "body": "top_fraction 0.2 Fraction of the map treated as most-salient"
     },
     {
       "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:22",
@@ -4972,7 +6109,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
       "kind": "content",
       "title": "Is this map telling the truth? — saliency faithfulness",
-      "body": "A map that's faithful should show a real drop in confidence as the top fraction is deleted — clearly separated from what random deletion does at the same rate. If deleting the \"important\" region barely moves the prediction, treat the saliency map for that clip with suspicion rather than as ground truth."
+      "body": "random_repeats 2–10, default 3 Random-deletion baselines for comparison"
     },
     {
       "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:23",
@@ -4980,10 +6117,106 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
       "kind": "content",
       "title": "Is this map telling the truth? — saliency faithfulness",
+      "body": "occlusion optional Alternative to deletion for masking regions"
+    },
+    {
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:24",
+      "sectionId": "saliency",
+      "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
+      "kind": "content",
+      "title": "Is this map telling the truth? — saliency faithfulness",
+      "body": "The faithfulness result reports these metrics:"
+    },
+    {
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:25",
+      "sectionId": "saliency",
+      "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
+      "kind": "content",
+      "title": "Is this map telling the truth? — saliency faithfulness",
+      "body": "aopc_deletion Average drop in the model's score as the top-attributed regions are deleted, across the deletion curve. Bigger drop = the map found regions the model really relies on."
+    },
+    {
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:26",
+      "sectionId": "saliency",
+      "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
+      "kind": "content",
+      "title": "Is this map telling the truth? — saliency faithfulness",
+      "body": "aopc_random (+ stderr) The same drop when regions are deleted at random, averaged over random_repeats. The baseline the map has to beat."
+    },
+    {
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:27",
+      "sectionId": "saliency",
+      "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
+      "kind": "content",
+      "title": "Is this map telling the truth? — saliency faithfulness",
+      "body": "faithfulness_gain aopc_deletion minus aopc_random. Positive means the map beats chance."
+    },
+    {
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:28",
+      "sectionId": "saliency",
+      "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
+      "kind": "content",
+      "title": "Is this map telling the truth? — saliency faithfulness",
+      "body": "aopc_inverse The drop when the least important regions are deleted. Should be small."
+    },
+    {
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:29",
+      "sectionId": "saliency",
+      "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
+      "kind": "content",
+      "title": "Is this map telling the truth? — saliency faithfulness",
+      "body": "comprehensiveness Score lost when the top regions are removed. High = those regions were necessary."
+    },
+    {
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:30",
+      "sectionId": "saliency",
+      "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
+      "kind": "content",
+      "title": "Is this map telling the truth? — saliency faithfulness",
+      "body": "sufficiency Score kept when only the top regions remain. High = those regions alone were enough."
+    },
+    {
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:31",
+      "sectionId": "saliency",
+      "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
+      "kind": "content",
+      "title": "Is this map telling the truth? — saliency faithfulness",
+      "body": "auc_deletion / auc_insertion Area under the deletion and insertion curves. Lower is better for deletion, higher for insertion."
+    },
+    {
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:32",
+      "sectionId": "saliency",
+      "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
+      "kind": "content",
+      "title": "Is this map telling the truth? — saliency faithfulness",
+      "body": "occlusion_spearman Rank correlation between attribution and the measured effect of occluding each region, with its p-value."
+    },
+    {
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:33",
+      "sectionId": "saliency",
+      "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
+      "kind": "content",
+      "title": "Is this map telling the truth? — saliency faithfulness",
+      "body": "The result also carries an overall verdict — a map with too little audio or signal to test is marked uninformative and includes a skipped_reason instead of a misleading score."
+    },
+    {
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:34",
+      "sectionId": "saliency",
+      "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
+      "kind": "content",
+      "title": "Is this map telling the truth? — saliency faithfulness",
+      "body": "A map that's faithful should show a real drop in confidence as the top fraction is deleted — clearly separated from what random deletion does at the same rate. If deleting the \"important\" region barely moves the prediction, treat the saliency map for that clip with suspicion rather than as ground truth."
+    },
+    {
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:35",
+      "sectionId": "saliency",
+      "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
+      "kind": "content",
+      "title": "Is this map telling the truth? — saliency faithfulness",
       "body": "Image placeholder: saliency waveform overlay Add /assets/docs/saliency-overlay.png — the saliency panel showing the attribution heatmap drawn over the waveform, with the method selector and full_audio toggle visible. Replace this callout with ![Saliency waveform overlay](/assets/docs/saliency-overlay.png) once the real image is uploaded."
     },
     {
-      "key": "heading:saliency:pairs-well-with-perturbation:24",
+      "key": "heading:saliency:pairs-well-with-perturbation:36",
       "sectionId": "saliency",
       "headingId": "pairs-well-with-perturbation",
       "kind": "heading",
@@ -4991,7 +6224,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:saliency:pairs-well-with-perturbation:25",
+      "key": "content:saliency:pairs-well-with-perturbation:37",
       "sectionId": "saliency",
       "headingId": "pairs-well-with-perturbation",
       "kind": "content",
@@ -5765,36 +6998,36 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Apache 2.0 license r-f/wav2vec-english-speech-emotion-recognition is Apache 2.0 licensed. It is fine-tuned from jonatasgrosman/wav2vec2-large-xlsr-53-english. See /docs/licenses for the full terms and source links."
     },
     {
-      "key": "content:wav2vec:available-checkpoint:4",
+      "key": "heading:wav2vec:output:4",
       "sectionId": "wav2vec",
-      "headingId": "available-checkpoint",
+      "headingId": "output",
+      "kind": "heading",
+      "title": "Output",
+      "body": ""
+    },
+    {
+      "key": "content:wav2vec:output:5",
+      "sectionId": "wav2vec",
+      "headingId": "output",
       "kind": "content",
-      "title": "Available checkpoint",
+      "title": "Output",
+      "body": "Audio is resampled to 16 kHz before inference. For each clip the model returns a probability for every emotion class, the top class as the predicted emotion, and its probability as the confidence. The classes are read from the model's config at runtime; for the bundled checkpoint they are neutral, happy, sad, angry, and fear."
+    },
+    {
+      "key": "content:wav2vec:output:6",
+      "sectionId": "wav2vec",
+      "headingId": "output",
+      "kind": "content",
+      "title": "Output",
       "body": "Like Whisper, this model is English-only — there is no multi-language support for emotion classification."
     },
     {
-      "key": "heading:wav2vec:legacy-fallback-models:5",
+      "key": "heading:wav2vec:legacy-fallback-models:7",
       "sectionId": "wav2vec",
       "headingId": "legacy-fallback-models",
       "kind": "heading",
       "title": "Legacy fallback models",
       "body": ""
-    },
-    {
-      "key": "content:wav2vec:legacy-fallback-models:6",
-      "sectionId": "wav2vec",
-      "headingId": "legacy-fallback-models",
-      "kind": "content",
-      "title": "Legacy fallback models",
-      "body": "Two older Wav2Vec2 checkpoints remain in the codebase as a legacy fallback path, used only for attention visualization on an older code path:"
-    },
-    {
-      "key": "content:wav2vec:legacy-fallback-models:7",
-      "sectionId": "wav2vec",
-      "headingId": "legacy-fallback-models",
-      "kind": "content",
-      "title": "Legacy fallback models",
-      "body": "jonatasgrosman/wav2vec2-large-xlsr-53-english"
     },
     {
       "key": "content:wav2vec:legacy-fallback-models:8",
@@ -5802,7 +7035,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "legacy-fallback-models",
       "kind": "content",
       "title": "Legacy fallback models",
-      "body": "facebook/wav2vec2-base-960h"
+      "body": "Two older Wav2Vec2 checkpoints remain in the codebase as a legacy fallback path, used only for attention visualization on an older code path:"
     },
     {
       "key": "content:wav2vec:legacy-fallback-models:9",
@@ -5810,10 +7043,26 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "legacy-fallback-models",
       "kind": "content",
       "title": "Legacy fallback models",
+      "body": "jonatasgrosman/wav2vec2-large-xlsr-53-english"
+    },
+    {
+      "key": "content:wav2vec:legacy-fallback-models:10",
+      "sectionId": "wav2vec",
+      "headingId": "legacy-fallback-models",
+      "kind": "content",
+      "title": "Legacy fallback models",
+      "body": "facebook/wav2vec2-base-960h"
+    },
+    {
+      "key": "content:wav2vec:legacy-fallback-models:11",
+      "sectionId": "wav2vec",
+      "headingId": "legacy-fallback-models",
+      "kind": "content",
+      "title": "Legacy fallback models",
       "body": "Both are Apache 2.0 licensed. They aren't part of the main model catalog and aren't offered in the UI dropdown."
     },
     {
-      "key": "heading:wav2vec:where-to-go-next:10",
+      "key": "heading:wav2vec:where-to-go-next:12",
       "sectionId": "wav2vec",
       "headingId": "where-to-go-next",
       "kind": "heading",
@@ -5821,7 +7070,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:wav2vec:where-to-go-next:11",
+      "key": "content:wav2vec:where-to-go-next:13",
       "sectionId": "wav2vec",
       "headingId": "where-to-go-next",
       "kind": "content",
@@ -5829,7 +7078,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Attention Analysis panel Per-layer, per-head attention weights"
     },
     {
-      "key": "content:wav2vec:where-to-go-next:12",
+      "key": "content:wav2vec:where-to-go-next:14",
       "sectionId": "wav2vec",
       "headingId": "where-to-go-next",
       "kind": "content",
@@ -5837,7 +7086,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Fairness slices Analysis panel Compare emotion-classification performance across groups"
     },
     {
-      "key": "content:wav2vec:where-to-go-next:13",
+      "key": "content:wav2vec:where-to-go-next:15",
       "sectionId": "wav2vec",
       "headingId": "where-to-go-next",
       "kind": "content",
