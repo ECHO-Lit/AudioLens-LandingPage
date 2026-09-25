@@ -15,12 +15,56 @@
 
 ## Dataset scripts
 
-| Script | Purpose |
-|---|---|
-| `download_librispeech_1000.py` | Downloads the ~1000-row LibriSpeech-1000 sample from the HF datasets-server |
-| `import_librispeech_custom.py` | Imports a LibriSpeech-style dataset you already have on disk |
-| `prepare_savee_subset.py` | Prepares a SAVEE subset (up to 100 clips) — see the callout below |
-| `run_layer_probe_analysis.py` | Runs layer-probe analysis from the command line, outside the UI |
+| Script | Purpose | Needs |
+|---|---|---|
+| `download_ravdess.py` | Fetches the 144-clip RAVDESS subset from Zenodo (~208 MB) into `Backend/data/ravdess_subset/`. `--zip <file>` reuses a zip you already have. | Nothing |
+| `download_saa.py` | Fetches the 150-clip Speech Accent Archive subset from accent.gmu.edu into `Backend/data/SAA_dataset/` | Nothing |
+| `download_librispeech_1000.py` | Downloads the ~1000-row LibriSpeech-1000 sample from the HF datasets-server | Nothing |
+| `prepare_l2arctic.py` | Builds the 150-clip L2-ARCTIC subset and its phone-error annotations from a copy you downloaded: `--source <extracted folder>` | Free registration, see below |
+| `prepare_common_voice.py` | Builds the 100-clip Common Voice `cv-valid-dev` subset: `--kaggle` (Kaggle CLI) or `--source <folder>` | Free Kaggle account, see below |
+| `prepare_savee_subset.py` | Prepares a SAVEE subset (up to 100 clips) — see the callout below | A copy you already own |
+| `fetch_datasets.py` | Runs the no-account ones (RAVDESS, SAA, LibriSpeech-1000) together | Nothing |
+| `import_librispeech_custom.py` | Imports a LibriSpeech-style dataset you already have on disk | Local files |
+| `run_layer_probe_analysis.py` | Runs layer-probe analysis from the command line, outside the UI | Fetched datasets |
+
+Run them from the repository root, for example
+`python scripts/download_ravdess.py`. All the dataset scripts accept
+`--dry-run` (show the plan, change nothing) and `--out <dir>` (default:
+`Backend/data/<dataset folder>`), print the dataset's license and citation
+first, and skip clips that are already present, so re-running is safe.
+
+<Callout title="Where the files go and how long they last" tone="note">
+  Output lands in `Backend/data/`, which Docker mounts read-only into the
+  containers, so it **persists until you delete it**. The 24-hour expiry
+  applies only to sessions and uploaded datasets, not to files fetched by
+  these scripts. Selection manifests (which clips, and their labels) ship in
+  `scripts/manifests/`; no audio does.
+</Callout>
+
+### Accounts and registration
+
+<Steps>
+  <Step title="L2-ARCTIC (registration)">
+    Open the [L2-ARCTIC page](https://psi.engr.tamu.edu/l2-arctic-corpus/),
+    fill in the form (name, email, affiliation), agree to CC BY-NC 4.0 and
+    complete the reCAPTCHA. An email titled "Access to L2-ARCTIC corpus"
+    arrives with a Google Drive link; download and extract it, then run
+    `python scripts/prepare_l2arctic.py --source /path/to/extracted`.
+    Citing Zhao et al. (2018) is required.
+  </Step>
+  <Step title="Common Voice (Kaggle account)">
+    Create a free Kaggle account, accept the `mozillaorg/common-voice`
+    dataset's terms on its page, make an API token (Settings → API) and save it
+    as `~/.kaggle/kaggle.json`, run `pip install kaggle`, then
+    `python scripts/prepare_common_voice.py --kaggle`. Already have the
+    download? Use `--source /path/to/common-voice` instead. Newer Common Voice
+    releases (23.0 onward) are distributed through the Mozilla Data Collective
+    and use different file names, so they don't match this subset.
+  </Step>
+  <Step title="RAVDESS, Speech Accent Archive, LibriSpeech-1000">
+    No account. Just run the script.
+  </Step>
+</Steps>
 
 <Callout title="SAVEE is not redistributable" tone="warn">
   `prepare_savee_subset.py` requires that you **already own a copy** of the

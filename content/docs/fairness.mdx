@@ -225,7 +225,7 @@ reported `n`.
 
 Non-native English speech where a trained linguist marked the exact time
 window, expected phoneme, and produced phoneme of every pronunciation error
-(891 annotated errors in the bundled subset). It adds:
+(891 annotated errors in the built-in subset). It adds:
 
 - **Phone-error grounding** — does saliency land on the moments a linguist
   flagged? Scored with **AUROC** (0.5 = random, 1.0 = perfect), **average
@@ -239,7 +239,7 @@ window, expected phoneme, and produced phoneme of every pronunciation error
   pronunciation itself predicts.
 
 <Callout title="L2-ARCTIC will report speaker_confounded" tone="warn">
-  The bundled subset has exactly **one speaker per native language** (ABA
+  The built-in subset has exactly **one speaker per native language** (ABA
   Arabic, LXC Chinese, EBVS Spanish). With the default minimum of 2 speakers
   per group, every language-based comparison correctly reports
   `speaker_confounded`. That's intentional, not a bug: with one speaker you

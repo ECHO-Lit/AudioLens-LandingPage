@@ -23,7 +23,7 @@ export const NAV_GROUPS: NavGroup[] = [
       { id: "intro", title: "Introduction", desc: "What AudioLens is and why it exists." },
       { id: "quickstart", title: "Quickstart", desc: "Boot the stack and run your first analysis in about ten minutes." },
       { id: "concepts", title: "Core concepts", desc: "Datapoints, the shared timeline, and how panels stay in sync." },
-      { id: "datasets", title: "Loading datasets", desc: "Bring your own audio or start from a bundled sample set." },
+      { id: "datasets", title: "Loading datasets", desc: "Bring your own audio or fetch a built-in sample set with one script." },
     ],
   },
   {

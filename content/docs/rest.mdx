@@ -26,7 +26,7 @@ is just "which session created this."
 | `GET` | `/upload/list` | List audio uploaded in this session |
 | `GET` | `/upload/metadata/{id}` | Get metadata for one upload |
 | `DELETE` | `/upload/{id}` | Delete an upload |
-| `POST` | `/audio/materialize` | Materialize an audio reference (e.g. from a bundled dataset) into a usable audio resource |
+| `POST` | `/audio/materialize` | Materialize an audio reference (e.g. from a built-in dataset) into a usable audio resource |
 | `GET` | `/audio/{id}` | Fetch audio bytes by id |
 | `POST` | `/audio/{id}/variant` | Create a derived variant of an audio file |
 
@@ -96,9 +96,9 @@ See [Loading datasets](/docs/datasets) for the higher-level workflow.
 
 | Method | Path | Purpose |
 |---|---|---|
-| `GET` | `/{dataset}/metadata` | Metadata for a bundled dataset |
-| `GET` | `/{dataset}/eda` | Bundled dataset's EDA report — see [Dataset EDA](/docs/eda) |
-| `GET`, `HEAD`, `OPTIONS` | `/{dataset}/file/{path}` | Fetch a file from a bundled dataset (supports HTTP `Range`) |
+| `GET` | `/{dataset}/metadata` | Metadata for a built-in dataset (errors as not provisioned until its [fetch script](/docs/cli) has run) |
+| `GET` | `/{dataset}/eda` | Built-in dataset's EDA report — see [Dataset EDA](/docs/eda) |
+| `GET`, `HEAD`, `OPTIONS` | `/{dataset}/file/{path}` | Fetch a file from a built-in dataset (supports HTTP `Range`) |
 
 ## Ops
 

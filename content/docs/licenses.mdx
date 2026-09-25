@@ -17,8 +17,13 @@ AudioLens's code is **MIT licensed**.
   (AudioLens, an extension of ECHO)
 
 **AudioLens does not redistribute any dataset audio.** Datasets are fetched
-or imported by scripts you run yourself — see [Loading
-datasets](/docs/datasets) and [CLI & scripts](/docs/cli). The MIT license on
+or imported by scripts you run yourself, from each dataset's official source
+— see [Loading datasets](/docs/datasets) and [CLI & scripts](/docs/cli). The
+repository does include small *selection manifests* (`scripts/manifests/`):
+CSVs listing which clips are used, with their labels and annotations. Those
+are derived from the source datasets, so they keep the source license
+(attribution always; share-alike for RAVDESS and SAA; non-commercial for
+RAVDESS, SAA and L2-ARCTIC). The MIT license on
 AudioLens's code says nothing about the license terms of the audio,
 transcripts, or model weights it helps you work with — those are listed
 below.
@@ -32,15 +37,15 @@ below.
 | `r-f/wav2vec-english-speech-emotion-recognition` | Apache 2.0 | Permissive; fine-tuned from `jonatasgrosman/wav2vec2-large-xlsr-53-english` | huggingface.co/r-f/wav2vec-english-speech-emotion-recognition |
 | `facebook/wav2vec2-base-960h` (legacy fallback) | Apache 2.0 | Permissive | huggingface.co/facebook/wav2vec2-base-960h |
 | `jonatasgrosman/wav2vec2-large-xlsr-53-english` (legacy fallback) | Apache 2.0 | Permissive | huggingface.co/jonatasgrosman/wav2vec2-large-xlsr-53-english |
-| Common Voice (cv-valid-dev subset) | **Unverified — check source** | Mozilla's own historical policy is CC0 (public domain) for audio + transcripts, but as of Oct 2025 Mozilla moved distribution behind "Mozilla Data Collective" and current live terms could not be confirmed by automated fetch | commonvoice.mozilla.org (fetch attempts blocked by JS-rendered page) |
+| Common Voice (cv-valid-dev subset) | **CC0** ("No Rights Reserved") — stated in the `LICENSE.txt` of the Kaggle dataset AudioLens uses, and by Mozilla | Public domain, commercial use OK. Mozilla's terms also ask you not to try to identify speakers. The subset is the Kaggle v1 release; a Kaggle account is needed to download it. Newer releases (23.0 onward) are distributed through the Mozilla Data Collective, whose live terms could not be fetched automatically, so check those separately if you use them | kaggle.com/datasets/mozillaorg/common-voice, commonvoice.mozilla.org |
 | RAVDESS | **CC BY-NC-SA 4.0** — non-commercial only | Commercial license must be purchased separately (contact ravdess@gmail.com); attribution + share-alike required; cite the PLoS ONE paper | zenodo.org/records/1188976 |
 | L2-ARCTIC | **CC BY-NC 4.0** — non-commercial only | Attribution required; must cite Zhao et al. (2018) Interspeech; registration (name/email/affiliation) required before download; commercial use needs approval from Dr. Ricardo Gutierrez-Osuna | psi.engr.tamu.edu/l2-arctic-corpus |
-| Speech Accent Archive (SAA) | **CC BY-NC-SA 4.0** | Non-commercial, attribution, share-alike | accent.gmu.edu |
+| Speech Accent Archive (SAA) | **CC BY-NC-SA 4.0** (stated on the archive's own site) | Non-commercial, attribution, share-alike; cite Weinberger, S. H. (2015), Speech Accent Archive, George Mason University | accent.gmu.edu |
 | LibriSpeech / LibriSpeech-1000 | **CC BY 4.0** | Attribution required, commercial use allowed | openslr.org/12, huggingface.co/datasets/openslr/librispeech_asr |
 | SAVEE | **Unverified — check source** | The project's own import script states plainly that "SAVEE is licensed and cannot be redistributed" — not freely licensed; requires obtaining a copy directly from the University of Surrey. Automated fetch of the official SAVEE site failed (TLS certificate mismatch) | kahlan.eps.surrey.ac.uk/savee (fetch blocked) |
 
 <Callout title="RAVDESS, L2-ARCTIC, and SAA are non-commercial licenses" tone="note">
-  These three bundled datasets are licensed for **non-commercial use only**.
+  These three datasets are licensed for **non-commercial use only**.
   AudioLens is itself a non-commercial, open-source project — self-hosted for
   free, and its planned [hosted demo](/docs/demo) is a non-commercial public
   demo with no paid tier — so this is compatible with how AudioLens uses
@@ -51,13 +56,26 @@ below.
   approval from its maintainer (Dr. Ricardo Gutierrez-Osuna).
 </Callout>
 
-<Callout title="Common Voice and SAVEE license terms are unverified" tone="note">
-  Both are marked **"unverified — check source"** in the table above rather
-  than given a guessed license, because automated attempts to fetch their
-  current official terms failed. Follow the source links and confirm the
-  terms yourself before relying on either dataset for anything beyond local
-  experimentation — don't take this page's absence of a confirmed license
-  as evidence that one doesn't apply.
+<Callout title="SAVEE's license terms are unverified" tone="note">
+  SAVEE is marked **"unverified — check source"** rather than given a guessed
+  license, because the official site couldn't be reached (TLS certificate
+  mismatch) and the project's own script says it can't be redistributed.
+  Follow the source link and confirm the terms yourself before relying on it
+  for anything beyond local experimentation — don't take this page's absence
+  of a confirmed license as evidence that one doesn't apply. (Common Voice
+  is confirmed CC0 for the Kaggle v1 subset; only newer Mozilla Data
+  Collective releases need a separate check.)
+</Callout>
+
+<Callout title="Hosting a public instance" tone="warn">
+  Don't mirror the datasets: no Google Drive folder, release asset or bucket
+  of dataset audio. Point users at the official sources and the fetch scripts
+  instead. A public instance that plays back RAVDESS, SAA or L2-ARCTIC clips
+  is redistributing them, so it must show each dataset's license and
+  attribution, keep share-alike terms for derived material, and stay
+  non-commercial. The safest public setup is LibriSpeech-1000 (CC BY) plus
+  user uploads. L2-ARCTIC's official download also requires registration, and
+  a mirror would bypass it.
 </Callout>
 
 ## What this means in practice
@@ -71,7 +89,10 @@ below.
 - **Non-commercial datasets are opt-in, not required** — you can run
   AudioLens entirely against LibriSpeech, your own uploaded audio, or a
   custom dataset and never touch RAVDESS, L2-ARCTIC, or SAA.
-- **Confirm current terms yourself** for Common Voice and SAVEE before
+- **Fetched data is permanent, uploads are not** — files the scripts write
+  to `Backend/data` stay until you delete them; uploaded datasets and
+  sessions expire after 24 hours.
+- **Confirm current terms yourself** for SAVEE before
   quoting a license anywhere official — this table reflects what could be
   verified as of the date at the top of this content pack, not a live feed.
 

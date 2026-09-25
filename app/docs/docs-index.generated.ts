@@ -60,8 +60,8 @@ export const TOC_BY_SECTION: Record<string, TocItem[]> = {
   ],
   "changelog": [
     {
-      "id": "unreleased--audiolens",
-      "label": "[Unreleased] — AudioLens"
+      "id": "audiolens",
+      "label": "AudioLens"
     },
     {
       "id": "100--2024-10-13",
@@ -142,8 +142,8 @@ export const TOC_BY_SECTION: Record<string, TocItem[]> = {
   ],
   "datasets": [
     {
-      "id": "bundled-datasets",
-      "label": "Bundled datasets"
+      "id": "built-in-datasets",
+      "label": "Built-in datasets"
     },
     {
       "id": "custom-datasets",
@@ -1127,124 +1127,124 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "AudioLens doesn't carry a version number today — see Licenses and the rest of these docs for \"Open source\" as the only label used. This page tracks what's shipped and what's in development instead of version numbers."
     },
     {
-      "key": "heading:changelog:unreleased--audiolens:1",
+      "key": "heading:changelog:audiolens:1",
       "sectionId": "changelog",
-      "headingId": "unreleased--audiolens",
+      "headingId": "audiolens",
       "kind": "heading",
-      "title": "[Unreleased] — AudioLens",
+      "title": "AudioLens",
       "body": ""
     },
     {
-      "key": "content:changelog:unreleased--audiolens:2",
+      "key": "content:changelog:audiolens:2",
       "sectionId": "changelog",
-      "headingId": "unreleased--audiolens",
+      "headingId": "audiolens",
       "kind": "content",
-      "title": "[Unreleased] — AudioLens",
-      "body": "in development"
-    },
-    {
-      "key": "content:changelog:unreleased--audiolens:3",
-      "sectionId": "changelog",
-      "headingId": "unreleased--audiolens",
-      "kind": "content",
-      "title": "[Unreleased] — AudioLens",
+      "title": "AudioLens",
       "body": "AudioLens extends the original ECHO project with a substantial set of new capabilities, currently in development:"
     },
     {
-      "key": "content:changelog:unreleased--audiolens:4",
+      "key": "content:changelog:audiolens:3",
       "sectionId": "changelog",
-      "headingId": "unreleased--audiolens",
+      "headingId": "audiolens",
       "kind": "content",
-      "title": "[Unreleased] — AudioLens",
+      "title": "AudioLens",
       "body": "Asynchronous job execution (submit → poll → fetch result, instead of synchronous inference)"
     },
     {
-      "key": "content:changelog:unreleased--audiolens:5",
+      "key": "content:changelog:audiolens:4",
       "sectionId": "changelog",
-      "headingId": "unreleased--audiolens",
+      "headingId": "audiolens",
       "kind": "content",
-      "title": "[Unreleased] — AudioLens",
+      "title": "AudioLens",
       "body": "A job lifecycle API (/jobs, /jobs/{id}, /jobs/{id}/result)"
     },
     {
-      "key": "content:changelog:unreleased--audiolens:6",
+      "key": "content:changelog:audiolens:5",
       "sectionId": "changelog",
-      "headingId": "unreleased--audiolens",
+      "headingId": "audiolens",
       "kind": "content",
-      "title": "[Unreleased] — AudioLens",
+      "title": "AudioLens",
       "body": "An object storage abstraction (local filesystem or S3-compatible backend)"
     },
     {
-      "key": "content:changelog:unreleased--audiolens:7",
+      "key": "content:changelog:audiolens:6",
       "sectionId": "changelog",
-      "headingId": "unreleased--audiolens",
+      "headingId": "audiolens",
       "kind": "content",
-      "title": "[Unreleased] — AudioLens",
+      "title": "AudioLens",
       "body": "Dataset EDA (exploratory data analysis) tooling"
     },
     {
-      "key": "content:changelog:unreleased--audiolens:8",
+      "key": "content:changelog:audiolens:7",
       "sectionId": "changelog",
-      "headingId": "unreleased--audiolens",
+      "headingId": "audiolens",
       "kind": "content",
-      "title": "[Unreleased] — AudioLens",
+      "title": "AudioLens",
       "body": "Embedding analytics — 2D/3D projection, clustering, nearest-neighbour retrieval"
     },
     {
-      "key": "content:changelog:unreleased--audiolens:9",
+      "key": "content:changelog:audiolens:8",
       "sectionId": "changelog",
-      "headingId": "unreleased--audiolens",
+      "headingId": "audiolens",
       "kind": "content",
-      "title": "[Unreleased] — AudioLens",
+      "title": "AudioLens",
       "body": "Saliency faithfulness checking (deletion-curve validation of saliency maps)"
     },
     {
-      "key": "content:changelog:unreleased--audiolens:10",
+      "key": "content:changelog:audiolens:9",
       "sectionId": "changelog",
-      "headingId": "unreleased--audiolens",
+      "headingId": "audiolens",
       "kind": "content",
-      "title": "[Unreleased] — AudioLens",
+      "title": "AudioLens",
       "body": "Linguistic-vs-acoustic influence sweeps"
     },
     {
-      "key": "content:changelog:unreleased--audiolens:11",
+      "key": "content:changelog:audiolens:10",
       "sectionId": "changelog",
-      "headingId": "unreleased--audiolens",
+      "headingId": "audiolens",
       "kind": "content",
-      "title": "[Unreleased] — AudioLens",
+      "title": "AudioLens",
       "body": "Layer-wise probing (linear probes per model layer)"
     },
     {
-      "key": "content:changelog:unreleased--audiolens:12",
+      "key": "content:changelog:audiolens:11",
       "sectionId": "changelog",
-      "headingId": "unreleased--audiolens",
+      "headingId": "audiolens",
       "kind": "content",
-      "title": "[Unreleased] — AudioLens",
+      "title": "AudioLens",
       "body": "Jacobian Lens — a decoder-only, position-resolved lens over Whisper's decoder layers"
     },
     {
-      "key": "content:changelog:unreleased--audiolens:13",
+      "key": "content:changelog:audiolens:12",
       "sectionId": "changelog",
-      "headingId": "unreleased--audiolens",
+      "headingId": "audiolens",
       "kind": "content",
-      "title": "[Unreleased] — AudioLens",
+      "title": "AudioLens",
       "body": "Accent and fairness slicing across speaker/accent/language/metadata groups"
     },
     {
-      "key": "content:changelog:unreleased--audiolens:14",
+      "key": "content:changelog:audiolens:13",
       "sectionId": "changelog",
-      "headingId": "unreleased--audiolens",
+      "headingId": "audiolens",
       "kind": "content",
-      "title": "[Unreleased] — AudioLens",
+      "title": "AudioLens",
       "body": "Custom model ingestion (any compatible Hugging Face speech model)"
     },
     {
-      "key": "content:changelog:unreleased--audiolens:15",
+      "key": "content:changelog:audiolens:14",
       "sectionId": "changelog",
-      "headingId": "unreleased--audiolens",
+      "headingId": "audiolens",
       "kind": "content",
-      "title": "[Unreleased] — AudioLens",
-      "body": "Two new bundled datasets: LibriSpeech-1000 and SAVEE (SAVEE requires the user's own licensed copy — see Licenses)"
+      "title": "AudioLens",
+      "body": "Two new built-in datasets: LibriSpeech-1000 and SAVEE (SAVEE requires the user's own licensed copy — see Licenses)"
+    },
+    {
+      "key": "content:changelog:audiolens:15",
+      "sectionId": "changelog",
+      "headingId": "audiolens",
+      "kind": "content",
+      "title": "AudioLens",
+      "body": "Dataset fetch scripts for RAVDESS, the Speech Accent Archive, L2-ARCTIC and Common Voice, plus a wrapper for the no-account ones — datasets now come from their official sources into Backend/data instead of being described as bundled (see CLI & scripts)"
     },
     {
       "key": "heading:changelog:100--2024-10-13:16",
@@ -1292,7 +1292,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "100--2024-10-13",
       "kind": "content",
       "title": "[1.0.0] — 2024-10-13",
-      "body": "Bundled Common Voice and RAVDESS datasets"
+      "body": "Common Voice and RAVDESS sample datasets"
     },
     {
       "key": "content:changelog:100--2024-10-13:22",
@@ -1357,7 +1357,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "dataset-scripts",
       "kind": "content",
       "title": "Dataset scripts",
-      "body": "download_librispeech_1000.py Downloads the ~1000-row LibriSpeech-1000 sample from the HF datasets-server"
+      "body": "download_ravdess.py Fetches the 144-clip RAVDESS subset from Zenodo (~208 MB) into Backend/data/ravdess_subset/. --zip <file> reuses a zip you already have. Nothing"
     },
     {
       "key": "content:cli:dataset-scripts:7",
@@ -1365,7 +1365,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "dataset-scripts",
       "kind": "content",
       "title": "Dataset scripts",
-      "body": "import_librispeech_custom.py Imports a LibriSpeech-style dataset you already have on disk"
+      "body": "download_saa.py Fetches the 150-clip Speech Accent Archive subset from accent.gmu.edu into Backend/data/SAA_dataset/ Nothing"
     },
     {
       "key": "content:cli:dataset-scripts:8",
@@ -1373,7 +1373,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "dataset-scripts",
       "kind": "content",
       "title": "Dataset scripts",
-      "body": "prepare_savee_subset.py Prepares a SAVEE subset (up to 100 clips) — see the callout below"
+      "body": "download_librispeech_1000.py Downloads the ~1000-row LibriSpeech-1000 sample from the HF datasets-server Nothing"
     },
     {
       "key": "content:cli:dataset-scripts:9",
@@ -1381,7 +1381,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "dataset-scripts",
       "kind": "content",
       "title": "Dataset scripts",
-      "body": "run_layer_probe_analysis.py Runs layer-probe analysis from the command line, outside the UI"
+      "body": "prepare_l2arctic.py Builds the 150-clip L2-ARCTIC subset and its phone-error annotations from a copy you downloaded: --source <extracted folder> Free registration, see below"
     },
     {
       "key": "content:cli:dataset-scripts:10",
@@ -1389,10 +1389,98 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "dataset-scripts",
       "kind": "content",
       "title": "Dataset scripts",
+      "body": "prepare_common_voice.py Builds the 100-clip Common Voice cv-valid-dev subset: --kaggle (Kaggle CLI) or --source <folder> Free Kaggle account, see below"
+    },
+    {
+      "key": "content:cli:dataset-scripts:11",
+      "sectionId": "cli",
+      "headingId": "dataset-scripts",
+      "kind": "content",
+      "title": "Dataset scripts",
+      "body": "prepare_savee_subset.py Prepares a SAVEE subset (up to 100 clips) — see the callout below A copy you already own"
+    },
+    {
+      "key": "content:cli:dataset-scripts:12",
+      "sectionId": "cli",
+      "headingId": "dataset-scripts",
+      "kind": "content",
+      "title": "Dataset scripts",
+      "body": "fetch_datasets.py Runs the no-account ones (RAVDESS, SAA, LibriSpeech-1000) together Nothing"
+    },
+    {
+      "key": "content:cli:dataset-scripts:13",
+      "sectionId": "cli",
+      "headingId": "dataset-scripts",
+      "kind": "content",
+      "title": "Dataset scripts",
+      "body": "import_librispeech_custom.py Imports a LibriSpeech-style dataset you already have on disk Local files"
+    },
+    {
+      "key": "content:cli:dataset-scripts:14",
+      "sectionId": "cli",
+      "headingId": "dataset-scripts",
+      "kind": "content",
+      "title": "Dataset scripts",
+      "body": "run_layer_probe_analysis.py Runs layer-probe analysis from the command line, outside the UI Fetched datasets"
+    },
+    {
+      "key": "content:cli:dataset-scripts:15",
+      "sectionId": "cli",
+      "headingId": "dataset-scripts",
+      "kind": "content",
+      "title": "Dataset scripts",
+      "body": "Run them from the repository root, for example python scripts/download_ravdess.py. All the dataset scripts accept --dry-run (show the plan, change nothing) and --out <dir> (default: Backend/data/<dataset folder>), print the dataset's license and citation first, and skip clips that are already present, so re-running is safe."
+    },
+    {
+      "key": "content:cli:dataset-scripts:16",
+      "sectionId": "cli",
+      "headingId": "dataset-scripts",
+      "kind": "content",
+      "title": "Dataset scripts",
+      "body": "Where the files go and how long they last Output lands in Backend/data/, which Docker mounts read-only into the containers, so it persists until you delete it. The 24-hour expiry applies only to sessions and uploaded datasets, not to files fetched by these scripts. Selection manifests (which clips, and their labels) ship in scripts/manifests/; no audio does."
+    },
+    {
+      "key": "content:cli:dataset-scripts:17",
+      "sectionId": "cli",
+      "headingId": "dataset-scripts",
+      "kind": "content",
+      "title": "Dataset scripts",
+      "body": "Accounts and registration"
+    },
+    {
+      "key": "content:cli:dataset-scripts:18",
+      "sectionId": "cli",
+      "headingId": "dataset-scripts",
+      "kind": "content",
+      "title": "Dataset scripts",
+      "body": "L2-ARCTIC (registration) Open the L2-ARCTIC page, fill in the form (name, email, affiliation), agree to CC BY-NC 4.0 and complete the reCAPTCHA. An email titled \"Access to L2-ARCTIC corpus\" arrives with a Google Drive link; download and extract it, then run python scripts/prepare_l2arctic.py --source /path/to/extracted. Citing Zhao et al. (2018) is required."
+    },
+    {
+      "key": "content:cli:dataset-scripts:19",
+      "sectionId": "cli",
+      "headingId": "dataset-scripts",
+      "kind": "content",
+      "title": "Dataset scripts",
+      "body": "Common Voice (Kaggle account) Create a free Kaggle account, accept the mozillaorg/common-voice dataset's terms on its page, make an API token (Settings → API) and save it as ~/.kaggle/kaggle.json, run pip install kaggle, then python scripts/prepare_common_voice.py --kaggle. Already have the download? Use --source /path/to/common-voice instead. Newer Common Voice releases (23.0 onward) are distributed through the Mozilla Data Collective and use different file names, so they don't match this subset."
+    },
+    {
+      "key": "content:cli:dataset-scripts:20",
+      "sectionId": "cli",
+      "headingId": "dataset-scripts",
+      "kind": "content",
+      "title": "Dataset scripts",
+      "body": "RAVDESS, Speech Accent Archive, LibriSpeech-1000 No account. Just run the script."
+    },
+    {
+      "key": "content:cli:dataset-scripts:21",
+      "sectionId": "cli",
+      "headingId": "dataset-scripts",
+      "kind": "content",
+      "title": "Dataset scripts",
       "body": "SAVEE is not redistributable prepare_savee_subset.py requires that you already own a copy of the SAVEE dataset — the script's own comments state plainly that \"SAVEE is licensed and cannot be redistributed.\" AudioLens does not bundle or fetch SAVEE audio for you. See Licenses for what's currently confirmed about SAVEE's terms, and Loading datasets for the general import workflow."
     },
     {
-      "key": "heading:cli:useful-docker-compose-commands:11",
+      "key": "heading:cli:useful-docker-compose-commands:22",
       "sectionId": "cli",
       "headingId": "useful-docker-compose-commands",
       "kind": "heading",
@@ -1400,7 +1488,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:cli:useful-docker-compose-commands:12",
+      "key": "content:cli:useful-docker-compose-commands:23",
       "sectionId": "cli",
       "headingId": "useful-docker-compose-commands",
       "kind": "content",
@@ -1408,7 +1496,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Scale worker replicas:"
     },
     {
-      "key": "content:cli:useful-docker-compose-commands:13",
+      "key": "content:cli:useful-docker-compose-commands:24",
       "sectionId": "cli",
       "headingId": "useful-docker-compose-commands",
       "kind": "content",
@@ -1416,7 +1504,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "docker compose up -d --scale worker-cpu=2 --scale worker-model-local=2"
     },
     {
-      "key": "content:cli:useful-docker-compose-commands:14",
+      "key": "content:cli:useful-docker-compose-commands:25",
       "sectionId": "cli",
       "headingId": "useful-docker-compose-commands",
       "kind": "content",
@@ -1424,7 +1512,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Tear the stack down, optionally wiping volumes (Redis data, local storage):"
     },
     {
-      "key": "content:cli:useful-docker-compose-commands:15",
+      "key": "content:cli:useful-docker-compose-commands:26",
       "sectionId": "cli",
       "headingId": "useful-docker-compose-commands",
       "kind": "content",
@@ -1432,7 +1520,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "docker compose down docker compose down -v"
     },
     {
-      "key": "content:cli:useful-docker-compose-commands:16",
+      "key": "content:cli:useful-docker-compose-commands:27",
       "sectionId": "cli",
       "headingId": "useful-docker-compose-commands",
       "kind": "content",
@@ -1440,7 +1528,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Pre-warm model weights in a one-off container instead of waiting for the first real job to trigger the download:"
     },
     {
-      "key": "content:cli:useful-docker-compose-commands:17",
+      "key": "content:cli:useful-docker-compose-commands:28",
       "sectionId": "cli",
       "headingId": "useful-docker-compose-commands",
       "kind": "content",
@@ -1448,7 +1536,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "docker compose run --rm worker-model-local python3 -c \\ \"from transformers import pipeline; pipeline('automatic-speech-recognition', model='openai/whisper-base')\""
     },
     {
-      "key": "content:cli:useful-docker-compose-commands:18",
+      "key": "content:cli:useful-docker-compose-commands:29",
       "sectionId": "cli",
       "headingId": "useful-docker-compose-commands",
       "kind": "content",
@@ -1983,164 +2071,164 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
   ],
   "datasets": [
     {
-      "key": "heading:datasets:bundled-datasets:0",
+      "key": "heading:datasets:built-in-datasets:0",
       "sectionId": "datasets",
-      "headingId": "bundled-datasets",
+      "headingId": "built-in-datasets",
       "kind": "heading",
-      "title": "Bundled datasets",
+      "title": "Built-in datasets",
       "body": ""
     },
     {
-      "key": "content:datasets:bundled-datasets:1",
+      "key": "content:datasets:built-in-datasets:1",
       "sectionId": "datasets",
-      "headingId": "bundled-datasets",
+      "headingId": "built-in-datasets",
       "kind": "content",
-      "title": "Bundled datasets",
-      "body": "AudioLens ships with a handful of small, bundled sample datasets so you can start exploring without uploading anything. Audio files themselves are never committed to the repository — bundled datasets are packaged separately, and a couple of the larger ones are fetched by a script you run yourself."
+      "title": "Built-in datasets",
+      "body": "AudioLens has six built-in sample datasets so you can start exploring without uploading anything. No dataset audio is included in the repository or in any download from this project — their licenses don't allow redistribution. You fetch each one once, from its official source, with a script in scripts/. The scripts write into Backend/data/ and reproduce the exact subset AudioLens uses."
     },
     {
-      "key": "content:datasets:bundled-datasets:2",
+      "key": "content:datasets:built-in-datasets:2",
       "sectionId": "datasets",
-      "headingId": "bundled-datasets",
+      "headingId": "built-in-datasets",
       "kind": "content",
-      "title": "Bundled datasets",
-      "body": "Common Voice (cv-valid-dev subset) 100 bundled"
+      "title": "Built-in datasets",
+      "body": "RAVDESS 144 download_ravdess.py Nothing. Downloads about 208 MB from Zenodo."
     },
     {
-      "key": "content:datasets:bundled-datasets:3",
+      "key": "content:datasets:built-in-datasets:3",
       "sectionId": "datasets",
-      "headingId": "bundled-datasets",
+      "headingId": "built-in-datasets",
       "kind": "content",
-      "title": "Bundled datasets",
-      "body": "RAVDESS 144 bundled"
+      "title": "Built-in datasets",
+      "body": "Speech Accent Archive (SAA) 150 download_saa.py Nothing. Fetches each clip from accent.gmu.edu."
     },
     {
-      "key": "content:datasets:bundled-datasets:4",
+      "key": "content:datasets:built-in-datasets:4",
       "sectionId": "datasets",
-      "headingId": "bundled-datasets",
+      "headingId": "built-in-datasets",
       "kind": "content",
-      "title": "Bundled datasets",
-      "body": "L2-ARCTIC 150 bundled, includes phone-error annotations"
+      "title": "Built-in datasets",
+      "body": "LibriSpeech-1000 ~1000 download_librispeech_1000.py Nothing. Uses the Hugging Face datasets-server."
     },
     {
-      "key": "content:datasets:bundled-datasets:5",
+      "key": "content:datasets:built-in-datasets:5",
       "sectionId": "datasets",
-      "headingId": "bundled-datasets",
+      "headingId": "built-in-datasets",
       "kind": "content",
-      "title": "Bundled datasets",
-      "body": "Speech Accent Archive (SAA) 150 bundled"
+      "title": "Built-in datasets",
+      "body": "L2-ARCTIC 150, with phone-error annotations prepare_l2arctic.py --source <folder> Free registration. Fill in the form on the L2-ARCTIC page (name, email, affiliation, agree to the license); a Google Drive link arrives by email. Download and extract it."
     },
     {
-      "key": "content:datasets:bundled-datasets:6",
+      "key": "content:datasets:built-in-datasets:6",
       "sectionId": "datasets",
-      "headingId": "bundled-datasets",
+      "headingId": "built-in-datasets",
       "kind": "content",
-      "title": "Bundled datasets",
-      "body": "LibriSpeech-1000 ~1000 fetched via scripts/download_librispeech_1000.py"
+      "title": "Built-in datasets",
+      "body": "Common Voice (cv-valid-dev subset) 100 prepare_common_voice.py --kaggle or --source <folder> A free Kaggle account and API token (for --kaggle), or the Kaggle common-voice download you already have (for --source)."
     },
     {
-      "key": "content:datasets:bundled-datasets:7",
+      "key": "content:datasets:built-in-datasets:7",
       "sectionId": "datasets",
-      "headingId": "bundled-datasets",
+      "headingId": "built-in-datasets",
       "kind": "content",
-      "title": "Bundled datasets",
-      "body": "SAVEE up to 100 prepared via scripts/prepare_savee_subset.py — requires you to already own a copy"
+      "title": "Built-in datasets",
+      "body": "SAVEE up to 100 prepare_savee_subset.py --source <folder> A copy you already own. SAVEE can't be redistributed, so nothing fetches it for you."
     },
     {
-      "key": "content:datasets:bundled-datasets:8",
+      "key": "content:datasets:built-in-datasets:8",
       "sectionId": "datasets",
-      "headingId": "bundled-datasets",
+      "headingId": "built-in-datasets",
       "kind": "content",
-      "title": "Bundled datasets",
-      "body": "Non-commercial licenses in this list RAVDESS, L2-ARCTIC, and the Speech Accent Archive (SAA) are all licensed for non-commercial use only. Common Voice and SAVEE's current terms are flagged as unverified. See /docs/licenses for the full breakdown per dataset before using any of these outside research or personal use."
+      "title": "Built-in datasets",
+      "body": "Every script accepts --dry-run and prints the dataset's license and citation before doing anything. python scripts/fetch_datasets.py runs the three that need nothing in one go. Full usage is on CLI & scripts."
     },
     {
-      "key": "content:datasets:bundled-datasets:9",
+      "key": "content:datasets:built-in-datasets:9",
       "sectionId": "datasets",
-      "headingId": "bundled-datasets",
+      "headingId": "built-in-datasets",
       "kind": "content",
-      "title": "Bundled datasets",
+      "title": "Built-in datasets",
+      "body": "Where the data lives, and how long The scripts write to Backend/data/ in your project folder. Docker mounts that folder read-only into the containers, so the files stay until you delete them — fetch once and you're done, including after docker compose down -v. Uploaded datasets and sessions are different: they are temporary and expire after 24 hours. To keep a dataset permanently, put it in Backend/data with a script, don't re-upload it each session."
+    },
+    {
+      "key": "content:datasets:built-in-datasets:10",
+      "sectionId": "datasets",
+      "headingId": "built-in-datasets",
+      "kind": "content",
+      "title": "Built-in datasets",
+      "body": "Until you run a script, the dataset isn't there A built-in dataset whose files haven't been fetched shows as not provisioned and its endpoints return an error. Custom uploads and LibriSpeech-1000 work without any of the account-gated sets."
+    },
+    {
+      "key": "content:datasets:built-in-datasets:11",
+      "sectionId": "datasets",
+      "headingId": "built-in-datasets",
+      "kind": "content",
+      "title": "Built-in datasets",
+      "body": "Non-commercial licenses in this list RAVDESS, L2-ARCTIC, and the Speech Accent Archive (SAA) are licensed for non-commercial use only. Common Voice is CC0, and SAVEE's terms are unverified. See /docs/licenses for the full breakdown per dataset before using any of these outside research or personal use."
+    },
+    {
+      "key": "content:datasets:built-in-datasets:12",
+      "sectionId": "datasets",
+      "headingId": "built-in-datasets",
+      "kind": "content",
+      "title": "Built-in datasets",
       "body": "Metadata columns"
     },
     {
-      "key": "content:datasets:bundled-datasets:10",
+      "key": "content:datasets:built-in-datasets:13",
       "sectionId": "datasets",
-      "headingId": "bundled-datasets",
+      "headingId": "built-in-datasets",
       "kind": "content",
-      "title": "Bundled datasets",
-      "body": "Bundled datasets ship a metadata CSV. Its columns are what the Fairness grouping and the Layer probes properties draw on:"
+      "title": "Built-in datasets",
+      "body": "Each built-in dataset gets a metadata CSV when you fetch it. Its columns are what the Fairness grouping and the Layer probes properties draw on:"
     },
     {
-      "key": "content:datasets:bundled-datasets:11",
+      "key": "content:datasets:built-in-datasets:14",
       "sectionId": "datasets",
-      "headingId": "bundled-datasets",
+      "headingId": "built-in-datasets",
       "kind": "content",
-      "title": "Bundled datasets",
+      "title": "Built-in datasets",
       "body": "Common Voice text, age, gender, accent, duration, up_votes, down_votes, client_id, locale"
     },
     {
-      "key": "content:datasets:bundled-datasets:12",
+      "key": "content:datasets:built-in-datasets:15",
       "sectionId": "datasets",
-      "headingId": "bundled-datasets",
+      "headingId": "built-in-datasets",
       "kind": "content",
-      "title": "Bundled datasets",
+      "title": "Built-in datasets",
       "body": "RAVDESS emotion, intensity, statement, repetition, actor, gender, modality, vocal_channel"
     },
     {
-      "key": "content:datasets:bundled-datasets:13",
+      "key": "content:datasets:built-in-datasets:16",
       "sectionId": "datasets",
-      "headingId": "bundled-datasets",
+      "headingId": "built-in-datasets",
       "kind": "content",
-      "title": "Bundled datasets",
+      "title": "Built-in datasets",
       "body": "L2-ARCTIC speaker_code, native_language, gender, text, utt_id, error_type, canonical and perceived IPA, and human-verified error counts. Phone-level errors (time window, expected and produced phone) are in a separate annotations file."
     },
     {
-      "key": "content:datasets:bundled-datasets:14",
+      "key": "content:datasets:built-in-datasets:17",
       "sectionId": "datasets",
-      "headingId": "bundled-datasets",
+      "headingId": "built-in-datasets",
       "kind": "content",
-      "title": "Bundled datasets",
+      "title": "Built-in datasets",
       "body": "SAA native_language, age, age_english_onset, sex, birthplace, country, speakerid, reading_passage"
     },
     {
-      "key": "content:datasets:bundled-datasets:15",
+      "key": "content:datasets:built-in-datasets:18",
       "sectionId": "datasets",
-      "headingId": "bundled-datasets",
+      "headingId": "built-in-datasets",
       "kind": "content",
-      "title": "Bundled datasets",
+      "title": "Built-in datasets",
       "body": "Values of unknown (common in Common Voice age, gender, and accent) are treated as missing by layer probes, not as a category."
     },
     {
-      "key": "heading:datasets:custom-datasets:16",
+      "key": "heading:datasets:custom-datasets:19",
       "sectionId": "datasets",
       "headingId": "custom-datasets",
       "kind": "heading",
       "title": "Custom datasets",
       "body": ""
-    },
-    {
-      "key": "content:datasets:custom-datasets:17",
-      "sectionId": "datasets",
-      "headingId": "custom-datasets",
-      "kind": "content",
-      "title": "Custom datasets",
-      "body": "Any user can upload their own dataset — there's no gatekeeping beyond the same file limits that apply to a single upload. A custom dataset needs labels from one of two sources:"
-    },
-    {
-      "key": "content:datasets:custom-datasets:18",
-      "sectionId": "datasets",
-      "headingId": "custom-datasets",
-      "kind": "content",
-      "title": "Custom datasets",
-      "body": "an uploaded label CSV mapping filenames to labels, or"
-    },
-    {
-      "key": "content:datasets:custom-datasets:19",
-      "sectionId": "datasets",
-      "headingId": "custom-datasets",
-      "kind": "content",
-      "title": "Custom datasets",
-      "body": "filename-pattern-derived labels, where labels are inferred from a naming convention (for example, the pattern used for SAVEE-style filenames)."
     },
     {
       "key": "content:datasets:custom-datasets:20",
@@ -2148,39 +2236,39 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "custom-datasets",
       "kind": "content",
       "title": "Custom datasets",
+      "body": "Any user can upload their own dataset — there's no gatekeeping beyond the same file limits that apply to a single upload. A custom dataset needs labels from one of two sources:"
+    },
+    {
+      "key": "content:datasets:custom-datasets:21",
+      "sectionId": "datasets",
+      "headingId": "custom-datasets",
+      "kind": "content",
+      "title": "Custom datasets",
+      "body": "an uploaded label CSV mapping filenames to labels, or"
+    },
+    {
+      "key": "content:datasets:custom-datasets:22",
+      "sectionId": "datasets",
+      "headingId": "custom-datasets",
+      "kind": "content",
+      "title": "Custom datasets",
+      "body": "filename-pattern-derived labels, where labels are inferred from a naming convention (for example, the pattern used for SAVEE-style filenames)."
+    },
+    {
+      "key": "content:datasets:custom-datasets:23",
+      "sectionId": "datasets",
+      "headingId": "custom-datasets",
+      "kind": "content",
+      "title": "Custom datasets",
       "body": "Custom dataset management goes through its own set of endpoints — creating the dataset, uploading files, submitting or deriving a manifest and labels, and listing or deleting the dataset later. See /docs/rest for the full list."
     },
     {
-      "key": "heading:datasets:formats-size-and-duration-limits:21",
+      "key": "heading:datasets:formats-size-and-duration-limits:24",
       "sectionId": "datasets",
       "headingId": "formats-size-and-duration-limits",
       "kind": "heading",
       "title": "Formats, size, and duration limits",
       "body": ""
-    },
-    {
-      "key": "content:datasets:formats-size-and-duration-limits:22",
-      "sectionId": "datasets",
-      "headingId": "formats-size-and-duration-limits",
-      "kind": "content",
-      "title": "Formats, size, and duration limits",
-      "body": "These limits apply to any audio you upload, whether it's a one-off clip or part of a custom dataset:"
-    },
-    {
-      "key": "content:datasets:formats-size-and-duration-limits:23",
-      "sectionId": "datasets",
-      "headingId": "formats-size-and-duration-limits",
-      "kind": "content",
-      "title": "Formats, size, and duration limits",
-      "body": "Accepted formats .wav .mp3 .m4a .flac"
-    },
-    {
-      "key": "content:datasets:formats-size-and-duration-limits:24",
-      "sectionId": "datasets",
-      "headingId": "formats-size-and-duration-limits",
-      "kind": "content",
-      "title": "Formats, size, and duration limits",
-      "body": "Max upload size 100 MB (MAX_UPLOAD_BYTES = 104857600)"
     },
     {
       "key": "content:datasets:formats-size-and-duration-limits:25",
@@ -2188,7 +2276,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "formats-size-and-duration-limits",
       "kind": "content",
       "title": "Formats, size, and duration limits",
-      "body": "Max clip duration 10 minutes (MAX_AUDIO_DURATION_SECONDS = 600)"
+      "body": "These limits apply to any audio you upload, whether it's a one-off clip or part of a custom dataset:"
     },
     {
       "key": "content:datasets:formats-size-and-duration-limits:26",
@@ -2196,10 +2284,34 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "formats-size-and-duration-limits",
       "kind": "content",
       "title": "Formats, size, and duration limits",
+      "body": "Accepted formats .wav .mp3 .m4a .flac"
+    },
+    {
+      "key": "content:datasets:formats-size-and-duration-limits:27",
+      "sectionId": "datasets",
+      "headingId": "formats-size-and-duration-limits",
+      "kind": "content",
+      "title": "Formats, size, and duration limits",
+      "body": "Max upload size 100 MB (MAX_UPLOAD_BYTES = 104857600)"
+    },
+    {
+      "key": "content:datasets:formats-size-and-duration-limits:28",
+      "sectionId": "datasets",
+      "headingId": "formats-size-and-duration-limits",
+      "kind": "content",
+      "title": "Formats, size, and duration limits",
+      "body": "Max clip duration 10 minutes (MAX_AUDIO_DURATION_SECONDS = 600)"
+    },
+    {
+      "key": "content:datasets:formats-size-and-duration-limits:29",
+      "sectionId": "datasets",
+      "headingId": "formats-size-and-duration-limits",
+      "kind": "content",
+      "title": "Formats, size, and duration limits",
       "body": "Some analyses apply tighter limits on top of these — saliency, for example, caps the analysis window well below 10 minutes. See each panel's own page for its specific limits."
     },
     {
-      "key": "heading:datasets:where-to-go-next:27",
+      "key": "heading:datasets:where-to-go-next:30",
       "sectionId": "datasets",
       "headingId": "where-to-go-next",
       "kind": "heading",
@@ -2207,7 +2319,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:datasets:where-to-go-next:28",
+      "key": "content:datasets:where-to-go-next:31",
       "sectionId": "datasets",
       "headingId": "where-to-go-next",
       "kind": "content",
@@ -2215,7 +2327,15 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Dataset EDA Analysis panel Explore class balance and distributions before you analyze"
     },
     {
-      "key": "content:datasets:where-to-go-next:29",
+      "key": "content:datasets:where-to-go-next:32",
+      "sectionId": "datasets",
+      "headingId": "where-to-go-next",
+      "kind": "content",
+      "title": "Where to go next",
+      "body": "CLI & scripts Reference Every dataset script, its flags and prerequisites"
+    },
+    {
+      "key": "content:datasets:where-to-go-next:33",
       "sectionId": "datasets",
       "headingId": "where-to-go-next",
       "kind": "content",
@@ -2223,7 +2343,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Licenses Reference Full license terms for AudioLens's models and datasets"
     },
     {
-      "key": "content:datasets:where-to-go-next:30",
+      "key": "content:datasets:where-to-go-next:34",
       "sectionId": "datasets",
       "headingId": "where-to-go-next",
       "kind": "content",
@@ -2292,10 +2412,18 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "dataset-licensing-and-the-demo",
       "kind": "content",
       "title": "Dataset licensing and the demo",
-      "body": "AudioLens ships with several bundled sample datasets, and three of them — RAVDESS, L2-ARCTIC, and the Speech Accent Archive (SAA) — are licensed non-commercial only (see Licenses for the exact terms). AudioLens is a non-commercial, open-source project, and the hosted demo will be a non-commercial public demo with no paid tier — so using these datasets there is compatible with their license terms. Attribution/citation requirements still apply and are listed on the Licenses page. This only becomes a real question for someone who forks AudioLens into a commercial product; that fork would need to drop these three datasets or obtain a separate license for them."
+      "body": "AudioLens has several built-in sample datasets, fetched from their official sources by scripts (nothing is bundled in the repo), and three of them — RAVDESS, L2-ARCTIC, and the Speech Accent Archive (SAA) — are licensed non-commercial only (see Licenses for the exact terms). AudioLens is a non-commercial, open-source project, and the hosted demo will be a non-commercial public demo with no paid tier — so using these datasets there is compatible with their license terms, provided the demo shows each dataset's license and attribution and keeps share-alike terms for derived material. The demo won't offer the datasets as downloads; users who want the data get it from the official sources with the scripts on CLI & scripts. Attribution/citation requirements still apply and are listed on the Licenses page. This only becomes a real question for someone who forks AudioLens into a commercial product; that fork would need to drop these three datasets or obtain a separate license for them."
     },
     {
-      "key": "heading:demo:usage-limits--not-decided-yet:8",
+      "key": "content:demo:dataset-licensing-and-the-demo:8",
+      "sectionId": "demo",
+      "headingId": "dataset-licensing-and-the-demo",
+      "kind": "content",
+      "title": "Dataset licensing and the demo",
+      "body": "Hosted-demo sessions and anything uploaded to them expire after 24 hours. Files fetched into Backend/data on a self-hosted install do not."
+    },
+    {
+      "key": "heading:demo:usage-limits--not-decided-yet:9",
       "sectionId": "demo",
       "headingId": "usage-limits--not-decided-yet",
       "kind": "heading",
@@ -2303,7 +2431,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:demo:usage-limits--not-decided-yet:9",
+      "key": "content:demo:usage-limits--not-decided-yet:10",
       "sectionId": "demo",
       "headingId": "usage-limits--not-decided-yet",
       "kind": "content",
@@ -2311,7 +2439,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "No rate limiting exists in AudioLens's code today. If and when the hosted demo launches, any usage caps (requests per session, clip length, concurrent jobs, etc.) will be a policy decision made at launch time, not a feature that's already built. Don't rely on this page — or any other page in these docs — as evidence that quotas exist; as of this writing, they don't."
     },
     {
-      "key": "heading:demo:in-the-meantime:10",
+      "key": "heading:demo:in-the-meantime:11",
       "sectionId": "demo",
       "headingId": "in-the-meantime",
       "kind": "heading",
@@ -2319,7 +2447,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:demo:in-the-meantime:11",
+      "key": "content:demo:in-the-meantime:12",
       "sectionId": "demo",
       "headingId": "in-the-meantime",
       "kind": "content",
@@ -2944,7 +3072,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "where-to-go-next",
       "kind": "content",
       "title": "Where to go next",
-      "body": "Loading datasets Get started Bundled datasets and custom uploads"
+      "body": "Loading datasets Get started Built-in datasets, fetch scripts and custom uploads"
     },
     {
       "key": "content:eda:where-to-go-next:23",
@@ -4121,7 +4249,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "dataset-specific-analyses",
       "kind": "content",
       "title": "Dataset-specific analyses",
-      "body": "Non-native English speech where a trained linguist marked the exact time window, expected phoneme, and produced phoneme of every pronunciation error (891 annotated errors in the bundled subset). It adds:"
+      "body": "Non-native English speech where a trained linguist marked the exact time window, expected phoneme, and produced phoneme of every pronunciation error (891 annotated errors in the built-in subset). It adds:"
     },
     {
       "key": "content:fairness:dataset-specific-analyses:76",
@@ -4145,7 +4273,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "dataset-specific-analyses",
       "kind": "content",
       "title": "Dataset-specific analyses",
-      "body": "L2-ARCTIC will report speaker_confounded The bundled subset has exactly one speaker per native language (ABA Arabic, LXC Chinese, EBVS Spanish). With the default minimum of 2 speakers per group, every language-based comparison correctly reports speaker_confounded. That's intentional, not a bug: with one speaker you can't tell language from that person's voice."
+      "body": "L2-ARCTIC will report speaker_confounded The built-in subset has exactly one speaker per native language (ABA Arabic, LXC Chinese, EBVS Spanish). With the default minimum of 2 speakers per group, every language-based comparison correctly reports speaker_confounded. That's intentional, not a bug: with one speaker you can't tell language from that person's voice."
     },
     {
       "key": "heading:fairness:common-misreadings:79",
@@ -4571,7 +4699,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "audiolenss-own-license",
       "kind": "content",
       "title": "AudioLens's own license",
-      "body": "AudioLens does not redistribute any dataset audio. Datasets are fetched or imported by scripts you run yourself — see Loading datasets and CLI & scripts. The MIT license on AudioLens's code says nothing about the license terms of the audio, transcripts, or model weights it helps you work with — those are listed below."
+      "body": "AudioLens does not redistribute any dataset audio. Datasets are fetched or imported by scripts you run yourself, from each dataset's official source — see Loading datasets and CLI & scripts. The repository does include small selection manifests (scripts/manifests/): CSVs listing which clips are used, with their labels and annotations. Those are derived from the source datasets, so they keep the source license (attribution always; share-alike for RAVDESS and SAA; non-commercial for RAVDESS, SAA and L2-ARCTIC). The MIT license on AudioLens's code says nothing about the license terms of the audio, transcripts, or model weights it helps you work with — those are listed below."
     },
     {
       "key": "heading:licenses:third-party-model-and-dataset-licenses:7",
@@ -4627,7 +4755,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "third-party-model-and-dataset-licenses",
       "kind": "content",
       "title": "Third-party model and dataset licenses",
-      "body": "Common Voice (cv-valid-dev subset) Unverified — check source Mozilla's own historical policy is CC0 (public domain) for audio + transcripts, but as of Oct 2025 Mozilla moved distribution behind \"Mozilla Data Collective\" and current live terms could not be confirmed by automated fetch commonvoice.mozilla.org (fetch attempts blocked by JS-rendered page)"
+      "body": "Common Voice (cv-valid-dev subset) CC0 (\"No Rights Reserved\") — stated in the LICENSE.txt of the Kaggle dataset AudioLens uses, and by Mozilla Public domain, commercial use OK. Mozilla's terms also ask you not to try to identify speakers. The subset is the Kaggle v1 release; a Kaggle account is needed to download it. Newer releases (23.0 onward) are distributed through the Mozilla Data Collective, whose live terms could not be fetched automatically, so check those separately if you use them kaggle.com/datasets/mozillaorg/common-voice, commonvoice.mozilla.org"
     },
     {
       "key": "content:licenses:third-party-model-and-dataset-licenses:14",
@@ -4651,7 +4779,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "third-party-model-and-dataset-licenses",
       "kind": "content",
       "title": "Third-party model and dataset licenses",
-      "body": "Speech Accent Archive (SAA) CC BY-NC-SA 4.0 Non-commercial, attribution, share-alike accent.gmu.edu"
+      "body": "Speech Accent Archive (SAA) CC BY-NC-SA 4.0 (stated on the archive's own site) Non-commercial, attribution, share-alike; cite Weinberger, S. H. (2015), Speech Accent Archive, George Mason University accent.gmu.edu"
     },
     {
       "key": "content:licenses:third-party-model-and-dataset-licenses:17",
@@ -4675,7 +4803,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "third-party-model-and-dataset-licenses",
       "kind": "content",
       "title": "Third-party model and dataset licenses",
-      "body": "RAVDESS, L2-ARCTIC, and SAA are non-commercial licenses These three bundled datasets are licensed for non-commercial use only. AudioLens is itself a non-commercial, open-source project — self-hosted for free, and its planned hosted demo is a non-commercial public demo with no paid tier — so this is compatible with how AudioLens uses them. Attribution and citation requirements still apply regardless. If you fork AudioLens for a commercial deployment, you'd need to either drop these three datasets or get a separate license: RAVDESS's commercial terms require a purchased license (ravdess@gmail.com), and L2-ARCTIC's require approval from its maintainer (Dr. Ricardo Gutierrez-Osuna)."
+      "body": "RAVDESS, L2-ARCTIC, and SAA are non-commercial licenses These three datasets are licensed for non-commercial use only. AudioLens is itself a non-commercial, open-source project — self-hosted for free, and its planned hosted demo is a non-commercial public demo with no paid tier — so this is compatible with how AudioLens uses them. Attribution and citation requirements still apply regardless. If you fork AudioLens for a commercial deployment, you'd need to either drop these three datasets or get a separate license: RAVDESS's commercial terms require a purchased license (ravdess@gmail.com), and L2-ARCTIC's require approval from its maintainer (Dr. Ricardo Gutierrez-Osuna)."
     },
     {
       "key": "content:licenses:third-party-model-and-dataset-licenses:20",
@@ -4683,10 +4811,18 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "third-party-model-and-dataset-licenses",
       "kind": "content",
       "title": "Third-party model and dataset licenses",
-      "body": "Common Voice and SAVEE license terms are unverified Both are marked \"unverified — check source\" in the table above rather than given a guessed license, because automated attempts to fetch their current official terms failed. Follow the source links and confirm the terms yourself before relying on either dataset for anything beyond local experimentation — don't take this page's absence of a confirmed license as evidence that one doesn't apply."
+      "body": "SAVEE's license terms are unverified SAVEE is marked \"unverified — check source\" rather than given a guessed license, because the official site couldn't be reached (TLS certificate mismatch) and the project's own script says it can't be redistributed. Follow the source link and confirm the terms yourself before relying on it for anything beyond local experimentation — don't take this page's absence of a confirmed license as evidence that one doesn't apply. (Common Voice is confirmed CC0 for the Kaggle v1 subset; only newer Mozilla Data Collective releases need a separate check.)"
     },
     {
-      "key": "heading:licenses:what-this-means-in-practice:21",
+      "key": "content:licenses:third-party-model-and-dataset-licenses:21",
+      "sectionId": "licenses",
+      "headingId": "third-party-model-and-dataset-licenses",
+      "kind": "content",
+      "title": "Third-party model and dataset licenses",
+      "body": "Hosting a public instance Don't mirror the datasets: no Google Drive folder, release asset or bucket of dataset audio. Point users at the official sources and the fetch scripts instead. A public instance that plays back RAVDESS, SAA or L2-ARCTIC clips is redistributing them, so it must show each dataset's license and attribution, keep share-alike terms for derived material, and stay non-commercial. The safest public setup is LibriSpeech-1000 (CC BY) plus user uploads. L2-ARCTIC's official download also requires registration, and a mirror would bypass it."
+    },
+    {
+      "key": "heading:licenses:what-this-means-in-practice:22",
       "sectionId": "licenses",
       "headingId": "what-this-means-in-practice",
       "kind": "heading",
@@ -4694,7 +4830,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:licenses:what-this-means-in-practice:22",
+      "key": "content:licenses:what-this-means-in-practice:23",
       "sectionId": "licenses",
       "headingId": "what-this-means-in-practice",
       "kind": "content",
@@ -4702,7 +4838,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Whisper and Wav2Vec2 model weights are unambiguously permissive (Apache 2.0) — nothing about running inference with them restricts commercial use."
     },
     {
-      "key": "content:licenses:what-this-means-in-practice:23",
+      "key": "content:licenses:what-this-means-in-practice:24",
       "sectionId": "licenses",
       "headingId": "what-this-means-in-practice",
       "kind": "content",
@@ -4710,7 +4846,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "AudioLens's own code (MIT) does not redistribute any dataset audio — the license terms above attach to the datasets themselves, fetched or imported by scripts you run, not to anything AudioLens ships in its repo."
     },
     {
-      "key": "content:licenses:what-this-means-in-practice:24",
+      "key": "content:licenses:what-this-means-in-practice:25",
       "sectionId": "licenses",
       "headingId": "what-this-means-in-practice",
       "kind": "content",
@@ -4718,15 +4854,23 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Non-commercial datasets are opt-in, not required — you can run AudioLens entirely against LibriSpeech, your own uploaded audio, or a custom dataset and never touch RAVDESS, L2-ARCTIC, or SAA."
     },
     {
-      "key": "content:licenses:what-this-means-in-practice:25",
+      "key": "content:licenses:what-this-means-in-practice:26",
       "sectionId": "licenses",
       "headingId": "what-this-means-in-practice",
       "kind": "content",
       "title": "What this means in practice",
-      "body": "Confirm current terms yourself for Common Voice and SAVEE before quoting a license anywhere official — this table reflects what could be verified as of the date at the top of this content pack, not a live feed."
+      "body": "Fetched data is permanent, uploads are not — files the scripts write to Backend/data stay until you delete them; uploaded datasets and sessions expire after 24 hours."
     },
     {
-      "key": "content:licenses:what-this-means-in-practice:26",
+      "key": "content:licenses:what-this-means-in-practice:27",
+      "sectionId": "licenses",
+      "headingId": "what-this-means-in-practice",
+      "kind": "content",
+      "title": "What this means in practice",
+      "body": "Confirm current terms yourself for SAVEE before quoting a license anywhere official — this table reflects what could be verified as of the date at the top of this content pack, not a live feed."
+    },
+    {
+      "key": "content:licenses:what-this-means-in-practice:28",
       "sectionId": "licenses",
       "headingId": "what-this-means-in-practice",
       "kind": "content",
@@ -5405,7 +5549,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "run-your-first-analysis",
       "kind": "content",
       "title": "Run your first analysis",
-      "body": "Pick a dataset or upload a clip Start from a bundled dataset (see /docs/datasets) or upload your own .wav, .mp3, .m4a, or .flac file, up to 100 MB and 10 minutes long."
+      "body": "Pick a dataset or upload a clip Start from a built-in dataset — fetch it first with the scripts described on /docs/datasets — or upload your own .wav, .mp3, .m4a, or .flac file, up to 100 MB and 10 minutes long."
     },
     {
       "key": "content:quickstart:run-your-first-analysis:25",
@@ -5461,7 +5605,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "where-to-go-next",
       "kind": "content",
       "title": "Where to go next",
-      "body": "Loading datasets Get started Bundled datasets, licenses, and custom uploads"
+      "body": "Loading datasets Get started Built-in datasets, fetch scripts, licenses, and custom uploads"
     },
     {
       "key": "content:quickstart:where-to-go-next:32",
@@ -5565,7 +5709,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "audio",
       "kind": "content",
       "title": "Audio",
-      "body": "POST /audio/materialize Materialize an audio reference (e.g. from a bundled dataset) into a usable audio resource"
+      "body": "POST /audio/materialize Materialize an audio reference (e.g. from a built-in dataset) into a usable audio resource"
     },
     {
       "key": "content:rest:audio:11",
@@ -5877,7 +6021,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "built-in-datasets",
       "kind": "content",
       "title": "Built-in datasets",
-      "body": "GET /{dataset}/metadata Metadata for a bundled dataset"
+      "body": "GET /{dataset}/metadata Metadata for a built-in dataset (errors as not provisioned until its fetch script has run)"
     },
     {
       "key": "content:rest:built-in-datasets:50",
@@ -5885,7 +6029,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "built-in-datasets",
       "kind": "content",
       "title": "Built-in datasets",
-      "body": "GET /{dataset}/eda Bundled dataset's EDA report — see Dataset EDA"
+      "body": "GET /{dataset}/eda Built-in dataset's EDA report — see Dataset EDA"
     },
     {
       "key": "content:rest:built-in-datasets:51",
@@ -5893,7 +6037,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "built-in-datasets",
       "kind": "content",
       "title": "Built-in datasets",
-      "body": "GET, HEAD, OPTIONS /{dataset}/file/{path} Fetch a file from a bundled dataset (supports HTTP Range)"
+      "body": "GET, HEAD, OPTIONS /{dataset}/file/{path} Fetch a file from a built-in dataset (supports HTTP Range)"
     },
     {
       "key": "heading:rest:ops:52",

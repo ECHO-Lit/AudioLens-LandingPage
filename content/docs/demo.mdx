@@ -21,16 +21,24 @@
 
 ## Dataset licensing and the demo
 
-AudioLens ships with several bundled sample datasets, and three of them —
+AudioLens has several built-in sample datasets, fetched from their official
+sources by scripts (nothing is bundled in the repo), and three of them —
 **RAVDESS**, **L2-ARCTIC**, and the **Speech Accent Archive (SAA)** — are
 licensed **non-commercial only** (see [Licenses](/docs/licenses) for the
 exact terms). AudioLens is a non-commercial, open-source project, and the
 hosted demo will be a non-commercial public demo with no paid tier — so
-using these datasets there is compatible with their license terms.
+using these datasets there is compatible with their license terms, provided
+the demo shows each dataset's license and attribution and keeps
+share-alike terms for derived material. The demo won't offer the datasets as
+downloads; users who want the data get it from the official sources with the
+scripts on [CLI & scripts](/docs/cli).
 Attribution/citation requirements still apply and are listed on the
 [Licenses](/docs/licenses) page. This only becomes a real question for
 someone who forks AudioLens into a **commercial** product; that fork would
 need to drop these three datasets or obtain a separate license for them.
+
+Hosted-demo sessions and anything uploaded to them expire after 24 hours.
+Files fetched into `Backend/data` on a self-hosted install do not.
 
 ## Usage limits — not decided yet
 

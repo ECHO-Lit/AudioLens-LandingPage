@@ -1,33 +1,52 @@
-## Bundled datasets
+## Built-in datasets
 
 <Lead>
-  AudioLens ships with a handful of small, bundled sample datasets so you can
-  start exploring without uploading anything. Audio files themselves are
-  never committed to the repository — bundled datasets are packaged
-  separately, and a couple of the larger ones are fetched by a script you
-  run yourself.
+  AudioLens has six built-in sample datasets so you can start exploring
+  without uploading anything. **No dataset audio is included in the
+  repository or in any download from this project** — their licenses don't
+  allow redistribution. You fetch each one once, from its official source,
+  with a script in `scripts/`. The scripts write into `Backend/data/` and
+  reproduce the exact subset AudioLens uses.
 </Lead>
 
-| Dataset | Rows | How it's added |
-|---|---|---|
-| Common Voice (cv-valid-dev subset) | 100 | bundled |
-| RAVDESS | 144 | bundled |
-| L2-ARCTIC | 150 | bundled, includes phone-error annotations |
-| Speech Accent Archive (SAA) | 150 | bundled |
-| LibriSpeech-1000 | ~1000 | fetched via `scripts/download_librispeech_1000.py` |
-| SAVEE | up to 100 | prepared via `scripts/prepare_savee_subset.py` — requires you to already own a copy |
+| Dataset | Rows | Script | What you need first |
+|---|---|---|---|
+| RAVDESS | 144 | `download_ravdess.py` | Nothing. Downloads about 208 MB from Zenodo. |
+| Speech Accent Archive (SAA) | 150 | `download_saa.py` | Nothing. Fetches each clip from accent.gmu.edu. |
+| LibriSpeech-1000 | ~1000 | `download_librispeech_1000.py` | Nothing. Uses the Hugging Face datasets-server. |
+| L2-ARCTIC | 150, with phone-error annotations | `prepare_l2arctic.py --source <folder>` | **Free registration.** Fill in the form on the [L2-ARCTIC page](https://psi.engr.tamu.edu/l2-arctic-corpus/) (name, email, affiliation, agree to the license); a Google Drive link arrives by email. Download and extract it. |
+| Common Voice (cv-valid-dev subset) | 100 | `prepare_common_voice.py --kaggle` or `--source <folder>` | **A free Kaggle account** and API token (for `--kaggle`), or the Kaggle `common-voice` download you already have (for `--source`). |
+| SAVEE | up to 100 | `prepare_savee_subset.py --source <folder>` | **A copy you already own.** SAVEE can't be redistributed, so nothing fetches it for you. |
+
+Every script accepts `--dry-run` and prints the dataset's license and
+citation before doing anything. `python scripts/fetch_datasets.py` runs the
+three that need nothing in one go. Full usage is on [CLI & scripts](/docs/cli).
+
+<Callout title="Where the data lives, and how long" tone="note">
+  The scripts write to `Backend/data/` in your project folder. Docker mounts
+  that folder read-only into the containers, so the files **stay until you
+  delete them** — fetch once and you're done, including after `docker compose
+  down -v`. Uploaded datasets and sessions are different: they are temporary
+  and expire after 24 hours. To keep a dataset permanently, put it in
+  `Backend/data` with a script, don't re-upload it each session.
+</Callout>
+
+<Callout title="Until you run a script, the dataset isn't there" tone="warn">
+  A built-in dataset whose files haven't been fetched shows as not provisioned
+  and its endpoints return an error. Custom uploads and LibriSpeech-1000 work
+  without any of the account-gated sets.
+</Callout>
 
 <Callout title="Non-commercial licenses in this list" tone="warn">
-  RAVDESS, L2-ARCTIC, and the Speech Accent Archive (SAA) are all licensed
-  for non-commercial use only. Common Voice and SAVEE's current terms are
-  flagged as unverified. See [/docs/licenses](/docs/licenses) for the full
-  breakdown per dataset before using any of these outside research or
-  personal use.
+  RAVDESS, L2-ARCTIC, and the Speech Accent Archive (SAA) are licensed for
+  non-commercial use only. Common Voice is CC0, and SAVEE's terms are
+  unverified. See [/docs/licenses](/docs/licenses) for the full breakdown per
+  dataset before using any of these outside research or personal use.
 </Callout>
 
 ### Metadata columns
 
-Bundled datasets ship a metadata CSV. Its columns are what the
+Each built-in dataset gets a metadata CSV when you fetch it. Its columns are what the
 [Fairness](/docs/fairness) grouping and the [Layer probes](/docs/probes)
 properties draw on:
 
@@ -76,6 +95,7 @@ for its specific limits.
 
 <CardGrid min={232}>
   <Card title="Dataset EDA" kicker="Analysis panel" meta="Explore class balance and distributions before you analyze" href="/docs/eda" />
+  <Card title="CLI & scripts" kicker="Reference" meta="Every dataset script, its flags and prerequisites" href="/docs/cli" />
   <Card title="Licenses" kicker="Reference" meta="Full license terms for AudioLens's models and datasets" href="/docs/licenses" />
   <Card title="REST API" kicker="Reference" meta="Every dataset and upload endpoint" href="/docs/rest" />
 </CardGrid>

@@ -5,9 +5,7 @@
   development instead of version numbers.
 </Lead>
 
-## [Unreleased] — AudioLens
-
-<Status>in development</Status>
+## AudioLens
 
 AudioLens extends the original ECHO project with a substantial set of new
 capabilities, currently in development:
@@ -26,8 +24,12 @@ capabilities, currently in development:
   decoder layers
 - Accent and fairness slicing across speaker/accent/language/metadata groups
 - Custom model ingestion (any compatible Hugging Face speech model)
-- Two new bundled datasets: LibriSpeech-1000 and SAVEE (SAVEE requires the
+- Two new built-in datasets: LibriSpeech-1000 and SAVEE (SAVEE requires the
   user's own licensed copy — see [Licenses](/docs/licenses))
+- Dataset fetch scripts for RAVDESS, the Speech Accent Archive, L2-ARCTIC and
+  Common Voice, plus a wrapper for the no-account ones — datasets now come
+  from their official sources into `Backend/data` instead of being described
+  as bundled (see [CLI & scripts](/docs/cli))
 
 ## [1.0.0] — 2024-10-13
 
@@ -36,7 +38,7 @@ capabilities, currently in development:
 - React frontend, FastAPI backend
 - Whisper and Wav2Vec2 model support
 - Redis-backed caching
-- Bundled Common Voice and RAVDESS datasets
+- Common Voice and RAVDESS sample datasets
 
 This release was later renamed **ECHO**, and is now developed further as
 **AudioLens**. See [Contributing](/docs/contributing) for the full lineage
