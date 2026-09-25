@@ -21,6 +21,12 @@ accurate count:
 - **`pitch_shift`**
 - **`time_stretch`**
 
+<img
+  src="/assets/perturbation.jpeg"
+  alt="Diagram: an original clip goes through one controlled change to become a perturbed clip, and the model is re-run on it. Four perturbation types, each shown as a small waveform: noise adds background noise, time masking silences a stretch of audio, pitch shift raises or lowers the pitch, and time stretch speeds up or slows down. Below, a before-and-after comparison: the original prediction 'the cat sat' next to the perturbed prediction 'the cap sat' with the changed word highlighted, and the metrics to read: word error rate, whether the label flipped, and confidence change. Up to 10 perturbations per request."
+  className="my-6 w-full rounded-2xl"
+/>
+
 ## Request limits
 
 Up to **10 perturbations per request**. Each generates a new audio variant,
