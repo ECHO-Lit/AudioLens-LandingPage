@@ -18,6 +18,12 @@ scores how well each layer's probe predicts the property. The result is a
 per-layer view of where in the model that property becomes linearly
 separable.
 
+<img
+  src="/assets/layer_probes.jpeg"
+  alt="Diagram: an audio clip passes through a model's layers, Layer 1 to Layer 5. The same kind of probe is trained on each layer separately, and each probe's accuracy is drawn as a horizontal bar. Two dashed reference lines mark the shuffled-label control and the majority baseline. The bar for Layer 4 is highlighted as the best layer, reaching past both lines. Below: accuracy is how well the probe predicts, baseline is a guess by class size, and selectivity is accuracy minus the shuffled-label control."
+  className="my-6 w-full rounded-2xl"
+/>
+
 ## Probe types
 
 - **`logreg`** — logistic regression.
