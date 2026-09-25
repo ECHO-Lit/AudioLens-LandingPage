@@ -6,6 +6,10 @@
 
 <Badges items={["noise", "time_masking", "pitch_shift", "time_stretch"]} />
 
+## What is perturbation?
+
+Perturbation means changing a clip in a controlled way, such as adding noise or shifting pitch, and re-running the model on the result. Comparing the prediction before and after tells you directly whether the model's answer is robust to that change.
+
 ## Four perturbation types
 
 There are **four** perturbation types available today — noted explicitly
@@ -32,6 +36,31 @@ For each perturbation, the panel shows:
 - **Re-run prediction** for the perturbed clip, next to the original
   prediction, so you can see whether — and how much — the transform moved
   the model's output.
+
+### Metrics reported
+
+For **transcription** models the perturbed transcript is scored against a
+reference after Whisper's own text normalisation, so punctuation and casing
+don't count as errors:
+
+| Metric | Meaning |
+|---|---|
+| `wer` / `cer` | Word and character error rate (capped at 1.0). Scored against the dataset ground truth, or against the unperturbed transcript to measure self-consistency. |
+| `substitutions`, `deletions`, `insertions` | Edit counts behind WER, so you can see *how* the transcript degraded. |
+| `insertion_ratio` | Insertions ÷ reference words. High insertions with few deletions is the hallucination signature. |
+
+For **classification** models the perturbed prediction is compared with the
+baseline prediction:
+
+| Metric | Meaning |
+|---|---|
+| `confidence_delta` | Change in top-class confidence versus baseline. |
+| `label_flipped` | `1` if the predicted label changed. |
+| `js_divergence` | Jensen-Shannon divergence between the perturbed and baseline probability distributions, in nats, bounded 0 to ln 2 (≈ 0.69). Symmetric and always finite. |
+| `true_class_confidence_delta` | Change in confidence on the baseline class. |
+
+When several files are perturbed together, set-level **accuracy, macro-F1,
+and macro-recall** are also reported (they need at least 2 files).
 
 This is the most direct robustness signal in AudioLens: instead of asking
 "what does the model attend to," perturbation asks "does the model's answer

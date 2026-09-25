@@ -25,6 +25,22 @@
   personal use.
 </Callout>
 
+### Metadata columns
+
+Bundled datasets ship a metadata CSV. Its columns are what the
+[Fairness](/docs/fairness) grouping and the [Layer probes](/docs/probes)
+properties draw on:
+
+| Dataset | Columns |
+|---|---|
+| Common Voice | `text`, `age`, `gender`, `accent`, `duration`, `up_votes`, `down_votes`, `client_id`, `locale` |
+| RAVDESS | `emotion`, `intensity`, `statement`, `repetition`, `actor`, `gender`, `modality`, `vocal_channel` |
+| L2-ARCTIC | `speaker_code`, `native_language`, `gender`, `text`, `utt_id`, `error_type`, canonical and perceived IPA, and human-verified error counts. Phone-level errors (time window, expected and produced phone) are in a separate annotations file. |
+| SAA | `native_language`, `age`, `age_english_onset`, `sex`, `birthplace`, `country`, `speakerid`, `reading_passage` |
+
+Values of `unknown` (common in Common Voice age, gender, and accent) are
+treated as missing by layer probes, not as a category.
+
 ## Custom datasets
 
 Any user can upload their own dataset — there's no gatekeeping beyond the
