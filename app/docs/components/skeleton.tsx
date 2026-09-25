@@ -1,18 +1,22 @@
+import { Skeleton as ShadcnSkeleton } from "@/components/ui/skeleton";
+import { cn } from "@/lib/utils";
+
 /**
- * Placeholder block for loading states. Static markup -- no client JS, so it
- * can render inside a Server Component loading.tsx.
+ * The shadcn Skeleton, tinted with the docs' own token instead of the default
+ * `bg-muted` so it reads the same in light and dark. Static markup -- no client
+ * JS, so it can render inside a Server Component loading.tsx.
  */
 export function Skeleton({
-  className = "",
+  className,
   style,
 }: {
   className?: string;
   style?: React.CSSProperties;
 }) {
   return (
-    <div
+    <ShadcnSkeleton
       aria-hidden="true"
-      className={`animate-pulse rounded-[5px] bg-al-skeleton ${className}`}
+      className={cn("rounded-[5px] bg-al-skeleton", className)}
       style={style}
     />
   );
