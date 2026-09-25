@@ -942,15 +942,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Base images: python:3.11-slim (CPU/ROCm), nvidia/cuda:12.6.0-runtime-ubuntu22.04 (GPU). Frontend: node:20-alpine for development; the production target is nginx:alpine on port 80 with SPA fallback. Containers run as non-root user appuser (uid 1000)."
     },
     {
-      "key": "content:arch:compose-services:33",
-      "sectionId": "arch",
-      "headingId": "compose-services",
-      "kind": "content",
-      "title": "Compose services",
-      "body": "Image placeholder: architecture diagram Add /assets/docs/architecture-diagram.png — a diagram (not a screenshot) showing the frontend talking only to the FastAPI control plane, the control plane publishing job envelopes to the three queues, Celery workers consuming those queues, and the shared Redis/object-storage layer underneath. Replace this callout with ![Architecture diagram](/assets/docs/architecture-diagram.png) once the real image is uploaded."
-    },
-    {
-      "key": "heading:arch:related-pages:34",
+      "key": "heading:arch:related-pages:33",
       "sectionId": "arch",
       "headingId": "related-pages",
       "kind": "heading",
@@ -958,7 +950,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:arch:related-pages:35",
+      "key": "content:arch:related-pages:34",
       "sectionId": "arch",
       "headingId": "related-pages",
       "kind": "content",

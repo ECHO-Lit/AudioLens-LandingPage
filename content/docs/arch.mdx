@@ -4,6 +4,12 @@
   reaches a worker directly.
 </Lead>
 
+<img
+  src="/assets/architecture.jpeg"
+  alt="Architecture diagram in three columns. Browser: the React web UI. Control plane (CPU only): FastAPI, which accepts uploads, enqueues jobs and serves results but never runs a model. Execution plane: the Celery workers cpu, gpu-fast and gpu-large, plus Celery Beat for hourly cleanup and the stale-job reaper. Between them, Redis DB2 is the Celery broker with three queues: cpu, gpu-fast and gpu-large. The main path: 1, upload audio; 2, submit a job and get a job id right away; 3, a worker picks it up, runs the model and stores the result; 4, the UI polls job status and then fetches the result. Shared storage underneath: Redis DB0 for sessions and cache, DB1 for job metadata, DB3 for Celery results, and object storage on local disk or S3 with a 24-hour lifecycle. Everything expires after 24 hours."
+  className="my-6 w-full rounded-2xl"
+/>
+
 <Badges items={["FastAPI", "Celery", "Redis", "No SQL database"]} />
 
 ## Control plane vs. execution plane
@@ -84,12 +90,6 @@ Compose project name: `echo`.
 `nvidia/cuda:12.6.0-runtime-ubuntu22.04` (GPU). Frontend: `node:20-alpine`
 for development; the production target is `nginx:alpine` on port 80 with
 SPA fallback. Containers run as non-root user `appuser` (uid 1000).
-
-<img
-  src="/assets/architecture.jpeg"
-  alt="AudioLens architecture: the React web UI talks over REST with a session cookie to the FastAPI control plane. The control plane reads and writes Redis (DB 0 sessions and cache pointers, DB 1 job and audio metadata), publishes jobs to the Celery broker (Redis DB 2), and stores audio in object storage (local shared storage or S3). A CPU worker and a model worker on the gpu-fast and gpu-large queues consume the broker, with optional CUDA and ROCm workers, a Celery Beat scheduler for hourly cleanup, and a Hugging Face model cache."
-  className="my-6 w-full rounded-2xl"
-/>
 
 ## Related pages
 

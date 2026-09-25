@@ -9,6 +9,12 @@
   reproduce the exact subset AudioLens uses.
 </Lead>
 
+<img
+  src="/assets/dataset_loading.jpeg"
+  alt="Diagram with two lanes. Built-in datasets: you run a script once against the official source (Zenodo, accent.gmu.edu or Kaggle), it writes into Backend/data, the files stay until you delete them, and Docker containers read that folder read-only. L2-ARCTIC needs registration first and the link arrives by email; Common Voice needs a Kaggle account. Uploads and sessions: your files are uploaded in the app into session storage and deleted after 24 hours. No dataset audio ships with AudioLens; fetch from the official source; check each non-commercial license."
+  className="my-6 w-full rounded-2xl"
+/>
+
 | Dataset | Rows | Script | What you need first |
 |---|---|---|---|
 | RAVDESS | 144 | `download_ravdess.py` | Nothing. Downloads about 208 MB from Zenodo. |
