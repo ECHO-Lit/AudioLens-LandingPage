@@ -75,7 +75,7 @@ const OVERVIEW = [
 const HOW_IT_WORKS = [
   {
     label: "Bring audio",
-    detail: "Upload a .wav, .mp3, .m4a or .flac file (up to 100 MB and 10 minutes), or start from a bundled dataset.",
+    detail: "Upload a .wav, .mp3, .m4a or .flac file (up to 100 MB and 10 minutes), or start from a built-in dataset you've fetched with one script.",
   },
   {
     label: "Pick a model",
@@ -110,7 +110,7 @@ const FAQ = [
   },
   {
     q: "What audio can I upload?",
-    a: "WAV, MP3, M4A or FLAC files, up to 100 MB and 10 minutes each. You can also skip uploading and start from one of the bundled sample datasets.",
+    a: "WAV, MP3, M4A or FLAC files, up to 100 MB and 10 minutes each. You can also skip uploading and start from one of the built-in sample datasets. Uploads expire after 24 hours; datasets fetched with the scripts stay on disk until you delete them.",
     href: "/docs/datasets",
     hrefLabel: "See the datasets",
   },
@@ -122,7 +122,7 @@ const FAQ = [
   },
   {
     q: "Can I script it instead of using the UI?",
-    a: "Yes. Every panel is a thin client over the REST API, so anything you can click is also an endpoint you can call. A few shell and Python scripts cover starting the stack, checking queues and importing datasets.",
+    a: "Yes. Every panel is a thin client over the REST API, so anything you can click is also an endpoint you can call. A few shell and Python scripts cover starting the stack, checking queues and fetching the sample datasets.",
     href: "/docs/rest",
     hrefLabel: "Browse the REST API",
   },
@@ -138,13 +138,13 @@ const FAQ = [
   },
   {
     q: "What's the license?",
-    a: "AudioLens itself is MIT. The models and datasets it ships with keep their own terms, listed one by one.",
+    a: "AudioLens itself is MIT. The models and datasets it works with keep their own terms, listed one by one. No dataset audio is redistributed; you fetch it from the official source.",
     href: "/docs/licenses",
     hrefLabel: "See the licenses",
   },
   {
-    q: "Can I use the bundled datasets commercially?",
-    a: "Not necessarily. RAVDESS, L2-ARCTIC and the Speech Accent Archive are licensed for non-commercial use only, and the terms for Common Voice and SAVEE are flagged as unverified. Check each dataset's license before using it outside research or personal use.",
+    q: "Can I use the sample datasets commercially?",
+    a: "Not necessarily. RAVDESS, L2-ARCTIC and the Speech Accent Archive are licensed for non-commercial use only, Common Voice is CC0, and SAVEE's terms are unverified. Check each dataset's license before using it outside research or personal use.",
     href: "/docs/licenses",
     hrefLabel: "See the per-dataset licenses",
   },
@@ -565,7 +565,7 @@ export default function Home() {
           <div className="max-w-[24ch]">
             <TextReveal
               as="h2"
-              text="Models & datasets, out of the box."
+              text="Models & datasets, one script away."
               className="mt-5 mb-0 text-[34px] leading-none font-semibold tracking-[-0.04em] sm:w-min sm:text-[44px] lg:text-[64px]"
             />
           </div>
@@ -598,8 +598,14 @@ export default function Home() {
           </div>
 
           <p className="mt-8 mb-0 max-w-[60ch] text-[15px] leading-[1.6] text-al-fg-body text-pretty">
-            Whisper and Wav2Vec2 checkpoints are Apache 2.0. Bundled datasets
-            carry their own licenses — see{" "}
+            Whisper and Wav2Vec2 checkpoints are Apache 2.0. Datasets:
+            a script fetches each one from its official source
+            (L2-ARCTIC needs a free registration, Common Voice a Kaggle
+            account) and each carries its own license — see{" "}
+            <Link href="/docs/datasets" className="underline underline-offset-4">
+              loading datasets
+            </Link>{" "}
+            and{" "}
             <Link href="/docs/licenses" className="underline underline-offset-4">
               the licenses page
             </Link>{" "}
