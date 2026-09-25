@@ -440,7 +440,7 @@ export default function Home() {
             <TextReveal
               as="h2"
               text="From a clip to an explanation."
-              className="mt-5 mb-0 text-[34px] leading-none font-semibold tracking-[-0.04em] text-balance sm:text-[44px] lg:text-[64px]"
+              className="mt-5 mb-0 text-[34px] leading-none font-semibold tracking-[-0.04em] sm:w-min sm:text-[44px] lg:text-[64px]"
             />
             <p className="mt-6 mb-0 max-w-[40ch] text-[17px] leading-[1.6] text-al-fg-body text-pretty">
               No scripts, no notebooks. Five steps in the browser, and every
@@ -483,7 +483,7 @@ export default function Home() {
             <TextReveal
               as="h2"
               text="Beyond the transcript."
-              className="mt-5 mb-0 text-[34px] leading-none font-semibold tracking-[-0.04em] text-balance sm:text-[44px] lg:text-[64px]"
+              className="mt-5 mb-0 text-[34px] leading-none font-semibold tracking-[-0.04em] sm:w-min sm:text-[44px] lg:text-[64px]"
             />
           </div>
 
@@ -539,7 +539,7 @@ export default function Home() {
               <TextReveal
                 as="h2"
                 text="Methods, not vibes."
-                className="mt-5 mb-0 text-[34px] leading-none font-semibold tracking-[-0.04em] text-balance sm:text-[44px] lg:text-[64px]"
+                className="mt-5 mb-0 text-[34px] leading-none font-semibold tracking-[-0.04em] sm:w-min sm:text-[44px] lg:text-[64px]"
               />
             </div>
             <Link
@@ -566,7 +566,7 @@ export default function Home() {
             <TextReveal
               as="h2"
               text="Models & datasets, out of the box."
-              className="mt-5 mb-0 text-[34px] leading-none font-semibold tracking-[-0.04em] text-balance sm:text-[44px] lg:text-[64px]"
+              className="mt-5 mb-0 text-[34px] leading-none font-semibold tracking-[-0.04em] sm:w-min sm:text-[44px] lg:text-[64px]"
             />
           </div>
 
@@ -611,7 +611,7 @@ export default function Home() {
       {/* FAQ: native <details>, so the page stays a server component. */}
       <section className="px-6 pt-[90px] sm:pt-[120px] lg:pt-[150px]">
         <div className="mx-auto grid max-w-[1240px] gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
-          <div className="lg:sticky lg:top-28 lg:self-start">
+          <div className="w-full sm:w-fit sm:max-w-full lg:sticky lg:top-28 lg:self-start">
             <div
               className="font-code text-[11.5px] tracking-[0.14em] uppercase"
               style={{ color: "var(--al-accent-text)" }}
@@ -621,8 +621,19 @@ export default function Home() {
             <TextReveal
               as="h2"
               text="Questions, answered."
-              className="mt-5 mb-0 text-[34px] leading-none font-semibold tracking-[-0.04em] text-balance sm:text-[44px] lg:text-[64px]"
+              className="mt-5 mb-0 text-[34px] leading-none font-semibold tracking-[-0.04em] sm:w-min sm:text-[44px] lg:text-[64px]"
             />
+            <div className="mt-6 aspect-[2/1] w-full sm:w-0 sm:min-w-full overflow-hidden rounded-2xl sm:aspect-[3/2] lg:aspect-square">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/assets/FAQ.svg"
+                alt=""
+                aria-hidden
+                width={600}
+                height={600}
+                className="block h-full w-full scale-125 object-cover"
+              />
+            </div>
           </div>
           <div className="shadow-[inset_0_-1px_0_var(--al-hairline-strong)]">
             {FAQ.map((item) => (
