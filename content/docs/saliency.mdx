@@ -6,6 +6,10 @@
 
 <Badges items={["gradcam", "lime", "shap", "full_audio flag"]} />
 
+## What is saliency?
+
+Saliency is an attribution method: it scores every moment of the input audio by how much it influenced the model's prediction. The result is a heatmap drawn over the waveform. High-scoring stretches are the parts the model leaned on most for a given token or label, so you can check that it is listening to speech rather than noise or silence.
+
 ## Methods
 
 The `saliency` operation supports three methods:
@@ -58,6 +62,23 @@ result at each step.
   <Card title="random_repeats" kicker="2–10, default 3" meta="Random-deletion baselines for comparison" />
   <Card title="occlusion" kicker="optional" meta="Alternative to deletion for masking regions" />
 </CardGrid>
+
+The faithfulness result reports these metrics:
+
+| Metric | What it measures |
+|---|---|
+| `aopc_deletion` | Average drop in the model's score as the top-attributed regions are deleted, across the deletion curve. Bigger drop = the map found regions the model really relies on. |
+| `aopc_random` (+ stderr) | The same drop when regions are deleted at random, averaged over `random_repeats`. The baseline the map has to beat. |
+| `faithfulness_gain` | `aopc_deletion` minus `aopc_random`. Positive means the map beats chance. |
+| `aopc_inverse` | The drop when the *least* important regions are deleted. Should be small. |
+| `comprehensiveness` | Score lost when the top regions are removed. High = those regions were necessary. |
+| `sufficiency` | Score kept when *only* the top regions remain. High = those regions alone were enough. |
+| `auc_deletion` / `auc_insertion` | Area under the deletion and insertion curves. Lower is better for deletion, higher for insertion. |
+| `occlusion_spearman` | Rank correlation between attribution and the measured effect of occluding each region, with its p-value. |
+
+The result also carries an overall **verdict** — a map with too little audio
+or signal to test is marked `uninformative` and includes a `skipped_reason`
+instead of a misleading score.
 
 A map that's faithful should show a real drop in confidence as the top
 fraction is deleted — clearly separated from what random deletion does at the

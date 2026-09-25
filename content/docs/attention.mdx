@@ -5,6 +5,10 @@
 
 <Badges items={["Whisper", "custom models", "per-layer", "per-head"]} />
 
+## What is attention?
+
+Attention is the mechanism transformer models use to decide which parts of their input matter when producing each output. Every layer has several **heads**, and each head assigns a weight between every pair of positions. Plotting those weights for one layer and one head shows which words the model tied to which stretch of audio.
+
 ## Which models this works on
 
 Attention extraction is available for **Whisper** and **custom** models
@@ -23,10 +27,20 @@ continuity, others track longer-range structure. There's no single "right"
 head to look at; the point of exposing both indices is to let you sweep
 across layers and heads and compare.
 
-## Two views
+## What the weights are
+
+For the chosen layer and head, the panel transcribes the clip, gets
+word-level start and end times, and pairs each transcript word with the
+words it attends to. Each pair carries its **attention weight** plus the
+time interval of both words, which is how weights get placed on the audio
+timeline.
+
+## Views
 
 - **Matrix view** — the raw attention weight matrix for the selected
   layer/head, source positions against target positions.
+- **Word-time pairs** — the list of word pairs with their weights and time
+  intervals.
 - **Timeline view** — attention weight plotted against the shared audio
   timeline, so you can line it up against the waveform, the saliency map, or
   the transcript for the same clip.
