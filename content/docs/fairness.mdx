@@ -7,29 +7,147 @@
 
 <Badges items={["slice metrics", "bootstrap", "shipped feature"]} />
 
-<Callout title="Shipped, not beta">
-  Fairness slicing is a complete, shipped feature — it is not labeled
-  "beta" anywhere in the product, and this page shouldn't imply otherwise.
-</Callout>
+## What is fairness slicing?
+
+Fairness slicing splits a dataset into groups by a metadata column, such as accent or gender, and compares model performance across those groups. Speech models often do worse for non-native speakers or under-represented groups, and that only shows up when results are measured per group. A raw gap is not proof of bias on its own, so this panel adds statistics to tell a real gap from noise.
 
 ## Grouping
 
-You can slice by up to **2 grouping keys** at once (e.g. accent and
-speaker together, not just one at a time).
+You pick a dataset, a **grouping column** from its metadata, and a model.
+You can slice by up to **2 grouping keys** at once (e.g. accent and gender
+together, not just one at a time). You can also **filter** rows by other
+columns, but a column can't be both a filter and a grouping key.
+
+Every group is compared against a **reference group** — by default the
+largest one — not against every other group. Set `reference_group` to pick a
+different baseline.
 
 ## Metrics
 
-<CardGrid min={160}>
-  <Card title="wer" />
-  <Card title="cer" />
-  <Card title="accuracy" />
-  <Card title="macro_f1" />
-  <Card title="ece" />
-  <Card title="silhouette" />
-  <Card title="leakage" />
-  <Card title="grounding_lift" />
-  <Card title="attribution_entropy" />
-</CardGrid>
+Nine metrics are available. Transcription models (Whisper) use the error-rate
+family; classification models (Wav2Vec2 emotion) use the classification
+family; representation and grounding metrics come from the model's
+embeddings and saliency maps.
+
+### Transcription
+
+| Metric | What it measures |
+|---|---|
+| `wer` | **Word Error Rate**: `(substitutions + deletions + insertions) / reference words`. Lower is better. Reported both as *micro* WER (all edits summed first, so long utterances dominate) and *macro* WER (per-utterance WER averaged, so every utterance counts equally). |
+| `cer` | **Character Error Rate**: the same calculation at the character level. More forgiving of spelling and word-boundary differences, and better suited to languages without clear word spacing. |
+
+Text is normalised with Whisper's own normaliser before scoring, so
+punctuation and casing don't count as errors and numbers stay comparable
+with published Whisper results. Each group also reports its **substitution,
+deletion, and insertion rates** separately. A high insertion ratio with few
+deletions is the usual signature of hallucination.
+
+### Classification
+
+| Metric | What it measures |
+|---|---|
+| `accuracy` | Fraction of items whose predicted label matches the reference label. |
+| `macro_f1` | F1 score computed per class and averaged with equal weight, so rare classes count as much as common ones. Better than accuracy when classes are imbalanced. |
+| `ece` | **Expected Calibration Error**: whether the model's confidence can be trusted. Predictions are binned by confidence (0–10%, 10–20%, … 90–100%); in each bin, "how confident the model claimed to be" is compared with "how often it was actually right", weighted by bin size. `0` is perfectly calibrated. A group with higher ECE is getting more over- or under-confident predictions — a subtler unfairness than raw accuracy. |
+
+Classification groups also report macro-recall, balanced accuracy, mean
+confidence, and a per-group confusion matrix.
+
+### Representation
+
+These use the model's embedding vectors and are computed when
+`include_representation` is on.
+
+| Metric | What it measures |
+|---|---|
+| `silhouette` | Whether embeddings naturally cluster by group label, using cosine distance. Ranges from −1 to 1; higher means groups sit in visibly separate regions of the embedding space. The real score is compared against 200 **label-shuffled** runs and reported as a z-score, so you can tell real structure from chance. |
+| `leakage` | Whether a speaker's group can be *predicted from the embedding alone*, using a k-NN classifier. Evaluation is speaker-disjoint (`StratifiedGroupKFold` by speaker), so the same person never appears in both train and test — otherwise you'd be measuring speaker identification, not accent. Reported as balanced accuracy, the chance level (`1 / number of groups`), and a **leakage lift** (score ÷ chance). Skipped when any group has fewer than 2 speakers. |
+
+High silhouette or leakage means the model's internal representation has
+learned to tell groups apart as a side effect — a warning sign for
+downstream disparate treatment, even before you look at output accuracy.
+Combined with the disparity result, the panel labels each case as
+*representation-linked disparity*, *representation only*, *disparity not
+representation-linked*, or *no structure, no disparity*.
+
+### Grounding
+
+These use saliency maps on a speaker-balanced sample of items (12 per group
+by default) and are computed when `include_explanations` is on.
+
+| Metric | What it measures |
+|---|---|
+| `grounding_lift` | How much more of the saliency mass lands on **speech** frames than you'd expect by chance, given how much of the clip is speech. `1.0` means no better than random; higher means the model genuinely attends to speech rather than silence or noise. Speech vs. silence comes from a simple energy-based voice-activity split. |
+| `attribution_entropy` | How spread out the saliency map is, normalised to 0–1. Near `0` means attention is concentrated on a few frames; near `1` means it is smeared evenly across the clip. Reported alongside a Gini coefficient and the **top-10% mass** (how much attribution sits in the most-attended 10% of the clip). |
+
+If one group consistently gets lower grounding lift, the model is "listening
+to the wrong part" of the audio more often for that group — a different
+kind of unfairness than raw error rate.
+
+## Is a gap real? The statistics
+
+For every group × metric, the panel compares the group against the
+reference and reports:
+
+- **Gap** — `mean(group) − mean(reference)`, plus the **ratio** (e.g. 1.4×
+  the reference WER) and an **effect size** (the gap in units of natural
+  variation).
+- **95% confidence interval** — from a **bootstrap**: the data is resampled
+  2,000 times (`n_bootstrap`, 200–20,000) and the gap recomputed each time.
+  The interval is the 2.5th–97.5th percentile of those gaps. If it doesn't
+  cross zero, the gap is unlikely to be pure chance. This is the percentile
+  bootstrap, not BCa.
+- **p-value and `p_adjusted`** — the raw p-value is corrected with
+  **Holm-Bonferroni** so that running many groups × metrics at once doesn't
+  produce spurious "significant" results. Always read `p_adjusted`, not the
+  raw value.
+
+How the resampling is done depends on the data:
+
+- **Paired by content** — if groups read the same sentences and at least 5
+  are shared, the same sentence is compared across groups and those pairs
+  are resampled. Most powerful and most trustworthy.
+- **By speaker** — otherwise whole speakers are resampled, so one voice can't
+  dominate the result.
+- **By utterance** — used only when no speaker IDs exist.
+
+### Design: matched, partially matched, unmatched
+
+Before trusting any comparison, the panel checks whether the groups spoke
+the same content:
+
+- **`matched`** — every group covers ≥ 95% of the same content. Any gap is
+  down to *how* it was said, not *what*.
+- **`partially_matched`** — some overlap; pairing is done on the shared
+  subset only.
+- **`unmatched`** — different groups said different things. A gap may reflect
+  accent or may just reflect harder sentences, so every verdict carries a
+  **content-confounded** caveat and is never called causal.
+
+### Minimum detectable effect
+
+The **MDE** is the smallest true gap this specific sample could have
+detected at 95% confidence and 80% power. It stops "no significant
+difference" from being misread as "we checked and it's fine" when the data
+was simply too small to see anything.
+
+### Verdicts
+
+Each comparison gets one verdict, checked in this order:
+
+| Verdict | Meaning |
+|---|---|
+| `speaker_confounded` | The group has fewer speakers than the minimum, so an effect can't be separated from one individual's voice. *Come back with more speakers.* |
+| `disparity_detected` | `p_adjusted` < 0.05 **and** the gap is practically meaningful (≥ 0.05 absolute, or ≥ 1.25× the reference). A real, statistically supported gap. |
+| `inconclusive — underpowered` | The observed gap is smaller than the MDE. We can't rule out a real gap; there isn't enough data to see one this small. |
+| `no_evidence_of_disparity` | Not significant, and the sample had power to detect a meaningful gap. The only verdict that is an actual "looks fine". |
+
+Thresholds are configurable per run: `absolute_error_gap` (0.05),
+`disparity_ratio` (1.25), `grounding_gap` (0.15), and `alpha` (0.05).
+
+Alongside per-group verdicts, each metric gets corpus-level summary stats:
+**max gap**, **disparity ratio** (worst ÷ best group), **Gini**, and
+**weighted standard deviation**, with the best and worst group named.
 
 ## Minimums
 
@@ -57,6 +175,14 @@ Fairness analysis is capped at **≤ 20,000 items total** per run.
   on the request.
 </Callout>
 
+Behind the scenes the job runs in four stages: it **prepares** (cache check,
+grouping, dropping small groups, picking the reference, classifying the
+design), **infers** in parallel shards of about 8 items, optionally
+**explains** a sampled subset with saliency on the GPU, then **aggregates**
+all statistics. Identical requests are cached and return instantly. A
+corrupt file is recorded as a per-item failure without sinking the whole
+job, and you can cancel a running job at any stage.
+
 ## Reading the results
 
 - **Disparity radar** — one axis per metric, one line per group, so you can
@@ -64,6 +190,8 @@ Fairness analysis is capped at **≤ 20,000 items total** per run.
   metric.
 - **Group error bars** — per-group metric values with bootstrap confidence
   intervals, so you can tell a real gap from noise.
+- **Verdict cards** — the plain-English verdict for each group and metric,
+  with the CI, `p_adjusted`, estimator, and block count spelled out.
 - **Phone confusion matrix** — where phone-level annotations exist (for
   example, L2-ARCTIC), a confusion matrix of which phones get mistaken for
   which, broken out by group.
@@ -75,3 +203,66 @@ Fairness analysis is capped at **≤ 20,000 items total** per run.
   `![Fairness disparity radar](/assets/docs/fairness-radar.png)` once the
   real image is uploaded.
 </Callout>
+
+## Dataset-specific analyses
+
+### Speech Accent Archive (SAA)
+
+150 speakers all read the **same** paragraph, so the design is naturally
+`matched` and content can't be a confound. That unlocks two extra analyses:
+
+- **Word-position error heatmap** — because every transcript aligns to the
+  same reference, you get an error rate *per word position*, turning "WER is
+  higher" into "this group mishandles these specific words".
+- **Age-of-English-onset regression** — `WER ≈ β0 + β1·age_english_onset +
+  β2·age`, plus a Spearman correlation, testing whether learning English
+  later predicts worse transcription independent of current age.
+
+Both are descriptive, not significance-tested; read them alongside the
+reported `n`.
+
+### L2-ARCTIC
+
+Non-native English speech where a trained linguist marked the exact time
+window, expected phoneme, and produced phoneme of every pronunciation error
+(891 annotated errors in the bundled subset). It adds:
+
+- **Phone-error grounding** — does saliency land on the moments a linguist
+  flagged? Scored with **AUROC** (0.5 = random, 1.0 = perfect), **average
+  precision**, and **AUROC within speech**, which only counts speech frames
+  and so proves the model is honing in on the error rather than just
+  preferring speech over silence.
+- **Accentedness regression** — `WER ≈ intercept + β·accentedness + group
+  terms`, where accentedness is human-verified error count per phone. If WER
+  is already explained by how mispronounced an utterance was, a group's
+  extra term shows whether the model penalises that accent *beyond* what the
+  pronunciation itself predicts.
+
+<Callout title="L2-ARCTIC will report speaker_confounded" tone="warn">
+  The bundled subset has exactly **one speaker per native language** (ABA
+  Arabic, LXC Chinese, EBVS Spanish). With the default minimum of 2 speakers
+  per group, every language-based comparison correctly reports
+  `speaker_confounded`. That's intentional, not a bug: with one speaker you
+  can't tell language from that person's voice.
+</Callout>
+
+## Common misreadings
+
+- `disparity_detected` on an `unmatched` design is real but **not proof of
+  accent-specific bias** — hence the content-confounded flag.
+- `speaker_confounded` means "get more speakers", not "no bias".
+- `inconclusive — underpowered` is not "fine". It means the sample was too
+  small to detect a gap of practical size.
+- Custom single-file uploads aren't eligible: fairness needs a dataset with
+  a grouping column and enough items per group.
+
+## Glossary
+
+| Term | Plain-English meaning |
+|---|---|
+| Reference group | The baseline group (usually the largest) everyone else is compared against |
+| Bootstrap CI | A confidence interval built by resampling the data thousands of times to see how much a statistic naturally wobbles |
+| `p_adjusted` | The p-value after Holm-Bonferroni correction for running many comparisons |
+| MDE | Smallest true gap this sample could reliably detect |
+| Macro vs micro WER | Macro averages each utterance's error rate; micro is total errors ÷ total words |
+| Leakage lift | Leakage accuracy divided by chance level; above 1 means groups are recoverable from embeddings |
