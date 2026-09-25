@@ -6,6 +6,17 @@
 
 <Badges items={["PCA", "t-SNE", "UMAP", "HDBSCAN", "nearest neighbour"]} />
 
+## What is an embedding?
+
+An embedding is the vector of numbers a model uses internally to represent a clip. Clips the model treats as similar end up with similar vectors. Because these vectors are far too long to read, the projector squeezes them into 2D or 3D so you can see clusters, outliers, and clips that look mislabeled.
+
+## What gets projected
+
+Each clip becomes one point. Its vector is the model's mean-pooled encoder
+output — Whisper's last encoder hidden state, or Wav2Vec2's 768-dimensional
+representation. The projection only reduces those vectors for display, so
+switching method re-runs the reduction without re-extracting embeddings.
+
 ## Projection methods
 
 The `embedding` operation supports three reduction methods:
@@ -22,7 +33,10 @@ Each can be projected into **2D or 3D**, your choice.
 Clustering is optional and off by default. When enabled, it runs
 **HDBSCAN** over the projected points, with `min_cluster_size` tunable from
 **2 to 50**. Smaller values surface more, smaller clusters; larger values
-collapse the projection into a handful of broad groups.
+collapse the projection into a handful of broad groups (default **5**).
+Points HDBSCAN can't assign to any cluster are marked as **noise**, and the
+result includes a **silhouette score** (−1 to 1) for cluster quality. At
+least 3 clips are required.
 
 ## Nearest-neighbour retrieval
 
