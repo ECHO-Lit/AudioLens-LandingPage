@@ -11,6 +11,12 @@
 
 Jacobian Lens reads Whisper's decoder layers as if they were making predictions themselves. At each token position, it maps a layer's intermediate representation onto the vocabulary, so you can see how the model's guess develops layer by layer before it settles on the final token.
 
+<img
+  src="/assets/jacobian_lens.jpeg"
+  alt="Diagram: an audio clip goes into the Whisper decoder. The lens reads each decoder layer, Layer 1 through Final layer, and shows the guess for the token 'cat' improving as you go up: car, then cap, cap, cap, then cat at the final layer. Below, three steps: fit the lens on a dataset with transcripts, save the lens, apply it to a new clip."
+  className="my-6 w-full rounded-2xl"
+/>
+
 ## Two operations
 
 - **`jacobian_lens_fit`** — fits a new lens from a dataset of samples.
