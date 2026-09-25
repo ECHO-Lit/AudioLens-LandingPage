@@ -16,6 +16,7 @@ const NAV_LINKS = [
   { key: "features", href: "/#features", label: "Features" },
   { key: "docs", href: "/docs", label: "Docs" },
   { key: "research", href: "/research", label: "Research" },
+  { key: "about", href: "/about", label: "About" },
 ] as const;
 
 export function SiteHeader({ active }: { active?: string }) {

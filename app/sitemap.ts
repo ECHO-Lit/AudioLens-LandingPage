@@ -14,6 +14,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.6,
     },
+    {
+      url: `${SITE_URL}/about`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.5,
+    },
     ...RESEARCH.map((entry) => ({
       url: `${SITE_URL}${researchHref(entry.slug)}`,
       lastModified: entry.date ? new Date(`${entry.date}T00:00:00Z`) : now,

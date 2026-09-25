@@ -23,6 +23,7 @@ const FOOTER_COLUMNS = [
   {
     label: "Project",
     links: [
+      { text: "About", href: "/about" },
       { text: "Contributing", href: "/docs/contributing" },
       { text: "Security", href: "/docs/security" },
       { text: "Changelog", href: "/docs/changelog" },
