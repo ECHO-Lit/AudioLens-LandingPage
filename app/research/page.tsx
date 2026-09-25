@@ -2,16 +2,12 @@ import type { Metadata } from "next";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ACCENT } from "@/lib/theme";
-import { ResearchCard } from "./research-card";
-import { RESEARCH } from "./research-data";
 
 export const metadata: Metadata = {
   title: "Research — AudioLens",
   description:
     "Nothing published yet. Writeups and findings behind AudioLens will land here as they're ready.",
 };
-
-const RING = "shadow-[0_0_0_1px_var(--al-hairline)]";
 
 export default function ResearchPage() {
   return (
@@ -50,28 +46,26 @@ export default function ResearchPage() {
             inspired by Google PAIR&apos;s LIT. Writeups and findings will land here as they&apos;re
             ready.
           </p>
+        </div>
 
-          {/* Keeps the page honest while the boxes below are empty. */}
-          <div
-            className={`mt-8 inline-flex items-center gap-2.5 rounded-full bg-card/75 py-[7px] pr-3.5 pl-3 text-[13px] text-al-fg-tertiary ${RING}`}
-          >
-            <span className="font-code text-[11px] tracking-[0.06em]">
-              PREVIEW
-            </span>
-            <span>Placeholders — the first write-ups are still in review</span>
-          </div>
+        <div className="relative z-[1] mx-auto mt-[64px] max-w-[1240px] overflow-hidden rounded-[22px]">
+          {/* Animated SVG: plain img so the animation plays. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/Research.svg"
+            alt="AudioLens research"
+            width={2400}
+            height={1350}
+            className="block h-[240px] w-full object-cover object-center sm:h-[340px] lg:h-[440px]"
+          />
         </div>
       </section>
 
       <section
         id="papers"
-        className="scroll-mt-24 px-6 pt-[70px] sm:pt-[90px] lg:pt-[110px]"
+        className="scroll-mt-24 px-6 pt-[70px] text-center sm:pt-[90px] lg:pt-[110px]"
       >
-        <div className="mx-auto grid max-w-[1240px] grid-cols-[repeat(auto-fit,minmax(min(320px,100%),1fr))] gap-[22px]">
-          {RESEARCH.map((entry, i) => (
-            <ResearchCard key={entry.slug} entry={entry} priority={i === 0} />
-          ))}
-        </div>
+        <p className="m-0 text-[18px] text-al-fg-tertiary">Nothing added yet.</p>
       </section>
 
       <div className="pt-[90px] sm:pt-[120px]" />
