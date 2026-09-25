@@ -7,15 +7,20 @@
 
 <Badges items={["decoder-only", "position-resolved", "Whisper", "/j-lens Lab"]} />
 
+## What is Jacobian Lens?
+
+Jacobian Lens reads Whisper's decoder layers as if they were making predictions themselves. At each token position, it maps a layer's intermediate representation onto the vocabulary, so you can see how the model's guess develops layer by layer before it settles on the final token.
+
 ## Two operations
 
 - **`jacobian_lens_fit`** — fits a new lens from a dataset of samples.
-  Requires **2 to 1000 samples**, each clip **≤ 60 seconds**, and a dataset
+  Requires **2 to 1000 samples**, each clip **≤ 60 seconds** (`max_audio_seconds`
+  defaults to 30), and a dataset
   or manifest that includes a **transcript** (the lens is fit against
   known text, not raw audio alone).
 - **`jacobian_lens_apply`** — applies an already-fitted lens to a clip.
-  Takes `top_k` (how many top results to return) and an optional
-  `transcript`.
+  Takes `top_k` (how many top results to return), an optional
+  `transcript`, and `max_new_tokens` (8–256, default 64).
 
 ## The J-Lens Lab
 

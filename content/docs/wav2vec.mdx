@@ -15,6 +15,14 @@
   [/docs/licenses](/docs/licenses) for the full terms and source links.
 </Callout>
 
+## Output
+
+Audio is resampled to **16 kHz** before inference. For each clip the model
+returns a probability for every emotion class, the top class as the
+predicted emotion, and its probability as the **confidence**. The classes
+are read from the model's config at runtime; for the bundled checkpoint they
+are `neutral`, `happy`, `sad`, `angry`, and `fear`.
+
 Like Whisper, this model is English-only — there is no multi-language
 support for emotion classification.
 

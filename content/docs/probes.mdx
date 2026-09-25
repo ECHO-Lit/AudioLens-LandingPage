@@ -6,6 +6,10 @@
 
 <Badges items={["layer_probe", "logreg", "linear_svm", "cross-validation"]} />
 
+## What is layer probing?
+
+A probe is a small, simple classifier trained on a model's hidden activations to predict a property, such as speaker gender or emotion. If a linear probe can predict the property from a layer, that layer represents it. Repeating this at every layer shows where in the network the property emerges.
+
 ## How it works
 
 The `layer_probe` operation trains a small linear classifier — a
@@ -29,6 +33,35 @@ separable.
 Each property is probed independently across all layers, using
 cross-validation so the reported score isn't just an artifact of the
 particular train/test split.
+
+| Setting | Default | Meaning |
+|---|---|---|
+| `probe` | `logreg` | `logreg` or `linear_svm` |
+| `cv_folds` | 5 | Cross-validation folds (2–10) |
+| `project_dims` | 256 | Random projection applied to each layer's vector before probing (0–1024; `0` disables) |
+| `min_class_count` | 5 | Minimum files a class needs to be included (2–50) |
+| `include_control` | on | Also train a control probe on shuffled labels |
+
+Activations are mean-pooled per layer and standardised before fitting. Files
+labelled empty, `unknown`, `none`, or `n/a` are dropped as unannotated, and
+a property needs at least **8 usable files** to be probed at all.
+
+## The three numbers per layer
+
+Read all three together — accuracy on its own can mislead:
+
+- **`accuracy`** — mean cross-validated accuracy of the probe.
+- **`majority_baseline`** — the share of the largest class. Accuracy at or
+  below this means the layer carries **no** usable information about the
+  property, however high the number looks.
+- **`selectivity`** — `accuracy − control_accuracy`, where the control is the
+  identical probe trained on shuffled labels. A probe that beats the
+  baseline but not its control is memorising training rows rather than
+  reading the representation.
+
+Each layer also reports macro-F1 and the accuracy's standard deviation across
+folds, and each property reports its best layer by accuracy and by
+selectivity.
 
 ## Reading the results
 
