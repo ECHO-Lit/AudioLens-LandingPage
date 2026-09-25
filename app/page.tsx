@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { ThemedGrainient } from "@/components/grainient-theme";
 import { Parallax } from "@/components/parallax";
 import { TextReveal } from "@/components/text-reveal";
+import { PanelGrid } from "@/components/panel-grid";
 import { ACCENT } from "@/lib/theme";
 
 const EYEBROW = "Open source";
@@ -17,114 +18,218 @@ const CHIPS = [
   "Docker Compose",
 ];
 
+// Three themes, in the order of the Methods cards below: listened, learned,
+// breaks.
 const PREMISE = [
   {
-    figure: "9",
     tone: "var(--al-accent-text)",
     bg: "var(--al-accent-tint)",
-    title: "Nine ways to look at one prediction",
-    body: "Saliency, attention, embeddings, perturbation, diagnostics, fairness, layer probes, Jacobian Lens, and dataset EDA — nine panels, all reading the same job.",
+    title: "Where it listened",
+    body: "Saliency and attention trace a prediction back to the moments in the audio, and the layers, that produced it.",
   },
   {
-    figure: "4",
     tone: "var(--al-fg-strong)",
     bg: "var(--al-surface-2)",
-    title: "Stress-test with real perturbations",
-    body: "Re-run a prediction under noise, pitch shift, time stretch, or time masking to see how much the output moves. Four transform types, chainable up to ten per request — not a marketing number.",
+    title: "What it learned",
+    body: "Embeddings, layer probes and the Jacobian Lens show how the model represents speech inside, layer by layer.",
   },
   {
-    figure: "Layer by layer",
     tone: "var(--al-accent-text)",
     bg: "var(--al-accent-tint)",
-    title: "Open the model up, not just the output",
-    body: "Layer probes and the Jacobian Lens look inside Whisper's decoder layer by layer, so 'the model got it wrong' becomes a specific, inspectable claim.",
+    title: "Where it breaks",
+    body: "Perturbation, diagnostics, fairness slices and dataset EDA test it against noise, accents and the data itself.",
   },
 ];
 
-// Each row is a step label plus a one-line explanation. Qualitative on
-// purpose: no measured durations or percentages.
-const TIMELINE = [
+// What it is / isn't / who it's for. The single home for the "isn't" and
+// language facts; nothing here repeats the panels or the model list.
+const OVERVIEW = [
   {
-    label: "Waveform",
-    detail: "The raw audio your model heard, scrubbable in the shared player.",
+    label: "It is",
+    items: [
+      "A browser workbench for explaining speech-model predictions",
+      "Built for Whisper (speech to text) and Wav2Vec2 (speech to emotion)",
+      "Interactive: each question is a click, not a new script",
+    ],
   },
   {
-    label: "Prediction",
-    detail: "The transcript (Whisper) or emotion label (Wav2Vec2) the model produced.",
+    label: "It isn't",
+    items: [
+      "A transcription, meeting-notes or call-analytics app",
+      "Real-time: no microphone recording or live streaming",
+      "Multilingual: it works on English speech only",
+    ],
   },
   {
-    label: "Saliency & attention",
-    detail: "Which moments in the audio, and which layers, shaped that output.",
-  },
-  {
-    label: "Embeddings & probes",
-    detail: "How the model represents the signal internally, and where a property lives layer by layer.",
-  },
-  {
-    label: "Perturbation & fairness",
-    detail: "Whether the prediction holds up under a perturbed input, and across accent, speaker, or metadata slices.",
+    label: "Built for",
+    items: [
+      "Researchers studying speech recognition or emotion models",
+      "Engineers debugging a checkpoint before shipping it",
+      "Teams auditing a model for accent or speaker bias",
+    ],
   },
 ];
 
+// The user's path through the workbench, not the REST calls behind it (those
+// live in /docs/rest, linked under the list).
 const HOW_IT_WORKS = [
   {
-    label: "Upload",
-    detail: "POST /upload stores the audio and returns an opaque audio_id. No inference runs yet.",
+    label: "Bring audio",
+    detail: "Upload a .wav, .mp3, .m4a or .flac file (up to 100 MB and 10 minutes), or start from a bundled dataset.",
   },
   {
-    label: "Queue",
-    detail: "POST /jobs returns 202 with a job_id and publishes a task to a queue.",
+    label: "Pick a model",
+    detail: "Whisper for speech-to-text, Wav2Vec2 for emotion, or point it at your own Hugging Face checkpoint.",
   },
   {
-    label: "Work",
-    detail: "A worker picks up the task, lazily loads the model, runs the operation, and stores the result.",
+    label: "See the prediction",
+    detail: "The model runs once and shows you its transcript or emotion label.",
   },
   {
-    label: "Poll",
-    detail: "The UI polls GET /jobs/{id}, then reads GET /jobs/{id}/result once it's ready.",
+    label: "Ask why",
+    detail: "Open any panel. Each analysis runs in the background and attaches to the same clip, so switching views never means re-uploading.",
   },
   {
-    label: "Expire",
-    detail: "Job metadata and results expire after 24 hours.",
+    label: "Stress-test",
+    detail: "Re-run the clip under noise or pitch changes, or slice results by speaker group, to see where the prediction breaks.",
   },
 ];
 
+const FAQ = [
+  {
+    q: "What do I need to run it?",
+    a: "Docker with Compose. A GPU is optional: AudioLens picks CUDA, ROCm or Apple MPS when one is available and falls back to CPU otherwise. Model weights download the first time a job needs them.",
+    href: "/docs/quickstart",
+    hrefLabel: "Read the quickstart",
+  },
+  {
+    q: "Is there a hosted demo?",
+    a: "Not yet. A limited public demo is planned; for now AudioLens is self-hosted only.",
+    href: "/docs/demo",
+    hrefLabel: "See what to expect",
+  },
+  {
+    q: "What audio can I upload?",
+    a: "WAV, MP3, M4A or FLAC files, up to 100 MB and 10 minutes each. You can also skip uploading and start from one of the bundled sample datasets.",
+    href: "/docs/datasets",
+    hrefLabel: "See the datasets",
+  },
+  {
+    q: "Which Hugging Face models will work?",
+    a: "Speech Seq2Seq models like Whisper, CTC models, and audio-classification models like the Wav2Vec2 emotion checkpoint. Classification models must define id2label, and repos that need remote code are rejected. Registration validates the model up front, so an unsupported one fails immediately instead of running with wrong assumptions.",
+    href: "/docs/custom",
+    hrefLabel: "Read the custom checkpoint guide",
+  },
+  {
+    q: "Can I script it instead of using the UI?",
+    a: "Yes. Every panel is a thin client over the REST API, so anything you can click is also an endpoint you can call. A few shell and Python scripts cover starting the stack, checking queues and importing datasets.",
+    href: "/docs/rest",
+    hrefLabel: "Browse the REST API",
+  },
+  {
+    q: "How do I know a saliency map is right?",
+    a: "You check it. The faithfulness test deletes the audio the map calls most important and measures how far the prediction falls, against deleting random audio. If the map doesn't beat chance, don't trust it.",
+    href: "/docs/saliency",
+    hrefLabel: "Read about faithfulness",
+  },
+  {
+    q: "Where does my audio go?",
+    a: "It stays on your machine. There are no accounts: uploads belong to an anonymous session and expire after 24 hours, and nothing is phoned home.",
+  },
+  {
+    q: "What's the license?",
+    a: "AudioLens itself is MIT. The models and datasets it ships with keep their own terms, listed one by one.",
+    href: "/docs/licenses",
+    hrefLabel: "See the licenses",
+  },
+  {
+    q: "Can I use the bundled datasets commercially?",
+    a: "Not necessarily. RAVDESS, L2-ARCTIC and the Speech Accent Archive are licensed for non-commercial use only, and the terms for Common Voice and SAVEE are flagged as unverified. Check each dataset's license before using it outside research or personal use.",
+    href: "/docs/licenses",
+    hrefLabel: "See the per-dataset licenses",
+  },
+  {
+    q: "Where did it come from?",
+    a: "It builds on ECHO, an MIT-licensed audio interpretability tool created by Anas Hussaindeen, Chandupa Ambepitiya and Dewmike Amarasinghe.",
+    href: "/docs/licenses",
+    hrefLabel: "Read the attribution",
+  },
+];
+
+// The nine panels, in theme order (see PREMISE). Each is described once: a
+// plain question, then the technical detail. ids match app/docs/docs-data.ts.
 const PANELS = [
   {
     no: "01",
+    id: "saliency",
     meta: "gradcam · lime · shap",
     title: "Saliency mapping",
-    body: "See which parts of the waveform drove each predicted token. GradCAM, LIME and SHAP are available, with a faithfulness check (deletion curve, before/after) to tell you whether to trust the map.",
+    question: "Which part of the audio made it say this word?",
+    body: "Per-token attribution over the waveform, with a faithfulness check (deletion curve, before/after) that tells you whether to trust the map.",
   },
   {
     no: "02",
+    id: "attention",
     meta: "encoder & decoder · layer 0–31 · head 0–31",
     title: "Attention",
-    body: "Inspect per-layer, per-head attention weights across Whisper's encoder and decoder (custom checkpoints too), one layer and head at a time.",
+    question: "Where is each layer looking?",
+    body: "Per-layer, per-head attention weights across Whisper's encoder and decoder, custom checkpoints included, one layer and head at a time.",
   },
   {
     no: "03",
+    id: "embeddings",
     meta: "PCA · t-SNE · UMAP · HDBSCAN",
     title: "Embedding projector",
+    question: "Which clips does the model treat as similar?",
     body: "Project learned representations into 2D or 3D, cluster them with HDBSCAN, and pull nearest neighbours for any point you select.",
   },
   {
     no: "04",
-    meta: "4 transform types",
-    title: "Perturbation lab",
-    body: "Re-run a prediction after adding noise, shifting pitch, stretching time, or masking part of the clip — four transform types, chainable up to ten per request, to see how robust an output really is.",
+    id: "probes",
+    meta: "logreg · linear svm",
+    title: "Layer probes",
+    question: "Which layer knows the speaker's emotion or accent?",
+    body: "Trains a linear probe on every layer's hidden states and scores where the property becomes linearly separable.",
   },
   {
     no: "05",
-    meta: "WER · CER",
-    title: "Transcript accuracy metrics",
-    body: "Score a predicted transcript against a reference using word- and character-error rate — the same metrics that power fairness slicing below, available anywhere you have ground truth to compare against.",
+    id: "jlens",
+    meta: "decoder · position-resolved",
+    title: "Jacobian Lens",
+    question: "What was it about to say, layer by layer?",
+    body: "Maps each Whisper decoder layer onto the vocabulary at every token position. Fit the lens once, then apply it to any clip.",
   },
   {
     no: "06",
-    meta: "accent · speaker · language · custom metadata",
-    title: "Fairness slicing",
-    body: "Slice model performance — WER, CER, accuracy, macro-F1, ECE, and more — by accent, speaker, or any metadata column you provide, with minimum group-size guards so small slices don't produce misleading numbers.",
+    id: "perturb",
+    meta: "noise · pitch · stretch · mask",
+    title: "Perturbation lab",
+    question: "Does it hold up with noise or faster speech?",
+    body: "Four transform types, chainable up to ten per request, with the prediction compared before and after.",
+  },
+  {
+    no: "07",
+    id: "diagnostics",
+    meta: "linguistic vs. acoustic",
+    title: "Diagnostics",
+    question: "Is it relying on the words, or how they sounded?",
+    body: "Sweeps up to 25 files across pitch, speed, noise and masking to separate what was said from how it sounded.",
+  },
+  {
+    no: "08",
+    id: "fairness",
+    meta: "WER · CER · accuracy · ECE",
+    title: "Fairness slices",
+    question: "Is it worse for some accents or speakers?",
+    body: "Slice performance by accent, speaker or any metadata column you provide, with minimum group-size guards so small slices don't mislead.",
+  },
+  {
+    no: "09",
+    id: "eda",
+    meta: "librosa features · outliers",
+    title: "Dataset EDA",
+    question: "Is my dataset lopsided before I start?",
+    body: "Class balance, acoustic feature distributions and outliers, so data problems don't get mistaken for model bugs.",
   },
 ];
 
@@ -147,28 +252,6 @@ const MODELS_AND_DATASETS = [
       "Speech Accent Archive",
       "LibriSpeech-1000",
     ],
-  },
-];
-
-const DEPLOY_YOUR_WAY = [
-  {
-    figure: "Self-host",
-    title: "Run it yourself",
-    body: "docker compose up --build gets you the full stack on your own machine.",
-    href: undefined as string | undefined,
-  },
-  {
-    figure: "Planned",
-    title: "Hosted demo",
-    body: "A limited public demo is planned — not live yet.",
-    // TODO: set real demo URL, see {{DEMO_URL}}
-    href: "#" as string | undefined,
-  },
-  {
-    figure: "MIT",
-    title: "Open source",
-    body: "MIT licensed, no telemetry, nothing phoned home. Read the code, fork it, self-host it.",
-    href: undefined as string | undefined,
   },
 ];
 
@@ -230,10 +313,10 @@ export default function Home() {
           </h1>
 
           <p className="mx-auto mt-[30px] max-w-[60ch] text-[17px] leading-[1.55] font-normal text-al-fg-body text-pretty sm:text-[20px]">
-            AudioLens is an interpretability workbench for speech models. Follow
-            a single prediction from raw waveform to emitted token, across
-            saliency, attention, embeddings and perturbation, on one shared
-            timeline.
+            AudioLens shows you why a speech model said what it said. Load a
+            clip, run Whisper or Wav2Vec2, and trace the prediction back
+            through the audio and the model&apos;s layers: nine views, one
+            shared timeline.
           </p>
 
           <div className="mt-[38px] flex flex-wrap justify-center gap-3">
@@ -295,6 +378,104 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Overview: one plain statement of what this is, then is / isn't / for
+          whom in three hairline-ruled columns. */}
+      <section className="px-6 pt-[90px] sm:pt-[120px] lg:pt-[150px]">
+        <div className="mx-auto max-w-[1240px]">
+          <div
+            className="font-code text-[11.5px] tracking-[0.14em] uppercase"
+            style={{ color: "var(--al-accent-text)" }}
+          >
+            Overview
+          </div>
+          <p className="mt-6 mb-0 max-w-[34ch] text-[28px] leading-[1.14] font-semibold tracking-[-0.03em] text-balance sm:text-[38px] lg:text-[52px]">
+            AudioLens is an open-source workbench for looking inside speech
+            models.{" "}
+            <span className="text-al-fg-quaternary">
+              It&apos;s the audio counterpart to Google PAIR&apos;s LIT: instead
+              of just reading a transcript or a label, you see which sounds,
+              layers and features produced it.
+            </span>
+          </p>
+
+          <div className="mt-[70px] grid gap-x-10 gap-y-12 md:grid-cols-3">
+            {OVERVIEW.map((col) => (
+              <div
+                key={col.label}
+                className="pt-5 shadow-[inset_0_1px_0_var(--al-hairline-strong)]"
+              >
+                <div className="font-code text-[11.5px] tracking-[0.14em] text-al-fg-tertiary uppercase">
+                  {col.label}
+                </div>
+                <ul className="mt-6 mb-0 flex list-none flex-col gap-4 p-0">
+                  {col.items.map((item) => (
+                    <li
+                      key={item}
+                      className="text-[16px] leading-[1.55] text-al-fg-body text-pretty"
+                    >
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How it works: open editorial layout. Sticky heading on the left, a
+          numbered ledger on the right, separated only by hairlines. */}
+      <section
+        id="how-it-works"
+        className="scroll-mt-24 px-6 pt-[90px] sm:pt-[120px] lg:pt-[150px]"
+      >
+        <div className="mx-auto grid max-w-[1240px] gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <div
+              className="font-code text-[11.5px] tracking-[0.14em] uppercase"
+              style={{ color: "var(--al-accent-text)" }}
+            >
+              How it works
+            </div>
+            <TextReveal
+              as="h2"
+              text="From a clip to an explanation."
+              className="mt-5 mb-0 text-[34px] leading-none font-semibold tracking-[-0.04em] text-balance sm:text-[44px] lg:text-[64px]"
+            />
+            <p className="mt-6 mb-0 max-w-[40ch] text-[17px] leading-[1.6] text-al-fg-body text-pretty">
+              No scripts, no notebooks. Five steps in the browser, and every
+              panel stays in sync with the same clip.
+            </p>
+          </div>
+          <ol className="m-0 list-none p-0 shadow-[inset_0_-1px_0_var(--al-hairline-strong)]">
+            {HOW_IT_WORKS.map((s, i) => (
+              <li
+                key={s.label}
+                className="group grid grid-cols-[44px_1fr] gap-x-4 py-7 shadow-[inset_0_1px_0_var(--al-hairline-strong)] sm:grid-cols-[64px_1fr] sm:py-9"
+              >
+                <span className="font-code pt-2 text-[12px] text-al-fg-quaternary transition-colors group-hover:text-[var(--al-accent-text)]">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <div className="text-[26px] leading-[1.1] font-semibold tracking-[-0.03em] sm:text-[34px]">
+                    {s.label}
+                  </div>
+                  <p className="mt-3 mb-0 max-w-[52ch] text-[15.5px] leading-[1.6] text-al-fg-body text-pretty">
+                    {s.detail}
+                  </p>
+                </div>
+              </li>
+            ))}
+            <li className="py-6 text-[14px] leading-[1.6] text-al-fg-tertiary shadow-[inset_0_1px_0_var(--al-hairline-strong)]">
+              Under the hood every step is a REST job: upload, queue, poll.{" "}
+              <Link href="/docs/rest" className="underline underline-offset-4">
+                API reference
+              </Link>
+            </li>
+          </ol>
+        </div>
+      </section>
+
       {/* The premise */}
       <section className="px-6 pt-[90px] sm:pt-[120px] lg:pt-[150px]">
         <div className="mx-auto max-w-[1240px]">
@@ -332,15 +513,12 @@ export default function Home() {
                 style={{ background: p.bg }}
               >
                 <div
-                  className="font-code text-[44px] leading-none font-normal tracking-[-0.03em]"
+                  className="text-[32px] leading-[1.05] font-semibold tracking-[-0.035em] text-balance sm:text-[36px]"
                   style={{ color: p.tone }}
                 >
-                  {p.figure}
-                </div>
-                <div className="mt-5 text-[19px] font-semibold tracking-[-0.015em]">
                   {p.title}
                 </div>
-                <p className="mt-[9px] mb-0 text-[15px] leading-[1.6] text-al-fg-body text-pretty">
+                <p className="mt-4 mb-0 text-[15px] leading-[1.6] text-al-fg-body text-pretty">
                   {p.body}
                 </p>
               </div>
@@ -349,112 +527,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* One timeline */}
-      <section className="px-6 pt-[90px] sm:pt-[120px] lg:pt-[150px]">
-        <div className="relative mx-auto max-w-[1240px] overflow-hidden rounded-[32px] bg-al-panel px-6 pt-[52px] pb-9 text-white sm:px-10 sm:pt-[64px] sm:pb-11 lg:px-16 lg:pt-[78px] lg:pb-14">
-          <Parallax
-            aria-hidden
-            speed={0.2}
-            max={120}
-            className="pointer-events-none absolute top-[-160px] right-[-160px] h-[620px] w-[620px] blur-[20px]"
-            style={{
-              background:
-                "radial-gradient(circle at 50% 50%, rgba(27,72,224,0.55) 0%, rgba(27,72,224,0) 68%)",
-            }}
-          />
-          <div className="relative">
-            <div className="font-code text-[11.5px] tracking-[0.14em] text-[#8fabff] uppercase">
-              One timeline
-            </div>
-            <TextReveal
-              as="h2"
-              text="One prediction, every panel."
-              className="mt-5 mb-0 max-w-[16ch] text-[32px] leading-none font-semibold tracking-[-0.04em] text-balance sm:text-[42px] lg:text-[60px]"
-            />
-            <p className="mt-6 mb-0 max-w-[52ch] text-[17px] leading-[1.6] text-white/65 text-pretty">
-              Every panel reads the same job: the same waveform, the same
-              prediction, the same timeline. Move between saliency, attention,
-              embeddings and probes without losing your place.
-            </p>
-          </div>
-
-          {/* Multitrack view: one lane per panel, and one selected span (the
-              lit bars) sitting at the same x in every lane. The bars are
-              decorative, not data. */}
-          <div className="relative mt-12 sm:mt-14">
-            <div className="font-code mb-3 hidden items-center justify-between text-[10.5px] tracking-[0.12em] text-white/35 uppercase md:flex md:pl-[calc(38%+24px)]">
-              <span>0:00</span>
-              <span className="text-[#8fabff]">selected span</span>
-              <span>end</span>
-            </div>
-            <ol className="m-0 list-none p-0">
-              {TIMELINE.map((lane, i) => (
-                <li
-                  key={lane.label}
-                  className="grid items-center gap-4 py-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.09)] md:grid-cols-[38%_1fr] md:gap-6"
-                >
-                  <div>
-                    <div className="flex items-baseline gap-3">
-                      <span className="font-code text-[11px] text-white/35">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <span className="text-[18px] font-semibold tracking-[-0.015em] sm:text-[20px]">
-                        {lane.label}
-                      </span>
-                    </div>
-                    <p className="mt-1.5 mb-0 max-w-[44ch] text-[13.5px] leading-[1.55] text-white/55">
-                      {lane.detail}
-                    </p>
-                  </div>
-                  <div
-                    aria-hidden
-                    className="relative flex h-12 items-center gap-[3px] overflow-hidden rounded-[10px] bg-white/[0.03] px-2 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.07)]"
-                  >
-                    {Array.from({ length: 56 }, (_, k) => {
-                      const h =
-                        22 +
-                        Math.abs(
-                          Math.sin(k * 0.55 + i * 1.7) * 44 +
-                            Math.sin(k * 1.9 + i) * 20,
-                        );
-                      const lit = k >= 31 && k <= 39;
-                      return (
-                        <span
-                          key={k}
-                          className={`w-full rounded-full ${lit ? "bg-[#8fabff]" : "bg-white/20"}`}
-                          style={{ height: `${Math.min(h, 100)}%` }}
-                        />
-                      );
-                    })}
-                  </div>
-                </li>
-              ))}
-            </ol>
-            {/* The shared playhead: one hairline through every lane. */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute top-0 bottom-0 hidden w-px bg-[#8fabff]/60 md:block"
-              style={{ left: "calc(38% + 24px + (100% - 38% - 24px) * 0.634)" }}
-            />
-          </div>
-          {/* Rounded and hairlined on all four sides: the shot used to bleed
-              into the panel's bottom edge, so it read as part of the card
-              rather than as something sitting inside it. */}
-          <div className="relative mt-16 max-h-[300px] overflow-hidden rounded-[20px] shadow-[0_0_0_1px_rgba(255,255,255,0.12)]">
-            <Image
-              src="/assets/embedded-image.jpg"
-              alt="Speech embeddings rendered as a voxel landscape, peaks marking the frames the model weighted most heavily"
-              width={1836}
-              height={1033}
-              priority
-              className="block h-[300px] w-full scale-[1.176] object-cover object-center"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Six panels. Keeps id="features" so the header's /#features link, which
-          predates this design, still resolves. */}
+      {/* Nine panels, each described once. Keeps id="features" so the header's
+          /#features link, which predates this design, still resolves. */}
       <section
         id="features"
         className="scroll-mt-24 px-6 pt-[90px] sm:pt-[120px] lg:pt-[150px]"
@@ -475,77 +549,12 @@ export default function Home() {
               Method reference
             </Link>
           </div>
+          <p className="mt-6 mb-0 max-w-[52ch] text-[17px] leading-[1.6] text-al-fg-body text-pretty">
+            Nine panels, each built around one question. All of them read the
+            same clip and the same prediction.
+          </p>
 
-          <div className="mt-16 grid grid-cols-[repeat(auto-fit,minmax(min(340px,100%),1fr))] gap-[22px]">
-            {PANELS.map((p) => (
-              <div
-                key={p.no}
-                className={`rounded-[22px] bg-card px-8 pt-[34px] pb-9 transition-[box-shadow,transform] duration-200 hover:-translate-y-[3px] hover:shadow-[0_0_0_1px_rgba(27,72,224,0.3),0_30px_60px_-34px_var(--al-shadow-lift)] ${RING}`}
-              >
-                <div className="flex items-center justify-between">
-                  <span
-                    className="font-code text-[11.5px]"
-                    style={{ color: ACCENT }}
-                  >
-                    {p.no}
-                  </span>
-                  <span className="font-code text-[10.5px] text-al-fg-quaternary">
-                    {p.meta}
-                  </span>
-                </div>
-                <h3 className="mt-[26px] mb-0 text-[26px] leading-[1.1] font-semibold tracking-[-0.025em]">
-                  {p.title}
-                </h3>
-                <p className="mt-3 mb-0 text-[15px] leading-[1.62] text-al-fg-body text-pretty">
-                  {p.body}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* How it works: open editorial layout. Sticky heading on the left, a
-          numbered ledger on the right, separated only by hairlines. */}
-      <section className="px-6 pt-[90px] sm:pt-[120px] lg:pt-[150px]">
-        <div className="mx-auto grid max-w-[1240px] gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
-          <div className="lg:sticky lg:top-28 lg:self-start">
-            <div
-              className="font-code text-[11.5px] tracking-[0.14em] uppercase"
-              style={{ color: "var(--al-accent-text)" }}
-            >
-              How it works
-            </div>
-            <TextReveal
-              as="h2"
-              text="How a job actually runs"
-              className="mt-5 mb-0 text-[34px] leading-none font-semibold tracking-[-0.04em] text-balance sm:text-[44px] lg:text-[64px]"
-            />
-            <p className="mt-6 mb-0 max-w-[40ch] text-[17px] leading-[1.6] text-al-fg-body text-pretty">
-              Every panel is backed by an asynchronous job: upload once, queue
-              an operation, and poll for the result.
-            </p>
-          </div>
-          <ol className="m-0 list-none p-0 shadow-[inset_0_-1px_0_var(--al-hairline-strong)]">
-            {HOW_IT_WORKS.map((s, i) => (
-              <li
-                key={s.label}
-                className="group grid grid-cols-[44px_1fr] gap-x-4 py-7 shadow-[inset_0_1px_0_var(--al-hairline-strong)] sm:grid-cols-[64px_1fr] sm:py-9"
-              >
-                <span className="font-code pt-2 text-[12px] text-al-fg-quaternary transition-colors group-hover:text-[var(--al-accent-text)]">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <div className="text-[26px] leading-[1.1] font-semibold tracking-[-0.03em] sm:text-[34px]">
-                    {s.label}
-                  </div>
-                  <p className="mt-3 mb-0 max-w-[52ch] text-[15.5px] leading-[1.6] text-al-fg-body text-pretty">
-                    {s.detail}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ol>
+          <PanelGrid panels={PANELS} />
         </div>
       </section>
 
@@ -599,48 +608,50 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Deploy your way: three open columns under a heavy top rule, no
-          cards. The rule picks up the accent on hover. */}
+      {/* FAQ: native <details>, so the page stays a server component. */}
       <section className="px-6 pt-[90px] sm:pt-[120px] lg:pt-[150px]">
-        <div className="mx-auto max-w-[1240px]">
-          <div>
+        <div className="mx-auto grid max-w-[1240px] gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <div
+              className="font-code text-[11.5px] tracking-[0.14em] uppercase"
+              style={{ color: "var(--al-accent-text)" }}
+            >
+              FAQ
+            </div>
             <TextReveal
               as="h2"
-              text="Deploy your way."
-              className="whitespace-nowrap mt-5 mb-0 text-[34px] leading-none font-semibold tracking-[-0.04em] text-balance sm:text-[44px] lg:text-[64px]"
+              text="Questions, answered."
+              className="mt-5 mb-0 text-[34px] leading-none font-semibold tracking-[-0.04em] text-balance sm:text-[44px] lg:text-[64px]"
             />
           </div>
-
-          <div className="mt-[70px] grid grid-cols-1 gap-x-10 gap-y-14 md:grid-cols-3">
-            {DEPLOY_YOUR_WAY.map((p) => (
-              <div
-                key={p.title}
-                className="group border-t-2 border-al-fg-strong pt-6 transition-colors hover:border-[var(--al-accent-text)]"
+          <div className="shadow-[inset_0_-1px_0_var(--al-hairline-strong)]">
+            {FAQ.map((item) => (
+              <details
+                key={item.q}
+                className="group shadow-[inset_0_1px_0_var(--al-hairline-strong)]"
               >
-                <span
-                  className={`font-code inline-block rounded-full px-3 py-1 text-[11px] tracking-[0.08em] uppercase ${RING}`}
-                >
-                  {p.figure}
-                </span>
-                <div className="mt-8 text-[30px] leading-[1.05] font-semibold tracking-[-0.03em] sm:text-[36px]">
-                  {p.href ? (
-                    <Link
-                      href={p.href}
-                      className="inline-flex items-baseline gap-2 hover:text-[var(--al-accent-text)]"
-                    >
-                      {p.title}
-                      <span aria-hidden className="text-[22px]">
-                        →
-                      </span>
-                    </Link>
-                  ) : (
-                    p.title
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-[20px] font-semibold tracking-[-0.02em] transition-colors hover:text-[var(--al-accent-text)] sm:text-[24px] [&::-webkit-details-marker]:hidden">
+                  {item.q}
+                  <span
+                    aria-hidden
+                    className="text-[24px] leading-none font-normal text-al-fg-quaternary transition-transform duration-200 group-open:rotate-45"
+                  >
+                    +
+                  </span>
+                </summary>
+                <p className="mt-0 mb-0 max-w-[56ch] pb-7 text-[15.5px] leading-[1.65] text-al-fg-body text-pretty">
+                  {item.a}
+                  {item.href && (
+                    <>
+                      {" "}
+                      <Link href={item.href} className="underline underline-offset-4">
+                        {item.hrefLabel}
+                      </Link>
+                      .
+                    </>
                   )}
-                </div>
-                <p className="mt-4 mb-0 max-w-[36ch] text-[15.5px] leading-[1.6] text-al-fg-body text-pretty">
-                  {p.body}
                 </p>
-              </div>
+              </details>
             ))}
           </div>
         </div>
