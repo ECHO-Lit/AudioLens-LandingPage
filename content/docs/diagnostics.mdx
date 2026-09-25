@@ -6,12 +6,27 @@
 
 <Badges items={["linguistic-vs-acoustic", "sweep", "batch analysis"]} />
 
+## What is linguistic-vs-acoustic diagnostics?
+
+A model's output can change because of *what was said* (linguistic content) or *how it sounded* (acoustics such as pitch, speed, or noise). Diagnostics sweeps controlled acoustic changes across a batch of files and compares the resulting damage against a control that removes words. That shows which of the two the model depends on.
+
 ## What the sweep does
 
 Instead of perturbing one clip at a time, diagnostics sweeps a whole batch
 of files across one or more acoustic dimensions and looks at how
 predictions shift as a group — separating variation that tracks the
 *content* of the speech from variation that tracks its *acoustics*.
+
+<img
+  src="/assets/Diagnostic.png"
+  alt="Diagnostics pipeline in three stages: a DSP engine renders pitch-shift, time-stretch, noise and time-mask variants of the waveform with the reference transcript held constant and loudness locked at −23 LUFS; CPU and GPU workers render the variants and run Whisper or Wav2Vec2 on each; the dashboard shows a verdict, degradation curves per acoustic parameter, ranked sensitivity indices, and an A/B variant inspector."
+  className="my-6 w-full rounded-2xl"
+/>
+
+Read the diagram left to right: variants are rendered from one waveform
+(the reference transcript and loudness stay fixed), workers render and
+score them in the background, and the result lands as a verdict plus a
+degradation curve and sensitivity index per dimension.
 
 ## Limits
 
@@ -26,6 +41,51 @@ The five available sweep dimensions are **pitch, speed, noise, time_mask,
 and freq_mask** — you choose between 1 and 5 of them per sweep, and the
 combination of files × dimensions is capped so a single request can't
 generate an unbounded number of variants.
+
+## What each dimension varies
+
+Every variant is rendered at 16 kHz mono and loudness-normalised to −23 LUFS,
+so gain never confounds the result.
+
+| Dimension | Unit |
+|---|---|
+| `pitch` | semitones |
+| `speed` | rate (1.0 = unchanged) |
+| `noise` | dB SNR (repeated per step to average out randomness) |
+| `time_mask` | % of the clip masked |
+| `freq_mask` | Hz |
+
+Each file also gets an **identity control** (unchanged audio) and, by
+default, a **lexical control** that removes about 30% of the words, which
+gives a reference ceiling for how much damage changing the *content* does.
+
+## Reading the profile
+
+For each dimension, the sweep produces a **degradation curve**: how far the
+output moves from the unperturbed baseline at each setting. That's self-WER
+for transcription models and output divergence for classification models,
+clipped to 0–1, with a bootstrap 95% interval per point.
+
+- **`sensitivity_index`** — the area under that curve, on a 0–1 scale. This
+  is what dimensions are ranked by.
+- **`breakdown_theta`** — the setting at which degradation first crosses
+  50%, or none if it never does within the swept range.
+- **`local_slope_at_identity`** — how fast the output starts to move near the
+  unchanged setting (local fragility).
+- **`asymmetry` and `monotonic`** — whether degradation differs by direction
+  and whether it grows steadily.
+
+The overall **verdict** is based on the top dimension's `sensitivity_index`
+(`acoustic_influence`) and its size relative to the lexical control:
+
+| Verdict | Rule |
+|---|---|
+| `linguistically_driven` | acoustic influence below 0.10 — acoustics barely move the output |
+| `acoustically_dominated` | the top dimension reaches ≥ 60% of the lexical-control damage |
+| `mixed` | anything in between |
+| `inconclusive` | no dimension could be isolated for the input |
+
+`linguistic_robustness` is `1 − acoustic_influence`.
 
 ## Running it
 
