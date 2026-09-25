@@ -85,15 +85,11 @@ Compose project name: `echo`.
 for development; the production target is `nginx:alpine` on port 80 with
 SPA fallback. Containers run as non-root user `appuser` (uid 1000).
 
-<Callout title="Image placeholder: architecture diagram">
-  Add `/assets/docs/architecture-diagram.png` — a diagram (not a screenshot)
-  showing the frontend talking only to the FastAPI control plane, the
-  control plane publishing job envelopes to the three queues, Celery
-  workers consuming those queues, and the shared Redis/object-storage layer
-  underneath. Replace this callout with
-  `![Architecture diagram](/assets/docs/architecture-diagram.png)` once the
-  real image is uploaded.
-</Callout>
+<img
+  src="/assets/architecture.jpeg"
+  alt="AudioLens architecture: the React web UI talks over REST with a session cookie to the FastAPI control plane. The control plane reads and writes Redis (DB 0 sessions and cache pointers, DB 1 job and audio metadata), publishes jobs to the Celery broker (Redis DB 2), and stores audio in object storage (local shared storage or S3). A CPU worker and a model worker on the gpu-fast and gpu-large queues consume the broker, with optional CUDA and ROCm workers, a Celery Beat scheduler for hourly cleanup, and a Hugging Face model cache."
+  className="my-6 w-full rounded-2xl"
+/>
 
 ## Related pages
 
