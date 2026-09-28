@@ -6117,7 +6117,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "methods",
       "kind": "content",
       "title": "Methods",
-      "body": "gradcam"
+      "body": "gradcam (Integrated Gradients)"
     },
     {
       "key": "content:saliency:methods:7",
@@ -6136,15 +6136,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "shap"
     },
     {
-      "key": "content:saliency:methods:9",
-      "sectionId": "saliency",
-      "headingId": "methods",
-      "kind": "content",
-      "title": "Methods",
-      "body": "“gradcam” is not Grad-CAM The method labeled gradcam in the API and UI does not run Grad-CAM. It runs Integrated Gradients under the hood. The name is kept for historical reasons in the API surface, but if you're comparing this against literature on Grad-CAM for audio models, you're actually looking at an Integrated Gradients attribution. Attribute results accordingly when you write them up."
-    },
-    {
-      "key": "heading:saliency:the-full_audio-flag:10",
+      "key": "heading:saliency:the-full_audio-flag:9",
       "sectionId": "saliency",
       "headingId": "the-full_audio-flag",
       "kind": "heading",
@@ -6152,7 +6144,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:saliency:the-full_audio-flag:11",
+      "key": "content:saliency:the-full_audio-flag:10",
       "sectionId": "saliency",
       "headingId": "the-full_audio-flag",
       "kind": "content",
@@ -6160,7 +6152,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "By default, saliency runs on a bounded window of the clip rather than the full file. Set full_audio to run the attribution over the entire clip instead of just the windowed portion — subject to the window limits below."
     },
     {
-      "key": "heading:saliency:window-limits:12",
+      "key": "heading:saliency:window-limits:11",
       "sectionId": "saliency",
       "headingId": "window-limits",
       "kind": "heading",
@@ -6168,7 +6160,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:saliency:window-limits:13",
+      "key": "content:saliency:window-limits:12",
       "sectionId": "saliency",
       "headingId": "window-limits",
       "kind": "content",
@@ -6176,7 +6168,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Saliency computation is memory- and compute-bound, so it's capped:"
     },
     {
-      "key": "content:saliency:window-limits:14",
+      "key": "content:saliency:window-limits:13",
       "sectionId": "saliency",
       "headingId": "window-limits",
       "kind": "content",
@@ -6184,7 +6176,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "gradcam and lime: up to 12 seconds (MAX_SALIENCY_SECONDS)."
     },
     {
-      "key": "content:saliency:window-limits:15",
+      "key": "content:saliency:window-limits:14",
       "sectionId": "saliency",
       "headingId": "window-limits",
       "kind": "content",
@@ -6192,7 +6184,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "shap: up to 6 seconds (MAX_SALIENCY_SECONDS_SHAP) — SHAP is run with a fixed number of samples per call (SALIENCY_SHAP_SAMPLES), which makes it the most memory-sensitive of the three, hence the stricter window."
     },
     {
-      "key": "content:saliency:window-limits:16",
+      "key": "content:saliency:window-limits:15",
       "sectionId": "saliency",
       "headingId": "window-limits",
       "kind": "content",
@@ -6200,7 +6192,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "If your clip is longer than the relevant limit, trim it or pick a shorter segment before requesting saliency."
     },
     {
-      "key": "heading:saliency:is-this-map-telling-the-truth--saliency-faithfulness:17",
+      "key": "heading:saliency:is-this-map-telling-the-truth--saliency-faithfulness:16",
       "sectionId": "saliency",
       "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
       "kind": "heading",
@@ -6208,7 +6200,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:18",
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:17",
       "sectionId": "saliency",
       "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
       "kind": "content",
@@ -6216,7 +6208,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "A saliency map can look convincing and still be wrong. The companion check, saliency_faithfulness, asks the honest question directly: if you delete the parts of the waveform the map says matter most, does the prediction actually change?"
     },
     {
-      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:19",
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:18",
       "sectionId": "saliency",
       "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
       "kind": "content",
@@ -6224,7 +6216,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "It does this with a deletion curve: progressively occlude the highest-attributed regions and re-run prediction, comparing the before/after result at each step."
     },
     {
-      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:20",
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:19",
       "sectionId": "saliency",
       "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
       "kind": "content",
@@ -6232,7 +6224,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "n_steps 3–20, default 9 Deletion curve resolution"
     },
     {
-      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:21",
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:20",
       "sectionId": "saliency",
       "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
       "kind": "content",
@@ -6240,7 +6232,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "top_fraction 0.2 Fraction of the map treated as most-salient"
     },
     {
-      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:22",
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:21",
       "sectionId": "saliency",
       "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
       "kind": "content",
@@ -6248,7 +6240,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "random_repeats 2–10, default 3 Random-deletion baselines for comparison"
     },
     {
-      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:23",
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:22",
       "sectionId": "saliency",
       "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
       "kind": "content",
@@ -6256,7 +6248,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "occlusion optional Alternative to deletion for masking regions"
     },
     {
-      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:24",
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:23",
       "sectionId": "saliency",
       "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
       "kind": "content",
@@ -6264,7 +6256,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "The faithfulness result reports these metrics:"
     },
     {
-      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:25",
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:24",
       "sectionId": "saliency",
       "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
       "kind": "content",
@@ -6272,7 +6264,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "aopc_deletion Average drop in the model's score as the top-attributed regions are deleted, across the deletion curve. Bigger drop = the map found regions the model really relies on."
     },
     {
-      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:26",
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:25",
       "sectionId": "saliency",
       "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
       "kind": "content",
@@ -6280,7 +6272,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "aopc_random (+ stderr) The same drop when regions are deleted at random, averaged over random_repeats. The baseline the map has to beat."
     },
     {
-      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:27",
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:26",
       "sectionId": "saliency",
       "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
       "kind": "content",
@@ -6288,7 +6280,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "faithfulness_gain aopc_deletion minus aopc_random. Positive means the map beats chance."
     },
     {
-      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:28",
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:27",
       "sectionId": "saliency",
       "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
       "kind": "content",
@@ -6296,7 +6288,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "aopc_inverse The drop when the least important regions are deleted. Should be small."
     },
     {
-      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:29",
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:28",
       "sectionId": "saliency",
       "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
       "kind": "content",
@@ -6304,7 +6296,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "comprehensiveness Score lost when the top regions are removed. High = those regions were necessary."
     },
     {
-      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:30",
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:29",
       "sectionId": "saliency",
       "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
       "kind": "content",
@@ -6312,7 +6304,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "sufficiency Score kept when only the top regions remain. High = those regions alone were enough."
     },
     {
-      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:31",
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:30",
       "sectionId": "saliency",
       "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
       "kind": "content",
@@ -6320,7 +6312,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "auc_deletion / auc_insertion Area under the deletion and insertion curves. Lower is better for deletion, higher for insertion."
     },
     {
-      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:32",
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:31",
       "sectionId": "saliency",
       "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
       "kind": "content",
@@ -6328,7 +6320,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "occlusion_spearman Rank correlation between attribution and the measured effect of occluding each region, with its p-value."
     },
     {
-      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:33",
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:32",
       "sectionId": "saliency",
       "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
       "kind": "content",
@@ -6336,7 +6328,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "The result also carries an overall verdict — a map with too little audio or signal to test is marked uninformative and includes a skipped_reason instead of a misleading score."
     },
     {
-      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:34",
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:33",
       "sectionId": "saliency",
       "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
       "kind": "content",
@@ -6344,7 +6336,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "A map that's faithful should show a real drop in confidence as the top fraction is deleted — clearly separated from what random deletion does at the same rate. If deleting the \"important\" region barely moves the prediction, treat the saliency map for that clip with suspicion rather than as ground truth."
     },
     {
-      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:35",
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:34",
       "sectionId": "saliency",
       "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
       "kind": "content",
@@ -6352,7 +6344,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Image placeholder: saliency waveform overlay Add /assets/docs/saliency-overlay.png — the saliency panel showing the attribution heatmap drawn over the waveform, with the method selector and full_audio toggle visible. Replace this callout with ![Saliency waveform overlay](/assets/docs/saliency-overlay.png) once the real image is uploaded."
     },
     {
-      "key": "heading:saliency:pairs-well-with-perturbation:36",
+      "key": "heading:saliency:pairs-well-with-perturbation:35",
       "sectionId": "saliency",
       "headingId": "pairs-well-with-perturbation",
       "kind": "heading",
@@ -6360,7 +6352,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:saliency:pairs-well-with-perturbation:37",
+      "key": "content:saliency:pairs-well-with-perturbation:36",
       "sectionId": "saliency",
       "headingId": "pairs-well-with-perturbation",
       "kind": "content",

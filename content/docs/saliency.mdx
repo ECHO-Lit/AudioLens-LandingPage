@@ -14,18 +14,9 @@ Saliency is an attribution method: it scores every moment of the input audio by 
 
 The `saliency` operation supports three methods:
 
-- **`gradcam`**
+- **`gradcam`** (Integrated Gradients)
 - **`lime`**
 - **`shap`**
-
-<Callout title="“gradcam” is not Grad-CAM" tone="warn">
-  The method labeled `gradcam` in the API and UI does not run Grad-CAM. It
-  runs **Integrated Gradients** under the hood. The name is kept for
-  historical reasons in the API surface, but if you're comparing this against
-  literature on Grad-CAM for audio models, you're actually looking at an
-  Integrated Gradients attribution. Attribute results accordingly when you
-  write them up.
-</Callout>
 
 ## The `full_audio` flag
 
