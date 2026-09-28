@@ -208,7 +208,7 @@ export default async function ResearchArticlePage({ params }: Props) {
         {/* Body. research-prose lifts the docs-scale MDX typography to article
             size -- see the rules in app/globals.css. */}
         <div className="px-6 pt-14 sm:pt-16">
-          <div className="research-prose mx-auto max-w-[720px]">
+          <div className="research-prose mx-auto max-w-[720px] max-sm:break-words">
             <Content />
           </div>
         </div>
