@@ -293,7 +293,7 @@ export default function Home() {
 
         <div className="relative z-[1] mx-auto max-w-[1120px]">
           <div
-            className={`inline-flex items-center gap-2.5 rounded-full bg-card/75 py-[7px] pr-2 pl-3.5 text-[13px] text-al-fg-body ${RING}`}
+            className={`inline-flex items-center gap-2.5 rounded-full bg-card/75 py-[7px] pr-2 pl-3.5 text-[13px] text-al-fg-body max-sm:gap-2 max-sm:pr-3.5 max-sm:text-[12px] ${RING}`}
           >
             <span
               className="font-code text-[11px] tracking-[0.06em]"
@@ -301,12 +301,12 @@ export default function Home() {
               {EYEBROW}
             </span>
             <span>Interpretability for speech models</span>
-            <span className="inline-flex h-[22px] w-[22px] items-center justify-center text-[12px] text-al-fg-body">
+            <span className="inline-flex h-[22px] w-[22px] items-center justify-center text-[12px] text-al-fg-body max-sm:hidden">
               →
             </span>
           </div>
 
-          <h1 className="mt-[26px] mb-0 text-[44px] leading-[0.94] font-semibold tracking-[-0.045em] text-balance sm:text-[64px] md:text-[80px] lg:text-[104px]">
+          <h1 className="mt-[26px] mb-0 text-[40px] leading-[0.94] font-semibold tracking-[-0.045em] text-balance sm:text-[64px] md:text-[80px] lg:text-[104px]">
             Listen to the
             <br />
             model thinking.
