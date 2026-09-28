@@ -73,7 +73,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-[780px]">
           <TextReveal
             as="h2"
-            text="Our vision"
+            text="Our vision."
             className="m-0 text-[40px] leading-none font-semibold tracking-[-0.04em] sm:text-[52px] lg:text-[64px]"
           />
           <div className="mt-8 flex flex-col gap-6 text-[18px] leading-[1.65] text-al-fg-body text-pretty sm:text-[20px]">
@@ -114,7 +114,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-[780px]">
           <TextReveal
             as="h2"
-            text="Get involved"
+            text="Get involved."
             className="m-0 text-[40px] leading-none font-semibold tracking-[-0.04em] sm:text-[52px] lg:text-[64px]"
           />
           <div className="mt-8 flex flex-col gap-6 text-[18px] leading-[1.65] text-al-fg-body text-pretty sm:text-[20px]">
