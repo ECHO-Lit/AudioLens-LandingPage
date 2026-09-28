@@ -43,7 +43,7 @@ export function DocsPageFooter({ active }: { active: string }) {
   const next = idx >= 0 && idx < flat.length - 1 ? flat[idx + 1] : null;
 
   const cardClass =
-    "min-w-[200px] rounded-lg border border-al-hairline-strong bg-card px-4 py-3 text-foreground hover:border-al-accent-line-strong focus-visible:ring-2 focus-visible:ring-al-accent focus-visible:outline-none";
+    "min-w-[200px] max-sm:w-full rounded-lg border border-al-hairline-strong bg-card px-4 py-3 text-foreground hover:border-al-accent-line-strong focus-visible:ring-2 focus-visible:ring-al-accent focus-visible:outline-none";
 
   return (
     <>
