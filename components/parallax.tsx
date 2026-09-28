@@ -37,6 +37,9 @@ export function Parallax({
   useEffect(() => {
     const el = ref.current;
     if (!el || prefersReducedMotion()) return;
+    // Parallax is a small visual flourish; skip the scroll-driven transform on
+    // narrow viewports, where it mostly just crowds a short layout.
+    if (window.matchMedia("(max-width: 639px)").matches) return;
 
     el.style.willChange = "transform";
 
