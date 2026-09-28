@@ -47,15 +47,15 @@ export function PanelGrid({ panels }: { panels: Panel[] }) {
           <Link
             key={p.no}
             href={`/docs/${p.id}`}
-            className={`block rounded-[22px] bg-card px-8 pt-[34px] pb-9 text-al-fg-strong transition-[box-shadow,transform] duration-200 hover:-translate-y-[3px] hover:text-al-fg-strong hover:shadow-[0_0_0_1px_rgba(27,72,224,0.3),0_30px_60px_-34px_var(--al-shadow-lift)] ${RING} ${
+            className={`block rounded-[22px] bg-card px-8 pt-[34px] max-sm:px-6 pb-9 text-al-fg-strong transition-[box-shadow,transform] duration-200 hover:-translate-y-[3px] hover:text-al-fg-strong hover:shadow-[0_0_0_1px_rgba(27,72,224,0.3),0_30px_60px_-34px_var(--al-shadow-lift)] ${RING} ${
               i >= INITIAL && !expanded ? "hidden" : ""
             }`}
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-3">
               <span className="font-code text-[11.5px]" style={{ color: ACCENT }}>
                 {p.no}
               </span>
-              <span className="font-code text-[10.5px] text-al-fg-quaternary">
+              <span className="font-code text-right text-[10.5px] text-al-fg-quaternary">
                 {p.meta}
               </span>
             </div>
