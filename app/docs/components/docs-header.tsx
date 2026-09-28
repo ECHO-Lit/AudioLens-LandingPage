@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Logomark } from "@/components/logomark";
+import Image from "next/image";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { ACCENT } from "@/lib/theme";
 import { DASHBOARD_HREF, SITE_LINKS } from "../docs-links";
@@ -42,7 +42,13 @@ export function DocsHeader({
             href="/"
             className="flex items-center gap-[9px] text-foreground hover:text-foreground focus-visible:ring-2 focus-visible:ring-al-accent focus-visible:outline-none"
           >
-            <Logomark heights={[7, 15, 11, 4]} containerHeight={15} mutedLast />
+            <Image
+              src="/assets/logo_icon_square.png"
+              alt=""
+              width={28}
+              height={28}
+              className="size-7 flex-none"
+            />
             <span className="text-[15px] font-semibold tracking-[-0.01em] whitespace-nowrap">
               AudioLens
             </span>

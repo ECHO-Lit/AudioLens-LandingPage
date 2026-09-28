@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, MouseEvent } from "react";
 import Link from "next/link";
-import { Logomark } from "./logomark";
+import Image from "next/image";
 import { HamburgerIcon } from "./hamburger-icon";
 import { ThemeToggle } from "./theme-toggle";
 import { ACCENT } from "@/lib/theme";
@@ -73,8 +73,15 @@ export function SiteHeader({ active }: { active?: string }) {
         setMobileOpen(false);
       }
     };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileOpen(false);
+    };
     document.addEventListener("mousedown", onClick);
-    return () => document.removeEventListener("mousedown", onClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onClick);
+      document.removeEventListener("keydown", onKey);
+    };
   }, []);
 
   // Next's <Link> bails on scrolling for a same-route hash change, so
@@ -104,7 +111,13 @@ export function SiteHeader({ active }: { active?: string }) {
           }}
         >
           <Link href="/" className="flex flex-none items-center gap-[9px]">
-            <Logomark heights={[7, 15, 11, 4]} containerHeight={15} mutedLast />
+            <Image
+              src="/assets/logo_icon_square.png"
+              alt=""
+              width={28}
+              height={28}
+              className="size-7 flex-none"
+            />
             <span className="text-[15px] font-semibold tracking-[-0.01em] whitespace-nowrap text-foreground">
               AudioLens
             </span>
@@ -150,7 +163,7 @@ export function SiteHeader({ active }: { active?: string }) {
             onClick={() => setMobileOpen((v) => !v)}
             aria-label="Toggle menu"
             aria-expanded={mobileOpen}
-            className="ml-auto flex h-8 w-8 flex-none items-center justify-center rounded-full text-foreground md:hidden"
+            className="ml-auto flex h-10 w-10 flex-none items-center justify-center rounded-full text-foreground md:hidden"
           >
             <HamburgerIcon open={mobileOpen} />
           </button>

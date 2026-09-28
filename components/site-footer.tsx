@@ -1,4 +1,4 @@
-import { Logomark } from "./logomark";
+import Image from "next/image";
 
 // Labels and hrefs are the site's own and predate the v2 design; only the
 // presentation below was restyled.
@@ -34,10 +34,16 @@ const FOOTER_COLUMNS = [
 export function SiteFooter() {
   return (
     <footer className="font-display bg-al-canvas px-6 pt-[90px] text-al-fg-strong sm:pt-[110px] lg:pt-[130px]">
-      <div className="mx-auto grid max-w-[1240px] grid-cols-1 gap-11 pt-[52px] shadow-[inset_0_1px_0_var(--al-hairline-strong)] sm:grid-cols-2 lg:grid-cols-[minmax(0,1.7fr)_repeat(3,minmax(0,1fr))]">
-        <div>
+      <div className="mx-auto grid max-w-[1240px] grid-cols-2 gap-11 pt-[52px] shadow-[inset_0_1px_0_var(--al-hairline-strong)] sm:grid-cols-2 lg:grid-cols-[minmax(0,1.7fr)_repeat(3,minmax(0,1fr))]">
+        <div className="col-span-2 sm:col-span-1">
           <div className="flex items-center gap-2.5">
-            <Logomark heights={[7, 16, 11]} containerHeight={16} />
+            <Image
+              src="/assets/logo_icon_square.png"
+              alt=""
+              width={28}
+              height={28}
+              className="size-7 flex-none"
+            />
             <span className="text-[15px] font-semibold tracking-[-0.02em]">
               AudioLens
             </span>
@@ -52,7 +58,7 @@ export function SiteFooter() {
             <div className="font-code mb-4 text-[10.5px] tracking-[0.12em] text-al-fg-quaternary uppercase">
               {col.label}
             </div>
-            <div className="flex flex-col gap-[11px] text-[14.5px]">
+            <div className="flex flex-col gap-[11px] max-sm:gap-3.5 text-[14.5px]">
               {col.links.map((l) => (
                 <a
                   key={l.text}
