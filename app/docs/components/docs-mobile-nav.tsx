@@ -31,7 +31,7 @@ export function DocsMobileNav({ active }: { active: string }) {
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger
         aria-label="Open documentation menu"
-        className="flex h-8 w-8 flex-none items-center justify-center rounded-[6px] text-foreground hover:bg-al-surface-2 focus-visible:ring-2 focus-visible:ring-al-accent focus-visible:outline-none lg:hidden"
+        className="flex h-10 w-10 flex-none items-center justify-center rounded-[6px] text-foreground hover:bg-al-surface-2 focus-visible:ring-2 focus-visible:ring-al-accent focus-visible:outline-none lg:hidden"
       >
         <HamburgerIcon open={open} />
       </Dialog.Trigger>
