@@ -169,7 +169,7 @@ export function DocsSearchDialog({
       onOpenChange={onOpenChange}
       title="Search documentation"
       description="Search AudioLens docs by page, heading, or content"
-      className="top-[18%] left-auto inset-x-0 mx-auto translate-x-0 sm:max-w-xl"
+      className="top-[8%] left-auto inset-x-0 mx-auto translate-x-0 sm:top-[18%] sm:max-w-xl"
     >
       {/* Ranking happens in searchDocs; cmdk's own filter would re-sort the DOM
           on every keystroke. */}
@@ -178,8 +178,9 @@ export function DocsSearchDialog({
           value={query}
           onValueChange={setQuery}
           placeholder="Search documentation..."
+          className="max-sm:text-base"
         />
-        <CommandList ref={listRef} className="mt-3 max-h-[420px]">
+        <CommandList ref={listRef} className="mt-3 max-h-[50svh] sm:max-h-[420px]">
           {hasQuery && (
             <>
               <CommandEmpty>No results found.</CommandEmpty>
