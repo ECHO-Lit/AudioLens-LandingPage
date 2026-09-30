@@ -1094,7 +1094,15 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Attention matrix view"
     },
     {
-      "key": "heading:attention:gpu-note-attention_force_cpu:17",
+      "key": "content:attention:views:17",
+      "sectionId": "attention",
+      "headingId": "views",
+      "kind": "content",
+      "title": "Views",
+      "body": "Matrix view"
+    },
+    {
+      "key": "heading:attention:gpu-note-attention_force_cpu:18",
       "sectionId": "attention",
       "headingId": "gpu-note-attention_force_cpu",
       "kind": "heading",
@@ -1102,7 +1110,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:attention:gpu-note-attention_force_cpu:18",
+      "key": "content:attention:gpu-note-attention_force_cpu:19",
       "sectionId": "attention",
       "headingId": "gpu-note-attention_force_cpu",
       "kind": "content",
@@ -6341,10 +6349,18 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
       "kind": "content",
       "title": "Is this map telling the truth? — saliency faithfulness",
-      "body": "Image placeholder: saliency waveform overlay Add /assets/docs/saliency-overlay.png — the saliency panel showing the attribution heatmap drawn over the waveform, with the method selector and full_audio toggle visible. Replace this callout with ![Saliency waveform overlay](/assets/docs/saliency-overlay.png) once the real image is uploaded."
+      "body": "Saliency waveform overlay"
     },
     {
-      "key": "heading:saliency:pairs-well-with-perturbation:35",
+      "key": "content:saliency:is-this-map-telling-the-truth--saliency-faithfulness:35",
+      "sectionId": "saliency",
+      "headingId": "is-this-map-telling-the-truth--saliency-faithfulness",
+      "kind": "content",
+      "title": "Is this map telling the truth? — saliency faithfulness",
+      "body": "Saliency view"
+    },
+    {
+      "key": "heading:saliency:pairs-well-with-perturbation:36",
       "sectionId": "saliency",
       "headingId": "pairs-well-with-perturbation",
       "kind": "heading",
@@ -6352,7 +6368,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:saliency:pairs-well-with-perturbation:36",
+      "key": "content:saliency:pairs-well-with-perturbation:37",
       "sectionId": "saliency",
       "headingId": "pairs-well-with-perturbation",
       "kind": "content",
