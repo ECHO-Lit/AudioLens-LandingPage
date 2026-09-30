@@ -64,6 +64,12 @@ half second and ignored that one". Put next to the attention view for the same
 clip, it shows whether the model was looking in the right place when it
 emitted the wrong token.
 
+![Illustration: the transcript "the cap sat" above a waveform. The word "cap" is highlighted in orange, and an orange saliency glow sits over the matching stretch of the waveform, while the rest glows a soft blue.](/assets/research/model-listened.jpeg)
+
+<div className="mt-2.5 text-center font-mono text-[11.5px] text-al-fg-quaternary">
+  Saliency ties the wrong word to the audio behind it
+</div>
+
 ### You test instead of guessing
 
 An attribution map is a hypothesis, not a fact. AudioLens lets you check it:
