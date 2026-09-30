@@ -1091,7 +1091,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "views",
       "kind": "content",
       "title": "Views",
-      "body": "Image placeholder: attention matrix view Add /assets/docs/attention-matrix.png — the attention panel with the layer/head selectors and the matrix view rendered for a sample clip. Replace this callout with ![Attention matrix view](/assets/docs/attention-matrix.png) once the real image is uploaded."
+      "body": "Attention matrix view"
     },
     {
       "key": "heading:attention:gpu-note-attention_force_cpu:17",
