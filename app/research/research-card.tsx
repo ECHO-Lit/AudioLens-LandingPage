@@ -15,23 +15,21 @@ const LIFT =
 /**
  * The whole box is one link, so a card is a single tab stop rather than a
  * title link with dead space around it. Date, excerpt and topics render only
- * when the entry carries them. `compact` drops the cover for text-only lists.
+ * when the entry carries them.
  */
 export function ResearchCard({
   entry,
   priority = false,
-  compact = false,
 }: {
   entry: ResearchEntry;
   priority?: boolean;
-  compact?: boolean;
 }) {
   return (
     <Link
       href={researchHref(entry.slug)}
       className={`group block overflow-hidden rounded-[22px] bg-card text-al-fg-strong hover:text-al-fg-strong focus-visible:ring-2 focus-visible:ring-al-accent focus-visible:ring-offset-2 focus-visible:ring-offset-al-canvas focus-visible:outline-none ${RING} ${LIFT}`}
     >
-      {!compact && <ResearchCover entry={entry} priority={priority} />}
+      <ResearchCover entry={entry} priority={priority} />
 
       <div className="px-7 pt-6 pb-7">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2">

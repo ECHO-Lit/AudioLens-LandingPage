@@ -68,8 +68,8 @@ export default function ResearchPage() {
       >
         {RESEARCH.length > 0 ? (
           <div className="mx-auto grid max-w-[1240px] gap-[22px] sm:grid-cols-2 lg:grid-cols-3">
-            {RESEARCH.map((entry) => (
-              <ResearchCard key={entry.slug} entry={entry} compact />
+            {RESEARCH.map((entry, i) => (
+              <ResearchCard key={entry.slug} entry={entry} priority={i === 0} />
             ))}
           </div>
         ) : (
