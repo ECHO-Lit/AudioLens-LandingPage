@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ACCENT } from "@/lib/theme";
+import { ResearchCard } from "./research-card";
+import { RESEARCH } from "./research-data";
 
 export const metadata: Metadata = {
   title: "Research — AudioLens",
   description:
-    "Nothing published yet. Writeups and findings behind AudioLens will land here as they're ready.",
+    "Write-ups and findings behind AudioLens, an interpretability workbench for speech models.",
 };
 
 export default function ResearchPage() {
@@ -42,9 +44,8 @@ export default function ResearchPage() {
           </h1>
 
           <p className="mx-auto mt-[26px] max-w-[56ch] text-[17px] leading-[1.6] text-al-fg-body text-pretty sm:text-[18px]">
-            Nothing published yet. AudioLens is built in the open as an extension of ECHO —
-            inspired by Google PAIR&apos;s LIT. Writeups and findings will land here as they&apos;re
-            ready.
+            AudioLens is built in the open as an extension of ECHO, inspired by Google PAIR&apos;s
+            LIT. Write-ups and findings land here as they&apos;re ready.
           </p>
         </div>
 
@@ -63,9 +64,17 @@ export default function ResearchPage() {
 
       <section
         id="papers"
-        className="scroll-mt-24 px-6 pt-[70px] text-center sm:pt-[90px] lg:pt-[110px]"
+        className="scroll-mt-24 px-6 pt-[70px] sm:pt-[90px] lg:pt-[110px]"
       >
-        <p className="m-0 text-[18px] text-al-fg-tertiary">Nothing added yet.</p>
+        {RESEARCH.length > 0 ? (
+          <div className="mx-auto grid max-w-[1240px] gap-[22px] sm:grid-cols-2 lg:grid-cols-3">
+            {RESEARCH.map((entry) => (
+              <ResearchCard key={entry.slug} entry={entry} compact />
+            ))}
+          </div>
+        ) : (
+          <p className="m-0 text-center text-[18px] text-al-fg-tertiary">Nothing added yet.</p>
+        )}
       </section>
 
       <div className="pt-[90px] sm:pt-[120px]" />

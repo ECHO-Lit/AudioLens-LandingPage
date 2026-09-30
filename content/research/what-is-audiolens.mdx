@@ -1,0 +1,161 @@
+<Lead>
+A speech model hands you a transcript or a label and a confidence score. That
+tells you what it decided. It does not tell you why, whether the reason holds
+up, or who it quietly fails. AudioLens is a workbench for asking those
+questions directly, on real audio, one prediction at a time.
+</Lead>
+
+## A transcript is not an explanation
+
+Say Whisper turns "the cat sat" into "the cap sat". The usual next steps are
+familiar: listen to the clip again, guess that the consonant was soft, maybe
+write a script to add noise and see if it gets worse, maybe write another to
+check whether the error rate is higher for some speakers. Each question needs
+its own code, its own model run and its own plot, and the answers never end up
+side by side.
+
+That is the gap AudioLens fills. Speech models are hard to debug from the
+outside because the evidence you need is spread across the waveform, the
+attention heads, the hidden layers and the dataset. Looking at any one of
+those alone rarely settles anything.
+
+## What AudioLens is
+
+AudioLens is an interpretability and debugging workbench for speech models.
+It is the audio counterpart to Google PAIR's LIT (Learning Interpretability
+Tool), which covers text and tabular models, and it builds on **ECHO**, an
+MIT-licensed tool first released as *LIT for Voice*.
+
+The core idea is simple: **one clip plus one model is one datapoint, and every
+analysis attaches to the same timeline.** You upload a clip once, pick a
+model once, and then move between views without re-running anything:
+
+- **Saliency** draws an attribution map over the waveform: which stretches of
+  audio pushed the prediction.
+- **Attention** shows per-layer, per-head attention weights.
+- **Embeddings** project clips into 2D or 3D, with clustering and nearest
+  neighbours.
+- **Perturbation** applies a controlled change (noise, time masking, pitch
+  shift or time stretch) and re-runs the model.
+- **Diagnostics** sweeps a batch of files to separate what was said from how
+  it sounded.
+- **Layer probes** find which layer best represents a property you can label.
+- **Jacobian Lens** reads Whisper's decoder layers as if each were making its
+  own guess.
+- **Fairness slices** compare performance across accent, speaker or any
+  metadata column, with bootstrap statistics.
+
+It ships with Whisper for transcription and a Wav2Vec2 model for emotion
+classification, and it can register other Hugging Face models that fit a
+Seq2Seq, CTC or audio-classification architecture.
+
+![Diagram: a waveform labelled "one clip + one model" sits inside a circle, with eight panels connected around it: Saliency, Attention, Embeddings, Perturbation, Diagnostics, Layer probes, Jacobian Lens and Fairness.](/assets/research/one-timeline.jpeg)
+
+<div className="mt-2.5 text-center font-mono text-[11.5px] text-al-fg-quaternary">
+  One clip, one timeline, many lenses
+</div>
+
+## Why it is useful
+
+### You see what the model listened to
+
+A saliency map turns "the model got it wrong" into "the model leaned on this
+half second and ignored that one". Put next to the attention view for the same
+clip, it shows whether the model was looking in the right place when it
+emitted the wrong token.
+
+### You test instead of guessing
+
+An attribution map is a hypothesis, not a fact. AudioLens lets you check it:
+perturb the region the map calls important and see whether the prediction
+actually moves. If deleting the "important" audio barely changes the output,
+the map for that clip should not be trusted. Robustness stops being an
+opinion and becomes a before-and-after comparison.
+
+### You find where knowledge lives
+
+Layer probes train a small linear classifier on each layer's hidden states and
+report which layer predicts a property best, against a shuffled-label control
+and a majority baseline. The Jacobian Lens does something similar for tokens,
+showing how a guess like "car" becomes "cap" and then "cat" as it moves up the
+decoder. Both answer a question a transcript never can: *where* in the network
+something is decided.
+
+### You measure who it fails
+
+Speech models often do worse for non-native speakers and under-represented
+groups, and an overall error rate hides that. Fairness slicing splits a dataset
+by one or two metadata columns, compares each group against a reference group,
+and puts confidence intervals behind every gap, so a real difference can be
+told apart from noise.
+
+### It all happens in one place
+
+Because every panel reads the same datapoint, a finding in one view leads
+straight into the next. That is the practical win: less glue code, fewer
+one-off notebooks, and evidence you can line up and compare.
+
+## Getting the most out of it
+
+The panels are most useful chained together. A few patterns that work well:
+
+<Steps>
+  <Step title="Debug a single wrong prediction">
+    Start in **Saliency** to see which region drove the output, confirm it in
+    **Attention**, then run **Perturbation** on that region. If the prediction
+    flips, you have found the cause. If it does not, the map was misleading and
+    you have learned that too.
+  </Step>
+  <Step title="Audit a model before you ship it">
+    Load a dataset with speaker metadata, run **Fairness slices** by accent or
+    gender, and look at substitution, deletion and insertion rates per group. A
+    high insertion rate with few deletions is the usual sign of hallucination.
+    Follow up with **Diagnostics** to see whether the weak group is hurt by
+    acoustics or by content.
+  </Step>
+  <Step title="Compare two checkpoints">
+    Run the same clips through both models and compare predictions,
+    perturbation robustness and fairness gaps side by side. A fine-tune that
+    lowers overall error but widens a group gap shows up immediately.
+  </Step>
+  <Step title="Answer a research question">
+    Use **Layer probes** to ask where a property such as emotion or speaker
+    gender becomes linearly separable, and **Jacobian Lens** to watch token
+    guesses form across decoder layers. Pair them with **Embeddings** to see
+    whether clips cluster by the property you expect.
+  </Step>
+</Steps>
+
+![Diagram: a loop of four stages joined by arrows. Observe (saliency, attention), Hypothesise (what drove this?), Test (perturbation, diagnostics) and Measure (fairness, probes), then back to Observe.](/assets/research/investigation-loop.jpeg)
+
+<div className="mt-2.5 text-center font-mono text-[11.5px] text-al-fg-quaternary">
+  The investigation loop
+</div>
+
+A few habits make the results more trustworthy:
+
+- **Treat every saliency map as a claim to verify.** Perturbation exists for
+  exactly this.
+- **Read probe scores against their controls.** Accuracy only means something
+  when it clears the shuffled-label control and the majority baseline.
+- **Look at gaps with their intervals.** A group gap whose confidence interval
+  crosses zero is not yet a finding.
+- **Keep datasets in `Backend/data`.** Uploads expire with the session after
+  24 hours; built-in datasets fetched with the scripts stay put.
+
+## Where it stops
+
+AudioLens is a research and debugging tool, not a transcription product. It
+does not run in real time, it is English-only (Whisper decoding is pinned to
+English and the emotion model is English-only), and it has no user accounts:
+everything is scoped to an anonymous session that expires after 24 hours. It
+is built for looking closely at predictions, not for serving them.
+
+## Start here
+
+<CardGrid min={232}>
+  <Card title="Quickstart" kicker="Get started" meta="Boot the stack and run your first analysis" href="/docs/quickstart" />
+  <Card title="Core concepts" kicker="Get started" meta="Datapoints, the shared timeline, and panel sync" href="/docs/concepts" />
+  <Card title="Saliency mapping" kicker="Analysis panel" meta="Attribution maps and how to check them" href="/docs/saliency" />
+  <Card title="Fairness slices" kicker="Analysis panel" meta="Performance across accent, speaker, or metadata" href="/docs/fairness" />
+</CardGrid>

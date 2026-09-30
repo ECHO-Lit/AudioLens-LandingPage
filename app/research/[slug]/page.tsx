@@ -85,22 +85,31 @@ export default async function ResearchArticlePage({ params }: Props) {
           />
 
           <div className="relative z-[1] mx-auto max-w-[900px]">
-            <nav aria-label="Breadcrumb">
-              <ol className="flex list-none items-center gap-2 p-0 text-[12px] text-al-fg-quaternary">
-                <li>
-                  <Link
-                    href="/research"
-                    className="text-al-fg-tertiary no-underline hover:text-al-fg-strong"
-                  >
-                    Research
-                  </Link>
-                </li>
-                <li aria-hidden className="text-al-fg-faint">
-                  /
-                </li>
-                <li>{KIND_LABEL[entry.kind]}</li>
-              </ol>
-            </nav>
+            <div className="flex items-center justify-between gap-4">
+              <nav aria-label="Breadcrumb">
+                <ol className="m-0 flex list-none items-center gap-2 p-0 text-[12px] text-al-fg-quaternary">
+                  <li>
+                    <Link
+                      href="/research"
+                      className="text-al-fg-tertiary no-underline hover:text-al-fg-strong"
+                    >
+                      Research
+                    </Link>
+                  </li>
+                  <li aria-hidden className="text-al-fg-faint">
+                    /
+                  </li>
+                  <li>{KIND_LABEL[entry.kind]}</li>
+                </ol>
+              </nav>
+
+              <Link
+                href="/research"
+                className={`inline-flex shrink-0 items-center gap-2 rounded-full bg-card/80 px-4 py-2 text-[13.5px] font-medium text-al-fg-strong no-underline transition-colors hover:bg-al-surface-3 hover:text-al-fg-strong ${RING}`}
+              >
+                <span aria-hidden>←</span> All research
+              </Link>
+            </div>
 
             <div className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2">
               <span
@@ -153,8 +162,8 @@ export default async function ResearchArticlePage({ params }: Props) {
               </div>
             )}
 
-            {/* Publications carry the paper actions; write-ups just go back. */}
-            {entry.kind === "publication" ? (
+            {/* Publications carry the paper actions; the way back sits top right. */}
+            {entry.kind === "publication" && (
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
                   href={links.paper ?? "#"}
@@ -179,15 +188,6 @@ export default async function ResearchArticlePage({ params }: Props) {
                     Code
                   </a>
                 )}
-              </div>
-            ) : (
-              <div className="mt-8">
-                <Link
-                  href="/research"
-                  className={`inline-flex items-center gap-2 rounded-full bg-card/80 px-5 py-3 text-[14.5px] font-medium text-al-fg-strong no-underline transition-colors hover:bg-al-surface-3 hover:text-al-fg-strong ${RING}`}
-                >
-                  <span aria-hidden>←</span> All research
-                </Link>
               </div>
             )}
           </div>
