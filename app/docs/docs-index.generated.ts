@@ -1808,18 +1808,10 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "code-of-conduct",
       "kind": "content",
       "title": "Code of Conduct",
-      "body": "Contributions are governed by a Contributor Covenant 2.0 Code of Conduct, with a four-step enforcement ladder (correction, warning, temporary ban, permanent ban)."
+      "body": "Contributions are governed by a Contributor Covenant 2.0 Code of Conduct, with a four-step enforcement ladder (correction, warning, temporary ban, permanent ban). Report conduct issues to janithmahanama47@gmail.com."
     },
     {
-      "key": "content:contributing:code-of-conduct:11",
-      "sectionId": "contributing",
-      "headingId": "code-of-conduct",
-      "kind": "content",
-      "title": "Code of Conduct",
-      "body": "The Code of Conduct's contact method is still a placeholder As of this writing, the enforcement contact line in the repo's Code of Conduct still reads [INSERT CONTACT METHOD] rather than a real address. This is a known gap, not an oversight to paper over here — a maintainer needs to fill in a real reporting contact before the enforcement process described above is actually actionable. If you need to report a conduct issue in the meantime, use the security contact on the Security page as a fallback."
-    },
-    {
-      "key": "heading:contributing:credits:12",
+      "key": "heading:contributing:credits:11",
       "sectionId": "contributing",
       "headingId": "credits",
       "kind": "heading",
@@ -1827,7 +1819,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:contributing:credits:13",
+      "key": "content:contributing:credits:12",
       "sectionId": "contributing",
       "headingId": "credits",
       "kind": "content",
@@ -1835,7 +1827,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "AudioLens is built by:"
     },
     {
-      "key": "content:contributing:credits:14",
+      "key": "content:contributing:credits:13",
       "sectionId": "contributing",
       "headingId": "credits",
       "kind": "content",
@@ -1843,7 +1835,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Januda Lelwala"
     },
     {
-      "key": "content:contributing:credits:15",
+      "key": "content:contributing:credits:14",
       "sectionId": "contributing",
       "headingId": "credits",
       "kind": "content",
@@ -1851,7 +1843,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Janith Mahanama"
     },
     {
-      "key": "content:contributing:credits:16",
+      "key": "content:contributing:credits:15",
       "sectionId": "contributing",
       "headingId": "credits",
       "kind": "content",
@@ -1859,7 +1851,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Hesandi Mallawarachchi"
     },
     {
-      "key": "content:contributing:credits:17",
+      "key": "content:contributing:credits:16",
       "sectionId": "contributing",
       "headingId": "credits",
       "kind": "content",
@@ -1867,7 +1859,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "AudioLens is built on and extends ECHO, an MIT-licensed audio interpretability tool created by:"
     },
     {
-      "key": "content:contributing:credits:18",
+      "key": "content:contributing:credits:17",
       "sectionId": "contributing",
       "headingId": "credits",
       "kind": "content",
@@ -1875,7 +1867,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Anas Hussaindeen"
     },
     {
-      "key": "content:contributing:credits:19",
+      "key": "content:contributing:credits:18",
       "sectionId": "contributing",
       "headingId": "credits",
       "kind": "content",
@@ -1883,7 +1875,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Chandupa Ambepitiya"
     },
     {
-      "key": "content:contributing:credits:20",
+      "key": "content:contributing:credits:19",
       "sectionId": "contributing",
       "headingId": "credits",
       "kind": "content",
@@ -1891,7 +1883,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": "Dewmike Amarasinghe"
     },
     {
-      "key": "content:contributing:credits:21",
+      "key": "content:contributing:credits:20",
       "sectionId": "contributing",
       "headingId": "credits",
       "kind": "content",
