@@ -168,8 +168,8 @@ export const TOC_BY_SECTION: Record<string, TocItem[]> = {
       "label": "Dataset licensing and the demo"
     },
     {
-      "id": "usage-limits--not-decided-yet",
-      "label": "Usage limits — not decided yet"
+      "id": "usage-limits",
+      "label": "Usage limits"
     },
     {
       "id": "in-the-meantime",
@@ -2349,14 +2349,14 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "sectionId": "demo",
       "kind": "content",
       "title": "",
-      "body": "A limited public hosted demo of AudioLens is planned. It is not live yet — there is no URL to link to, and nothing below should be read as a description of a running service."
+      "body": "AudioLens has a public hosted demo. Every feature — all nine analysis panels, both models, every bundled dataset — is available there, no install required."
     },
     {
       "key": "content:demo:lead:1",
       "sectionId": "demo",
       "kind": "content",
       "title": "",
-      "body": "Planned Not live"
+      "body": "Live All features"
     },
     {
       "key": "heading:demo:status:2",
@@ -2372,7 +2372,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "status",
       "kind": "content",
       "title": "Status",
-      "body": "/* TODO: set real demo URL, see {{DEMO_URL}} */"
+      "body": "Hosted demo Live All features available"
     },
     {
       "key": "content:demo:status:4",
@@ -2380,23 +2380,23 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "status",
       "kind": "content",
       "title": "Status",
-      "body": "Hosted demo Planned No URL yet — check this page again once it ships"
+      "body": "The demo is live Open the hosted dashboard and start exploring — nothing is gated or disabled. Prefer to run it yourself? See Self-hosting."
     },
     {
-      "key": "content:demo:status:5",
-      "sectionId": "demo",
-      "headingId": "status",
-      "kind": "content",
-      "title": "Status",
-      "body": "This demo isn't live Until a real deployment exists, the fastest way to use AudioLens today is to run it yourself — see Self-hosting. This page will be updated with a real link the moment the hosted demo ships."
-    },
-    {
-      "key": "heading:demo:dataset-licensing-and-the-demo:6",
+      "key": "heading:demo:dataset-licensing-and-the-demo:5",
       "sectionId": "demo",
       "headingId": "dataset-licensing-and-the-demo",
       "kind": "heading",
       "title": "Dataset licensing and the demo",
       "body": ""
+    },
+    {
+      "key": "content:demo:dataset-licensing-and-the-demo:6",
+      "sectionId": "demo",
+      "headingId": "dataset-licensing-and-the-demo",
+      "kind": "content",
+      "title": "Dataset licensing and the demo",
+      "body": "AudioLens has several built-in sample datasets, fetched from their official sources by scripts (nothing is bundled in the repo), and three of them — RAVDESS, L2-ARCTIC, and the Speech Accent Archive (SAA) — are licensed non-commercial only (see Licenses for the exact terms). AudioLens is a non-commercial, open-source project, and the hosted demo is a non-commercial public demo with no paid tier — so using these datasets there is compatible with their license terms, provided the demo shows each dataset's license and attribution and keeps share-alike terms for derived material. The demo doesn't offer the datasets as downloads; users who want the data get it from the official sources with the scripts on CLI & scripts. Attribution/citation requirements still apply and are listed on the Licenses page. This only becomes a real question for someone who forks AudioLens into a commercial product; that fork would need to drop these three datasets or obtain a separate license for them."
     },
     {
       "key": "content:demo:dataset-licensing-and-the-demo:7",
@@ -2404,34 +2404,26 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "dataset-licensing-and-the-demo",
       "kind": "content",
       "title": "Dataset licensing and the demo",
-      "body": "AudioLens has several built-in sample datasets, fetched from their official sources by scripts (nothing is bundled in the repo), and three of them — RAVDESS, L2-ARCTIC, and the Speech Accent Archive (SAA) — are licensed non-commercial only (see Licenses for the exact terms). AudioLens is a non-commercial, open-source project, and the hosted demo will be a non-commercial public demo with no paid tier — so using these datasets there is compatible with their license terms, provided the demo shows each dataset's license and attribution and keeps share-alike terms for derived material. The demo won't offer the datasets as downloads; users who want the data get it from the official sources with the scripts on CLI & scripts. Attribution/citation requirements still apply and are listed on the Licenses page. This only becomes a real question for someone who forks AudioLens into a commercial product; that fork would need to drop these three datasets or obtain a separate license for them."
-    },
-    {
-      "key": "content:demo:dataset-licensing-and-the-demo:8",
-      "sectionId": "demo",
-      "headingId": "dataset-licensing-and-the-demo",
-      "kind": "content",
-      "title": "Dataset licensing and the demo",
       "body": "Hosted-demo sessions and anything uploaded to them expire after 24 hours. Files fetched into Backend/data on a self-hosted install do not."
     },
     {
-      "key": "heading:demo:usage-limits--not-decided-yet:9",
+      "key": "heading:demo:usage-limits:8",
       "sectionId": "demo",
-      "headingId": "usage-limits--not-decided-yet",
+      "headingId": "usage-limits",
       "kind": "heading",
-      "title": "Usage limits — not decided yet",
+      "title": "Usage limits",
       "body": ""
     },
     {
-      "key": "content:demo:usage-limits--not-decided-yet:10",
+      "key": "content:demo:usage-limits:9",
       "sectionId": "demo",
-      "headingId": "usage-limits--not-decided-yet",
+      "headingId": "usage-limits",
       "kind": "content",
-      "title": "Usage limits — not decided yet",
-      "body": "No rate limiting exists in AudioLens's code today. If and when the hosted demo launches, any usage caps (requests per session, clip length, concurrent jobs, etc.) will be a policy decision made at launch time, not a feature that's already built. Don't rely on this page — or any other page in these docs — as evidence that quotas exist; as of this writing, they don't."
+      "title": "Usage limits",
+      "body": "No rate limiting exists in AudioLens's code today. Usage caps (requests per session, clip length, concurrent jobs, etc.), if any are ever introduced, would be a policy decision made separately, not a feature that's already built. Don't rely on this page — or any other page in these docs — as evidence that quotas exist; as of this writing, they don't."
     },
     {
-      "key": "heading:demo:in-the-meantime:11",
+      "key": "heading:demo:in-the-meantime:10",
       "sectionId": "demo",
       "headingId": "in-the-meantime",
       "kind": "heading",
@@ -2439,12 +2431,12 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "body": ""
     },
     {
-      "key": "content:demo:in-the-meantime:12",
+      "key": "content:demo:in-the-meantime:11",
       "sectionId": "demo",
       "headingId": "in-the-meantime",
       "kind": "content",
       "title": "In the meantime",
-      "body": "If you want to try AudioLens now, Self-hosting gets the full stack running locally with Docker Compose in about ten minutes — see also the Quickstart."
+      "body": "Prefer to run AudioLens on your own machine? Self-hosting gets the full stack running locally with Docker Compose in about ten minutes — see also the Quickstart."
     }
   ],
   "devices": [
@@ -3240,7 +3232,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "selection-and-export",
       "kind": "content",
       "title": "Selection and export",
-      "body": "Image placeholder: 3D embedding scatter Add /assets/docs/embeddings-3d.png — the projector in 3D mode with a handful of HDBSCAN clusters colored distinctly and a lasso selection in progress. Replace this callout with ![3D embedding scatter](/assets/docs/embeddings-3d.png) once the real image is uploaded."
+      "body": "3D embedding scatter"
     }
   ],
   "env": [
@@ -4177,7 +4169,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "reading-the-results",
       "kind": "content",
       "title": "Reading the results",
-      "body": "Image placeholder: fairness disparity radar Add /assets/docs/fairness-radar.png — the fairness panel's disparity radar chart with several groups plotted across the metric axes. Replace this callout with ![Fairness disparity radar](/assets/docs/fairness-radar.png) once the real image is uploaded."
+      "body": "/* Image placeholder: fairness disparity radar. Add /assets/docs/fairness-radar.png — the fairness panel's disparity radar chart with several groups plotted across the metric axes. Replace this comment with ![Fairness disparity radar](/assets/docs/fairness-radar.png) once the real image is uploaded. */"
     },
     {
       "key": "heading:fairness:dataset-specific-analyses:68",
@@ -4603,7 +4595,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "the-j-lens-lab",
       "kind": "content",
       "title": "The J-Lens Lab",
-      "body": "Image placeholder: J-Lens Lab flow Add /assets/docs/jlens-lab.png — the /j-lens page showing the 3-step fit flow (model+dataset, sample selection, fit) and the saved lenses list. Replace this callout with ![J-Lens Lab flow](/assets/docs/jlens-lab.png) once the real image is uploaded."
+      "body": "/* Image placeholder: J-Lens Lab flow. Add /assets/docs/jlens-lab.png — the /j-lens page showing the 3-step fit flow (model+dataset, sample selection, fit) and the saved lenses list. Replace this comment with ![J-Lens Lab flow](/assets/docs/jlens-lab.png) once the real image is uploaded. */"
     },
     {
       "key": "heading:jlens:saved-lenses:13",
@@ -4795,7 +4787,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "third-party-model-and-dataset-licenses",
       "kind": "content",
       "title": "Third-party model and dataset licenses",
-      "body": "RAVDESS, L2-ARCTIC, and SAA are non-commercial licenses These three datasets are licensed for non-commercial use only. AudioLens is itself a non-commercial, open-source project — self-hosted for free, and its planned hosted demo is a non-commercial public demo with no paid tier — so this is compatible with how AudioLens uses them. Attribution and citation requirements still apply regardless. If you fork AudioLens for a commercial deployment, you'd need to either drop these three datasets or get a separate license: RAVDESS's commercial terms require a purchased license (ravdess@gmail.com), and L2-ARCTIC's require approval from its maintainer (Dr. Ricardo Gutierrez-Osuna)."
+      "body": "RAVDESS, L2-ARCTIC, and SAA are non-commercial licenses These three datasets are licensed for non-commercial use only. AudioLens is itself a non-commercial, open-source project — self-hosted for free, and its hosted demo is a non-commercial public demo with no paid tier — so this is compatible with how AudioLens uses them. Attribution and citation requirements still apply regardless. If you fork AudioLens for a commercial deployment, you'd need to either drop these three datasets or get a separate license: RAVDESS's commercial terms require a purchased license (ravdess@gmail.com), and L2-ARCTIC's require approval from its maintainer (Dr. Ricardo Gutierrez-Osuna)."
     },
     {
       "key": "content:licenses:third-party-model-and-dataset-licenses:20",
@@ -5099,7 +5091,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "comparing-results",
       "kind": "content",
       "title": "Comparing results",
-      "body": "Image placeholder: perturbation before/after Add /assets/docs/perturb-compare.png — the perturbation panel showing the original and perturbed waveforms stacked, with both predictions displayed for comparison. Replace this callout with ![Perturbation before and after](/assets/docs/perturb-compare.png) once the real image is uploaded."
+      "body": "/* Image placeholder: perturbation before/after. Add /assets/docs/perturb-compare.png — the perturbation panel showing the original and perturbed waveforms stacked, with both predictions displayed for comparison. Replace this comment with ![Perturbation before and after](/assets/docs/perturb-compare.png) once the real image is uploaded. */"
     }
   ],
   "probes": [
@@ -5339,7 +5331,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "reading-the-results",
       "kind": "content",
       "title": "Reading the results",
-      "body": "Image placeholder: layer probe profile Add /assets/docs/probes-profile.png — the layer probe panel showing the layer profile chart and selectivity heatmap for a multi-property run. Replace this callout with ![Layer probe profile](/assets/docs/probes-profile.png) once the real image is uploaded."
+      "body": "/* Image placeholder: layer probe profile. Add /assets/docs/probes-profile.png — the layer probe panel showing the layer profile chart and selectivity heatmap for a multi-property run. Replace this comment with ![Layer probe profile](/assets/docs/probes-profile.png) once the real image is uploaded. */"
     }
   ],
   "quickstart": [
@@ -5573,7 +5565,7 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "headingId": "run-your-first-analysis",
       "kind": "content",
       "title": "Run your first analysis",
-      "body": "Image placeholder: first analysis result Add /assets/docs/quickstart-first-result.png — a screenshot of the frontend showing a completed prediction job with the saliency panel open on the shared timeline. Replace this callout with ![First analysis result in AudioLens](/assets/docs/quickstart-first-result.png) once the real image is uploaded."
+      "body": "/* Image placeholder: first analysis result. Add /assets/docs/quickstart-first-result.png — a screenshot of the frontend showing a completed prediction job with the saliency panel open on the shared timeline. Replace this comment with ![First analysis result in AudioLens](/assets/docs/quickstart-first-result.png) once the real image is uploaded. */"
     },
     {
       "key": "heading:quickstart:where-to-go-next:29",

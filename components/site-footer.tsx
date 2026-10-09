@@ -8,8 +8,7 @@ const FOOTER_COLUMNS = [
     links: [
       { text: "Features", href: "/#features" },
       { text: "Quickstart", href: "/docs/quickstart" },
-      // TODO: set real demo URL, see {{DEMO_URL}}
-      { text: "Dashboard", href: "#" },
+      { text: "Dashboard", href: "https://echo-frontend.janudaxx.workers.dev/" },
     ],
   },
   {

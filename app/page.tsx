@@ -104,9 +104,9 @@ const FAQ = [
   },
   {
     q: "Is there a hosted demo?",
-    a: "Not yet. A limited public demo is planned; for now AudioLens is self-hosted only.",
+    a: "Yes. A limited public demo is live with all features available — no install required.",
     href: "/docs/demo",
-    hrefLabel: "See what to expect",
+    hrefLabel: "Open the demo",
   },
   {
     q: "What audio can I upload?",
@@ -320,9 +320,10 @@ export default function Home() {
           </p>
 
           <div className="mt-[38px] flex flex-wrap justify-center gap-3">
-            {/* TODO: set real demo URL, see {{DEMO_URL}} */}
             <a
-              href="#"
+              href="https://echo-frontend.janudaxx.workers.dev/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="rounded-full px-7 py-[15px] text-[15px] font-medium text-white shadow-[0_14px_30px_-14px_var(--al-shadow-accent)] transition-[filter] hover:text-white hover:brightness-90"
               style={{ background: ACCENT }}
             >

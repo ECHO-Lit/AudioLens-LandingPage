@@ -149,9 +149,10 @@ export function SiteHeader({ active }: { active?: string }) {
               </a>
             </nav>
             <ThemeToggle />
-            {/* TODO: set real demo URL, see {{DEMO_URL}} */}
             <a
-              href="#"
+              href="https://echo-frontend.janudaxx.workers.dev/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="rounded-full px-[17px] py-[9px] text-[13px] font-medium whitespace-nowrap text-white transition-[filter] hover:text-white hover:brightness-[0.88]"
               style={{ background: ACCENT }}
             >
@@ -206,9 +207,10 @@ export function SiteHeader({ active }: { active?: string }) {
               <span className="text-[14px] text-muted-foreground">Theme</span>
               <ThemeToggle />
             </div>
-            {/* TODO: set real demo URL, see {{DEMO_URL}} */}
             <a
-              href="#"
+              href="https://echo-frontend.janudaxx.workers.dev/"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setMobileOpen(false)}
               className="mt-1 rounded-full px-3.5 py-2.5 text-center text-[13.5px] font-medium text-white transition-[filter] hover:text-white hover:brightness-[0.88]"
               style={{ background: ACCENT }}

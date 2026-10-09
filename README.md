@@ -6,7 +6,7 @@ The landing and documentation site for **AudioLens** — an open-source interpre
 
 Main AudioLens repo: [ECHO-Lit/ECHO-LIT](https://github.com/ECHO-Lit/ECHO-LIT)
 
-> **Status:** copy, docs and pages below are real and kept in sync with the product. What's still pending: a public hosted demo (self-hosting is the only option today, see [Self-hosting](https://github.com/ECHO-Lit/ECHO-LIT) docs) and a Research section, which is scaffolded but has nothing published yet.
+> **Status:** copy, docs and pages below are real and kept in sync with the product. A public hosted demo is live at [echo-frontend.janudaxx.workers.dev](https://echo-frontend.janudaxx.workers.dev/) with all features available; self-hosting remains an option too (see [Self-hosting](https://github.com/ECHO-Lit/ECHO-LIT) docs). The Research section is still scaffolded but has nothing published yet.
 
 ## Pages
 
