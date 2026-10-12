@@ -304,6 +304,28 @@
   }
 }
 
+/* Featured-video swap on the landing page -- components/video-showcase.tsx. */
+@keyframes al-stage-in {
+  from {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.al-stage-in {
+  animation: al-stage-in 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .al-stage-in {
+    animation: none;
+  }
+}
+
 /* Character-by-character reveal on scroll -- components/text-reveal.tsx.
    The component only writes --al-reveal-p (0..1 scroll progress) once per
    frame; the per-character ramp below is pure CSS, so a 40-character heading

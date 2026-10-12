@@ -6,6 +6,7 @@ import { ThemedGrainient } from "@/components/grainient-theme";
 import { Parallax } from "@/components/parallax";
 import { TextReveal } from "@/components/text-reveal";
 import { PanelGrid } from "@/components/panel-grid";
+import { VideoShowcase } from "@/components/video-showcase";
 import { ACCENT } from "@/lib/theme";
 
 const EYEBROW = "Open source";
@@ -230,6 +231,19 @@ const PANELS = [
     title: "Dataset EDA",
     question: "Is my dataset lopsided before I start?",
     body: "Class balance, acoustic feature distributions and outliers, so data problems don't get mistaken for model bugs.",
+  },
+];
+
+const VIDEOS = [
+  {
+    youtubeId: "LOnpjeQLB-M",
+    title: "Introducing AudioLens",
+    caption: "What AudioLens is, and the questions it helps you ask of a speech model.",
+  },
+  {
+    youtubeId: "hG5bqS8LFqw",
+    title: "Full Walkthrough of AudioLens",
+    caption: "The workbench end to end: one clip, nine panels, one shared timeline.",
   },
 ];
 
@@ -612,6 +626,29 @@ export default function Home() {
             </Link>{" "}
             before using them commercially.
           </p>
+        </div>
+      </section>
+
+      {/* Demo: one featured stage plus a playlist rail; picking a rail item
+          promotes it to the stage. */}
+      <section
+        id="demo"
+        className="scroll-mt-24 px-6 pt-[90px] sm:pt-[120px] lg:pt-[150px]"
+      >
+        <div className="mx-auto max-w-[1240px]">
+          <div
+            className="font-code text-[11.5px] tracking-[0.14em] uppercase"
+            style={{ color: "var(--al-accent-text)" }}
+          >
+            Demo
+          </div>
+          <TextReveal
+            as="h2"
+            text="See it in motion."
+            className="mt-5 mb-0 text-[34px] leading-none font-semibold tracking-[-0.04em] sm:text-[44px] sm:whitespace-nowrap lg:text-[64px]"
+          />
+
+          <VideoShowcase videos={VIDEOS} />
         </div>
       </section>
 

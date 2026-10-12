@@ -63,7 +63,16 @@ const components: MDXComponents = {
   hr: (props) => <hr {...props} className="mt-9 border-t border-al-hairline-strong" />,
   a: Anchor,
   // eslint-disable-next-line @next/next/no-img-element
-  img: (props) => <img {...props} className="mt-6 w-full rounded-2xl border border-al-hairline-strong" />,
+  img: (props) => (
+    <img
+      {...props}
+      className={`mt-6 w-full rounded-2xl border border-al-hairline-strong ${
+        typeof props.src === "string" && props.src.includes("attention-matrix")
+          ? "md:mx-0 md:w-3/5"
+          : ""
+      }`}
+    />
+  ),
 
   // GFM tables. The wrapper scrolls on its own so a wide table never makes the
   // page scroll sideways.
