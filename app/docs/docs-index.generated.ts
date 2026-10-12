@@ -3225,14 +3225,6 @@ export const SECTION_RECORDS: Record<string, SearchRecord[]> = {
       "kind": "content",
       "title": "Selection and export",
       "body": "PNG export is available on the projection via Plotly's built-in export, like the other Plotly-backed charts in the app."
-    },
-    {
-      "key": "content:embeddings:selection-and-export:19",
-      "sectionId": "embeddings",
-      "headingId": "selection-and-export",
-      "kind": "content",
-      "title": "Selection and export",
-      "body": "3D embedding scatter"
     }
   ],
   "env": [
